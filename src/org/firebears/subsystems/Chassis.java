@@ -35,7 +35,7 @@ public class Chassis extends Subsystem {
 	// here. Call these from Commands.
 
 	public void mechanumDrive(double x, double y, double z) {
-		robot_drive.mecanumDrive_Cartesian(x, y, z, drive_gyro.getAngle());
+		robot_drive.mecanumDrive_Cartesian(x, y, z, /*drive_gyro.getAngle()*/0);
 	}
 
 	public void initDefaultCommand() {
