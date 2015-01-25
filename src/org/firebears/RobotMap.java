@@ -58,10 +58,34 @@ public class RobotMap {
 		
 		//Jag Code
 //	/*		
-		chassis_front_left = new CANJaguar(2);
-		chassis_back_left = new CANJaguar(3);
-		chassis_front_right = new CANJaguar(4);
-		chassis_back_right = new CANJaguar(5);
+		try {
+			chassis_front_left = new CANJaguar(2);
+			LiveWindow.addActuator("chassis", "frontleft", chassis_front_left);
+		} catch (Exception e) {
+			System.err.println("Failed to load Jag 2");
+			e.printStackTrace();
+		}
+		try {
+			chassis_front_right = new CANJaguar(4);
+			LiveWindow.addActuator("chassis", "frontright", chassis_front_right);
+		} catch (Exception e) {
+			System.err.println("Failed to load Jag 4");
+			e.printStackTrace();
+		}
+		try {
+			chassis_back_left = new CANJaguar(3);
+			LiveWindow.addActuator("chassis", "backleft", chassis_back_left);
+		} catch (Exception e) {
+			System.err.println("Failed to load Jag 3");
+			e.printStackTrace();
+		}
+		try {
+			chassis_back_right = new CANJaguar(5);
+			LiveWindow.addActuator("chassis", "backright", chassis_back_right);
+		} catch (Exception e) {
+			System.err.println("Failed to load Jag 5");
+			e.printStackTrace();
+		}
 //		LiveWindow.addActuator("chassis", "frontleft", chassis_front_left);
 //		LiveWindow.addActuator("chassis", "frontright", chassis_front_right);
 //		LiveWindow.addActuator("chassis", "backleft", chassis_back_left);
@@ -71,10 +95,10 @@ public class RobotMap {
 		chassis_robot_drive = new RobotDrive(chassis_front_left,
 				chassis_back_left, chassis_front_right, chassis_back_right);
 
-//		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
-//		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, false);
-//		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
-//		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, false);
+		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
+		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, false);
+		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
+		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, false);
 		
 		chassis_robot_drive.setSafetyEnabled(true);
 		chassis_robot_drive.setExpiration(0.1);
