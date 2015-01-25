@@ -12,7 +12,9 @@
 package org.firebears.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+
 import org.firebears.Robot;
+import org.firebears.RobotMap;
 
 /**
  *
@@ -34,9 +36,9 @@ public class  DriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.chassis.mechanumDrive(Robot.oi.getJoystickZero().getX(),
-				-Robot.oi.getJoystickZero().getZ(),
-				-Robot.oi.getJoystickZero().getY());
+    	Robot.chassis.mechanumDrive(Robot.oi.getJoystickZero().getRawAxis(1),
+    			-1 * Robot.oi.getJoystickZero().getRawAxis(2),
+    			Robot.oi.getJoystickZero().getRawAxis(0));
     }
 
     // Make this return true when this Command no longer needs to run execute()
