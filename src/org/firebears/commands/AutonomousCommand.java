@@ -12,6 +12,8 @@
 package org.firebears.commands;
 
 import edu.wpi.first.wpilibj.command.Command;
+
+import org.firebears.OI;
 import org.firebears.Robot;
 
 /**
