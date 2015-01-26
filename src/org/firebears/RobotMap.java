@@ -12,7 +12,10 @@ package org.firebears;
 
 import edu.wpi.first.wpilibj.*;
 import edu.wpi.first.wpilibj.can.*;
+<<<<<<< HEAD
 import edu.wpi.first.wpilibj.interfaces.Accelerometer;
+=======
+>>>>>>> 4d0376aee83b5c0ceef9acc1b83a5debac0c5947
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import java.util.Vector;
@@ -23,11 +26,27 @@ import java.util.Vector;
  * the wiring easier and significantly reduces the number of magic numbers
  * floating around.
  */
+<<<<<<< HEAD
 public class RobotMap {
+=======
+public class RobotMap {	
+	//Talon Code
+	/*
+>>>>>>> 4d0376aee83b5c0ceef9acc1b83a5debac0c5947
 	public static CANTalon chassis_front_left;
 	public static CANTalon chassis_back_left;
 	public static CANTalon chassis_front_right;
 	public static CANTalon chassis_back_right;
+	*/
+	
+	//Jaguar Code
+//	/*
+	public static CANJaguar chassis_front_left;
+	public static CANJaguar chassis_back_left;
+	public static CANJaguar chassis_front_right;
+	public static CANJaguar chassis_back_right;
+//	*/
+	
 	public static RobotDrive chassis_robot_drive;
 	public static Gyro chassis_drive_gyro;
 	public static AnalogPotentiometer liftpot;
@@ -35,30 +54,77 @@ public class RobotMap {
 	public static Solenoid grabbersolenoid_left;
 	public static Compressor grabbercompressor;
 	public static Solenoid grabbersolenoid_right;
+<<<<<<< HEAD
 	public static BuiltInAccelerometer accelerometer;
 	
 	public static void init() {
+=======
+
+	public static void init() {
+		//Talon code
+	/*		
+>>>>>>> 4d0376aee83b5c0ceef9acc1b83a5debac0c5947
 		chassis_front_left = new CANTalon(5);
-
 		chassis_back_left = new CANTalon(3);
-
 		chassis_front_right = new CANTalon(4);
-
 		chassis_back_right = new CANTalon(2);
+	*/
+		
+		//Jag Code
+//	/*		
+		try {
+			chassis_front_left = new CANJaguar(2);
+			LiveWindow.addActuator("chassis", "frontleft", chassis_front_left);
+		} catch (Exception e) {
+			System.err.println("Failed to load Jag 2");
+			e.printStackTrace();
+		}
+		try {
+			chassis_front_right = new CANJaguar(4);
+			LiveWindow.addActuator("chassis", "frontright", chassis_front_right);
+		} catch (Exception e) {
+			System.err.println("Failed to load Jag 4");
+			e.printStackTrace();
+		}
+		try {
+			chassis_back_left = new CANJaguar(3);
+			LiveWindow.addActuator("chassis", "backleft", chassis_back_left);
+		} catch (Exception e) {
+			System.err.println("Failed to load Jag 3");
+			e.printStackTrace();
+		}
+		try {
+			chassis_back_right = new CANJaguar(5);
+			LiveWindow.addActuator("chassis", "backright", chassis_back_right);
+		} catch (Exception e) {
+			System.err.println("Failed to load Jag 5");
+			e.printStackTrace();
+		}
+//		LiveWindow.addActuator("chassis", "frontleft", chassis_front_left);
+//		LiveWindow.addActuator("chassis", "frontright", chassis_front_right);
+//		LiveWindow.addActuator("chassis", "backleft", chassis_back_left);
+//		LiveWindow.addActuator("chassis", "backright", chassis_back_right);
+//	*/
 
 		chassis_robot_drive = new RobotDrive(chassis_front_left,
 				chassis_back_left, chassis_front_right, chassis_back_right);
 
+		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kFrontRight, true);
+		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft, false);
+		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kRearRight, true);
+		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft, false);
+		
 		chassis_robot_drive.setSafetyEnabled(true);
 		chassis_robot_drive.setExpiration(0.1);
 		chassis_robot_drive.setSensitivity(0.5);
 		chassis_robot_drive.setMaxOutput(1.0);
 
 		chassis_drive_gyro = new Gyro(1);
+		chassis_drive_gyro.reset();
 		LiveWindow.addSensor("Chassis", "drive_gyro", chassis_drive_gyro);
 		chassis_drive_gyro.setSensitivity(0.007);
 		chassis_drive_gyro.initGyro();
-		liftpot = new AnalogPotentiometer(0, 1.0, 0.0);
+		liftpot = new AnalogPotentiometer(3, 1.0, 0.0);
 		LiveWindow.addSensor("Lift", "pot", liftpot);
 
 		lifttalon = new Talon(0);
