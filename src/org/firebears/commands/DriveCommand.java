@@ -36,9 +36,10 @@ public class  DriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.chassis.mechanumDrive(Robot.oi.getJoystickZero().getRawAxis(1),
-    			-1 * Robot.oi.getJoystickZero().getRawAxis(2),
-    			Robot.oi.getJoystickZero().getRawAxis(0));
+    	Robot.chassis.mechanumDrive(
+    			Robot.oi.getJoystickZero().getRawAxis(0),	// x
+    			Robot.oi.getJoystickZero().getRawAxis(1),	// y
+    			Robot.oi.getJoystickZero().getRawAxis(2));	// rotation
     }
 
     // Make this return true when this Command no longer needs to run execute()

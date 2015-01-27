@@ -27,7 +27,6 @@ import java.util.Vector;
 public class RobotMap {	
 	//Talon Code
 	/*
->>>>>>> 4d0376aee83b5c0ceef9acc1b83a5debac0c5947
 	public static CANTalon chassis_front_left;
 	public static CANTalon chassis_back_left;
 	public static CANTalon chassis_front_right;
@@ -54,7 +53,6 @@ public class RobotMap {
 	public static void init() {
 		//Talon code
 	/*		
->>>>>>> 4d0376aee83b5c0ceef9acc1b83a5debac0c5947
 		chassis_front_left = new CANTalon(5);
 		chassis_back_left = new CANTalon(3);
 		chassis_front_right = new CANTalon(4);
@@ -122,14 +120,12 @@ public class RobotMap {
 		LiveWindow.addActuator("Lift", "talon", (Talon) lifttalon);
 
 		grabbersolenoid_left = new Solenoid(0, 0);
-		LiveWindow
-				.addActuator("Grabber", "solenoid_left", grabbersolenoid_left);
+		LiveWindow.addActuator("Grabber", "solenoid_left", grabbersolenoid_left);
 
 		grabbercompressor = new Compressor(0);
 
 		grabbersolenoid_right = new Solenoid(0, 1);
-		LiveWindow.addActuator("Grabber", "solenoid_right",
-				grabbersolenoid_right);
+		LiveWindow.addActuator("Grabber", "solenoid_right", grabbersolenoid_right);
 		
 		accelerometer = new BuiltInAccelerometer();
 		LiveWindow.addSensor("Accelerometer", "accelerometer", accelerometer);
