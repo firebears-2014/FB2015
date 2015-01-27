@@ -2,8 +2,10 @@ package org.firebears.sensors;
 // made by Jacob Wiggins
 
 import edu.wpi.first.wpilibj.AnalogInput;
+import edu.wpi.first.wpilibj.tables.ITable;
 
 public class sharpIRRange extends AnalogInput {
+	
 
 	public sharpIRRange(int channel) {
 		super(channel);
@@ -23,5 +25,15 @@ public class sharpIRRange extends AnalogInput {
 		return distance;
 		
 	}
-
+	
+	
+//	@Override
+//	public void updateTable() {
+//		ITable m_table = super.getTable();
+//		if (m_table != null) {
+//			m_table.putNumber("Distance", getRangefinderDistance());
+//		}
+//	}
+	
+	
 }
