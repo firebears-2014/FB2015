@@ -53,9 +53,9 @@ public class Chassis extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 
-	public void mechanumDrive(double rotation, double strafe, double forward) {
+	public void mechanumDrive(double x, double y, double rotation) {
     	double theta = RobotMap.chassis_drive_gyro.getAngle();
-    	double angle = drive_gyro.getAngle();
+    	double angle = 0;
 		SmartDashboard.putNumber("gyro value", angle);
     	
 //        double cosA = Math.cos(theta * (3.14159 / 180.0));
@@ -68,7 +68,7 @@ public class Chassis extends Subsystem {
 //    	back_left.set(strafe - forward + rotation);
 //    	back_right.set((strafe - forward - rotation ));
 
-		robot_drive.mecanumDrive_Cartesian(forward, rotation, strafe, angle);
+		robot_drive.mecanumDrive_Cartesian(x, y, rotation, angle);
 	}
 
 	public void initDefaultCommand() {

@@ -15,6 +15,7 @@ import org.firebears.commands.*;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Sendable;
+import edu.wpi.first.wpilibj.buttons.JoystickButton;
 import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -65,9 +66,23 @@ public class OI {
         autoSelect2 = new DigitalInput(2);
         autoSelect3 = new DigitalInput(3);
         autoSelect4 = new DigitalInput(4);
+        JoystickButton forwardbutton= new JoystickButton(joystickZero, 6);
+        forwardbutton.whileHeld(new ForwardCommand(0.5));
+        
+        JoystickButton backwardbutton= new JoystickButton(joystickZero, 4);
+        backwardbutton.whileHeld(new ForwardCommand(-0.5));
+        
+        JoystickButton stopbutton= new JoystickButton(joystickZero, 2);
+        stopbutton.whileHeld(new ForwardCommand(0));
+        
+        JoystickButton strafeleft= new JoystickButton(joystickZero, 5);
+        strafeleft.whileHeld(new StrafeCommand(0.5));
+        
+        JoystickButton straferight= new JoystickButton(joystickZero, 3);
+        straferight.whileHeld(new StrafeCommand(-0.5));
 	    
         // SmartDashboard Buttons
-        SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
+//        SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
 		SmartDashboard.putData("Change Lights", new LightChangeCommand(0, Robot.lights.RANDOM_ANIM));
 
     }
