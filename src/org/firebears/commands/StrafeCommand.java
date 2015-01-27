@@ -5,7 +5,7 @@ import org.firebears.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * This command drives sideways at a fixed speed until interupted
  */
 public class StrafeCommand extends Command {
 	

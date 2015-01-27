@@ -53,10 +53,17 @@ public class Chassis extends Subsystem {
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
 
-	public void mechanumDrive(double x, double y, double rotation) {
+	/**
+	 * Drive the chassis mecanum wheels.
+	 * 
+	 * @param strafe x dimension speed, in the range -1.0 to 1.0.
+	 * @param forward y dimension movement, in the range -1.0 to 1.0.
+	 * @param rotation angular rotation, in the range -1.0 to 1.0.
+	 */
+	public void mechanumDrive(double strafe, double forward, double rotation) {
     	double theta = RobotMap.chassis_drive_gyro.getAngle();
     	double angle = 0;
-		SmartDashboard.putNumber("gyro value", angle);
+		SmartDashboard.putNumber("gyro value", theta);
     	
 //        double cosA = Math.cos(theta * (3.14159 / 180.0));
 //        double sinA = Math.sin(theta * (3.14159 / 180.0));
@@ -68,7 +75,7 @@ public class Chassis extends Subsystem {
 //    	back_left.set(strafe - forward + rotation);
 //    	back_right.set((strafe - forward - rotation ));
 
-		robot_drive.mecanumDrive_Cartesian(x, y, rotation, angle);
+		robot_drive.mecanumDrive_Cartesian(strafe, forward, rotation, angle);
 	}
 
 	public void initDefaultCommand() {
