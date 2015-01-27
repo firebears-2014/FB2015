@@ -108,8 +108,12 @@ public class Robot extends IterativeRobot {
     /**
      * This function is called periodically during operator control
      */
+
 	public void teleopPeriodic() {
     	Scheduler.getInstance().run();
+
+		SmartDashboard.putBoolean("Proximity detector", RobotMap.sharpIRProx.inRange());
+		SmartDashboard.putNumber("Distance from object", RobotMap.sharpIRRange.getRangefinderDistance());
 		SmartDashboard.putBoolean("Color Sensor Value", oi.scoringPlatformSensor.get());
 		
 		SmartDashboard.putNumber("Accel X", accel.getX());
