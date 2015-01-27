@@ -1,67 +1,78 @@
 package org.firebears.sensors;
 
+import java.text.DecimalFormat;
+
 import org.firebears.RobotMap;
 
 public class Accelerometer {
-	private long curTime;
-	private long prevTime;
-	private double veloX;
-	private double initVeloX;
-	private double veloZ;
-	private double initVeloZ;
-	private long initTime=System.currentTimeMillis();
-	private double accX;
-	private double accZ;
-	private double dispX;
-	private double dispZ;
-	private boolean veloXinitCalc;
-	private boolean dispXinitCalc;
-	private boolean veloZinitCalc;
-	private boolean dispZinitCalc;
-	private double totaldispX;
-	private double totaldispZ;
+	private static long curTime;
+	private static long prevTime;
+	private static double veloX;
+	private static double initVeloX;
+	private static double veloY;
+	private static double initVeloY;
+	private static double accX;
+	private static double accY;
+	private static double dispX;
+	private static double dispY;
+	private static double timeSec;
+	private static boolean veloXinitCalc;
+	private static boolean dispXinitCalc;
+	private static boolean veloYinitCalc;
+	private static boolean dispYinitCalc;
+	private static double totaldispX;
+	private static double totaldispY;
+	static DecimalFormat dtime = new DecimalFormat("#.#");
 	
-	public void update(){
+	public static void update(){
 		displacementX();
-		displacementZ();
+		displacementY();
+		updateTime();
 	}
 	
-	public void reset(){
+	public static double totalX(){
+		return totaldispX;
+	}
+	public static double totalY(){
+		return totaldispY;
+	}
+	public static void reset(){
 		curTime=0;
 		veloX=0;
 		initVeloX=0;
-		veloZ=0;
-		initVeloZ=0;
-		prevTime=0;
-		initTime=System.currentTimeMillis();
+		veloY=0;
+		initVeloY=0;
+		prevTime=System.currentTimeMillis();
 		accX=0;
-		accZ=0;
+		accY=0;
 		dispX=0;
-		dispZ=0;
+		dispY=0;
 		veloXinitCalc=true;
 		dispXinitCalc=true;
-		veloZinitCalc=true;
-		dispZinitCalc=true;
+		veloYinitCalc=true;
+		dispYinitCalc=true;
 		totaldispX=0;
-		totaldispZ=0;
+		totaldispY=0;
 	}
 	
-	public void updateTime(){
-		prevTime=curTime;
-		curTime=System.currentTimeMillis()-initTime;
+	public static void updateTime(){
+		curTime=System.currentTimeMillis()-prevTime;
+		prevTime=System.currentTimeMillis();
+		timeSec=curTime*.001;
+		System.out.println("curTime "+curTime);
+		System.out.println("timeSec "+timeSec);
 	}
 	
 	
 	
-	
-	public void updateaccX(){
-		accX= RobotMap.accelerometer.getX();
+	public static void updateaccX(){
+		accX= RobotMap.accelerometer.getX(); 
+	    accX=Double.valueOf(dtime.format(accX));
 	}
 	
-	public void updateVeloX(){
+	public static void updateVeloX(){
 		updateaccX();
-		updateTime();
-		double at= accX*curTime;
+		double at= accX*timeSec;
 		if (veloXinitCalc==true){
 		veloX=initVeloX+at;
 		veloXinitCalc=false;
@@ -70,46 +81,45 @@ public class Accelerometer {
 		}
 	}
 	
-	public double displacementX(){
+	public static void displacementX(){
 		updateVeloX();
 		if(dispXinitCalc==true){
-			dispX=(0*curTime)+(.5*accX*curTime*curTime);
+			dispX=(.5*accX*timeSec*timeSec);
 			dispXinitCalc=false;
 		}else{
-			dispX=(veloX*curTime)+(.5*accX*curTime*curTime);
+			dispX=(veloX*timeSec)+(.5*accX*timeSec*timeSec);
 		}
 		totaldispX=totaldispX+dispX;
-		return dispX;
 	}
 	
 	
 	
 
-	public void updateaccZ(){
-		accZ= RobotMap.accelerometer.getZ();
+	public static void updateaccY(){
+		//new DecimalFormat("#.#").format(accY);
+		accY= RobotMap.accelerometer.getY(); 
+	    accY=Double.valueOf(dtime.format(accY));
 	}
 	
-	public void updateVeloZ(){
-		updateaccZ();
-		updateTime();
-		double at= accZ*curTime;
-		if (veloZinitCalc==true){
-		veloZ=initVeloZ+at;
-		veloZinitCalc=false;
+	public static void updateVeloY(){
+		updateaccY();
+		double at= accY*timeSec;
+		if (veloYinitCalc==true){
+		veloY=initVeloY+at;
+		veloYinitCalc=false;
 		}else{
-		veloZ=veloZ+at;
+		veloY=veloY+at;
 		}
 	}
 	
-	public double displacementZ(){
-		updateVeloZ();
-		if(dispZinitCalc==true){
-			dispZ=(0*curTime)+(.5*accZ*curTime*curTime);
-			dispZinitCalc=false;
+	public static void displacementY(){
+		updateVeloY();
+		if(dispYinitCalc==true){
+			dispY=(.5*accY*timeSec*timeSec);
+			dispYinitCalc=false;
 		}else{
-			dispZ=(veloZ*curTime)+(.5*accZ*curTime*curTime);
+			dispY=(veloY*timeSec)+(.5*accY*timeSec*timeSec);
 		}
-		totaldispZ=totaldispZ+dispZ;
-		return dispZ;
+		totaldispY=totaldispY+dispY;
 	}
 }
