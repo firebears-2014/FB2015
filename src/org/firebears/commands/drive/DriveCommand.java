@@ -9,7 +9,7 @@
 // it from being updated in the future.
 
 
-package org.firebears.commands;
+package org.firebears.commands.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
 

@@ -9,28 +9,30 @@
 // it from being updated in the future.
 
 
-package org.firebears.commands;
+package org.firebears.commands.auto;
 
-import edu.wpi.first.wpilibj.command.Command;
-import org.firebears.Robot;
+import org.firebears.commands.drive.ForwardCommand;
+import org.firebears.commands.drive.StrafeCommand;
+
+import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
  *
  */
-public class LightChangeCommand extends Command {
-	
-	int which;
-	String anim;
+public class  AutoStrafeCommand extends CommandGroup {
 
-    public LightChangeCommand(int p_which, String p_anim) {
-        requires(Robot.lights);
-        which = p_which;
-        anim = p_anim;
+    public AutoStrafeCommand() {
+        // Use requires() here to declare subsystem dependencies
+        // eg. requires(chassis);
+    	
+    	//1 second, full speed
+    	addSequential(new StrafeCommand(-.75), 1.0);
+    	addSequential(new ForwardCommand(.5), 1.0);
+    	addSequential(new StrafeCommand(.75), 1.0);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.lights.setStrip(which, anim);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -39,7 +41,7 @@ public class LightChangeCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return false;
     }
 
     // Called once after isFinished returns true

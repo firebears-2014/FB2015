@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
-import org.firebears.commands.*;
+import org.firebears.commands.auto.*; //Autonomous Commands
 import org.firebears.sensors.Accelerometer;
 import org.firebears.subsystems.*;
 
@@ -64,12 +64,16 @@ public class Robot extends IterativeRobot {
         // pointers. Bad news. Don't move it.
         oi = new OI();
 
-        // instantiate the command used for the autonomous period
+        // instantiate which command should be used for the autonomous period
+        // uncomment next 3 lines to override defaults.
+//        autonomousCommand = new AutoStrafeCommand();
+//		/*
     	if(OI.autoSelect1.get()==false){autonomousCommand = new AutoSM();
     	}else if (OI.autoSelect2.get()==false){autonomousCommand = new AutoGM();
     	}else if (OI.autoSelect3.get()==false){autonomousCommand = new AutoM();
     	}//else if (OI.autoSelect4.get()==false){autonomousCommand = new AutonomousCommand();
     	//}
+//    	*/
     }
 
     /**

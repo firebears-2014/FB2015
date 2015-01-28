@@ -1,30 +1,40 @@
-package org.firebears.commands;
+package org.firebears.commands.drive;
 
 import org.firebears.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * This command drives forward at a fixed speed until interupted
+ * This command drives in any direction at a fixed speed until interrupted
  */
-public class ForwardCommand extends Command {
+public class ChassisCommand extends Command {
 
-	double speed;
+	double x;
+	double y;
+	double z;
 	
-    public ForwardCommand(double s) {
+	/**
+	 * 
+	 * @param px strafe speed
+	 * @param py forward/backward speed
+	 * @param pz rotation speed
+	 */
+    public ChassisCommand(double px, double py, double pz) {
     	requires(Robot.chassis);
-    	speed=s;
+    	x = px;
+    	y = py;
+    	z = py;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
 
-    	Robot.chassis.mechanumDrive(0, speed, 0);
+    	Robot.chassis.mechanumDrive(x, y, z);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.chassis.mechanumDrive(0, speed, 0);
+    	Robot.chassis.mechanumDrive(x, y, z);
     }
 
     // Make this return true when this Command no longer needs to run execute()

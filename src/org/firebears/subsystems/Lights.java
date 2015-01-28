@@ -13,6 +13,7 @@ package org.firebears.subsystems;
 
 import org.firebears.RobotMap;
 import org.firebears.commands.*;
+import org.firebears.commands.lights.LightsCommand;
 
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.networktables.NetworkTable;

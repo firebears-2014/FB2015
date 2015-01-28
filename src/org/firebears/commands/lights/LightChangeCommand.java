@@ -9,25 +9,28 @@
 // it from being updated in the future.
 
 
-package org.firebears.commands;
-
-import org.firebears.Robot;
+package org.firebears.commands.lights;
 
 import edu.wpi.first.wpilibj.command.Command;
+import org.firebears.Robot;
 
 /**
  *
  */
-public class  AutoSM extends Command {
+public class LightChangeCommand extends Command {
+	
+	int which;
+	String anim;
 
-    public AutoSM() {
-        // Use requires() here to declare subsystem dependencies
-    	requires(Robot.chassis);
+    public LightChangeCommand(int p_which, String p_anim) {
+        requires(Robot.lights);
+        which = p_which;
+        anim = p_anim;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	
+    	Robot.lights.setStrip(which, anim);
     }
 
     // Called repeatedly when this Command is scheduled to run
@@ -36,7 +39,7 @@ public class  AutoSM extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return true;
     }
 
     // Called once after isFinished returns true

@@ -1,4 +1,4 @@
-package org.firebears.commands;
+package org.firebears.commands.drive;
 
 import org.firebears.Robot;
 
