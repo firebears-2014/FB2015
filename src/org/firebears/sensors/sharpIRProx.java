@@ -12,8 +12,7 @@ public class sharpIRProx extends AnalogInput {
 
 	public boolean inRange() {
 		double prox = this.getAverageVoltage();
-		System.out.println("Proximity Sensor Voltage:" + prox);
-		if (prox < .6) {
+		if (prox < 1.0) {
 			return true;
 		} else {
 			return false;

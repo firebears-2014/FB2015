@@ -59,7 +59,6 @@ public class OI {
 	// button.whenReleased(new ExampleCommand());
 
 	public Joystick joystickZero;
-    JoystickButton distanceButton;
 	public Joystick joystickLift;
 	public DigitalInput scoringPlatformSensor;
 	public DigitalInput autoSelect1;
@@ -85,10 +84,7 @@ public class OI {
 		autoSelect2 = new DigitalInput(2);
 		autoSelect3 = new DigitalInput(3);
 		autoSelect4 = new DigitalInput(4);
-
-	    distanceButton = new JoystickButton(joystickZero, 2);
-	    distanceButton.whenPressed(new DriveToDistanceCommand(5));
-
+		
 		openGrabbers = new JoystickButton(joystickLift, 1);
 		openGrabbers.whenPressed(new GrabberCommand(true));
 
