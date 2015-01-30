@@ -13,6 +13,7 @@ package org.firebears;
 import org.firebears.commands.*;
 import org.firebears.commands.drive.ForwardCommand;
 import org.firebears.commands.drive.StrafeCommand;
+import org.firebears.commands.gripper.GrabberCommand;
 import org.firebears.commands.lights.LightChangeCommand;
 
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -28,69 +29,91 @@ import edu.wpi.first.wpilibj.DigitalInput;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-    //// CREATING BUTTONS
-    // One type of button is a joystick button which is any button on a joystick.
-    // You create one by telling it which joystick it's on and which button
-    // number it is.
-    // Joystick stick = new Joystick(port);
-    // Button button = new JoystickButton(stick, buttonNumber);
-    
-    // There are a few additional built in buttons you can use. Additionally,
-    // by subclassing Button you can create custom triggers and bind those to
-    // commands the same as any other Button.
-    
-    //// TRIGGERING COMMANDS WITH BUTTONS
-    // Once you have a button, it's trivial to bind it to a button in one of
-    // three ways:
-    
-    // Start the command when the button is pressed and let it run the command
-    // until it is finished as determined by it's isFinished method.
-    // button.whenPressed(new ExampleCommand());
-    
-    // Run the command while the button is being held down and interrupt it once
-    // the button is released.
-    // button.whileHeld(new ExampleCommand());
-    
-    // Start the command when the button is released  and let it run the command
-    // until it is finished as determined by it's isFinished method.
-    // button.whenReleased(new ExampleCommand());
+	// // CREATING BUTTONS
+	// One type of button is a joystick button which is any button on a
+	// joystick.
+	// You create one by telling it which joystick it's on and which button
+	// number it is.
+	// Joystick stick = new Joystick(port);
+	// Button button = new JoystickButton(stick, buttonNumber);
 
+	// There are a few additional built in buttons you can use. Additionally,
+	// by subclassing Button you can create custom triggers and bind those to
+	// commands the same as any other Button.
 
-    public Joystick joystickZero;
-    public DigitalInput scoringPlatformSensor;
+	// // TRIGGERING COMMANDS WITH BUTTONS
+	// Once you have a button, it's trivial to bind it to a button in one of
+	// three ways:
+
+	// Start the command when the button is pressed and let it run the command
+	// until it is finished as determined by it's isFinished method.
+	// button.whenPressed(new ExampleCommand());
+
+	// Run the command while the button is being held down and interrupt it once
+	// the button is released.
+	// button.whileHeld(new ExampleCommand());
+
+	// Start the command when the button is released and let it run the command
+	// until it is finished as determined by it's isFinished method.
+	// button.whenReleased(new ExampleCommand());
+
+	public Joystick joystickZero;
+	public Joystick joystickLift;
+	public DigitalInput scoringPlatformSensor;
 	public static DigitalInput autoSelect1;
 	public static DigitalInput autoSelect2;
 	public static DigitalInput autoSelect3;
 	public static DigitalInput autoSelect4;
-    public OI() {
-        joystickZero = new Joystick(0);
-        scoringPlatformSensor = new DigitalInput(0);
-        autoSelect1 = new DigitalInput(1);
-        autoSelect2 = new DigitalInput(2);
-        autoSelect3 = new DigitalInput(3);
-        autoSelect4 = new DigitalInput(4);
-        JoystickButton forwardbutton= new JoystickButton(joystickZero, 6);
-        forwardbutton.whileHeld(new ForwardCommand(0.5));
-        
-        JoystickButton backwardbutton= new JoystickButton(joystickZero, 4);
-        backwardbutton.whileHeld(new ForwardCommand(-0.5));
-        
-        JoystickButton stopbutton= new JoystickButton(joystickZero, 2);
-        stopbutton.whileHeld(new ForwardCommand(0));
-        
-        JoystickButton strafeleft= new JoystickButton(joystickZero, 5);
-        strafeleft.whileHeld(new StrafeCommand(0.5));
-        
-        JoystickButton straferight= new JoystickButton(joystickZero, 3);
-        straferight.whileHeld(new StrafeCommand(-0.5));
-	    
-        // SmartDashboard Buttons
-//        SmartDashboard.putData("Autonomous Command", new AutonomousCommand());
-		SmartDashboard.putData("Change Lights", new LightChangeCommand(0, Robot.lights.RANDOM_ANIM));
 
-    }
-    
-    public Joystick getJoystickZero() {
-        return joystickZero;
-    }
+	public JoystickButton forwardbutton;
+	public JoystickButton backwardbutton;
+	public JoystickButton stopbutton;
+	public JoystickButton strafeleft;
+	public JoystickButton straferight;
+
+	public JoystickButton openGrabbers;
+	public JoystickButton closeGrabbers;
+
+	public OI() {
+		joystickZero = new Joystick(0);
+		joystickLift = new Joystick(1);
+
+		scoringPlatformSensor = new DigitalInput(0);
+		autoSelect1 = new DigitalInput(1);
+		autoSelect2 = new DigitalInput(2);
+		autoSelect3 = new DigitalInput(3);
+		autoSelect4 = new DigitalInput(4);
+
+		openGrabbers = new JoystickButton(joystickLift, 1);
+		openGrabbers.whenPressed(new GrabberCommand(true));
+
+		closeGrabbers = new JoystickButton(joystickLift, 1);
+		closeGrabbers.whenPressed(new GrabberCommand(false));
+
+		forwardbutton = new JoystickButton(joystickZero, 6);
+		forwardbutton.whileHeld(new ForwardCommand(0.5));
+
+		backwardbutton = new JoystickButton(joystickZero, 4);
+		backwardbutton.whileHeld(new ForwardCommand(-0.5));
+
+		stopbutton = new JoystickButton(joystickZero, 2);
+		stopbutton.whileHeld(new ForwardCommand(0));
+
+		strafeleft = new JoystickButton(joystickZero, 5);
+		strafeleft.whileHeld(new StrafeCommand(0.5));
+
+		straferight = new JoystickButton(joystickZero, 3);
+		straferight.whileHeld(new StrafeCommand(-0.5));
+
+		// SmartDashboard Buttons
+		// SmartDashboard.putData("Autonomous Command", new
+		// AutonomousCommand());
+		SmartDashboard.putData("Change Lights", new LightChangeCommand(0,
+				Robot.lights.RANDOM_ANIM));
+
+	}
+
+	public Joystick getJoystickZero() {
+		return joystickZero;
+	}
 }
