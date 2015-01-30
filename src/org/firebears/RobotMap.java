@@ -25,6 +25,19 @@ import java.util.Vector;
  */
 
 public class RobotMap {
+
+	public static final String LIFT_ZERO_REF = "LIFT_ZERO_REF";
+	public static final String LIFT_TOTE_PICKUP = "LIFT_TOTE_PICKUP";
+	public static final String LIFT_TOTE_1 = "LIFT_TOTE_1";
+	public static final String LIFT_TOTE_2 = "LIFT_TOTE_2";
+	public static final String LIFT_TOTE_3 = "LIFT_TOTE_3";
+
+	public static double lift_zero_ref;
+	public static double lift_tote_pickup;
+	public static double lift_tote_1;
+	public static double lift_tote_2;
+	public static double lift_tote_3;
+
 	// Talon Code
 	/*
 	 * public static CANTalon chassis_front_left; public static CANTalon
@@ -59,6 +72,15 @@ public class RobotMap {
 	public static BuiltInAccelerometer accelerometer;
 
 	public static void init() {
+
+		Preferences preferences = Preferences.getInstance();
+
+		lift_zero_ref = preferences.getDouble(LIFT_ZERO_REF, 0);
+		lift_tote_pickup = preferences.getDouble(LIFT_TOTE_PICKUP, 0);
+		lift_tote_1 = preferences.getDouble(LIFT_TOTE_1, 0);
+		lift_tote_2 = preferences.getDouble(LIFT_TOTE_2, 0);
+		lift_tote_3 = preferences.getDouble(LIFT_TOTE_3, 0);
+		
 		// Talon code
 		/*
 		 * chassis_front_left = new CANTalon(5); chassis_back_left = new
