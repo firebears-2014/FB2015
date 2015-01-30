@@ -11,6 +11,7 @@
 package org.firebears;
 
 import org.firebears.commands.*;
+import org.firebears.commands.drive.DriveToDistanceCommand;
 import org.firebears.commands.drive.ForwardCommand;
 import org.firebears.commands.drive.StrafeCommand;
 import org.firebears.commands.gripper.GrabberCommand;
@@ -60,11 +61,11 @@ public class OI {
 	public Joystick joystickZero;
 	public Joystick joystickLift;
 	public DigitalInput scoringPlatformSensor;
-	public static DigitalInput autoSelect1;
-	public static DigitalInput autoSelect2;
-	public static DigitalInput autoSelect3;
-	public static DigitalInput autoSelect4;
-
+	public DigitalInput autoSelect1;
+	public DigitalInput autoSelect2;
+	public DigitalInput autoSelect3;
+	public DigitalInput autoSelect4;
+    
 	public JoystickButton forwardbutton;
 	public JoystickButton backwardbutton;
 	public JoystickButton stopbutton;
@@ -83,7 +84,7 @@ public class OI {
 		autoSelect2 = new DigitalInput(2);
 		autoSelect3 = new DigitalInput(3);
 		autoSelect4 = new DigitalInput(4);
-
+		
 		openGrabbers = new JoystickButton(joystickLift, 1);
 		openGrabbers.whenPressed(new GrabberCommand(true));
 

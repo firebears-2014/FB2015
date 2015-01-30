@@ -37,7 +37,7 @@ public class Robot extends IterativeRobot {
     private BuiltInAccelerometer accel = new BuiltInAccelerometer();
     public static OI oi;
     public static Chassis chassis;
-    public static Lift lift;;
+    public static Lift lift;
     public static Grabber grabber;
     public static Lights lights;
     public static Vision vision;
@@ -68,12 +68,13 @@ public class Robot extends IterativeRobot {
         // uncomment next 3 lines to override defaults.
 //        autonomousCommand = new AutoStrafeCommand();
 //		/*
-    	if(OI.autoSelect1.get()==false){autonomousCommand = new AutoSM();
-    	}else if (OI.autoSelect2.get()==false){autonomousCommand = new AutoGM();
-    	}else if (OI.autoSelect3.get()==false){autonomousCommand = new AutoM();
+    	if (oi.autoSelect1.get()==false){autonomousCommand = new AutoSM();
+    	}else if (oi.autoSelect2.get()==false){autonomousCommand = new AutoGM();
+    	}else if (oi.autoSelect3.get()==false){autonomousCommand = new AutoM();
     	}//else if (OI.autoSelect4.get()==false){autonomousCommand = new AutonomousCommand();
     	//}
 //    	*/
+    	RobotMap.chassis_drive_gyro.reset();
     }
 
     /**
@@ -91,6 +92,7 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
+        RobotMap.chassis_drive_gyro.reset();
     }
 
     /**
@@ -120,17 +122,19 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putBoolean("Proximity detector", RobotMap.sharpIRProx.inRange());
 		SmartDashboard.putNumber("Distance from object", RobotMap.sharpIRRange.getRangefinderDistance());
 		SmartDashboard.putBoolean("Color Sensor Value", oi.scoringPlatformSensor.get());
+		SmartDashboard.putNumber("gyro value", RobotMap.chassis_drive_gyro.getAngle());
 		
 		SmartDashboard.putNumber("Accel X", accel.getX());
 		SmartDashboard.putNumber("Accel Y", accel.getY());
 		SmartDashboard.putNumber("Accel Z", accel.getZ());
 		
 		
-		System.out.println("Raw Accel output: "+accel.getX()+" "+accel.getY());
+//		System.out.println("Raw Accel output: "+accel.getX()+" "+accel.getY());
 		Accelerometer.update();
 		double Y=Accelerometer.totalY();
 		double X=Accelerometer.totalX();
-		System.out.println("X displacement: "+X+" "+"Y displacement: "+Y);
+//		System.out.println("X displacement: "+X+" "+"Y displacement: "+Y);
+
     }
 
     /**

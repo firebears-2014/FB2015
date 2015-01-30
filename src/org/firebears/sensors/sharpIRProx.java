@@ -12,8 +12,7 @@ public class sharpIRProx extends AnalogInput {
 
 	public boolean inRange() {
 		double prox = this.getAverageVoltage();
-		
-		if (prox < 3) {
+		if (prox < 1.0) {
 			return true;
 		} else {
 			return false;

@@ -62,9 +62,7 @@ public class Chassis extends Subsystem {
 	 * @param rotation angular rotation, in the range -1.0 to 1.0.
 	 */
 	public void mechanumDrive(double strafe, double forward, double rotation) {
-    	double theta = RobotMap.chassis_drive_gyro.getAngle();
-    	double angle = 0;
-		SmartDashboard.putNumber("gyro value", theta);
+    	double angle = RobotMap.chassis_drive_gyro.getAngle();
     	
 //        double cosA = Math.cos(theta * (3.14159 / 180.0));
 //        double sinA = Math.sin(theta * (3.14159 / 180.0));

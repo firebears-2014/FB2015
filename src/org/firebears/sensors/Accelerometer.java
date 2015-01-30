@@ -59,8 +59,8 @@ public class Accelerometer {
 		curTime=System.currentTimeMillis()-prevTime;
 		prevTime=System.currentTimeMillis();
 		timeSec=curTime*.001;
-		System.out.println("curTime "+curTime);
-		System.out.println("timeSec "+timeSec);
+	//	System.out.println("curTime "+curTime);
+	//	System.out.println("timeSec "+timeSec);
 	}
 	
 	
