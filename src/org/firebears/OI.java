@@ -11,11 +11,9 @@
 package org.firebears;
 
 import org.firebears.commands.*;
-import org.firebears.commands.drive.DriveToDistanceCommand;
-import org.firebears.commands.drive.ForwardCommand;
-import org.firebears.commands.drive.StrafeCommand;
-import org.firebears.commands.gripper.GrabberCommand;
-import org.firebears.commands.lights.LightChangeCommand;
+import org.firebears.commands.drive.*;
+import org.firebears.commands.gripper.*;
+import org.firebears.commands.lights.*;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
