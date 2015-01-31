@@ -12,7 +12,11 @@
 package org.firebears.commands.lights;
 
 import edu.wpi.first.wpilibj.command.Command;
+
 import org.firebears.Robot;
+import org.firebears.subsystems.Lights;
+import org.firebears.subsystems.Lift;
+
 
 /**
  *
@@ -34,7 +38,8 @@ public class  LightsCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-//    	Robot.lights.
+    	Robot.lights.setLiftHeight(Lights.LIFT_LIGHTS_LEFT, Robot.lift.getLiftHeight());
+    	Robot.lights.setLiftHeight(Lights.LIFT_LIGHTS_RIGHT, Robot.lift.getLiftHeight());
     }
 
     // Make this return true when this Command no longer needs to run execute()

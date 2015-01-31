@@ -89,6 +89,10 @@ public class Lift extends PIDSubsystem {
 
 		return heightSensor.getHeight();
 	}
+	
+	public double getLiftHeight() {
+		return heightSensor.getHeight();
+	}
 
 	protected void usePIDOutput(double output) {
 		// Use output to drive your system, like a motor
