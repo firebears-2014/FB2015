@@ -24,25 +24,34 @@ public class PreferenceSetup extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-    	/*
-    	 * ex:
-    	 * if(m_key.equals(RobotMap.String)){
-    	 * 
-    	 * preferences.putDouble(m_key, double);
-    	 * 
-    	 * RobotMap.value = wantedValue;
-    	 * }
-    	 */
+		/*
+		 * ex: if(m_key.equals(RobotMap.String)){
+		 * 
+		 * preferences.putDouble(m_key, double);
+		 * 
+		 * RobotMap.value = wantedValue; }
+		 */
 		double height = Robot.lift.heightSensor.getHeight();
-		
-    	if(m_key.equals(RobotMap.LIFT_ZERO_REF)){
-      	 
-       	 preferences.putDouble(m_key, RobotMap.lift_zero_ref);
-       	 RobotMap.lift_zero_ref = height;
-       	 }
-    	
-    	preferences.save();
-    }
+
+		if (m_key.equals(RobotMap.LIFT_ZERO_REF)) {
+			preferences.putDouble(m_key, RobotMap.lift_zero_ref);
+			RobotMap.lift_zero_ref = height;
+		} else if (m_key.equals(RobotMap.LIFT_TOTE_PICKUP)) {
+			preferences.putDouble(m_key, RobotMap.lift_tote_pickup);
+			RobotMap.lift_tote_pickup = height;
+		} else if (m_key.equals(RobotMap.LIFT_TOTE_1)) {
+			preferences.putDouble(m_key, RobotMap.lift_tote_1);
+			RobotMap.lift_tote_1 = height;
+		} else if (m_key.equals(RobotMap.LIFT_TOTE_2)) {
+			preferences.putDouble(m_key, RobotMap.lift_tote_2);
+			RobotMap.lift_tote_2 = height;
+		} else if (m_key.equals(RobotMap.LIFT_TOTE_3)) {
+			preferences.putDouble(m_key, RobotMap.lift_tote_3);
+			RobotMap.lift_tote_3 = height;
+		}
+
+		preferences.save();
+	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {

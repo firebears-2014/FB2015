@@ -11,21 +11,24 @@ public class HeightSensor {
 
 	AnalogPotentiometer pot = RobotMap.liftpot;
 
+	// number used to convert volts (which the pot returns) to inches
 	public final double inchesPerVolt = 1.0;
-	public double Zero = 1.0;
+	public double Zero;
 
 	public HeightSensor() {
-		// get zero from preferences
 		Zero = RobotMap.lift_zero_ref;
 	}
 
 	public double getHeight() {
+		// returns inches above "Zero"
 		return (pot.get() - Zero) * inchesPerVolt;
 	}
 
+	public double getZero() {
+		return Zero;
+	}
+
 	public void setZero() {
-		Preferences preferences;
-		preferences = Preferences.getInstance();
 		new PreferenceSetup(RobotMap.LIFT_ZERO_REF);
 
 		Zero = RobotMap.lift_zero_ref;

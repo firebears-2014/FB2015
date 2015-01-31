@@ -11,12 +11,14 @@
 package org.firebears;
 
 import org.firebears.commands.*;
-import org.firebears.commands.drive.DriveToDistanceCommand;
 import org.firebears.commands.drive.ForwardCommand;
 import org.firebears.commands.drive.StrafeCommand;
 import org.firebears.commands.gripper.GrabberCommand;
+import org.firebears.commands.lift.setHeightCommand;
+import org.firebears.commands.lift.setLiftMotor;
 import org.firebears.commands.lights.LightChangeCommand;
 
+import PreferenceSetup.PreferenceSetup;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Sendable;
@@ -65,7 +67,7 @@ public class OI {
 	public DigitalInput autoSelect2;
 	public DigitalInput autoSelect3;
 	public DigitalInput autoSelect4;
-    
+
 	public JoystickButton forwardbutton;
 	public JoystickButton backwardbutton;
 	public JoystickButton stopbutton;
@@ -74,6 +76,11 @@ public class OI {
 
 	public JoystickButton openGrabbers;
 	public JoystickButton closeGrabbers;
+	public JoystickButton setLiftPickup;
+	public JoystickButton setLiftTote0;
+	public JoystickButton setLiftTote1;
+	public JoystickButton setLiftTote2;
+	public JoystickButton setLiftTote3;
 
 	public OI() {
 		joystickZero = new Joystick(0);
@@ -84,12 +91,6 @@ public class OI {
 		autoSelect2 = new DigitalInput(2);
 		autoSelect3 = new DigitalInput(3);
 		autoSelect4 = new DigitalInput(4);
-		
-		openGrabbers = new JoystickButton(joystickLift, 1);
-		openGrabbers.whenPressed(new GrabberCommand(true));
-
-		closeGrabbers = new JoystickButton(joystickLift, 1);
-		closeGrabbers.whenPressed(new GrabberCommand(false));
 
 		forwardbutton = new JoystickButton(joystickZero, 6);
 		forwardbutton.whileHeld(new ForwardCommand(0.5));
@@ -106,9 +107,47 @@ public class OI {
 		straferight = new JoystickButton(joystickZero, 3);
 		straferight.whileHeld(new StrafeCommand(-0.5));
 
+		// start of final joystick buttons
+		openGrabbers = new JoystickButton(joystickLift, 1);
+		openGrabbers.whenPressed(new GrabberCommand(true));
+
+		closeGrabbers = new JoystickButton(joystickLift, 1);
+		closeGrabbers.whenPressed(new GrabberCommand(false));
+
+		setLiftPickup = new JoystickButton(joystickLift, 1);
+		setLiftPickup.whenPressed(new setHeightCommand("Lift_Pickup"));
+
+		setLiftTote0 = new JoystickButton(joystickLift, 1);
+		setLiftTote0.whenPressed(new setHeightCommand("Lift_Tote_0"));
+
+		setLiftTote1 = new JoystickButton(joystickLift, 1);
+		setLiftTote1.whenPressed(new setHeightCommand("Lift_Tote_1"));
+
+		setLiftTote2 = new JoystickButton(joystickLift, 1);
+		setLiftTote2.whenPressed(new setHeightCommand("Lift_Tote_2"));
+
+		setLiftTote3 = new JoystickButton(joystickLift, 1);
+		setLiftTote3.whenPressed(new setHeightCommand("Lift_Tote_3"));
+
 		// SmartDashboard Buttons
 		// SmartDashboard.putData("Autonomous Command", new
 		// AutonomousCommand());
+		SmartDashboard.putBoolean("Lift Motor", Robot.lift.enable_motor);
+
+		SmartDashboard.putData("Enable Lift Motor", new setLiftMotor(true));
+		SmartDashboard.putData("Disable Lift Motor", new setLiftMotor(false));
+
+		SmartDashboard.putData("Set Zero", new PreferenceSetup(
+				RobotMap.LIFT_ZERO_REF));
+		SmartDashboard.putData("Set Tote Zero/Pickup", new PreferenceSetup(
+				RobotMap.LIFT_TOTE_PICKUP));
+		SmartDashboard.putData("Set Tote One", new PreferenceSetup(
+				RobotMap.LIFT_TOTE_1));
+		SmartDashboard.putData("Set Tote Two", new PreferenceSetup(
+				RobotMap.LIFT_TOTE_2));
+		SmartDashboard.putData("Set Tote Three", new PreferenceSetup(
+				RobotMap.LIFT_TOTE_3));
+
 		SmartDashboard.putData("Change Lights", new LightChangeCommand(0,
 				Robot.lights.RANDOM_ANIM));
 
