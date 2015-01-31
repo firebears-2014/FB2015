@@ -232,5 +232,7 @@ public class RobotMap {
 		// LiveWindow.addSensor("Rangefinder", "distance", sharpIRRange);
 		sharpIRProx = new org.firebears.sensors.sharpIRProx(2);
 		// LiveWindow.addSensor("Detector", "Proximity", sharpIRProx);
+		sharpIRRange = new org.firebears.sensors.sharpIRRange(1);
+		sharpIRProx = new org.firebears.sensors.sharpIRProx(3);
 	}
 }
