@@ -35,9 +35,17 @@ public class Lights extends Subsystem {
 	public static final String PULSING_GREEN_ANIM = "PULSING_GREEN_ANIM";
 	public static final String MOVING_BLUE_ANIM = "MOVING_BLUE_ANIM";
 	public static final String FIRE_ANIM = "FIRE_ANIM";
+	public static final String LIFT = "LIFT";
 	
 	public static final String RANDOM_ANIM = "RANDOM";
 	
+	//TODO: Change #s to the proper id's and add undefined light strips
+
+	public static final int LIFT_LIGHTS_RIGHT = 0;
+	public static final int LIFT_LIGHTS_LEFT = 1;
+	public static final int UNDERGLOW_LIGHTS = 2;
+//	public static final int UNDERGLOW_LIGHTS = 0;
+
 	public Lights() {
 		table = NetworkTable.getTable("lights");
 		setStrip(0, PULSING_GREEN_ANIM);
@@ -63,6 +71,9 @@ public class Lights extends Subsystem {
     				anim = FIRE_ANIM;
     				break;
     			case FIRE_ANIM:
+    				anim = LIFT;
+    				break;
+    			case LIFT:
     				anim = PULSING_GREEN_ANIM;
     				break;
     		}
