@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  *
  */
-public class setHeightCommand extends Command {
+public class SetHeightCommand extends Command {
 
 	private String SetHeight;
 
-	public setHeightCommand(String height) {
+	public SetHeightCommand(String height) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		SetHeight = height;

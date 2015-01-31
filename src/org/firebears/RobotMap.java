@@ -31,26 +31,29 @@ public class RobotMap {
 	public static final String LIFT_TOTE_1 = "LIFT_TOTE_1";
 	public static final String LIFT_TOTE_2 = "LIFT_TOTE_2";
 	public static final String LIFT_TOTE_3 = "LIFT_TOTE_3";
+	public static final String CHASSIS_DRIVE_TYPE_TAL = "CHASSIS_DRIVE_TYPE_TAL";
+	public static final String CHASSIS_DRIVE_TYPE_JAG = "CHASSIS_DRIVE_TYPE_JAG";
 
 	public static double lift_zero_ref;
 	public static double lift_tote_pickup;
 	public static double lift_tote_1;
 	public static double lift_tote_2;
 	public static double lift_tote_3;
+	public static boolean chassis_drive_type_tal;
 
 	// Talon Code
-	/*
-	 * public static CANTalon chassis_front_left; public static CANTalon
-	 * chassis_back_left; public static CANTalon chassis_front_right; public
-	 * static CANTalon chassis_back_right;
-	 */
+
+	public static Talon chassis_front_left_tal;
+	public static Talon chassis_back_left_tal;
+	public static Talon chassis_front_right_tal;
+	public static Talon chassis_back_right_tal;
 
 	// Jaguar Code
 	// /*
-	public static CANJaguar chassis_front_left;
-	public static CANJaguar chassis_back_left;
-	public static CANJaguar chassis_front_right;
-	public static CANJaguar chassis_back_right;
+	public static CANJaguar chassis_front_left_jag;
+	public static CANJaguar chassis_back_left_jag;
+	public static CANJaguar chassis_front_right_jag;
+	public static CANJaguar chassis_back_right_jag;
 	// */
 
 	public static RobotDrive chassis_robot_drive;
@@ -80,7 +83,9 @@ public class RobotMap {
 		lift_tote_1 = preferences.getDouble(LIFT_TOTE_1, 0);
 		lift_tote_2 = preferences.getDouble(LIFT_TOTE_2, 0);
 		lift_tote_3 = preferences.getDouble(LIFT_TOTE_3, 0);
-		
+		chassis_drive_type_tal = preferences.getBoolean(CHASSIS_DRIVE_TYPE_TAL,
+				true);
+
 		// Talon code
 		/*
 		 * chassis_front_left = new CANTalon(5); chassis_back_left = new
@@ -91,30 +96,72 @@ public class RobotMap {
 		// Jag Code
 		// /*
 		try {
-			chassis_front_left = new CANJaguar(2);
-			LiveWindow.addActuator("chassis", "frontleft", chassis_front_left);
+			chassis_front_left_tal = new Talon(2);
+			LiveWindow.addActuator("chassis", "frontleft",
+					chassis_front_left_tal);
+		} catch (Exception e) {
+			System.err.println("Failed to load Tal 2");
+			e.printStackTrace();
+		}
+		try {
+			chassis_front_right_tal = new Talon(4);
+			LiveWindow.addActuator("chassis", "frontright",
+					chassis_front_right_tal);
+		} catch (Exception e) {
+			System.err.println("Failed to load Tal 4");
+			e.printStackTrace();
+		}
+		try {
+			chassis_back_left_tal = new Talon(3);
+			LiveWindow
+					.addActuator("chassis", "backleft", chassis_back_left_tal);
+		} catch (Exception e) {
+			System.err.println("Failed to load Tal 3");
+			e.printStackTrace();
+		}
+		try {
+			chassis_back_right_tal = new Talon(5);
+			LiveWindow.addActuator("chassis", "backright",
+					chassis_back_right_tal);
+		} catch (Exception e) {
+			System.err.println("Failed to load Tal 5");
+			e.printStackTrace();
+		}
+		// LiveWindow.addActuator("chassis", "frontleft", chassis_front_left);
+		// LiveWindow.addActuator("chassis", "frontright", chassis_front_right);
+		// LiveWindow.addActuator("chassis", "backleft", chassis_back_left);
+		// LiveWindow.addActuator("chassis", "backright", chassis_back_right);
+		// */
+		// Jag Code
+		// /*
+		try {
+			chassis_front_left_jag = new CANJaguar(2);
+			LiveWindow.addActuator("chassis", "frontleft",
+					chassis_front_left_jag);
 		} catch (Exception e) {
 			System.err.println("Failed to load Jag 2");
 			e.printStackTrace();
 		}
 		try {
-			chassis_front_right = new CANJaguar(4);
-			LiveWindow
-					.addActuator("chassis", "frontright", chassis_front_right);
+			chassis_front_right_jag = new CANJaguar(4);
+			LiveWindow.addActuator("chassis", "frontright",
+					chassis_front_right_jag);
 		} catch (Exception e) {
 			System.err.println("Failed to load Jag 4");
 			e.printStackTrace();
 		}
 		try {
-			chassis_back_left = new CANJaguar(3);
-			LiveWindow.addActuator("chassis", "backleft", chassis_back_left);
+			chassis_back_left_jag = new CANJaguar(3);
+			LiveWindow
+					.addActuator("chassis", "backleft", chassis_back_left_jag);
 		} catch (Exception e) {
 			System.err.println("Failed to load Jag 3");
 			e.printStackTrace();
 		}
 		try {
-			chassis_back_right = new CANJaguar(5);
-			LiveWindow.addActuator("chassis", "backright", chassis_back_right);
+			chassis_back_right_jag = new CANJaguar(5);
+			LiveWindow.addActuator("chassis", "backright",
+					chassis_back_right_jag);
 		} catch (Exception e) {
 			System.err.println("Failed to load Jag 5");
 			e.printStackTrace();
@@ -124,18 +171,24 @@ public class RobotMap {
 		// LiveWindow.addActuator("chassis", "backleft", chassis_back_left);
 		// LiveWindow.addActuator("chassis", "backright", chassis_back_right);
 		// */
+		if(chassis_drive_type_tal){
+		chassis_robot_drive = new RobotDrive(chassis_front_left_tal,
+				chassis_back_left_tal, chassis_front_right_tal,
+				chassis_back_right_tal);
+		} else {
+		chassis_robot_drive = new RobotDrive(chassis_front_left_jag,
+				chassis_back_left_jag, chassis_front_right_jag,
+				chassis_back_right_jag);
+		}
 
-		chassis_robot_drive = new RobotDrive(chassis_front_left,
-				chassis_back_left, chassis_front_right, chassis_back_right);
-
-		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kFrontRight,
-				true);
-		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft,
-				false);
-		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kRearRight,
-				true);
-		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft,
-				false);
+		chassis_robot_drive.setInvertedMotor(
+				RobotDrive.MotorType.kFrontRight, true);
+		chassis_robot_drive.setInvertedMotor(
+				RobotDrive.MotorType.kFrontLeft, false);
+		chassis_robot_drive.setInvertedMotor(
+				RobotDrive.MotorType.kRearRight, true);
+		chassis_robot_drive.setInvertedMotor(
+				RobotDrive.MotorType.kRearLeft, false);
 
 		chassis_robot_drive.setSafetyEnabled(true);
 		chassis_robot_drive.setExpiration(0.1);

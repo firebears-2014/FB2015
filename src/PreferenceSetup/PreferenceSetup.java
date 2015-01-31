@@ -48,6 +48,12 @@ public class PreferenceSetup extends Command {
 		} else if (m_key.equals(RobotMap.LIFT_TOTE_3)) {
 			preferences.putDouble(m_key, RobotMap.lift_tote_3);
 			RobotMap.lift_tote_3 = height;
+		} else if (m_key.equals(RobotMap.CHASSIS_DRIVE_TYPE_TAL)) {
+			preferences.putBoolean(m_key, true);
+			RobotMap.chassis_drive_type_tal = true;
+		} else if (m_key.equals(RobotMap.CHASSIS_DRIVE_TYPE_JAG)) {
+			preferences.putBoolean(m_key, false);
+			RobotMap.chassis_drive_type_tal = false;
 		}
 
 		preferences.save();

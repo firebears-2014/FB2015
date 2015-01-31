@@ -36,6 +36,8 @@ public class Lift extends PIDSubsystem {
 	private final double INCHES_TOTE_2 = 0.0;
 	private final double INCHES_TOTE_3 = 0.0;
 
+	public double addStep = 0;
+
 	public boolean enable_motor = true;
 
 	private static double m_P = 1.0;
@@ -86,18 +88,21 @@ public class Lift extends PIDSubsystem {
 	}
 
 	public void setSetpointInches(String setpoint) {
+
 		if (setpoint.equals("Lift_Pickup")) {
 			// set pid to pickup height
 			// set to inches above "ground height"
-			setSetpoint(INCHES_TOTE_PICKUP);
+
+			// addStep will be 0 or 6, depending on if the switch is flicked
+			setSetpoint(INCHES_TOTE_PICKUP + addStep);
 		} else if (setpoint.equals("Lift_Tote_0")) {
-			setSetpoint(INCHES_TOTE_PICKUP);
+			setSetpoint(INCHES_TOTE_PICKUP + addStep);
 		} else if (setpoint.equals("Lift_Tote_1")) {
-			setSetpoint(INCHES_TOTE_1);
+			setSetpoint(INCHES_TOTE_1 + addStep);
 		} else if (setpoint.equals("Lift_Tote_2")) {
-			setSetpoint(INCHES_TOTE_2);
+			setSetpoint(INCHES_TOTE_2 + addStep);
 		} else if (setpoint.equals("Lift_Tote_3")) {
-			setSetpoint(INCHES_TOTE_3);
+			setSetpoint(INCHES_TOTE_3 + addStep);
 		}
 	}
 

@@ -14,8 +14,9 @@ import org.firebears.commands.*;
 import org.firebears.commands.drive.ForwardCommand;
 import org.firebears.commands.drive.StrafeCommand;
 import org.firebears.commands.gripper.GrabberCommand;
-import org.firebears.commands.lift.setHeightCommand;
-import org.firebears.commands.lift.setLiftMotor;
+import org.firebears.commands.lift.SetHeightCommand;
+import org.firebears.commands.lift.SetLiftMotor;
+import org.firebears.commands.lift.SetStep;
 import org.firebears.commands.lights.LightChangeCommand;
 import org.firebears.commands.drive.*;
 import org.firebears.commands.gripper.*;
@@ -66,24 +67,22 @@ public class OI {
 	public Joystick joystickZero;
 	public Joystick joystickLift;
 	public DigitalInput scoringPlatformSensor;
+	public DigitalInput ContainerSensor;
 	public DigitalInput autoSelect1;
 	public DigitalInput autoSelect2;
 	public DigitalInput autoSelect3;
-	public DigitalInput autoSelect4;
+	// only three, unless we get a new rotary switch
+	// public DigitalInput autoSelect4;
 
-	public JoystickButton forwardbutton;
-	public JoystickButton backwardbutton;
-	public JoystickButton stopbutton;
-	public JoystickButton strafeleft;
-	public JoystickButton straferight;
-
-	public JoystickButton openGrabbers;
-	public JoystickButton closeGrabbers;
 	public JoystickButton setLiftPickup;
 	public JoystickButton setLiftTote0;
 	public JoystickButton setLiftTote1;
 	public JoystickButton setLiftTote2;
 	public JoystickButton setLiftTote3;
+	public JoystickButton openGrabbers;
+	public JoystickButton closeGrabbers;
+	public JoystickButton toggleStepSwitch;
+	public JoystickButton toggleAutomatedSwitch;
 
 	public OI() {
 		joystickZero = new Joystick(0);
@@ -93,52 +92,46 @@ public class OI {
 		autoSelect1 = new DigitalInput(1);
 		autoSelect2 = new DigitalInput(2);
 		autoSelect3 = new DigitalInput(3);
-		autoSelect4 = new DigitalInput(4);
-
-		forwardbutton = new JoystickButton(joystickZero, 6);
-		forwardbutton.whileHeld(new ForwardCommand(0.5));
-
-		backwardbutton = new JoystickButton(joystickZero, 4);
-		backwardbutton.whileHeld(new ForwardCommand(-0.5));
-
-		stopbutton = new JoystickButton(joystickZero, 2);
-		stopbutton.whileHeld(new ForwardCommand(0));
-
-		strafeleft = new JoystickButton(joystickZero, 5);
-		strafeleft.whileHeld(new StrafeCommand(0.5));
-
-		straferight = new JoystickButton(joystickZero, 3);
-		straferight.whileHeld(new StrafeCommand(-0.5));
 
 		// start of final joystick buttons
-		openGrabbers = new JoystickButton(joystickLift, 1);
-		openGrabbers.whenPressed(new GrabberCommand(true));
-
-		closeGrabbers = new JoystickButton(joystickLift, 1);
-		closeGrabbers.whenPressed(new GrabberCommand(false));
 
 		setLiftPickup = new JoystickButton(joystickLift, 1);
-		setLiftPickup.whenPressed(new setHeightCommand("Lift_Pickup"));
+		setLiftPickup.whenPressed(new SetHeightCommand("Lift_Pickup"));
 
-		setLiftTote0 = new JoystickButton(joystickLift, 1);
-		setLiftTote0.whenPressed(new setHeightCommand("Lift_Tote_0"));
+		setLiftTote0 = new JoystickButton(joystickLift, 2);
+		setLiftTote0.whenPressed(new SetHeightCommand("Lift_Tote_0"));
 
-		setLiftTote1 = new JoystickButton(joystickLift, 1);
-		setLiftTote1.whenPressed(new setHeightCommand("Lift_Tote_1"));
+		setLiftTote1 = new JoystickButton(joystickLift, 3);
+		setLiftTote1.whenPressed(new SetHeightCommand("Lift_Tote_1"));
 
-		setLiftTote2 = new JoystickButton(joystickLift, 1);
-		setLiftTote2.whenPressed(new setHeightCommand("Lift_Tote_2"));
+		setLiftTote2 = new JoystickButton(joystickLift, 4);
+		setLiftTote2.whenPressed(new SetHeightCommand("Lift_Tote_2"));
 
-		setLiftTote3 = new JoystickButton(joystickLift, 1);
-		setLiftTote3.whenPressed(new setHeightCommand("Lift_Tote_3"));
+		setLiftTote3 = new JoystickButton(joystickLift, 5);
+		setLiftTote3.whenPressed(new SetHeightCommand("Lift_Tote_3"));
+
+		openGrabbers = new JoystickButton(joystickLift, 6);
+		openGrabbers.whenPressed(new GrabberCommand(true));
+
+		closeGrabbers = new JoystickButton(joystickLift, 7);
+		closeGrabbers.whenPressed(new GrabberCommand(false));
+
+		toggleStepSwitch = new JoystickButton(joystickLift, 8);
+		toggleStepSwitch.whileHeld(new SetStep());
 
 		// SmartDashboard Buttons
 		// SmartDashboard.putData("Autonomous Command", new
 		// AutonomousCommand());
+
+		SmartDashboard.putData("Run Talon Code", new PreferenceSetup(
+				RobotMap.CHASSIS_DRIVE_TYPE_TAL));
+		SmartDashboard.putData("Run Jag Code", new PreferenceSetup(
+				RobotMap.CHASSIS_DRIVE_TYPE_JAG));
+
 		SmartDashboard.putBoolean("Lift Motor", Robot.lift.enable_motor);
 
-		SmartDashboard.putData("Enable Lift Motor", new setLiftMotor(true));
-		SmartDashboard.putData("Disable Lift Motor", new setLiftMotor(false));
+		SmartDashboard.putData("Enable Lift Motor", new SetLiftMotor(true));
+		SmartDashboard.putData("Disable Lift Motor", new SetLiftMotor(false));
 
 		SmartDashboard.putData("Set Zero", new PreferenceSetup(
 				RobotMap.LIFT_ZERO_REF));
@@ -158,5 +151,9 @@ public class OI {
 
 	public Joystick getJoystickZero() {
 		return joystickZero;
+	}
+
+	public Joystick getJoystickLift() {
+		return joystickLift;
 	}
 }
