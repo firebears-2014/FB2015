@@ -96,19 +96,19 @@ public class RobotMap {
 		// Jag Code
 		// /*
 		try {
-			chassis_front_left_tal = new Talon(2);
+			chassis_front_left_tal = new Talon(4);
 			LiveWindow.addActuator("chassis", "frontleft",
 					chassis_front_left_tal);
 		} catch (Exception e) {
-			System.err.println("Failed to load Tal 2");
+			System.err.println("Failed to load Tal 4");
 			e.printStackTrace();
 		}
 		try {
-			chassis_front_right_tal = new Talon(4);
+			chassis_front_right_tal = new Talon(2);
 			LiveWindow.addActuator("chassis", "frontright",
 					chassis_front_right_tal);
 		} catch (Exception e) {
-			System.err.println("Failed to load Tal 4");
+			System.err.println("Failed to load Tal 2");
 			e.printStackTrace();
 		}
 		try {
@@ -135,19 +135,19 @@ public class RobotMap {
 		// Jag Code
 		// /*
 		try {
-			chassis_front_left_jag = new CANJaguar(2);
+			chassis_front_left_jag = new CANJaguar(4);
 			LiveWindow.addActuator("chassis", "frontleft",
 					chassis_front_left_jag);
 		} catch (Exception e) {
-			System.err.println("Failed to load Jag 2");
+			System.err.println("Failed to load Jag 4");
 			e.printStackTrace();
 		}
 		try {
-			chassis_front_right_jag = new CANJaguar(4);
+			chassis_front_right_jag = new CANJaguar(2);
 			LiveWindow.addActuator("chassis", "frontright",
 					chassis_front_right_jag);
 		} catch (Exception e) {
-			System.err.println("Failed to load Jag 4");
+			System.err.println("Failed to load Jag 2");
 			e.printStackTrace();
 		}
 		try {
@@ -171,24 +171,24 @@ public class RobotMap {
 		// LiveWindow.addActuator("chassis", "backleft", chassis_back_left);
 		// LiveWindow.addActuator("chassis", "backright", chassis_back_right);
 		// */
-		if(chassis_drive_type_tal){
-		chassis_robot_drive = new RobotDrive(chassis_front_left_tal,
-				chassis_back_left_tal, chassis_front_right_tal,
-				chassis_back_right_tal);
+		if (chassis_drive_type_tal) {
+			chassis_robot_drive = new RobotDrive(chassis_front_left_tal,
+					chassis_back_left_tal, chassis_front_right_tal,
+					chassis_back_right_tal);
 		} else {
-		chassis_robot_drive = new RobotDrive(chassis_front_left_jag,
-				chassis_back_left_jag, chassis_front_right_jag,
-				chassis_back_right_jag);
+			chassis_robot_drive = new RobotDrive(chassis_front_left_jag,
+					chassis_back_left_jag, chassis_front_right_jag,
+					chassis_back_right_jag);
 		}
 
-		chassis_robot_drive.setInvertedMotor(
-				RobotDrive.MotorType.kFrontRight, true);
-		chassis_robot_drive.setInvertedMotor(
-				RobotDrive.MotorType.kFrontLeft, false);
-		chassis_robot_drive.setInvertedMotor(
-				RobotDrive.MotorType.kRearRight, true);
-		chassis_robot_drive.setInvertedMotor(
-				RobotDrive.MotorType.kRearLeft, false);
+		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kFrontRight,
+				true);
+		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft,
+				false);
+		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kRearRight,
+				true);
+		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft,
+				false);
 
 		chassis_robot_drive.setSafetyEnabled(true);
 		chassis_robot_drive.setExpiration(0.1);
