@@ -29,20 +29,12 @@ public class Chassis extends Subsystem {
 		drive_gyro.reset();
 	}
 
-	// Talon Code
+	SpeedController front_left = RobotMap.chassis_front_left_controller;
+	SpeedController back_left = RobotMap.chassis_back_left_controller;
+	SpeedController front_right = RobotMap.chassis_front_right_controller;
+	SpeedController back_right = RobotMap.chassis_back_right_controller;
 
-	Talon front_left_tal = RobotMap.chassis_front_left_tal;
-	Talon back_left_tal = RobotMap.chassis_back_left_tal;
-	Talon front_right_tal = RobotMap.chassis_front_right_tal;
-	Talon back_right_tal = RobotMap.chassis_back_right_tal;
 
-	// Jag Code
-	// /*
-	CANJaguar front_left_jag = RobotMap.chassis_front_left_jag;
-	CANJaguar back_left_jag = RobotMap.chassis_back_left_jag;
-	CANJaguar front_right_jag = RobotMap.chassis_front_right_jag;
-	CANJaguar back_right_jag = RobotMap.chassis_back_right_jag;
-	// */
 
 	RobotDrive robot_drive = RobotMap.chassis_robot_drive;
 	Gyro drive_gyro = RobotMap.chassis_drive_gyro;
