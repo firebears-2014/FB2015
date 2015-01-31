@@ -5,7 +5,13 @@ import org.firebears.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Command For Setting the height of the lift.
+ * 	@height: setpoint to set to:
+ * 		"Lift_Pickup"
+ * 		"Lift_Tote_0"
+ * 		"Lift_Tote_1"
+ * 		"Lift_Tote_2"
+ * 		"Lift_Tote_3"
  */
 public class SetHeightCommand extends Command {
 

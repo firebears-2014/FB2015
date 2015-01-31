@@ -4,6 +4,9 @@ import java.text.DecimalFormat;
 
 import org.firebears.RobotMap;
 
+/*
+ * sensor for testing acceleration.
+ */
 public class Accelerometer {
 	private static long curTime;
 	private static long prevTime;

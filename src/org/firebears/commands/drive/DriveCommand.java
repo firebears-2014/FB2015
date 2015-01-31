@@ -14,7 +14,6 @@ package org.firebears.commands.drive;
 import edu.wpi.first.wpilibj.command.Command;
 
 import org.firebears.Robot;
-import org.firebears.RobotMap;
 
 /**
  *

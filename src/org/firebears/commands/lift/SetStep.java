@@ -5,7 +5,7 @@ import org.firebears.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * While run, prepared for step.  When finished will go back to normal height.
  */
 public class SetStep extends Command {
 

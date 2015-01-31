@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * The Command for initializing preferences.
  */
 public class PreferenceSetup extends Command {
 
