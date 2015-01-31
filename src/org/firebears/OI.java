@@ -17,6 +17,9 @@ import org.firebears.commands.gripper.GrabberCommand;
 import org.firebears.commands.lift.setHeightCommand;
 import org.firebears.commands.lift.setLiftMotor;
 import org.firebears.commands.lights.LightChangeCommand;
+import org.firebears.commands.drive.*;
+import org.firebears.commands.gripper.*;
+import org.firebears.commands.lights.*;
 
 import PreferenceSetup.PreferenceSetup;
 import edu.wpi.first.wpilibj.DigitalInput;
