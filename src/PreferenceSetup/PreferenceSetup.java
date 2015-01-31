@@ -52,7 +52,7 @@ public class PreferenceSetup extends Command {
 			preferences.putBoolean(m_key, true);
 			RobotMap.chassis_drive_type_tal = true;
 		} else if (m_key.equals(RobotMap.CHASSIS_DRIVE_TYPE_JAG)) {
-			preferences.putBoolean(m_key, false);
+			preferences.putBoolean(RobotMap.CHASSIS_DRIVE_TYPE_TAL, false);
 			RobotMap.chassis_drive_type_tal = false;
 		}
 

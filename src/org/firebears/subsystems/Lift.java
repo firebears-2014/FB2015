@@ -10,6 +10,7 @@
 
 package org.firebears.subsystems;
 
+import org.firebears.Robot;
 import org.firebears.RobotMap;
 import org.firebears.commands.*;
 import org.firebears.sensors.HeightSensor;
@@ -31,18 +32,30 @@ public class Lift extends PIDSubsystem {
 	public double LIFT_3_HEIGHT;
 
 	// hardcode these to inches wanted above "Zero" for each height
-	private final double INCHES_TOTE_PICKUP = 0.0;
-	private final double INCHES_TOTE_1 = 0.0;
-	private final double INCHES_TOTE_2 = 0.0;
-	private final double INCHES_TOTE_3 = 0.0;
+
+	// top of the grabbers
+	private final double INCHES_GRABBER_TOP = 7.0;
+	private final double INCHES_TOTE_PICKUP = 8.5 - INCHES_GRABBER_TOP;
+	private final double INCHES_TOTE_PICKUP_1 = 21.5 - INCHES_GRABBER_TOP;
+	private final double INCHES_TOTE_PICKUP_2 = 33.5 - INCHES_GRABBER_TOP;
+	private final double INCHES_TOTE_PICKUP_3 = 46.0 - INCHES_GRABBER_TOP;
+
+	private final double INCHES_TOTE_PUTDOWN = (INCHES_TOTE_PICKUP + 3.0)
+			- INCHES_GRABBER_TOP;
+	private final double INCHES_TOTE_PUTDOWN_1 = (INCHES_TOTE_PICKUP_1 + 3.0)
+			- INCHES_GRABBER_TOP;
+	private final double INCHES_TOTE_PUTDOWN_2 = (INCHES_TOTE_PICKUP_2 + 3.0)
+			- INCHES_GRABBER_TOP;
+	private final double INCHES_TOTE_PUTDOWN_3 = (INCHES_TOTE_PICKUP_3 + 3.0)
+			- INCHES_GRABBER_TOP;
 
 	public double addStep = 0;
 
 	public boolean enable_motor = true;
 
 	private static double m_P = 1.0;
-	private static double m_I = 1.0;
-	private static double m_D = 1.0;
+	private static double m_I = 0.0;
+	private static double m_D = 0.0;
 
 	// Initialize your subsystem here
 	public Lift() {
@@ -88,26 +101,42 @@ public class Lift extends PIDSubsystem {
 	}
 
 	public void setSetpointInches(String setpoint) {
+		// set pid to pickup height
+		// set to inches above "ground height"
 
-		if (setpoint.equals("Lift_Pickup")) {
-			// set pid to pickup height
-			// set to inches above "ground height"
+		boolean picking_up = Robot.grabber.isOpen();
+		// as opposed to droping
+		if (picking_up) {
+			if (setpoint.equals("Lift_Pickup")) {
 
-			// addStep will be 0 or 6, depending on if the switch is flicked
-			setSetpoint(INCHES_TOTE_PICKUP + addStep);
-		} else if (setpoint.equals("Lift_Tote_0")) {
-			setSetpoint(INCHES_TOTE_PICKUP + addStep);
-		} else if (setpoint.equals("Lift_Tote_1")) {
-			setSetpoint(INCHES_TOTE_1 + addStep);
-		} else if (setpoint.equals("Lift_Tote_2")) {
-			setSetpoint(INCHES_TOTE_2 + addStep);
-		} else if (setpoint.equals("Lift_Tote_3")) {
-			setSetpoint(INCHES_TOTE_3 + addStep);
+				// addStep will be 0 or 6, depending on if the switch is flicked
+				setSetpoint(INCHES_TOTE_PICKUP + addStep);
+			} else if (setpoint.equals("Lift_Tote_0")) {
+				setSetpoint(INCHES_TOTE_PICKUP + addStep);
+			} else if (setpoint.equals("Lift_Tote_1")) {
+				setSetpoint(INCHES_TOTE_PICKUP_1 + addStep);
+			} else if (setpoint.equals("Lift_Tote_2")) {
+				setSetpoint(INCHES_TOTE_PICKUP_2 + addStep);
+			} else if (setpoint.equals("Lift_Tote_3")) {
+				setSetpoint(INCHES_TOTE_PICKUP_3 + addStep);
+			}
+		} else {
+			if (setpoint.equals("Lift_Pickup")) {
+				setSetpoint(INCHES_TOTE_PUTDOWN + addStep);
+			} else if (setpoint.equals("Lift_Tote_0")) {
+				setSetpoint(INCHES_TOTE_PUTDOWN + addStep);
+			} else if (setpoint.equals("Lift_Tote_1")) {
+				setSetpoint(INCHES_TOTE_PUTDOWN_1 + addStep);
+			} else if (setpoint.equals("Lift_Tote_2")) {
+				setSetpoint(INCHES_TOTE_PUTDOWN_2 + addStep);
+			} else if (setpoint.equals("Lift_Tote_3")) {
+				setSetpoint(INCHES_TOTE_PUTDOWN_3 + addStep);
+			}
 		}
 	}
 
 	public void setMotor(boolean enable) {
-		// switches morot to be off if on, or on if off
+		// switches motor to be off if on, or on if off
 		enable_motor = enable;
 	}
 }

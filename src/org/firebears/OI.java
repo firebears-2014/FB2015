@@ -13,13 +13,12 @@ package org.firebears;
 import org.firebears.commands.*;
 import org.firebears.commands.drive.ForwardCommand;
 import org.firebears.commands.drive.StrafeCommand;
-import org.firebears.commands.gripper.GrabberCommand;
+import org.firebears.commands.grabber.*;
 import org.firebears.commands.lift.SetHeightCommand;
 import org.firebears.commands.lift.SetLiftMotor;
 import org.firebears.commands.lift.SetStep;
 import org.firebears.commands.lights.LightChangeCommand;
 import org.firebears.commands.drive.*;
-import org.firebears.commands.gripper.*;
 import org.firebears.commands.lights.*;
 
 import PreferenceSetup.PreferenceSetup;

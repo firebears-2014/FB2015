@@ -1,4 +1,4 @@
-package org.firebears.commands.gripper;
+package org.firebears.commands.grabber;
 
 import org.firebears.Robot;
 
