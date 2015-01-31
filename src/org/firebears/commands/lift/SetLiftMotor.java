@@ -5,7 +5,7 @@ import org.firebears.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * sets whether the motor for the lift is enabled or not.
  */
 public class SetLiftMotor extends Command {
 	

@@ -6,7 +6,9 @@ import PreferenceSetup.PreferenceSetup;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Preferences;
 
-// is the pot that senses the lift height.
+/*
+ * this is the pot that senses the lift height.
+ */
 public class HeightSensor {
 
 	AnalogPotentiometer pot = RobotMap.liftpot;

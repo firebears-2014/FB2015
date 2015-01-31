@@ -3,11 +3,13 @@ package org.firebears.sensors;
 
 import edu.wpi.first.wpilibj.AnalogInput;
 
+/*
+ * Proximity Detector
+ */
 public class sharpIRProx extends AnalogInput {
 
 	public sharpIRProx(int channel) {
 		super(channel);
-		// TODO Auto-generated constructor stub
 	}
 
 	public boolean inRange() {

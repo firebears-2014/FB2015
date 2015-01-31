@@ -2,14 +2,15 @@ package org.firebears.sensors;
 // made by Jacob Wiggins
 
 import edu.wpi.first.wpilibj.AnalogInput;
-import edu.wpi.first.wpilibj.tables.ITable;
 
+/*
+ * Range Sensor
+ */
 public class sharpIRRange extends AnalogInput {
 	
 
 	public sharpIRRange(int channel) {
 		super(channel);
-		// TODO Auto-generated constructor stub
 	}
 	//distance will be close to the distance that the robot is
 	//assuming that it is between 10cm and 80cm.
