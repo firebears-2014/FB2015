@@ -1,6 +1,8 @@
 package org.firebears;
 
 import edu.wpi.first.wpilibj.*;
+import edu.wpi.first.wpilibj.CounterBase.EncodingType;
+import edu.wpi.first.wpilibj.PIDSource.PIDSourceParameter;
 import edu.wpi.first.wpilibj.can.*;
 import edu.wpi.first.wpilibj.interfaces.Accelerometer;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
@@ -37,6 +39,11 @@ public class RobotMap {
 	public static SpeedController chassis_back_left_controller;
 	public static SpeedController chassis_front_right_controller;
 	public static SpeedController chassis_back_right_controller;
+	
+	public static Encoder chassis_front_left_encoder;
+	public static Encoder chassis_back_left_encoder;
+	public static Encoder chassis_front_right_encoder;
+	public static Encoder chassis_back_right_encoder;
 
 	public static RobotDrive chassis_robot_drive;
 	public static Gyro chassis_drive_gyro;
@@ -138,6 +145,24 @@ public class RobotMap {
 		chassis_robot_drive.setSensitivity(0.5);
 		chassis_robot_drive.setMaxOutput(1.0);
 
+		
+		chassis_front_left_encoder = new Encoder(2,3, false, EncodingType.k4X);
+		chassis_front_left_encoder.setDistancePerPulse(1.0);
+		chassis_front_left_encoder.setPIDSourceParameter(PIDSourceParameter.kRate);
+        
+		chassis_back_left_encoder = new Encoder(6,7, false, EncodingType.k4X);
+		chassis_back_left_encoder.setDistancePerPulse(1.0);
+		chassis_back_left_encoder.setPIDSourceParameter(PIDSourceParameter.kRate);
+		
+		chassis_front_right_encoder = new Encoder(0,1, false, EncodingType.k4X);
+		chassis_front_right_encoder.setDistancePerPulse(1.0);
+		chassis_front_right_encoder.setPIDSourceParameter(PIDSourceParameter.kRate);
+		
+		chassis_back_right_encoder = new Encoder(4,5, false, EncodingType.k4X);
+		chassis_back_right_encoder.setDistancePerPulse(1.0);
+		chassis_back_right_encoder.setPIDSourceParameter(PIDSourceParameter.kRate);
+		
+		
 //		chassis_drive_gyro = new Gyro(6);
 		if (chassis_drive_gyro!=null) { chassis_drive_gyro.reset(); 
 		LiveWindow.addSensor("Chassis", "drive_gyro", chassis_drive_gyro);

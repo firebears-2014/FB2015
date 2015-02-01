@@ -1,6 +1,7 @@
 package org.firebears;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
@@ -58,9 +59,9 @@ public class Robot extends IterativeRobot {
         // uncomment next 3 lines to override defaults.
 //        autonomousCommand = new AutoStrafeCommand();
 //		/*
-    	if (oi.autoSelect1.get()==false){autonomousCommand = new AutoSM();
-    	}else if (oi.autoSelect2.get()==false){autonomousCommand = new AutoGM();
-    	}else if (oi.autoSelect3.get()==false){autonomousCommand = new AutoM();
+    	if (oi.autoSelect1!=null && oi.autoSelect1.get()==false){autonomousCommand = new AutoSM();
+    	}else if (oi.autoSelect2!=null && oi.autoSelect2.get()==false){autonomousCommand = new AutoGM();
+    	}else if (oi.autoSelect3!=null && oi.autoSelect3.get()==false){autonomousCommand = new AutoM();
     	}//else if (OI.autoSelect4.get()==false){autonomousCommand = new AutonomousCommand();
     	//}
 //    	*/
@@ -111,8 +112,15 @@ public class Robot extends IterativeRobot {
 
 		SmartDashboard.putBoolean("Proximity detector", RobotMap.sharpIRProx.inRange());
 		SmartDashboard.putNumber("Distance from object", RobotMap.sharpIRRange.getRangefinderDistance());
-		SmartDashboard.putBoolean("Color Sensor Value", oi.scoringPlatformSensor.get());
+		if (oi.scoringPlatformSensor!=null) SmartDashboard.putBoolean("Color Sensor Value", oi.scoringPlatformSensor.get());
 		if (RobotMap.chassis_drive_gyro!=null) SmartDashboard.putNumber("gyro value", RobotMap.chassis_drive_gyro.getAngle());
+		
+		SmartDashboard.putNumber("chassis_front_left_encoder", RobotMap.chassis_front_left_encoder.pidGet());
+		SmartDashboard.putNumber("chassis_back_left_encoder", RobotMap.chassis_back_left_encoder.pidGet());
+		SmartDashboard.putNumber("chassis_front_right_encoder", RobotMap.chassis_front_right_encoder.pidGet());
+		SmartDashboard.putNumber("chassis_back_right_encoder", RobotMap.chassis_back_right_encoder.pidGet());
+		
+		SmartDashboard.putBoolean("Proximity detector", RobotMap.sharpIRProx.inRange());
 		
 		SmartDashboard.putNumber("Accel X", accel.getX());
 		SmartDashboard.putNumber("Accel Y", accel.getY());
@@ -125,7 +133,8 @@ public class Robot extends IterativeRobot {
 		double X = Accelerometer.totalX();
 //		System.out.println("X displacement: "+X+" "+"Y displacement: "+Y);
 
-System.out.println("::: POV: " + oi.getJoystickZero().getPOV());
+int pov = oi.getJoystickZero().getPOV();
+if (pov > -1) System.out.println("::: POV: " + pov);
     }
 
     /**
