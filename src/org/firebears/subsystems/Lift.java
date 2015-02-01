@@ -22,21 +22,17 @@ public class Lift extends PIDSubsystem {
 
 	// hardcode these to inches wanted above "Zero" for each height
 
-	// top of the grabbers
+	// top of the grabbers from ground
 	private final double INCHES_GRABBER_TOP = 7.0;
 	private final double INCHES_TOTE_PICKUP = 8.5 - INCHES_GRABBER_TOP;
 	private final double INCHES_TOTE_PICKUP_1 = 21.5 - INCHES_GRABBER_TOP;
 	private final double INCHES_TOTE_PICKUP_2 = 33.5 - INCHES_GRABBER_TOP;
 	private final double INCHES_TOTE_PICKUP_3 = 46.0 - INCHES_GRABBER_TOP;
 
-	private final double INCHES_TOTE_PUTDOWN = (INCHES_TOTE_PICKUP + 3.0)
-			- INCHES_GRABBER_TOP;
-	private final double INCHES_TOTE_PUTDOWN_1 = (INCHES_TOTE_PICKUP_1 + 3.0)
-			- INCHES_GRABBER_TOP;
-	private final double INCHES_TOTE_PUTDOWN_2 = (INCHES_TOTE_PICKUP_2 + 3.0)
-			- INCHES_GRABBER_TOP;
-	private final double INCHES_TOTE_PUTDOWN_3 = (INCHES_TOTE_PICKUP_3 + 3.0)
-			- INCHES_GRABBER_TOP;
+	private final double INCHES_TOTE_PUTDOWN = (INCHES_TOTE_PICKUP + 3.0);
+	private final double INCHES_TOTE_PUTDOWN_1 = (INCHES_TOTE_PICKUP_1 + 3.0);
+	private final double INCHES_TOTE_PUTDOWN_2 = (INCHES_TOTE_PICKUP_2 + 3.0);
+	private final double INCHES_TOTE_PUTDOWN_3 = (INCHES_TOTE_PICKUP_3 + 3.0);
 
 	public double addStep = 0;
 
