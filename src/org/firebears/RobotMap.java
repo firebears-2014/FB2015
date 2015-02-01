@@ -138,7 +138,7 @@ public class RobotMap {
 		chassis_robot_drive.setSensitivity(0.5);
 		chassis_robot_drive.setMaxOutput(1.0);
 
-		chassis_drive_gyro = new Gyro(6);
+//		chassis_drive_gyro = new Gyro(6);
 		if (chassis_drive_gyro!=null) { chassis_drive_gyro.reset(); 
 		LiveWindow.addSensor("Chassis", "drive_gyro", chassis_drive_gyro);
 		chassis_drive_gyro.setSensitivity(0.007);
