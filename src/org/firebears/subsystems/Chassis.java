@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Chassis extends Subsystem {
 
 	public Chassis() {
-		drive_gyro.reset();
+		if (drive_gyro!=null) drive_gyro.reset();
 	}
 
 	SpeedController front_left = RobotMap.chassis_front_left_controller;
@@ -49,7 +49,9 @@ public class Chassis extends Subsystem {
 	 *            angular rotation, in the range -1.0 to 1.0.
 	 */
 	public void mechanumDrive(double strafe, double forward, double rotation) {
-		double angle = RobotMap.chassis_drive_gyro.getAngle();
+		double angle = (RobotMap.chassis_drive_gyro!=null) 
+				? RobotMap.chassis_drive_gyro.getAngle() 
+				: 0.0;
 
 		// double cosA = Math.cos(theta * (3.14159 / 180.0));
 		// double sinA = Math.sin(theta * (3.14159 / 180.0));
@@ -61,7 +63,7 @@ public class Chassis extends Subsystem {
 		// back_left.set(strafe - forward + rotation);
 		// back_right.set((strafe - forward - rotation ));
 
-		robot_drive.mecanumDrive_Cartesian(strafe, forward, rotation, angle);
+		robot_drive.mecanumDrive_Cartesian(strafe, -1 * forward, rotation, angle);
 	}
 
 	public void initDefaultCommand() {
