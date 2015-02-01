@@ -110,17 +110,18 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
     	Scheduler.getInstance().run();
 
-		SmartDashboard.putBoolean("Proximity detector", RobotMap.sharpIRProx.inRange());
-		SmartDashboard.putNumber("Distance from object", RobotMap.sharpIRRange.getRangefinderDistance());
 		if (oi.scoringPlatformSensor!=null) SmartDashboard.putBoolean("Color Sensor Value", oi.scoringPlatformSensor.get());
+		if (RobotMap.leftsharpIRProx!=null) SmartDashboard.putBoolean("left Proximity detector", RobotMap.leftsharpIRProx.inRange());
+		if (RobotMap.leftsharpIRRange!=null) SmartDashboard.putNumber("left side Distance from object", RobotMap.leftsharpIRRange.getRangefinderDistance());
+		if (RobotMap.rightsharpIRProx!=null) SmartDashboard.putBoolean("right Proximity detector", RobotMap.rightsharpIRProx.inRange());
+		if (RobotMap.rightsharpIRRange!=null) SmartDashboard.putNumber("right side Distance from object", RobotMap.rightsharpIRRange.getRangefinderDistance());
+
 		if (RobotMap.chassis_drive_gyro!=null) SmartDashboard.putNumber("gyro value", RobotMap.chassis_drive_gyro.getAngle());
 		
-		SmartDashboard.putNumber("chassis_front_left_encoder", RobotMap.chassis_front_left_encoder.pidGet());
-		SmartDashboard.putNumber("chassis_back_left_encoder", RobotMap.chassis_back_left_encoder.pidGet());
-		SmartDashboard.putNumber("chassis_front_right_encoder", RobotMap.chassis_front_right_encoder.pidGet());
-		SmartDashboard.putNumber("chassis_back_right_encoder", RobotMap.chassis_back_right_encoder.pidGet());
-		
-		SmartDashboard.putBoolean("Proximity detector", RobotMap.sharpIRProx.inRange());
+		if (RobotMap.chassis_front_left_encoder!=null) SmartDashboard.putNumber("chassis_front_left_encoder", RobotMap.chassis_front_left_encoder.pidGet());
+		if (RobotMap.chassis_back_left_encoder!=null) SmartDashboard.putNumber("chassis_back_left_encoder", RobotMap.chassis_back_left_encoder.pidGet());
+		if (RobotMap.chassis_front_right_encoder!=null) SmartDashboard.putNumber("chassis_front_right_encoder", RobotMap.chassis_front_right_encoder.pidGet());
+		if (RobotMap.chassis_back_right_encoder!=null) SmartDashboard.putNumber("chassis_back_right_encoder", RobotMap.chassis_back_right_encoder.pidGet());
 		
 		SmartDashboard.putNumber("Accel X", accel.getX());
 		SmartDashboard.putNumber("Accel Y", accel.getY());
