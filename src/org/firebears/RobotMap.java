@@ -38,14 +38,6 @@ public class RobotMap {
 	public static SpeedController chassis_front_right_controller;
 	public static SpeedController chassis_back_right_controller;
 
-	// Jaguar Code
-	// /*
-	// public static CANJaguar chassis_front_left_jag;
-	// public static CANJaguar chassis_back_left_jag;
-	// public static CANJaguar chassis_front_right_jag;
-	// public static CANJaguar chassis_back_right_jag;
-	// */
-
 	public static RobotDrive chassis_robot_drive;
 	public static Gyro chassis_drive_gyro;
 	public static AnalogPotentiometer liftpot;
@@ -85,12 +77,15 @@ public class RobotMap {
 
 		// Talon Code
 		if (chassis_drive_type_tal) {
-			chassis_front_left_controller = new CANTalon(4);
-			chassis_front_right_controller = new CANTalon(2);
-			chassis_back_left_controller = new CANTalon(3);
-			chassis_back_right_controller = new CANTalon(5);
+			System.out.println("Configuring RobotDrive for CANTalons");
+		    chassis_front_left_controller = new CANTalon(3);
+			chassis_front_right_controller = new CANTalon(5);
+			chassis_back_left_controller = new CANTalon(4);
+			chassis_back_right_controller = new CANTalon(2);
+
 		} else {
 			// Jag Code
+			System.out.println("Configuring RobotDrive for CANJaguars");
 			try {
 				chassis_front_left_controller = new CANJaguar(4);
 				LiveWindow.addActuator("chassis", "frontleft",
@@ -143,11 +138,12 @@ public class RobotMap {
 		chassis_robot_drive.setSensitivity(0.5);
 		chassis_robot_drive.setMaxOutput(1.0);
 
-		chassis_drive_gyro = new Gyro(1);
-		chassis_drive_gyro.reset();
+		chassis_drive_gyro = new Gyro(6);
+		if (chassis_drive_gyro!=null) { chassis_drive_gyro.reset(); 
 		LiveWindow.addSensor("Chassis", "drive_gyro", chassis_drive_gyro);
 		chassis_drive_gyro.setSensitivity(0.007);
 		chassis_drive_gyro.initGyro();
+		}
 		liftpot = new AnalogPotentiometer(3, 1.0, 0.0);
 		LiveWindow.addSensor("Lift", "pot", liftpot);
 
@@ -180,7 +176,7 @@ public class RobotMap {
 		// LiveWindow.addSensor("Rangefinder", "distance", sharpIRRange);
 		sharpIRProx = new org.firebears.sensors.sharpIRProx(2);
 		// LiveWindow.addSensor("Detector", "Proximity", sharpIRProx);
-		sharpIRRange = new org.firebears.sensors.sharpIRRange(1);
-		sharpIRProx = new org.firebears.sensors.sharpIRProx(3);
+//		sharpIRRange = new org.firebears.sensors.sharpIRRange(1);
+//		sharpIRProx = new org.firebears.sensors.sharpIRProx(3);
 	}
 }

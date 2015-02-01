@@ -64,7 +64,7 @@ public class Robot extends IterativeRobot {
     	}//else if (OI.autoSelect4.get()==false){autonomousCommand = new AutonomousCommand();
     	//}
 //    	*/
-    	RobotMap.chassis_drive_gyro.reset();
+        if (RobotMap.chassis_drive_gyro!=null) RobotMap.chassis_drive_gyro.reset();
     }
 
     /**
@@ -82,7 +82,7 @@ public class Robot extends IterativeRobot {
     public void autonomousInit() {
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
-        RobotMap.chassis_drive_gyro.reset();
+        if (RobotMap.chassis_drive_gyro!=null) RobotMap.chassis_drive_gyro.reset();
     }
 
     /**
@@ -112,7 +112,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putBoolean("Proximity detector", RobotMap.sharpIRProx.inRange());
 		SmartDashboard.putNumber("Distance from object", RobotMap.sharpIRRange.getRangefinderDistance());
 		SmartDashboard.putBoolean("Color Sensor Value", oi.scoringPlatformSensor.get());
-		SmartDashboard.putNumber("gyro value", RobotMap.chassis_drive_gyro.getAngle());
+		if (RobotMap.chassis_drive_gyro!=null) SmartDashboard.putNumber("gyro value", RobotMap.chassis_drive_gyro.getAngle());
 		
 		SmartDashboard.putNumber("Accel X", accel.getX());
 		SmartDashboard.putNumber("Accel Y", accel.getY());
@@ -125,6 +125,7 @@ public class Robot extends IterativeRobot {
 		double X = Accelerometer.totalX();
 //		System.out.println("X displacement: "+X+" "+"Y displacement: "+Y);
 
+System.out.println("::: POV: " + oi.getJoystickZero().getPOV());
     }
 
     /**

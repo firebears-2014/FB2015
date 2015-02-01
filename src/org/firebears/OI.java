@@ -1,6 +1,7 @@
 package org.firebears;
 
 import org.firebears.commands.*;
+import org.firebears.commands.drive.DriveCommand;
 import org.firebears.commands.drive.ForwardCommand;
 import org.firebears.commands.drive.StrafeCommand;
 import org.firebears.commands.grabber.*;
@@ -53,7 +54,7 @@ public class OI {
 	// until it is finished as determined by it's isFinished method.
 	// button.whenReleased(new ExampleCommand());
 
-	public Joystick joystickZero;
+	public Joystick joystickDrive;
 	public Joystick joystickLift;
 	public DigitalInput scoringPlatformSensor;
 	public DigitalInput ContainerSensor;
@@ -74,7 +75,7 @@ public class OI {
 	public JoystickButton toggleAutomatedSwitch;
 
 	public OI() {
-		joystickZero = new Joystick(0);
+		joystickDrive = new Joystick(0);
 		joystickLift = new Joystick(1);
 
 		scoringPlatformSensor = new DigitalInput(0);
@@ -82,6 +83,10 @@ public class OI {
 		autoSelect2 = new DigitalInput(2);
 		autoSelect3 = new DigitalInput(3);
 
+		(new JoystickButton(joystickDrive, 5)).whileHeld(new ForwardCommand(0.5));
+		(new JoystickButton(joystickDrive, 3)).whileHeld(new ForwardCommand(-0.5));
+		(new JoystickButton(joystickDrive, 0)).whileHeld(new ForwardCommand(0));
+		
 		// start of final joystick buttons
 
 		setLiftPickup = new JoystickButton(joystickLift, 1);
@@ -139,7 +144,7 @@ public class OI {
 	}
 
 	public Joystick getJoystickZero() {
-		return joystickZero;
+		return joystickDrive;
 	}
 
 	public Joystick getJoystickLift() {
