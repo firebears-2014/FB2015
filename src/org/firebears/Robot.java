@@ -109,8 +109,10 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
     	Scheduler.getInstance().run();
 
-		SmartDashboard.putBoolean("Proximity detector", RobotMap.sharpIRProx.inRange());
-		SmartDashboard.putNumber("Distance from object", RobotMap.sharpIRRange.getRangefinderDistance());
+		SmartDashboard.putBoolean("left Proximity detector", RobotMap.leftsharpIRProx.inRange());
+		SmartDashboard.putNumber("left side Distance from object", RobotMap.leftsharpIRRange.getRangefinderDistance());
+		SmartDashboard.putBoolean("right Proximity detector", RobotMap.rightsharpIRProx.inRange());
+		SmartDashboard.putNumber("right side Distance from object", RobotMap.rightsharpIRRange.getRangefinderDistance());
 		SmartDashboard.putBoolean("Color Sensor Value", oi.scoringPlatformSensor.get());
 		SmartDashboard.putNumber("gyro value", RobotMap.chassis_drive_gyro.getAngle());
 		
