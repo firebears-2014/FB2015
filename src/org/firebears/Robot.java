@@ -45,7 +45,7 @@ public class Robot extends IterativeRobot {
     RobotMap.init();
     
         chassis = new Chassis();
-        lift = new Lift();
+//        lift = new Lift();
         grabber = new Grabber();
         lights = new Lights();
         vision = new Vision();

@@ -94,7 +94,7 @@ public class OI {
 		SmartDashboard.putData("Run Jag Code", new PreferenceSetup(
 				RobotMap.CHASSIS_DRIVE_TYPE_JAG));
 
-		SmartDashboard.putBoolean("Lift Motor", Robot.lift.enable_motor);
+		if (Robot.lift!=null) SmartDashboard.putBoolean("Lift Motor", Robot.lift.enable_motor);
 
 		SmartDashboard.putData("Enable Lift Motor", new SetLiftMotor(true));
 		SmartDashboard.putData("Disable Lift Motor", new SetLiftMotor(false));
