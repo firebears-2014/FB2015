@@ -54,7 +54,7 @@ public class Chassis extends Subsystem {
 		double angle = (RobotMap.chassis_drive_gyro!=null) 
 				? RobotMap.chassis_drive_gyro.getAngle() 
 				: 0.0;
-
+		angle = 0.0;
 		// double cosA = Math.cos(theta * (3.14159 / 180.0));
 		// double sinA = Math.sin(theta * (3.14159 / 180.0));
 		// strafe = strafe * cosA - forward * sinA;

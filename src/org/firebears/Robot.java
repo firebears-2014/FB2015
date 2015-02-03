@@ -100,6 +100,7 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
         Accelerometer.reset();
+        if (RobotMap.chassis_drive_gyro!=null) RobotMap.chassis_drive_gyro.reset();
         
     }
 
