@@ -111,9 +111,9 @@ public class Robot extends IterativeRobot {
     	Scheduler.getInstance().run();
 
 		if (oi.scoringPlatformSensor!=null) SmartDashboard.putBoolean("Color Sensor Value", oi.scoringPlatformSensor.get());
-		if (RobotMap.leftsharpIRProx!=null) SmartDashboard.putBoolean("left Proximity detector", RobotMap.leftsharpIRProx.inRange());
+		if (RobotMap.farleftsharpIRRange!=null) SmartDashboard.putNumber("far left Distance from object", RobotMap.farleftsharpIRRange.getRangefinderDistance());
 		if (RobotMap.leftsharpIRRange!=null) SmartDashboard.putNumber("left side Distance from object", RobotMap.leftsharpIRRange.getRangefinderDistance());
-		if (RobotMap.rightsharpIRProx!=null) SmartDashboard.putBoolean("right Proximity detector", RobotMap.rightsharpIRProx.inRange());
+		if (RobotMap.farrightsharpIRRange!=null) SmartDashboard.putNumber("far right Distance from object", RobotMap.farrightsharpIRRange.getRangefinderDistance());
 		if (RobotMap.rightsharpIRRange!=null) SmartDashboard.putNumber("right side Distance from object", RobotMap.rightsharpIRRange.getRangefinderDistance());
 
 		if (RobotMap.chassis_drive_gyro!=null) SmartDashboard.putNumber("gyro value", RobotMap.chassis_drive_gyro.getAngle());
