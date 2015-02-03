@@ -73,6 +73,7 @@ public class OI {
 	public JoystickButton closeGrabbers;
 	public JoystickButton toggleStepSwitch;
 	public JoystickButton toggleAutomatedSwitch;
+	public JoystickButton centerTote;
 
 	public OI() {
 		joystickDrive = new Joystick(0);
@@ -112,6 +113,9 @@ public class OI {
 
 		toggleStepSwitch = new JoystickButton(joystickLift, 8);
 		toggleStepSwitch.whileHeld(new SetStep());
+		
+		centerTote = new JoystickButton(joystickDrive, 12);
+		centerTote.whenPressed(new Totecenter());
 
 		// SmartDashboard Buttons
 		// SmartDashboard.putData("Autonomous Command", new

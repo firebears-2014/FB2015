@@ -152,8 +152,8 @@ public class RobotMap {
 		chassis_drive_gyro.setSensitivity(0.007);
 		chassis_drive_gyro.initGyro();
 		}
-		liftpot = new AnalogPotentiometer(3, 1.0, 0.0);
-		LiveWindow.addSensor("Lift", "pot", liftpot);
+		//liftpot = new AnalogPotentiometer(3, 1.0, 0.0);
+		//LiveWindow.addSensor("Lift", "pot", liftpot);
 
 		lifttalon = new Talon(0);
 		LiveWindow.addActuator("Lift", "talon", (Talon) lifttalon);
