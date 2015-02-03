@@ -32,6 +32,9 @@ public class  LightsCommand extends Command {
     	}
     	
     	old_value = new_value;
+
+//    	Robot.lights.setLiftHeight(Lights.LIFT_LIGHTS_LEFT, Robot.lift.getLiftHeight());
+//   	Robot.lights.setLiftHeight(Lights.LIFT_LIGHTS_RIGHT, Robot.lift.getLiftHeight());
     }
 
     // Make this return true when this Command no longer needs to run execute()

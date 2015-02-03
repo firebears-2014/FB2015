@@ -1,6 +1,7 @@
 package org.firebears;
 
 import org.firebears.commands.*;
+import org.firebears.commands.drive.DriveCommand;
 import org.firebears.commands.drive.ForwardCommand;
 import org.firebears.commands.drive.StrafeCommand;
 import org.firebears.commands.grabber.*;
@@ -25,35 +26,8 @@ import edu.wpi.first.wpilibj.DigitalInput;
  * interface to the commands and command groups that allow control of the robot.
  */
 public class OI {
-	// // CREATING BUTTONS
-	// One type of button is a joystick button which is any button on a
-	// joystick.
-	// You create one by telling it which joystick it's on and which button
-	// number it is.
-	// Joystick stick = new Joystick(port);
-	// Button button = new JoystickButton(stick, buttonNumber);
 
-	// There are a few additional built in buttons you can use. Additionally,
-	// by subclassing Button you can create custom triggers and bind those to
-	// commands the same as any other Button.
-
-	// // TRIGGERING COMMANDS WITH BUTTONS
-	// Once you have a button, it's trivial to bind it to a button in one of
-	// three ways:
-
-	// Start the command when the button is pressed and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenPressed(new ExampleCommand());
-
-	// Run the command while the button is being held down and interrupt it once
-	// the button is released.
-	// button.whileHeld(new ExampleCommand());
-
-	// Start the command when the button is released and let it run the command
-	// until it is finished as determined by it's isFinished method.
-	// button.whenReleased(new ExampleCommand());
-
-	public Joystick joystickZero;
+	public Joystick joystickDrive;
 	public Joystick joystickLift;
 	public DigitalInput scoringPlatformSensor;
 	public DigitalInput ContainerSensor;
@@ -72,16 +46,20 @@ public class OI {
 	public JoystickButton closeGrabbers;
 	public JoystickButton toggleStepSwitch;
 	public JoystickButton toggleAutomatedSwitch;
+	public JoystickButton centerTote;
 
 	public OI() {
-		joystickZero = new Joystick(0);
+		joystickDrive = new Joystick(0);
 		joystickLift = new Joystick(1);
 
-		scoringPlatformSensor = new DigitalInput(0);
-		autoSelect1 = new DigitalInput(1);
-		autoSelect2 = new DigitalInput(2);
-		autoSelect3 = new DigitalInput(3);
+//		scoringPlatformSensor = new DigitalInput(0);
+//		autoSelect1 = new DigitalInput(1);
+//		autoSelect2 = new DigitalInput(2);
+//		autoSelect3 = new DigitalInput(3);
 
+//		(new JoystickButton(joystickDrive, 3)).whileHeld(new ForwardCommand(0.5));
+//		(new JoystickButton(joystickDrive, 5)).whileHeld(new ForwardCommand(-0.5));
+		
 		// start of final joystick buttons
 
 		setLiftPickup = new JoystickButton(joystickLift, 1);
@@ -107,6 +85,9 @@ public class OI {
 
 		toggleStepSwitch = new JoystickButton(joystickLift, 8);
 		toggleStepSwitch.whileHeld(new SetStep());
+		
+		centerTote = new JoystickButton(joystickDrive, 12);
+		centerTote.whenPressed(new Totecenter());
 
 		// SmartDashboard Buttons
 		// SmartDashboard.putData("Autonomous Command", new
@@ -117,7 +98,7 @@ public class OI {
 		SmartDashboard.putData("Run Jag Code", new PreferenceSetup(
 				RobotMap.CHASSIS_DRIVE_TYPE_JAG));
 
-		SmartDashboard.putBoolean("Lift Motor", Robot.lift.enable_motor);
+		if (Robot.lift!=null) SmartDashboard.putBoolean("Lift Motor", Robot.lift.enable_motor);
 
 		SmartDashboard.putData("Enable Lift Motor", new SetLiftMotor(true));
 		SmartDashboard.putData("Disable Lift Motor", new SetLiftMotor(false));
@@ -139,7 +120,7 @@ public class OI {
 	}
 
 	public Joystick getJoystickZero() {
-		return joystickZero;
+		return joystickDrive;
 	}
 
 	public Joystick getJoystickLift() {

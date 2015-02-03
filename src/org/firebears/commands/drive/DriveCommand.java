@@ -35,15 +35,37 @@ public class  DriveCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.chassis.mechanumDrive(
-    			Robot.oi.getJoystickZero().getRawAxis(0),	// x
-    			Robot.oi.getJoystickZero().getRawAxis(1),	// y
-    			Robot.oi.getJoystickZero().getRawAxis(2));	// rotation
+    	double x = Robot.oi.getJoystickZero().getRawAxis(0);         // strafe left/right
+		double y = Robot.oi.getJoystickZero().getRawAxis(1);         // forward / backwards
+		double rotation = Robot.oi.getJoystickZero().getRawAxis(2);  
+		
+		x = (x>0?1:-1) * x * x;
+		y = (y>0?1:-1) * y * y;
+		rotation = removeDeadband(rotation, 0.2);
+		
+		Robot.chassis.mechanumDrive( x, y, rotation);	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
         return false;
+    }
+    
+    /**
+     * Returns zero for all input values from -d to d.
+     * 
+     * @param x  Input value in the range -1.0 to 1.0.
+     * @param d dead area around zero.
+     * @return  Output value in the range -1.0 to 1.0;
+     */
+    protected double removeDeadband(double x, double d) {
+    	if (x >= -1 * d && x <= d) {
+    		return 0.0;
+    	} else if (x > d) {
+    		return (x - d) / (1 - d);
+    	} else {
+    		return (x + d) / (1 - d);
+    	}
     }
 
     // Called once after isFinished returns true

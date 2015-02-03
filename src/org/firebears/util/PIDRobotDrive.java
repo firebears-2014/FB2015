@@ -23,29 +23,34 @@ public class PIDRobotDrive extends RobotDrive {
     public double g_p = 1.0;
     public double g_i = 0.0;
     public double g_d = 0.0;
-    public double g_maxEncoderSpeed = 1.0;
+    public double g_maxEncoderSpeed = .2;
 
 	public PIDRobotDrive(
 			SpeedController frontLeftMotor,
 			SpeedController rearLeftMotor,
 			SpeedController frontRightMotor,
 			SpeedController rearRightMotor,
-			PIDSource frontLeftEncoder,
-			PIDSource frontRightEncoder,
-			PIDSource backLeftEncoder,
-			PIDSource backRightEncoder,
+			PIDSource pidSource,
+			PIDSource pidSource2,
+			PIDSource pidSource3,
+			PIDSource pidSource4,
 			double maxEncoderSpeed)
 	{
 		super(frontLeftMotor, rearLeftMotor, frontRightMotor, rearRightMotor);
 		frontLeftPID = new PIDController(g_p, g_i, g_d,
-				frontLeftEncoder, frontLeftMotor);
+				pidSource, frontLeftMotor);
 		frontRightPID = new PIDController(g_p, g_i, g_d,
-				frontRightEncoder, frontRightMotor);
+				pidSource2, frontRightMotor);
 		backLeftPID = new PIDController(g_p, g_i, g_d,
-				backLeftEncoder, rearLeftMotor);
+				pidSource3, rearLeftMotor);
 		backRightPID = new PIDController(g_p, g_i, g_d,
-				backRightEncoder, rearRightMotor);
+				pidSource4, rearRightMotor);
+		frontLeftPID.enable();
+		frontRightPID.enable();
+		backLeftPID.enable();
+		backRightPID.enable();
 		g_maxEncoderSpeed = maxEncoderSpeed;
+		m_maxOutput = .2f;
 	}
 	
 	public void mecanumDrive_Cartesian(double x, double y, double rotation, double gyroAngle) {
@@ -70,10 +75,10 @@ public class PIDRobotDrive extends RobotDrive {
 
         normalize(wheelSpeeds);
 
-        frontLeftPID.setSetpoint(wheelSpeeds[kFrontLeft_val] * m_invertedMotors[kFrontLeft_val] * m_maxOutput * g_maxEncoderSpeed);
-        frontRightPID.setSetpoint(wheelSpeeds[kFrontRight_val] * m_invertedMotors[kFrontRight_val] * m_maxOutput * g_maxEncoderSpeed);
-        backLeftPID.setSetpoint(wheelSpeeds[kRearLeft_val] * m_invertedMotors[kRearLeft_val] * m_maxOutput * g_maxEncoderSpeed);
-        backRightPID.setSetpoint(wheelSpeeds[kRearRight_val] * m_invertedMotors[kRearRight_val] * m_maxOutput * g_maxEncoderSpeed);
+        frontLeftPID.setSetpoint(-wheelSpeeds[kFrontLeft_val] * m_invertedMotors[kFrontLeft_val] * m_maxOutput * g_maxEncoderSpeed);
+        frontRightPID.setSetpoint(-wheelSpeeds[kFrontRight_val] * m_invertedMotors[kFrontRight_val] * m_maxOutput * g_maxEncoderSpeed);
+        backLeftPID.setSetpoint(-wheelSpeeds[kRearLeft_val] * m_invertedMotors[kRearLeft_val] * m_maxOutput * g_maxEncoderSpeed);
+        backRightPID.setSetpoint(-wheelSpeeds[kRearRight_val] * m_invertedMotors[kRearRight_val] * m_maxOutput * g_maxEncoderSpeed);
 
     }
 
