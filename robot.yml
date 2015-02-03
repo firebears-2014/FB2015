@@ -13,7 +13,7 @@ Children:
             default: '2'
             name: CAN ID
             validators: &id002 [CANID]
-            value: '5'
+            value: '3'
         Base: CAN Jaguar
         Name: front_left
       - Children: []
@@ -23,7 +23,7 @@ Children:
             default: '2'
             name: CAN ID
             validators: *id002
-            value: '3'
+            value: '4'
         Base: CAN Jaguar
         Name: back_left
       - Children: []
@@ -33,7 +33,7 @@ Children:
             default: '2'
             name: CAN ID
             validators: *id002
-            value: '2'
+            value: '5'
         Base: CAN Jaguar
         Name: front_right
       - Children: []
@@ -43,7 +43,7 @@ Children:
             default: '2'
             name: CAN ID
             validators: *id002
-            value: '4'
+            value: '2'
         Base: CAN Jaguar
         Name: back_right
       Properties:
@@ -101,6 +101,46 @@ Children:
           value: '1'
       Base: Gyro
       Name: drive_gyro
+    - Children: []
+      Properties:
+        Input Channel (Analog): !!robotbuilder.data.properties.ChoicesProperty
+          choices: &id003 ['0', '1', '2', '3', '4', '5', '6', '7']
+          default: '0'
+          name: Input Channel (Analog)
+          validators: &id004 [AnalogInput]
+          value: '3'
+      Base: Analog Input
+      Name: leftSharpIrRange
+    - Children: []
+      Properties:
+        Input Channel (Analog): !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id003
+          default: '0'
+          name: Input Channel (Analog)
+          validators: *id004
+          value: '2'
+      Base: Analog Input
+      Name: rightSharpIrRange
+    - Children: []
+      Properties:
+        Input Channel (Analog): !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id003
+          default: '0'
+          name: Input Channel (Analog)
+          validators: *id004
+          value: '4'
+      Base: Analog Input
+      Name: LeftSharpIrProx
+    - Children: []
+      Properties:
+        Input Channel (Analog): !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id003
+          default: '0'
+          name: Input Channel (Analog)
+          validators: *id004
+          value: '5'
+      Base: Analog Input
+      Name: rightSharpIrProx
     Properties:
       Default Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Default Command, type: Command, validators: null, value: DriveCommand}
@@ -183,20 +223,68 @@ Children:
     - Children: []
       Properties:
         Output Channel (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
-          choices: &id003 ['0', '1', '2', '3', '4', '5', '6', '7']
+          choices: &id005 ['0', '1', '2', '3', '4', '5', '6', '7']
           default: '0'
           name: Output Channel (Solenoid)
-          validators: &id004 [Solenoid]
-          value: '0'
+          validators: &id006 [Solenoid]
+          value: '3'
         Output PCM (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
-          choices: &id005 ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
+          choices: &id007 ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9', '10',
             '11', '12', '13', '14', '15', '16', '17', '18', '19', '20']
           default: '0'
           name: Output PCM (Solenoid)
-          validators: &id006 [Solenoid]
+          validators: &id008 [Solenoid]
           value: '0'
       Base: Solenoid
-      Name: solenoid_left
+      Name: solenoid_left_open
+    - Children: []
+      Properties:
+        Output Channel (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id005
+          default: '0'
+          name: Output Channel (Solenoid)
+          validators: *id006
+          value: '1'
+        Output PCM (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id007
+          default: '0'
+          name: Output PCM (Solenoid)
+          validators: *id008
+          value: '0'
+      Base: Solenoid
+      Name: solenoid_left_close
+    - Children: []
+      Properties:
+        Output Channel (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id005
+          default: '0'
+          name: Output Channel (Solenoid)
+          validators: *id006
+          value: '4'
+        Output PCM (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id007
+          default: '0'
+          name: Output PCM (Solenoid)
+          validators: *id008
+          value: '0'
+      Base: Solenoid
+      Name: solenoid_right_open
+    - Children: []
+      Properties:
+        Output Channel (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id005
+          default: '0'
+          name: Output Channel (Solenoid)
+          validators: *id006
+          value: '2'
+        Output PCM (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
+          choices: *id007
+          default: '0'
+          name: Output PCM (Solenoid)
+          validators: *id008
+          value: '0'
+      Base: Solenoid
+      Name: solenoid_right_close
     - Children: []
       Properties:
         PCM ID: !!robotbuilder.data.properties.ChoicesProperty
@@ -208,22 +296,6 @@ Children:
           value: '0'
       Base: Compressor
       Name: compressor
-    - Children: []
-      Properties:
-        Output Channel (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id003
-          default: '0'
-          name: Output Channel (Solenoid)
-          validators: *id004
-          value: '1'
-        Output PCM (Solenoid): !!robotbuilder.data.properties.ChoicesProperty
-          choices: *id005
-          default: '0'
-          name: Output PCM (Solenoid)
-          validators: *id006
-          value: '0'
-      Base: Solenoid
-      Name: solenoid_right
     Properties:
       Default Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
         name: Default Command, type: Command, validators: null, value: None}
@@ -269,10 +341,10 @@ Children:
   Base: Commands
   Name: Commands
 Properties:
-  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: /home/jeron/workspace,
-    extension: null, folder: true, name: Eclipse Workspace, validators: null, value: /home/jeron/prg/Eclipse/Workspace}
+  Eclipse Workspace: !!robotbuilder.data.properties.FileProperty {default: /Users/keith/workspace,
+    extension: null, folder: true, name: Eclipse Workspace, validators: null, value: /Users/keith/Documents/workspace}
   Export Commands: !!robotbuilder.data.properties.BooleanProperty {default: true,
-    name: Export Commands, validators: null, value: true}
+    name: Export Commands, validators: null, value: false}
   Java Package: !!robotbuilder.data.properties.StringProperty {default: org.usfirst.frc0000,
     name: Java Package, validators: null, value: org.firebears}
   Use Default Java Package: !!robotbuilder.data.properties.BooleanProperty {default: true,
@@ -280,9 +352,9 @@ Properties:
   Team Number: !!robotbuilder.data.properties.IntegerProperty {default: 0, name: Team Number,
     validators: null, value: 2846}
   Export Subsystems: !!robotbuilder.data.properties.BooleanProperty {default: true,
-    name: Export Subsystems, validators: null, value: true}
+    name: Export Subsystems, validators: null, value: false}
   Wiring File: !!robotbuilder.data.properties.FileProperty {default: '', extension: html,
-    folder: false, name: Wiring File, validators: null, value: ''}
+    folder: false, name: Wiring File, validators: null, value: wiring.html}
   Simulation World File: !!robotbuilder.data.properties.StringProperty {default: /usr/share/frcsim/worlds/GearsBotDemo.world,
     name: Simulation World File, validators: null, value: /usr/share/frcsim/worlds/GearsBotDemo.world}
   Autonomous Command: !!robotbuilder.data.properties.TypeSelectionProperty {default: None,
