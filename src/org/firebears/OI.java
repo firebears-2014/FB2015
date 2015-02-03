@@ -56,8 +56,8 @@ public class OI {
 //		autoSelect2 = new DigitalInput(2);
 //		autoSelect3 = new DigitalInput(3);
 
-		(new JoystickButton(joystickDrive, 3)).whileHeld(new ForwardCommand(0.5));
-		(new JoystickButton(joystickDrive, 5)).whileHeld(new ForwardCommand(-0.5));
+//		(new JoystickButton(joystickDrive, 3)).whileHeld(new ForwardCommand(0.5));
+//		(new JoystickButton(joystickDrive, 5)).whileHeld(new ForwardCommand(-0.5));
 		
 		// start of final joystick buttons
 

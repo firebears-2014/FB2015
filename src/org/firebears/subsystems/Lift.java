@@ -56,7 +56,7 @@ public class Lift extends PIDSubsystem {
 		// setSetpoint() - Sets where the PID controller should move the system
 		// to
 		// enable() - Enables the PID controller.
-		heightSensor = new HeightSensor();
+		heightSensor = new HeightSensor(RobotMap.liftpot);
 	}
 
 	public void initDefaultCommand() {
