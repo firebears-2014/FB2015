@@ -118,10 +118,10 @@ public class Robot extends IterativeRobot {
 
 		if (RobotMap.chassis_drive_gyro!=null) SmartDashboard.putNumber("gyro value", RobotMap.chassis_drive_gyro.getAngle());
 		
-		if (RobotMap.chassis_front_left_encoder!=null) SmartDashboard.putNumber("chassis_front_left_encoder", RobotMap.chassis_front_left_encoder.pidGet());
-		if (RobotMap.chassis_back_left_encoder!=null) SmartDashboard.putNumber("chassis_back_left_encoder", RobotMap.chassis_back_left_encoder.pidGet());
-		if (RobotMap.chassis_front_right_encoder!=null) SmartDashboard.putNumber("chassis_front_right_encoder", RobotMap.chassis_front_right_encoder.pidGet());
-		if (RobotMap.chassis_back_right_encoder!=null) SmartDashboard.putNumber("chassis_back_right_encoder", RobotMap.chassis_back_right_encoder.pidGet());
+		SmartDashboard.putNumber("chassis_front_left_encoder", RobotMap.chassis_front_left_encoder.pidGet());
+		SmartDashboard.putNumber("chassis_back_left_encoder", RobotMap.chassis_back_left_encoder.pidGet());
+		SmartDashboard.putNumber("chassis_front_right_encoder", RobotMap.chassis_front_right_encoder.pidGet());
+		SmartDashboard.putNumber("chassis_back_right_encoder", RobotMap.chassis_back_right_encoder.pidGet());
 		
 		SmartDashboard.putNumber("Accel X", accel.getX());
 		SmartDashboard.putNumber("Accel Y", accel.getY());

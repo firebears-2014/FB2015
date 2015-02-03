@@ -12,6 +12,7 @@
 package org.firebears.commands.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.firebears.Robot;
 
@@ -38,10 +39,13 @@ public class  DriveCommand extends Command {
     	double x = Robot.oi.getJoystickZero().getRawAxis(0);         // strafe left/right
 		double y = Robot.oi.getJoystickZero().getRawAxis(1);         // forward / backwards
 		double rotation = Robot.oi.getJoystickZero().getRawAxis(2);  
+		double rotationMultiplier = 0.6;
+//		rotationMultiplier = (1 - Robot.oi.getJoystickZero().getThrottle()) / 2.0;
+//		SmartDashboard.putNumber("rotationMultiplier", rotationMultiplier);
 		
-		x = (x>0?1:-1) * x * x;
-		y = (y>0?1:-1) * y * y;
-		rotation = removeDeadband(rotation, 0.2);
+		x = Math.signum(x) * x * x;
+		y = Math.signum(y) * y * y;
+		rotation = Math.signum(rotation) * removeDeadband(rotation * rotation, 0.2) * rotationMultiplier;
 		
 		Robot.chassis.mechanumDrive( x, y, rotation);	
     }
