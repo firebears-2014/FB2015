@@ -21,12 +21,16 @@ public class Totecenter extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if (Robot.chassis.leftsharpIRRange.getRangefinderDistance() > 20) {
-    		Robot.chassis.mechanumDrive(0,-.5,0);
+    	if (Robot.chassis.leftsharpIRRange.getRangefinderDistance() > 20 && Robot.chassis.rightsharpIRRange.getRangefinderDistance() > 20) {
+    		Robot.chassis.mechanumDrive(0,-.1,0);
+    	}
+    	else if (Robot.chassis.leftsharpIRRange.getRangefinderDistance() > 20) {
+    		Robot.chassis.mechanumDrive(0, 0,.1);
     	}
     	else if (Robot.chassis.rightsharpIRRange.getRangefinderDistance() > 20) {
-    		Robot.chassis.mechanumDrive(0, 0,-.5);
+    		Robot.chassis.mechanumDrive(0,0,-.1);
     	}
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
