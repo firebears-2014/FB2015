@@ -101,6 +101,7 @@ public class Robot extends IterativeRobot {
         if (autonomousCommand != null) autonomousCommand.cancel();
         Accelerometer.reset();
         if (RobotMap.chassis_drive_gyro!=null) RobotMap.chassis_drive_gyro.reset();
+        chassis.setFieldOriented("field".equals(oi.drivingMode.getSelected()));
         
     }
 

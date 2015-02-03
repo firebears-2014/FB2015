@@ -1,15 +1,13 @@
 package org.firebears.subsystems;
 
-import org.firebears.Robot;
 import org.firebears.RobotMap;
-import org.firebears.commands.*;
 import org.firebears.commands.drive.DriveCommand;
 import org.firebears.sensors.sharpIRRange;
 
-import edu.wpi.first.wpilibj.*;
-import edu.wpi.first.wpilibj.can.*;
+import edu.wpi.first.wpilibj.Gyro;
+import edu.wpi.first.wpilibj.RobotDrive;
+import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.command.Subsystem;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * The Subsystem for driving the robot.
@@ -25,7 +23,7 @@ public class Chassis extends Subsystem {
 	SpeedController front_right = RobotMap.chassis_front_right_controller;
 	SpeedController back_right = RobotMap.chassis_back_right_controller;
 
-
+	boolean fieldOriented = false;
 
 	RobotDrive robot_drive = RobotMap.chassis_robot_drive;
 	Gyro drive_gyro = RobotMap.chassis_drive_gyro;
@@ -51,10 +49,10 @@ public class Chassis extends Subsystem {
 	 *            angular rotation, in the range -1.0 to 1.0.
 	 */
 	public void mechanumDrive(double strafe, double forward, double rotation) {
-		double angle = (RobotMap.chassis_drive_gyro!=null) 
+		double angle = ((RobotMap.chassis_drive_gyro!=null) && fieldOriented) 
 				? RobotMap.chassis_drive_gyro.getAngle() 
 				: 0.0;
-		angle = 0.0;
+				
 		// double cosA = Math.cos(theta * (3.14159 / 180.0));
 		// double sinA = Math.sin(theta * (3.14159 / 180.0));
 		// strafe = strafe * cosA - forward * sinA;
@@ -75,5 +73,15 @@ public class Chassis extends Subsystem {
 
 		// Set the default command for a subsystem here.
 		// setDefaultCommand(new MySpecialCommand());
+	}
+	
+	/**
+	 * Set whether driving is oriented to the field, versus oriented to the
+	 * robot.  Setting this to 'true' means that we will use the gyro to 
+	 * determine which way is forward;  forward on the joystick will always
+	 * mean forward down the field.
+	 */
+	public void setFieldOriented(boolean b)  {
+		fieldOriented = b;
 	}
 }

@@ -48,6 +48,8 @@ public class OI {
 	public JoystickButton toggleAutomatedSwitch;
 	public JoystickButton wideCentertote;
 	public JoystickButton centerTote;
+	
+	public SendableChooser drivingMode;
 
 	public OI() {
 		joystickDrive = new Joystick(0);
@@ -120,6 +122,11 @@ public class OI {
 
 		SmartDashboard.putData("Change Lights", new LightChangeCommand(0,
 				Robot.lights.RANDOM_ANIM));
+		
+		drivingMode = new SendableChooser();
+		drivingMode.addDefault("field", "field");
+		drivingMode.addObject("robot", "robot");
+		SmartDashboard.putData("Driving Mode", drivingMode);
 
 	}
 
