@@ -7,6 +7,9 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 import java.util.Vector;
 
+import org.firebears.util.PIDRobotDrive;
+import org.firebears.util.TalonEncoder;
+
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
  * to a variable name. This provides flexibility changing wiring, makes checking
@@ -124,10 +127,18 @@ public class RobotMap {
 				e.printStackTrace();
 			}
 		}
-
-		chassis_robot_drive = new RobotDrive(chassis_front_left_controller,
+//		chassis_robot_drive = new RobotDrive(chassis_front_left_controller,
+//		chassis_back_left_controller, chassis_front_right_controller,
+//		chassis_back_right_controller);
+		
+		chassis_robot_drive = new PIDRobotDrive(chassis_front_left_controller,
 				chassis_back_left_controller, chassis_front_right_controller,
-				chassis_back_right_controller);
+				chassis_back_right_controller,
+				(PIDSource)new TalonEncoder(chassis_front_left_controller),
+				(PIDSource)new TalonEncoder(chassis_front_left_controller),
+				(PIDSource)new TalonEncoder(chassis_front_left_controller),
+				(PIDSource)new TalonEncoder(chassis_front_left_controller),
+				1.0);
 
 		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kFrontRight,
 				true);

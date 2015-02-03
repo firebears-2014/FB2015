@@ -10,6 +10,8 @@ import org.firebears.subsystems.Lights;
  */
 public class  LightsCommand extends Command {
 
+	double old_value;
+	
     public LightsCommand() {
         requires(Robot.lights);
     }
@@ -20,8 +22,16 @@ public class  LightsCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.lights.setLiftHeight(Lights.LIFT_LIGHTS_LEFT, Robot.lift.getLiftHeight());
-    	Robot.lights.setLiftHeight(Lights.LIFT_LIGHTS_RIGHT, Robot.lift.getLiftHeight());
+    	double new_value =
+    		Robot.lift.getLiftHeight();
+    	new_value = (double)Math.round(new_value * 60);
+    	
+    	if(new_value != old_value) {
+			Robot.lights.setLiftHeight(Lights.LIFT_LIGHTS_LEFT, new_value);
+			Robot.lights.setLiftHeight(Lights.LIFT_LIGHTS_RIGHT, new_value);
+    	}
+    	
+    	old_value = new_value;
     }
 
     // Make this return true when this Command no longer needs to run execute()
