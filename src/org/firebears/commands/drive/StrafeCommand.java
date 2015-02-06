@@ -5,15 +5,15 @@ import org.firebears.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * This command drives sideways at a fixed speed until interupted
+ * This command drives sideways at a fixed direction until interupted
  */
 public class StrafeCommand extends Command {
 	
-	double speed;
+	double direction;
 	
     public StrafeCommand(double s) {
     	requires(Robot.chassis);
-    	speed=s;
+    	direction=s;
     }
 
 
@@ -21,12 +21,12 @@ public class StrafeCommand extends Command {
     protected void initialize() {
     
 
-    	Robot.chassis.mechanumDrive(speed, 0, 0);
+    	Robot.chassis.mechanumDrive(direction, 0, 0);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.chassis.mechanumDrive(speed, 0, 0);
+    	Robot.chassis.mechanumDrive(direction, 0, 0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
