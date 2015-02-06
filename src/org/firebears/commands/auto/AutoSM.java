@@ -1,6 +1,7 @@
 package org.firebears.commands.auto;
 import org.firebears.commands.drive.ForwardCommand;
 import org.firebears.commands.drive.StrafeCommand;
+import org.firebears.commands.drive.Totecenter;
 import org.firebears.commands.grabber.GrabberCommand;
 import org.firebears.commands.lift.SetHeightCommand;
 
@@ -16,13 +17,15 @@ public class  AutoSM extends CommandGroup {
     	addSequential(new GrabberCommand(true));
     	addParallel(new SetHeightCommand("Lift_Tote_2"));
     	addParallel(new StrafeCommand(1));    //add an interrupt
-    //tote 2 logic	
+    	addParallel(new Totecenter());
+    //tote 2 logic
     	addSequential(new SetHeightCommand("Lift_Tote_1"));
     	addParallel(new GrabberCommand(false));
     	addParallel	(new SetHeightCommand("Lift_Tote_0"));
     	addSequential(new GrabberCommand(true));
     	addParallel(new SetHeightCommand("Lift_Tote_2"));
     	addParallel(new StrafeCommand(1));	//add an interrupt
+    	addParallel(new Totecenter());
     //tote 3 logic	
     	addSequential(new SetHeightCommand("Lift_Tote_1"));
     	addParallel(new GrabberCommand(false));
