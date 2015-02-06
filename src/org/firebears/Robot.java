@@ -121,12 +121,10 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Accel Y", accel.getY());
 		SmartDashboard.putNumber("Accel Z", accel.getZ());
 		
-		
-		System.out.println("Raw Accel output: "+accel.getX()+" "+accel.getY());
-		Accelerometer.update();
-		double Y=Accelerometer.totalY();
-		double X=Accelerometer.totalX();
-		System.out.println("X displacement: "+X+" "+"Y displacement: "+Y);
+		//System.out.println("Raw Accel output: "+accel.getX()+" "+accel.getY());
+		//Accelerometer.update();
+		//double Y=Accelerometer.totalY();
+		//double X=Accelerometer.totalX();
     }
 
     /**
