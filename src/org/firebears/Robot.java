@@ -9,7 +9,6 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.firebears.commands.auto.*; //Autonomous Commands
-import org.firebears.sensors.Accelerometer;
 import org.firebears.subsystems.*;
 
 /**
@@ -100,7 +99,6 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
-        Accelerometer.reset();
         if (RobotMap.chassis_drive_gyro!=null) RobotMap.chassis_drive_gyro.reset();
         chassis.setFieldOriented("field".equals(oi.drivingMode.getSelected()));
         
@@ -129,21 +127,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Accel X", accel.getX());
 		SmartDashboard.putNumber("Accel Y", accel.getY());
 		SmartDashboard.putNumber("Accel Z", accel.getZ());
-		
-<<<<<<< HEAD
-		//System.out.println("Raw Accel output: "+accel.getX()+" "+accel.getY());
-		//Accelerometer.update();
-		//double Y=Accelerometer.totalY();
-		//double X=Accelerometer.totalX();
-=======
-		
-//		System.out.println("Raw Accel output: "+accel.getX()+" "+accel.getY());
-		Accelerometer.update();
-		double Y = Accelerometer.totalY();
-		double X = Accelerometer.totalX();
-//		System.out.println("X displacement: "+X+" "+"Y displacement: "+Y);
 
->>>>>>> ac7c5479615c893bbbf36f07a1c6def80f65fb1d
     }
 
     public void testInit() {

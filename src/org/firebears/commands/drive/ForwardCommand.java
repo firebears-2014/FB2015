@@ -1,9 +1,4 @@
-<<<<<<< HEAD:src/org/firebears/commands/ForwardCommand.java
-
-package org.firebears.commands;
-=======
 package org.firebears.commands.drive;
->>>>>>> ac7c5479615c893bbbf36f07a1c6def80f65fb1d:src/org/firebears/commands/drive/ForwardCommand.java
 
 import org.firebears.Robot;
 
