@@ -24,6 +24,8 @@ public class PIDRobotDrive extends RobotDrive {
     public double g_i = 0.0;
     public double g_d = 0.0;
     public double g_maxEncoderSpeed = .2;
+    
+    public double g_maxOutput = 0.05;
 
 	public PIDRobotDrive(
 			SpeedController frontLeftMotor,
@@ -50,7 +52,6 @@ public class PIDRobotDrive extends RobotDrive {
 		backLeftPID.enable();
 		backRightPID.enable();
 		g_maxEncoderSpeed = maxEncoderSpeed;
-		m_maxOutput = .2f;
 	}
 	
 	public void mecanumDrive_Cartesian(double x, double y, double rotation, double gyroAngle) {
@@ -75,10 +76,10 @@ public class PIDRobotDrive extends RobotDrive {
 
         normalize(wheelSpeeds);
 
-        frontLeftPID.setSetpoint(-wheelSpeeds[kFrontLeft_val] * m_invertedMotors[kFrontLeft_val] * m_maxOutput * g_maxEncoderSpeed);
-        frontRightPID.setSetpoint(-wheelSpeeds[kFrontRight_val] * m_invertedMotors[kFrontRight_val] * m_maxOutput * g_maxEncoderSpeed);
-        backLeftPID.setSetpoint(-wheelSpeeds[kRearLeft_val] * m_invertedMotors[kRearLeft_val] * m_maxOutput * g_maxEncoderSpeed);
-        backRightPID.setSetpoint(-wheelSpeeds[kRearRight_val] * m_invertedMotors[kRearRight_val] * m_maxOutput * g_maxEncoderSpeed);
+        frontLeftPID.setSetpoint(wheelSpeeds[kFrontLeft_val] * m_invertedMotors[kFrontLeft_val] * g_maxOutput * g_maxEncoderSpeed);
+        frontRightPID.setSetpoint(wheelSpeeds[kFrontRight_val] * m_invertedMotors[kFrontRight_val] * g_maxOutput * g_maxEncoderSpeed);
+        backLeftPID.setSetpoint(wheelSpeeds[kRearLeft_val] * m_invertedMotors[kRearLeft_val] * g_maxOutput * g_maxEncoderSpeed);
+        backRightPID.setSetpoint(wheelSpeeds[kRearRight_val] * m_invertedMotors[kRearRight_val] * g_maxOutput * g_maxEncoderSpeed);
 
     }
 

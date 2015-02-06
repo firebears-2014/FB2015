@@ -159,12 +159,17 @@ public class RobotMap {
 		chassis_back_right_encoder.setDistancePerPulse(1.0);
 		chassis_back_right_encoder.setPIDSourceParameter(PIDSourceParameter.kRate);
 		
-		chassis_robot_drive = new PIDRobotDrive(
+		chassis_robot_drive = new RobotDrive(
+				chassis_front_left_controller, chassis_back_left_controller,
+				chassis_front_right_controller, chassis_back_right_controller
+				);
+		//PID Robot Drive: warning DANGEROUS
+/*		chassis_robot_drive = new PIDRobotDrive(
 				chassis_front_left_controller, chassis_back_left_controller,
 				chassis_front_right_controller, chassis_back_right_controller,
 				chassis_front_left_encoder, chassis_back_left_encoder,
 				chassis_front_right_encoder,chassis_back_right_encoder,
-				1.0);
+				1.0);*/
 		
 		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kFrontRight,
 				true);
