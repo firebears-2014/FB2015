@@ -76,8 +76,6 @@ public class RobotMap {
 	public static BuiltInAccelerometer accelerometer;
 
 	public static void init() {
-		
-		chassis_drive_gyro = new Gyro(6);
 
 		Preferences preferences = Preferences.getInstance();
 
