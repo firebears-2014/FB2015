@@ -73,7 +73,7 @@ public class Robot extends IterativeRobot {
      * You can use it to reset subsystems before shutting down.
      */
     public void disabledInit(){
-
+        chassis.setFieldOriented(false);
     }
 
     public void disabledPeriodic() {
@@ -84,6 +84,7 @@ public class Robot extends IterativeRobot {
         // schedule the autonomous command (example)
         if (autonomousCommand != null) autonomousCommand.start();
         if (RobotMap.chassis_drive_gyro!=null) RobotMap.chassis_drive_gyro.reset();
+        chassis.setFieldOriented(false);
     }
 
     /**
@@ -100,6 +101,8 @@ public class Robot extends IterativeRobot {
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
         Accelerometer.reset();
+        if (RobotMap.chassis_drive_gyro!=null) RobotMap.chassis_drive_gyro.reset();
+        chassis.setFieldOriented("field".equals(oi.drivingMode.getSelected()));
         
     }
 
@@ -134,10 +137,12 @@ public class Robot extends IterativeRobot {
 		double X = Accelerometer.totalX();
 //		System.out.println("X displacement: "+X+" "+"Y displacement: "+Y);
 
-int pov = oi.getJoystickZero().getPOV();
-if (pov > -1) System.out.println("::: POV: " + pov);
     }
 
+    public void testInit() {
+        chassis.setFieldOriented(false);
+    }
+	
     /**
      * This function is called periodically during test mode
      */

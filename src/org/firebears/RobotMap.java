@@ -186,10 +186,10 @@ public class RobotMap {
 		chassis_robot_drive.setMaxOutput(1.0);
 		
 		chassis_drive_gyro = new Gyro(0);
+		chassis_drive_gyro.setSensitivity(0.007);
+//		chassis_drive_gyro.initGyro();
 		if (chassis_drive_gyro!=null) { chassis_drive_gyro.reset(); 
 		LiveWindow.addSensor("Chassis", "drive_gyro", chassis_drive_gyro);
-		chassis_drive_gyro.setSensitivity(0.007);
-		chassis_drive_gyro.initGyro();
 		}
 
 		//liftpot = new AnalogPotentiometer(3, 1.0, 0.0);

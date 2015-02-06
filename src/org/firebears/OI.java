@@ -46,7 +46,10 @@ public class OI {
 	public JoystickButton closeGrabbers;
 	public JoystickButton toggleStepSwitch;
 	public JoystickButton toggleAutomatedSwitch;
+	public JoystickButton wideCentertote;
 	public JoystickButton centerTote;
+	
+	public SendableChooser drivingMode;
 
 	public OI() {
 		joystickDrive = new Joystick(0);
@@ -86,6 +89,9 @@ public class OI {
 		toggleStepSwitch = new JoystickButton(joystickLift, 8);
 		toggleStepSwitch.whileHeld(new SetStep());
 		
+		wideCentertote = new JoystickButton(joystickDrive, 11);
+		wideCentertote.whenPressed(new WidetoteCommand());
+		
 		centerTote = new JoystickButton(joystickDrive, 12);
 		centerTote.whenPressed(new Totecenter());
 
@@ -116,6 +122,11 @@ public class OI {
 
 		SmartDashboard.putData("Change Lights", new LightChangeCommand(0,
 				Robot.lights.RANDOM_ANIM));
+		
+		drivingMode = new SendableChooser();
+		drivingMode.addDefault("field", "field");
+		drivingMode.addObject("robot", "robot");
+		SmartDashboard.putData("Driving Mode", drivingMode);
 
 	}
 
