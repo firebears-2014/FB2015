@@ -1,37 +1,40 @@
+<<<<<<< HEAD:src/org/firebears/commands/ForwardCommand.java
+
 package org.firebears.commands;
+=======
+package org.firebears.commands.drive;
+>>>>>>> ac7c5479615c893bbbf36f07a1c6def80f65fb1d:src/org/firebears/commands/drive/ForwardCommand.java
 
 import org.firebears.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * This command drives sideways at a fixed speed until interupted
+ * This command drives forward at a fixed speed until interupted
  */
-public class StrafeCommand extends Command {
-	
+public class ForwardCommand extends Command {
+
 	double speed;
 	
-    public StrafeCommand(double s) {
+    public ForwardCommand(double s) {
     	requires(Robot.chassis);
     	speed=s;
     }
 
-
     // Called just before this Command runs the first time
     protected void initialize() {
-    
 
-    	Robot.chassis.mechanumDrive(speed, 0, 0);
+    	Robot.chassis.mechanumDrive(0, speed, 0);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	Robot.chassis.mechanumDrive(speed, 0, 0);
+    	Robot.chassis.mechanumDrive(0, speed, 0);
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return false;
+        return speed == 0.0;
     }
 
     // Called once after isFinished returns true
