@@ -31,17 +31,17 @@ public class WidetoteCommand extends Command {
     	else if (Robot.chassis.rightsharpIRRange.getRangefinderDistance() > 20) {
     		Robot.chassis.mechanumDrive(0,0,-.1);
     	}
-    	else if (Robot.chassis.farleftsharpIRRange.getRangefinderDistance() > 20) {
+    	else if (Robot.chassis.leftArmsharpIRRange.getRangefinderDistance() > 20) {
     		Robot.chassis.mechanumDrive(.1, 0, 0);
     	}
-    	else if (Robot.chassis.farrightsharpIRRange.getRangefinderDistance() > 20) {
+    	else if (Robot.chassis.rightArmsharpIRRange.getRangefinderDistance() > 20) {
     		Robot.chassis.mechanumDrive(-.1, 0, 0);
     	}
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return (Robot.chassis.leftsharpIRRange.getRangefinderDistance() < 20 && Robot.chassis.rightsharpIRRange.getRangefinderDistance() < 20 && Robot.chassis.farleftsharpIRRange.getRangefinderDistance() < 20 && Robot.chassis.farrightsharpIRRange.getRangefinderDistance() < 20);
+        return (Robot.chassis.leftsharpIRRange.getRangefinderDistance() < 20 && Robot.chassis.rightsharpIRRange.getRangefinderDistance() < 20 && Robot.chassis.leftArmsharpIRRange.getRangefinderDistance() < 20 && Robot.chassis.rightArmsharpIRRange.getRangefinderDistance() < 20);
     }
 
     // Called once after isFinished returns true

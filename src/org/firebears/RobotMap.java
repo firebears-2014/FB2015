@@ -68,13 +68,16 @@ public class RobotMap {
 	public static Solenoid grabbersolenoid_left_close;
 
 	public static org.firebears.sensors.sharpIRRange leftsharpIRRange;
-	public static org.firebears.sensors.sharpIRRange farleftsharpIRRange;
+	public static org.firebears.sensors.sharpIRRange leftArmsharpIRRange;
 	public static org.firebears.sensors.sharpIRRange rightsharpIRRange;
-	public static org.firebears.sensors.sharpIRRange farrightsharpIRRange;
+	public static org.firebears.sensors.sharpIRRange rightArmsharpIRRange;
+
 
 	public static BuiltInAccelerometer accelerometer;
 
 	public static void init() {
+		
+		chassis_drive_gyro = new Gyro(6);
 
 		Preferences preferences = Preferences.getInstance();
 
@@ -182,8 +185,11 @@ public class RobotMap {
 		chassis_robot_drive.setExpiration(0.1);
 		chassis_robot_drive.setSensitivity(0.5);
 		chassis_robot_drive.setMaxOutput(1.0);
+
+
 		
 		chassis_drive_gyro = new Gyro(0);
+		LiveWindow.addSensor("Chassis", "drive_gyro", chassis_drive_gyro);
 		chassis_drive_gyro.setSensitivity(0.007);
 //		chassis_drive_gyro.initGyro();
 		if (chassis_drive_gyro!=null) { chassis_drive_gyro.reset(); 
@@ -203,33 +209,29 @@ public class RobotMap {
 
 		grabbercompressor = new Compressor(0);
 
-		grabbersolenoid_left_open = new Solenoid(3);
+		grabbersolenoid_left_open = new Solenoid(2);
 		LiveWindow.addActuator("Grabber", "solenoid_left_open",
 				grabbersolenoid_left_open);
 
-		grabbersolenoid_left_close = new Solenoid(1);
+		grabbersolenoid_left_close = new Solenoid(0);
 		LiveWindow.addActuator("Grabber", "solenoid_left_close",
 				grabbersolenoid_left_close);
 
-		grabbersolenoid_right_open = new Solenoid(4);
+		grabbersolenoid_right_open = new Solenoid(3);
 		LiveWindow.addActuator("Grabber", "solenoid_right_open",
 				grabbersolenoid_right_open);
 
-		grabbersolenoid_right_close = new Solenoid(2);
+		grabbersolenoid_right_close = new Solenoid(1);
 		LiveWindow.addActuator("Grabber", "solenoid_right_close",
 				grabbersolenoid_right_close);
 
 		accelerometer = new BuiltInAccelerometer();
 		LiveWindow.addSensor("Accelerometer", "accelerometer", accelerometer);
-
-		leftsharpIRRange = new org.firebears.sensors.sharpIRRange(6);
-		// LiveWindow.addSensor("Rangefinder", "distance", sharpIRRange);
-		farleftsharpIRRange = new org.firebears.sensors.sharpIRRange(2);
-		// LiveWindow.addSensor("Detector", "Proximity", sharpIRProx);
-
-		rightsharpIRRange = new org.firebears.sensors.sharpIRRange(1);
-		farrightsharpIRRange = new org.firebears.sensors.sharpIRRange(3);
-
+		
+		leftsharpIRRange = new org.firebears.sensors.sharpIRRange(1);
+		rightsharpIRRange = new org.firebears.sensors.sharpIRRange(3);
+		leftArmsharpIRRange = new org.firebears.sensors.sharpIRRange(4);
+		rightArmsharpIRRange = new org.firebears.sensors.sharpIRRange(5);
 
 	}
 }

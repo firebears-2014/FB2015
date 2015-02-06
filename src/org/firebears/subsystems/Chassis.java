@@ -32,8 +32,8 @@ public class Chassis extends Subsystem {
 	
 	public sharpIRRange leftsharpIRRange = RobotMap.leftsharpIRRange;
 	public sharpIRRange rightsharpIRRange = RobotMap.rightsharpIRRange;
-	public sharpIRRange farleftsharpIRRange = RobotMap.farleftsharpIRRange;
-	public sharpIRRange farrightsharpIRRange = RobotMap.farrightsharpIRRange;
+	public sharpIRRange leftArmsharpIRRange = RobotMap.leftArmsharpIRRange;
+	public sharpIRRange rightArmsharpIRRange = RobotMap.rightArmsharpIRRange;
 
 	// Put methods for controlling this subsystem
 	// here. Call these from Commands.
