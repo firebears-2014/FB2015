@@ -5,7 +5,7 @@ import org.firebears.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * sets whether the motor for the lift is enabled or not.
  */
 public class SetLiftMotor extends Command {
 	
@@ -14,7 +14,7 @@ public class SetLiftMotor extends Command {
     public SetLiftMotor(boolean enable) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	requires(Robot.lift);
+    	if (Robot.lift!=null) requires(Robot.lift);
     	enable_motor = enable;
     }
 
