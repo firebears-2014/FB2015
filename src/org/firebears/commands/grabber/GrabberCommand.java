@@ -5,7 +5,7 @@ import org.firebears.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Command to close of open grabber.
+ * Command to close or open grabber.
  * 	@close_grabbers: whether to close the grabber or open it.
  */
 public class GrabberCommand extends Command {

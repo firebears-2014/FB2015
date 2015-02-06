@@ -7,6 +7,7 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * This command drives forward at a fixed speed until interupted
  */
+//ToDo: add in a way to stop movement depending on where the robot is
 public class ForwardCommand extends Command {
 
 	double speed;
@@ -34,7 +35,6 @@ public class ForwardCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
-
     	Robot.chassis.mechanumDrive(0, 0, 0);
     }
 
