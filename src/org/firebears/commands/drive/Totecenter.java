@@ -1,35 +1,41 @@
-package org.firebears.commands.lift;
+package org.firebears.commands.drive;
 
 import org.firebears.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * sets whether the motor for the lift is enabled or not.
+ *
  */
-public class SetLiftMotor extends Command {
-	
-	boolean enable_motor;
-	
-    public SetLiftMotor(boolean enable) {
+public class Totecenter extends Command {
+
+    public Totecenter() {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
-    	if (Robot.lift!=null) requires(Robot.lift);
-    	enable_motor = enable;
+    	requires(Robot.chassis);
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	Robot.lift.setMotor(enable_motor);
     }
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+    	if (Robot.chassis.leftsharpIRRange.getRangefinderDistance() > 20 && Robot.chassis.rightsharpIRRange.getRangefinderDistance() > 20) {
+    		Robot.chassis.mechanumDrive(0,-.1,0);
+    	}
+    	else if (Robot.chassis.leftsharpIRRange.getRangefinderDistance() > 20) {
+    		Robot.chassis.mechanumDrive(0, 0,.1);
+    	}
+    	else if (Robot.chassis.rightsharpIRRange.getRangefinderDistance() > 20) {
+    		Robot.chassis.mechanumDrive(0,0,-.1);
+    	}
+    	
     }
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-        return true;
+        return (Robot.chassis.leftsharpIRRange.getRangefinderDistance() < 20 && Robot.chassis.rightsharpIRRange.getRangefinderDistance() < 20);
     }
 
     // Called once after isFinished returns true

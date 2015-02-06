@@ -20,19 +20,11 @@ public class Lift extends PIDSubsystem {
 	public double LIFT_2_HEIGHT;
 	public double LIFT_3_HEIGHT;
 
-	// hardcode these to inches wanted above "Zero" for each height
-
-	// top of the grabbers from ground
-	private final double INCHES_GRABBER_TOP = 7.0;
-	private final double INCHES_TOTE_PICKUP = 8.5 - INCHES_GRABBER_TOP;
-	private final double INCHES_TOTE_PICKUP_1 = 21.5 - INCHES_GRABBER_TOP;
-	private final double INCHES_TOTE_PICKUP_2 = 33.5 - INCHES_GRABBER_TOP;
-	private final double INCHES_TOTE_PICKUP_3 = 46.0 - INCHES_GRABBER_TOP;
-
-	private final double INCHES_TOTE_PUTDOWN = (INCHES_TOTE_PICKUP + 3.0);
-	private final double INCHES_TOTE_PUTDOWN_1 = (INCHES_TOTE_PICKUP_1 + 3.0);
-	private final double INCHES_TOTE_PUTDOWN_2 = (INCHES_TOTE_PICKUP_2 + 3.0);
-	private final double INCHES_TOTE_PUTDOWN_3 = (INCHES_TOTE_PICKUP_3 + 3.0);
+	// top of the grabbers
+	private final double INCHES_TOTE_PICKUP = RobotMap.lift_tote_pickup;
+	private final double INCHES_TOTE_PICKUP_1 = RobotMap.lift_tote_1;
+	private final double INCHES_TOTE_PICKUP_2 = RobotMap.lift_tote_2;
+	private final double INCHES_TOTE_PICKUP_3 = RobotMap.lift_tote_3;
 
 	public double addStep = 0;
 
@@ -56,7 +48,7 @@ public class Lift extends PIDSubsystem {
 		// setSetpoint() - Sets where the PID controller should move the system
 		// to
 		// enable() - Enables the PID controller.
-		heightSensor = new HeightSensor();
+		heightSensor = new HeightSensor(RobotMap.liftpot);
 	}
 
 	public void initDefaultCommand() {
@@ -74,7 +66,7 @@ public class Lift extends PIDSubsystem {
 
 		return heightSensor.getHeight();
 	}
-	
+
 	public double getLiftHeight() {
 		return heightSensor.getHeight();
 	}
@@ -85,7 +77,7 @@ public class Lift extends PIDSubsystem {
 
 		// if statement to allow turning off of lift motor in smartdashboard
 		if (enable_motor) {
-			liftTalon.pidWrite(output);
+			// liftTalon.pidWrite(output);
 		}
 	}
 
@@ -111,15 +103,15 @@ public class Lift extends PIDSubsystem {
 			}
 		} else {
 			if (setpoint.equals("Lift_Pickup")) {
-				setSetpoint(INCHES_TOTE_PUTDOWN + addStep);
+				setSetpoint(INCHES_TOTE_PICKUP + addStep + 3);
 			} else if (setpoint.equals("Lift_Tote_0")) {
-				setSetpoint(INCHES_TOTE_PUTDOWN + addStep);
+				setSetpoint(INCHES_TOTE_PICKUP + addStep + 3);
 			} else if (setpoint.equals("Lift_Tote_1")) {
-				setSetpoint(INCHES_TOTE_PUTDOWN_1 + addStep);
+				setSetpoint(INCHES_TOTE_PICKUP_1 + addStep + 3);
 			} else if (setpoint.equals("Lift_Tote_2")) {
-				setSetpoint(INCHES_TOTE_PUTDOWN_2 + addStep);
+				setSetpoint(INCHES_TOTE_PICKUP_2 + addStep + 3);
 			} else if (setpoint.equals("Lift_Tote_3")) {
-				setSetpoint(INCHES_TOTE_PUTDOWN_3 + addStep);
+				setSetpoint(INCHES_TOTE_PICKUP_3 + addStep + 3);
 			}
 		}
 	}
