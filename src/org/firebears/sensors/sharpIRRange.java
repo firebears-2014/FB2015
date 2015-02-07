@@ -18,11 +18,12 @@ public class sharpIRRange extends AnalogInput {
 	//when taking the range between the robot and something
 	//we got the constants by plotting points, making a function that fits the data
 	//and using trial and error to make it more accurate
+	//return value in inches
 
 	public double getRangefinderDistance() {
 		double volt = this.getAverageVoltage(); // value from sensor * (5/1024)
 		//System.out.println(volt);
-		double distance = (26.86 * Math.pow(volt, -1.15));
+		double distance = (26.86 * Math.pow(volt, -1.15))/2.54;
 		return distance;
 		
 	}
