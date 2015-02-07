@@ -13,7 +13,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Lift extends PIDSubsystem {
 	public HeightSensor heightSensor;
-	SpeedController liftTalon = RobotMap.lifttalon;
+	SpeedController liftTalon = RobotMap.liftJag;
 	public double LIFT_PICKUP_HEIGHT;
 	public double LIFT_0_HEIGHT;
 	public double LIFT_1_HEIGHT;
