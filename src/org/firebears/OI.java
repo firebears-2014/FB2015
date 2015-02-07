@@ -11,6 +11,7 @@ import org.firebears.commands.lift.SetStep;
 import org.firebears.commands.lights.LightChangeCommand;
 import org.firebears.commands.drive.*;
 import org.firebears.commands.lights.*;
+import org.firebears.sensors.GyroResetCommand;
 
 import PreferenceSetup.PreferenceSetup;
 import edu.wpi.first.wpilibj.DigitalInput;
@@ -48,21 +49,24 @@ public class OI {
 	public JoystickButton toggleAutomatedSwitch;
 	public JoystickButton wideCentertote;
 	public JoystickButton centerTote;
-	
+	public JoystickButton resetGyro;
+
 	public SendableChooser drivingMode;
 
 	public OI() {
 		joystickDrive = new Joystick(0);
 		joystickLift = new Joystick(1);
 
-//		scoringPlatformSensor = new DigitalInput(0);
-//		autoSelect1 = new DigitalInput(1);
-//		autoSelect2 = new DigitalInput(2);
-//		autoSelect3 = new DigitalInput(3);
+		// scoringPlatformSensor = new DigitalInput(0);
+		// autoSelect1 = new DigitalInput(1);
+		// autoSelect2 = new DigitalInput(2);
+		// autoSelect3 = new DigitalInput(3);
 
-//		(new JoystickButton(joystickDrive, 3)).whileHeld(new ForwardCommand(0.5));
-//		(new JoystickButton(joystickDrive, 5)).whileHeld(new ForwardCommand(-0.5));
-		
+		// (new JoystickButton(joystickDrive, 3)).whileHeld(new
+		// ForwardCommand(0.5));
+		// (new JoystickButton(joystickDrive, 5)).whileHeld(new
+		// ForwardCommand(-0.5));
+
 		// start of final joystick buttons
 
 		setLiftPickup = new JoystickButton(joystickLift, 1);
@@ -88,12 +92,15 @@ public class OI {
 
 		toggleStepSwitch = new JoystickButton(joystickLift, 8);
 		toggleStepSwitch.whileHeld(new SetStep());
-		
+
 		wideCentertote = new JoystickButton(joystickDrive, 11);
 		wideCentertote.whenPressed(new WidetoteCommand());
-		
+
 		centerTote = new JoystickButton(joystickDrive, 12);
 		centerTote.whenPressed(new Totecenter());
+
+		resetGyro = new JoystickButton(joystickDrive, 7);
+		resetGyro.whenPressed(new GyroResetCommand());
 
 		// SmartDashboard Buttons
 		// SmartDashboard.putData("Autonomous Command", new
@@ -104,7 +111,8 @@ public class OI {
 		SmartDashboard.putData("Run Jag Code", new PreferenceSetup(
 				RobotMap.CHASSIS_DRIVE_TYPE_JAG));
 
-		if (Robot.lift!=null) SmartDashboard.putBoolean("Lift Motor", Robot.lift.enable_motor);
+		if (Robot.lift != null)
+			SmartDashboard.putBoolean("Lift Motor", Robot.lift.enable_motor);
 
 		SmartDashboard.putData("Enable Lift Motor", new SetLiftMotor(true));
 		SmartDashboard.putData("Disable Lift Motor", new SetLiftMotor(false));
@@ -122,7 +130,7 @@ public class OI {
 
 		SmartDashboard.putData("Change Lights", new LightChangeCommand(0,
 				Robot.lights.RANDOM_ANIM));
-		
+
 		drivingMode = new SendableChooser();
 		drivingMode.addDefault("field", "field");
 		drivingMode.addObject("robot", "robot");
