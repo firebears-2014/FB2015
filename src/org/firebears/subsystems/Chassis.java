@@ -84,4 +84,7 @@ public class Chassis extends Subsystem {
 	public void setFieldOriented(boolean b)  {
 		fieldOriented = b;
 	}
+	public boolean getFieldOriented(){
+		return fieldOriented;
+	}
 }

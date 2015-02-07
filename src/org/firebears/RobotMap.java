@@ -50,11 +50,13 @@ public class RobotMap {
 	public static SpeedController chassis_back_left_controller;
 	public static SpeedController chassis_front_right_controller;
 	public static SpeedController chassis_back_right_controller;
-	
-	public static Encoder chassis_front_left_encoder;
-	public static Encoder chassis_back_left_encoder;
-	public static Encoder chassis_front_right_encoder;
-	public static Encoder chassis_back_right_encoder;
+
+	/*
+	 * public static Encoder chassis_front_left_encoder; public static Encoder
+	 * chassis_back_left_encoder; public static Encoder
+	 * chassis_front_right_encoder; public static Encoder
+	 * chassis_back_right_encoder;
+	 */
 
 	public static RobotDrive chassis_robot_drive;
 	public static Gyro chassis_drive_gyro;
@@ -71,7 +73,6 @@ public class RobotMap {
 	public static org.firebears.sensors.sharpIRRange leftArmsharpIRRange;
 	public static org.firebears.sensors.sharpIRRange rightsharpIRRange;
 	public static org.firebears.sensors.sharpIRRange rightArmsharpIRRange;
-
 
 	public static BuiltInAccelerometer accelerometer;
 
@@ -97,7 +98,7 @@ public class RobotMap {
 		// Talon Code
 		if (chassis_drive_type_tal) {
 			System.out.println("Configuring RobotDrive for CANTalons");
-		    chassis_front_left_controller = new CANTalon(3);
+			chassis_front_left_controller = new CANTalon(3);
 			chassis_front_right_controller = new CANTalon(5);
 			chassis_back_left_controller = new CANTalon(4);
 			chassis_back_right_controller = new CANTalon(2);
@@ -138,38 +139,48 @@ public class RobotMap {
 				e.printStackTrace();
 			}
 		}
-//		chassis_robot_drive = new RobotDrive(chassis_front_left_controller,
-//		chassis_back_left_controller, chassis_front_right_controller,
-//		chassis_back_right_controller);
-		
-		chassis_front_left_encoder = new Encoder(2,3, false, EncodingType.k4X);
-		chassis_front_left_encoder.setDistancePerPulse(1.0);
-		chassis_front_left_encoder.setPIDSourceParameter(PIDSourceParameter.kRate);
-        
-		chassis_back_left_encoder = new Encoder(6,7, false, EncodingType.k4X);
-		chassis_back_left_encoder.setDistancePerPulse(1.0);
-		chassis_back_left_encoder.setPIDSourceParameter(PIDSourceParameter.kRate);
-		
-		chassis_front_right_encoder = new Encoder(0,1, false, EncodingType.k4X);
-		chassis_front_right_encoder.setDistancePerPulse(1.0);
-		chassis_front_right_encoder.setPIDSourceParameter(PIDSourceParameter.kRate);
-		
-		chassis_back_right_encoder = new Encoder(4,5, false, EncodingType.k4X);
-		chassis_back_right_encoder.setDistancePerPulse(1.0);
-		chassis_back_right_encoder.setPIDSourceParameter(PIDSourceParameter.kRate);
-		
-		chassis_robot_drive = new RobotDrive(
-				chassis_front_left_controller, chassis_back_left_controller,
-				chassis_front_right_controller, chassis_back_right_controller
-				);
-		//PID Robot Drive: warning DANGEROUS
-/*		chassis_robot_drive = new PIDRobotDrive(
-				chassis_front_left_controller, chassis_back_left_controller,
-				chassis_front_right_controller, chassis_back_right_controller,
-				chassis_front_left_encoder, chassis_back_left_encoder,
-				chassis_front_right_encoder,chassis_back_right_encoder,
-				1.0);*/
-		
+		// chassis_robot_drive = new RobotDrive(chassis_front_left_controller,
+		// chassis_back_left_controller, chassis_front_right_controller,
+		// chassis_back_right_controller);
+
+		/*
+		 * chassis_front_left_encoder = new Encoder(2, 3, false,
+		 * EncodingType.k4X);
+		 * chassis_front_left_encoder.setDistancePerPulse(1.0);
+		 * chassis_front_left_encoder
+		 * .setPIDSourceParameter(PIDSourceParameter.kRate);
+		 * 
+		 * chassis_back_left_encoder = new Encoder(6, 7, false,
+		 * EncodingType.k4X);
+		 * chassis_back_left_encoder.setDistancePerPulse(1.0);
+		 * chassis_back_left_encoder
+		 * .setPIDSourceParameter(PIDSourceParameter.kRate);
+		 * 
+		 * chassis_front_right_encoder = new Encoder(0, 1, false,
+		 * EncodingType.k4X);
+		 * chassis_front_right_encoder.setDistancePerPulse(1.0);
+		 * chassis_front_right_encoder
+		 * .setPIDSourceParameter(PIDSourceParameter.kRate);
+		 * 
+		 * chassis_back_right_encoder = new Encoder(4, 5, false,
+		 * EncodingType.k4X);
+		 * chassis_back_right_encoder.setDistancePerPulse(1.0);
+		 * chassis_back_right_encoder
+		 * .setPIDSourceParameter(PIDSourceParameter.kRate);
+		 */
+
+		chassis_robot_drive = new RobotDrive(chassis_front_left_controller,
+				chassis_back_left_controller, chassis_front_right_controller,
+				chassis_back_right_controller);
+		// PID Robot Drive: warning DANGEROUS
+		/*
+		 * chassis_robot_drive = new PIDRobotDrive(
+		 * chassis_front_left_controller, chassis_back_left_controller,
+		 * chassis_front_right_controller, chassis_back_right_controller,
+		 * chassis_front_left_encoder, chassis_back_left_encoder,
+		 * chassis_front_right_encoder,chassis_back_right_encoder, 1.0);
+		 */
+
 		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kFrontRight,
 				true);
 		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft,
@@ -184,18 +195,17 @@ public class RobotMap {
 		chassis_robot_drive.setSensitivity(0.5);
 		chassis_robot_drive.setMaxOutput(1.0);
 
-
-		
 		chassis_drive_gyro = new Gyro(0);
 		LiveWindow.addSensor("Chassis", "drive_gyro", chassis_drive_gyro);
 		chassis_drive_gyro.setSensitivity(0.007);
-//		chassis_drive_gyro.initGyro();
-		if (chassis_drive_gyro!=null) { chassis_drive_gyro.reset(); 
-		LiveWindow.addSensor("Chassis", "drive_gyro", chassis_drive_gyro);
+		// chassis_drive_gyro.initGyro();
+		if (chassis_drive_gyro != null) {
+			chassis_drive_gyro.reset();
+			LiveWindow.addSensor("Chassis", "drive_gyro", chassis_drive_gyro);
 		}
 
-		//liftpot = new AnalogPotentiometer(3, 1.0, 0.0);
-		//LiveWindow.addSensor("Lift", "pot", liftpot);
+		// liftpot = new AnalogPotentiometer(2, 1.0, 0.0);
+		// LiveWindow.addSensor("Lift", "pot", liftpot);
 
 		try {
 			liftJag = new CANJaguar(2);
@@ -225,11 +235,11 @@ public class RobotMap {
 
 		accelerometer = new BuiltInAccelerometer();
 		LiveWindow.addSensor("Accelerometer", "accelerometer", accelerometer);
-		
-		leftsharpIRRange = new org.firebears.sensors.sharpIRRange(1);
-		rightsharpIRRange = new org.firebears.sensors.sharpIRRange(3);
-		leftArmsharpIRRange = new org.firebears.sensors.sharpIRRange(4);
+
 		rightArmsharpIRRange = new org.firebears.sensors.sharpIRRange(5);
+		rightsharpIRRange = new org.firebears.sensors.sharpIRRange(3);
+		leftsharpIRRange = new org.firebears.sensors.sharpIRRange(1);
+		leftArmsharpIRRange = new org.firebears.sensors.sharpIRRange(4);
 
 	}
 }

@@ -69,7 +69,7 @@ public class OI {
 		// ForwardCommand(-0.5));
 
 		// start of final joystick buttons
-		
+
 		showTriggerButton = new JoystickButton(joystickDrive, 1);
 
 		setLiftPickup = new JoystickButton(joystickLift, 1);
