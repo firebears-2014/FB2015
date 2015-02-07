@@ -22,8 +22,10 @@ public class WidetoteCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
+
     	if (Robot.chassis.leftsharpIRRange.getRangefinderDistance() > 8 && Robot.chassis.rightsharpIRRange.getRangefinderDistance() > 8) {
-    		Robot.chassis.mechanumDrive(0,-.1,0);
+    		Robot.chassis.mechanumDrive(0,.1,0);
+
     	}
     	else if (Robot.chassis.leftsharpIRRange.getRangefinderDistance() > 8) {
     		Robot.chassis.mechanumDrive(0, 0,.1);
@@ -46,6 +48,7 @@ public class WidetoteCommand extends Command {
 
     // Called once after isFinished returns true
     protected void end() {
+    	Robot.chassis.mechanumDrive(0, 0, 0);
     }
 
     // Called when another command which requires one or more of the same

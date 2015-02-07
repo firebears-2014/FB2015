@@ -1,24 +1,22 @@
-package org.firebears.commands.grabber;
+package org.firebears.sensors;
 
 import org.firebears.Robot;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * Command to close or open grabber.
- * 	@close_grabbers: whether to close the grabber or open it.
+ * reset the gyro to zero degrees
  */
-public class GrabberCommand extends Command {
+public class GyroResetCommand extends Command {
 
-	public GrabberCommand(boolean close_grabbers) {
+	public GyroResetCommand() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
-		requires(Robot.grabber);
-		Robot.grabber.setGrabbers(close_grabbers);
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		Robot.chassis.drive_gyro.reset();
 	}
 
 	// Called repeatedly when this Command is scheduled to run

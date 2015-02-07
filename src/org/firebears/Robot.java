@@ -5,11 +5,11 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.firebears.commands.auto.*; //Autonomous Commands
-import org.firebears.sensors.Accelerometer;
 import org.firebears.subsystems.*;
 
 /**
@@ -20,8 +20,7 @@ import org.firebears.subsystems.*;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
-    Command autonomousCommand;
+	Command autonomousCommand;
     Command AutoGM;
     Command AutoM;
     Command AutoSM;
@@ -100,7 +99,6 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
-        Accelerometer.reset();
         if (RobotMap.chassis_drive_gyro!=null) RobotMap.chassis_drive_gyro.reset();
         chassis.setFieldOriented("field".equals(oi.drivingMode.getSelected()));
         
@@ -129,13 +127,6 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Accel X", accel.getX());
 		SmartDashboard.putNumber("Accel Y", accel.getY());
 		SmartDashboard.putNumber("Accel Z", accel.getZ());
-		
-		
-//		System.out.println("Raw Accel output: "+accel.getX()+" "+accel.getY());
-		Accelerometer.update();
-		double Y = Accelerometer.totalY();
-		double X = Accelerometer.totalX();
-//		System.out.println("X displacement: "+X+" "+"Y displacement: "+Y);
 
     }
 

@@ -47,7 +47,7 @@ public class  DriveCommand extends Command {
 		y = Math.signum(y) * y * y;
 		rotation = Math.signum(rotation) * removeDeadband(rotation * rotation, 0.2) * rotationMultiplier;
 		
-		Robot.chassis.mechanumDrive( x, y, rotation);	
+		Robot.chassis.mechanumDrive( x, -y, rotation);	
     }
 
     // Make this return true when this Command no longer needs to run execute()
