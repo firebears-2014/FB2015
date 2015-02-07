@@ -71,6 +71,7 @@ public class OI {
 		// start of final joystick buttons
 		
 		slowTriggerButton = new JoystickButton(joystickDrive, 1);
+		showTriggerButton = new JoystickButton(joystickDrive, 1);
 
 		setLiftPickup = new JoystickButton(joystickLift, 1);
 		setLiftPickup.whenPressed(new SetHeightCommand(
