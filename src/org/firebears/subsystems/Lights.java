@@ -21,6 +21,8 @@ public class Lights extends Subsystem {
 	public static final String MOVING_BLUE_ANIM = "MOVING_BLUE_ANIM";
 	public static final String FIRE_ANIM = "FIRE_ANIM";
 	public static final String LIFT = "LIFT";
+	public static final String CRAZY = "CRAZY";
+	public static final String BULB = "BULB";
 	
 	public static final String RANDOM_ANIM = "RANDOM";
 	

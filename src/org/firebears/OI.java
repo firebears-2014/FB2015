@@ -50,7 +50,7 @@ public class OI {
 	public JoystickButton centerTote;
 	public JoystickButton resetGyro;
 	public JoystickButton approachTote;
-	public JoystickButton showTriggerButton;
+	public JoystickButton slowTriggerButton;
 
 	public SendableChooser drivingMode;
 
@@ -70,7 +70,7 @@ public class OI {
 
 		// start of final joystick buttons
 		
-		showTriggerButton = new JoystickButton(joystickDrive, 1);
+		slowTriggerButton = new JoystickButton(joystickDrive, 1);
 
 		setLiftPickup = new JoystickButton(joystickLift, 1);
 		setLiftPickup.whenPressed(new SetHeightCommand(

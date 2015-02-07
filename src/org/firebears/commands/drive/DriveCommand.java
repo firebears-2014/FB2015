@@ -40,13 +40,16 @@ public class DriveCommand extends Command {
 		double y = Robot.oi.getJoystickZero().getRawAxis(1); // forward /
 																// backwards
 		double rotation = Robot.oi.getJoystickZero().getRawAxis(2);
-		double rotationMultiplier = 0.6;
+		double rotationMultiplier = 0.4;
 		// rotationMultiplier = (1 - Robot.oi.getJoystickZero().getThrottle()) /
 		// 2.0;
 		// SmartDashboard.putNumber("rotationMultiplier", rotationMultiplier);
 
-		x = Math.signum(x) * x * x;
-		y = Math.signum(y) * y * y;
+		boolean slowMode = Robot.oi.slowTriggerButton.get();
+		double slowModeMultiplier = slowMode ? 0.5 : 1.0;
+		
+		x = Math.signum(x) * x * x * slowModeMultiplier;
+		y = Math.signum(y) * y * y * slowModeMultiplier;
 		rotation = Math.signum(rotation)
 				* removeDeadband(rotation * rotation, 0.2) * rotationMultiplier;
 
