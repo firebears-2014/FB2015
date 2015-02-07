@@ -1,8 +1,8 @@
 package org.firebears.sensors;
 
 import org.firebears.RobotMap;
+import org.firebears.commands.PreferenceSetup;
 
-import PreferenceSetup.PreferenceSetup;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Preferences;
 

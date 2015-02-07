@@ -11,8 +11,8 @@ import org.firebears.commands.lift.SetStep;
 import org.firebears.commands.lights.LightChangeCommand;
 import org.firebears.commands.drive.*;
 import org.firebears.commands.lights.*;
+import org.firebears.sensors.GyroResetCommand;
 
-import PreferenceSetup.PreferenceSetup;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Sendable;
@@ -48,37 +48,49 @@ public class OI {
 	public JoystickButton toggleAutomatedSwitch;
 	public JoystickButton wideCentertote;
 	public JoystickButton centerTote;
-	
+	public JoystickButton resetGyro;
+	public JoystickButton approachTote;
+	public JoystickButton showTriggerButton;
+
 	public SendableChooser drivingMode;
 
 	public OI() {
 		joystickDrive = new Joystick(0);
 		joystickLift = new Joystick(1);
 
-//		scoringPlatformSensor = new DigitalInput(0);
-//		autoSelect1 = new DigitalInput(1);
-//		autoSelect2 = new DigitalInput(2);
-//		autoSelect3 = new DigitalInput(3);
+		// scoringPlatformSensor = new DigitalInput(0);
+		// autoSelect1 = new DigitalInput(1);
+		// autoSelect2 = new DigitalInput(2);
+		// autoSelect3 = new DigitalInput(3);
 
-//		(new JoystickButton(joystickDrive, 3)).whileHeld(new ForwardCommand(0.5));
-//		(new JoystickButton(joystickDrive, 5)).whileHeld(new ForwardCommand(-0.5));
-		
+		// (new JoystickButton(joystickDrive, 3)).whileHeld(new
+		// ForwardCommand(0.5));
+		// (new JoystickButton(joystickDrive, 5)).whileHeld(new
+		// ForwardCommand(-0.5));
+
 		// start of final joystick buttons
+		
+		showTriggerButton = new JoystickButton(joystickDrive, 1);
 
 		setLiftPickup = new JoystickButton(joystickLift, 1);
-		setLiftPickup.whenPressed(new SetHeightCommand("Lift_Pickup"));
+		setLiftPickup.whenPressed(new SetHeightCommand(
+				Robot.lift.LIFT_PICKUP_HEIGHT));
 
 		setLiftTote0 = new JoystickButton(joystickLift, 2);
-		setLiftTote0.whenPressed(new SetHeightCommand("Lift_Tote_0"));
+		setLiftTote0
+				.whenPressed(new SetHeightCommand(Robot.lift.LIFT_0_HEIGHT));
 
 		setLiftTote1 = new JoystickButton(joystickLift, 3);
-		setLiftTote1.whenPressed(new SetHeightCommand("Lift_Tote_1"));
+		setLiftTote1
+				.whenPressed(new SetHeightCommand(Robot.lift.LIFT_1_HEIGHT));
 
 		setLiftTote2 = new JoystickButton(joystickLift, 4);
-		setLiftTote2.whenPressed(new SetHeightCommand("Lift_Tote_2"));
+		setLiftTote2
+				.whenPressed(new SetHeightCommand(Robot.lift.LIFT_2_HEIGHT));
 
 		setLiftTote3 = new JoystickButton(joystickLift, 5);
-		setLiftTote3.whenPressed(new SetHeightCommand("Lift_Tote_3"));
+		setLiftTote3
+				.whenPressed(new SetHeightCommand(Robot.lift.LIFT_3_HEIGHT));
 
 		openGrabbers = new JoystickButton(joystickLift, 6);
 		openGrabbers.whenPressed(new GrabberCommand(true));
@@ -88,12 +100,18 @@ public class OI {
 
 		toggleStepSwitch = new JoystickButton(joystickLift, 8);
 		toggleStepSwitch.whileHeld(new SetStep());
-		
+
 		wideCentertote = new JoystickButton(joystickDrive, 11);
 		wideCentertote.whenPressed(new WidetoteCommand());
-		
+
 		centerTote = new JoystickButton(joystickDrive, 12);
 		centerTote.whenPressed(new Totecenter());
+
+		resetGyro = new JoystickButton(joystickDrive, 7);
+		resetGyro.whenPressed(new GyroResetCommand());
+
+		approachTote = new JoystickButton(joystickDrive, 9);
+		approachTote.whenPressed(new ToteApproachCommand());
 
 		// SmartDashboard Buttons
 		// SmartDashboard.putData("Autonomous Command", new
@@ -104,7 +122,8 @@ public class OI {
 		SmartDashboard.putData("Run Jag Code", new PreferenceSetup(
 				RobotMap.CHASSIS_DRIVE_TYPE_JAG));
 
-		if (Robot.lift!=null) SmartDashboard.putBoolean("Lift Motor", Robot.lift.enable_motor);
+		if (Robot.lift != null)
+			SmartDashboard.putBoolean("Lift Motor", Robot.lift.enable_motor);
 
 		SmartDashboard.putData("Enable Lift Motor", new SetLiftMotor(true));
 		SmartDashboard.putData("Disable Lift Motor", new SetLiftMotor(false));
@@ -122,7 +141,7 @@ public class OI {
 
 		SmartDashboard.putData("Change Lights", new LightChangeCommand(0,
 				Robot.lights.RANDOM_ANIM));
-		
+
 		drivingMode = new SendableChooser();
 		drivingMode.addDefault("field", "field");
 		drivingMode.addObject("robot", "robot");

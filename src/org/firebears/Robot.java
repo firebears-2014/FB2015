@@ -5,11 +5,11 @@ import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
+import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.firebears.commands.auto.*; //Autonomous Commands
-import org.firebears.sensors.Accelerometer;
 import org.firebears.subsystems.*;
 
 /**
@@ -20,8 +20,7 @@ import org.firebears.subsystems.*;
  * directory.
  */
 public class Robot extends IterativeRobot {
-
-    Command autonomousCommand;
+	Command autonomousCommand;
     Command AutoGM;
     Command AutoM;
     Command AutoSM;
@@ -100,7 +99,6 @@ public class Robot extends IterativeRobot {
         // continue until interrupted by another command, remove
         // this line or comment it out.
         if (autonomousCommand != null) autonomousCommand.cancel();
-        Accelerometer.reset();
         if (RobotMap.chassis_drive_gyro!=null) RobotMap.chassis_drive_gyro.reset();
         chassis.setFieldOriented("field".equals(oi.drivingMode.getSelected()));
         
@@ -114,9 +112,9 @@ public class Robot extends IterativeRobot {
     	Scheduler.getInstance().run();
 
 		if (oi.scoringPlatformSensor!=null) SmartDashboard.putBoolean("Color Sensor Value", oi.scoringPlatformSensor.get());
-		if (RobotMap.farleftsharpIRRange!=null) SmartDashboard.putNumber("far left Distance from object", RobotMap.farleftsharpIRRange.getRangefinderDistance());
+		if (RobotMap.leftArmsharpIRRange!=null) SmartDashboard.putNumber("far left Distance from object", RobotMap.leftArmsharpIRRange.getRangefinderDistance());
 		if (RobotMap.leftsharpIRRange!=null) SmartDashboard.putNumber("left side Distance from object", RobotMap.leftsharpIRRange.getRangefinderDistance());
-		if (RobotMap.farrightsharpIRRange!=null) SmartDashboard.putNumber("far right Distance from object", RobotMap.farrightsharpIRRange.getRangefinderDistance());
+		if (RobotMap.rightArmsharpIRRange!=null) SmartDashboard.putNumber("far right Distance from object", RobotMap.rightArmsharpIRRange.getRangefinderDistance());
 		if (RobotMap.rightsharpIRRange!=null) SmartDashboard.putNumber("right side Distance from object", RobotMap.rightsharpIRRange.getRangefinderDistance());
 
 		if (RobotMap.chassis_drive_gyro!=null) SmartDashboard.putNumber("gyro value", RobotMap.chassis_drive_gyro.getAngle());
@@ -129,13 +127,6 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Accel X", accel.getX());
 		SmartDashboard.putNumber("Accel Y", accel.getY());
 		SmartDashboard.putNumber("Accel Z", accel.getZ());
-		
-		
-//		System.out.println("Raw Accel output: "+accel.getX()+" "+accel.getY());
-		Accelerometer.update();
-		double Y = Accelerometer.totalY();
-		double X = Accelerometer.totalX();
-//		System.out.println("X displacement: "+X+" "+"Y displacement: "+Y);
 
     }
 
