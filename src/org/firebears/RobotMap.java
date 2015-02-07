@@ -194,8 +194,8 @@ public class RobotMap {
 		LiveWindow.addSensor("Chassis", "drive_gyro", chassis_drive_gyro);
 		}
 
-		//liftpot = new AnalogPotentiometer(3, 1.0, 0.0);
-		//LiveWindow.addSensor("Lift", "pot", liftpot);
+		liftpot = new AnalogPotentiometer(2, 1.0, 0.0);
+		LiveWindow.addSensor("Lift", "pot", liftpot);
 
 		try {
 			liftJag = new CANJaguar(2);

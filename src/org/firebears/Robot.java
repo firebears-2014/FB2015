@@ -128,6 +128,7 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Accel Y", accel.getY());
 		SmartDashboard.putNumber("Accel Z", accel.getZ());
 
+		if (RobotMap.liftpot != null) SmartDashboard.putNumber("liftPot", RobotMap.liftpot.get());
     }
 
     public void testInit() {
