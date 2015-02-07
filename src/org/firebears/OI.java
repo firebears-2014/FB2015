@@ -13,7 +13,6 @@ import org.firebears.commands.drive.*;
 import org.firebears.commands.lights.*;
 import org.firebears.sensors.GyroResetCommand;
 
-import PreferenceSetup.PreferenceSetup;
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
 import edu.wpi.first.wpilibj.Sendable;
@@ -70,19 +69,24 @@ public class OI {
 		// start of final joystick buttons
 
 		setLiftPickup = new JoystickButton(joystickLift, 1);
-		setLiftPickup.whenPressed(new SetHeightCommand("Lift_Pickup"));
+		setLiftPickup.whenPressed(new SetHeightCommand(
+				Robot.lift.LIFT_PICKUP_HEIGHT));
 
 		setLiftTote0 = new JoystickButton(joystickLift, 2);
-		setLiftTote0.whenPressed(new SetHeightCommand("Lift_Tote_0"));
+		setLiftTote0
+				.whenPressed(new SetHeightCommand(Robot.lift.LIFT_0_HEIGHT));
 
 		setLiftTote1 = new JoystickButton(joystickLift, 3);
-		setLiftTote1.whenPressed(new SetHeightCommand("Lift_Tote_1"));
+		setLiftTote1
+				.whenPressed(new SetHeightCommand(Robot.lift.LIFT_1_HEIGHT));
 
 		setLiftTote2 = new JoystickButton(joystickLift, 4);
-		setLiftTote2.whenPressed(new SetHeightCommand("Lift_Tote_2"));
+		setLiftTote2
+				.whenPressed(new SetHeightCommand(Robot.lift.LIFT_2_HEIGHT));
 
 		setLiftTote3 = new JoystickButton(joystickLift, 5);
-		setLiftTote3.whenPressed(new SetHeightCommand("Lift_Tote_3"));
+		setLiftTote3
+				.whenPressed(new SetHeightCommand(Robot.lift.LIFT_3_HEIGHT));
 
 		openGrabbers = new JoystickButton(joystickLift, 6);
 		openGrabbers.whenPressed(new GrabberCommand(true));

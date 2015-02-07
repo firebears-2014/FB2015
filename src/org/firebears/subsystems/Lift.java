@@ -14,11 +14,11 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class Lift extends PIDSubsystem {
 	public HeightSensor heightSensor;
 	SpeedController liftTalon = RobotMap.lifttalon;
-	public double LIFT_PICKUP_HEIGHT;
-	public double LIFT_0_HEIGHT;
-	public double LIFT_1_HEIGHT;
-	public double LIFT_2_HEIGHT;
-	public double LIFT_3_HEIGHT;
+	public final String LIFT_PICKUP_HEIGHT = "LIFT_PICKUP_HEIGHT";
+	public final String LIFT_0_HEIGHT = "LIFT_0_HEIGHT";
+	public final String LIFT_1_HEIGHT = "LIFT_1_HEIGHT";
+	public final String LIFT_2_HEIGHT = "LIFT_2_HEIGHT";
+	public final String LIFT_3_HEIGHT = "LIFT_3_HEIGHT";
 
 	// top of the grabbers
 	private final double INCHES_TOTE_PICKUP = RobotMap.lift_tote_pickup;
@@ -90,29 +90,29 @@ public class Lift extends PIDSubsystem {
 		boolean picking_up = Robot.grabber.isOpen();
 		// as opposed to droping
 		if (picking_up) {
-			if (setpoint.equals("Lift_Pickup")) {
+			if (setpoint.equals(LIFT_PICKUP_HEIGHT)) {
 
 				// addStep will be 0 or 6, depending on if the switch is flicked
 				setSetpoint(INCHES_TOTE_PICKUP + addStep);
-			} else if (setpoint.equals("Lift_Tote_0")) {
+			} else if (setpoint.equals(LIFT_0_HEIGHT)) {
 				setSetpoint(INCHES_TOTE_PICKUP + addStep);
-			} else if (setpoint.equals("Lift_Tote_1")) {
+			} else if (setpoint.equals(LIFT_1_HEIGHT)) {
 				setSetpoint(INCHES_TOTE_PICKUP_1 + addStep);
-			} else if (setpoint.equals("Lift_Tote_2")) {
+			} else if (setpoint.equals(LIFT_2_HEIGHT)) {
 				setSetpoint(INCHES_TOTE_PICKUP_2 + addStep);
-			} else if (setpoint.equals("Lift_Tote_3")) {
+			} else if (setpoint.equals(LIFT_3_HEIGHT)) {
 				setSetpoint(INCHES_TOTE_PICKUP_3 + addStep);
 			}
 		} else {
-			if (setpoint.equals("Lift_Pickup")) {
+			if (setpoint.equals(LIFT_PICKUP_HEIGHT)) {
 				setSetpoint(INCHES_TOTE_PICKUP + addStep + 3);
-			} else if (setpoint.equals("Lift_Tote_0")) {
+			} else if (setpoint.equals(LIFT_0_HEIGHT)) {
 				setSetpoint(INCHES_TOTE_PICKUP + addStep + 3);
-			} else if (setpoint.equals("Lift_Tote_1")) {
+			} else if (setpoint.equals(LIFT_1_HEIGHT)) {
 				setSetpoint(INCHES_TOTE_PICKUP_1 + addStep + 3);
-			} else if (setpoint.equals("Lift_Tote_2")) {
+			} else if (setpoint.equals(LIFT_2_HEIGHT)) {
 				setSetpoint(INCHES_TOTE_PICKUP_2 + addStep + 3);
-			} else if (setpoint.equals("Lift_Tote_3")) {
+			} else if (setpoint.equals(LIFT_3_HEIGHT)) {
 				setSetpoint(INCHES_TOTE_PICKUP_3 + addStep + 3);
 			}
 		}

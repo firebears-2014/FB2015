@@ -1,4 +1,4 @@
-package PreferenceSetup;
+package org.firebears.commands;
 
 import org.firebears.Robot;
 import org.firebears.RobotMap;

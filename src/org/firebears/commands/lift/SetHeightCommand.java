@@ -17,6 +17,8 @@ public class SetHeightCommand extends Command {
 
 	private String SetHeight;
 
+	// takes string because actual value can change (preferences),
+	// 	but strings will be constant
 	public SetHeightCommand(String height) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);

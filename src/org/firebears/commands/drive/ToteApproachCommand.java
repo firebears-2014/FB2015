@@ -12,6 +12,7 @@ public class ToteApproachCommand extends Command {
 
 	boolean continueCommand;
 	int lastState;
+	public final double DRIVE_TO = 4.0;
 
 	public ToteApproachCommand() {
 		// Use requires() here to declare subsystem dependencies
@@ -43,14 +44,11 @@ public class ToteApproachCommand extends Command {
 		}
 
 		switch (chassisToteState) {
-		case 0:
-			chassisToteState = lastState;
-			break;
 		case 1:
 			Robot.chassis.mechanumDrive(0.2, 0.0, 0.0);
 			break;
 		case 2:
-			chassisToteState = lastState;
+			Robot.chassis.mechanumDrive(0.2, 0.0, 0.0);
 			break;
 		case 3:
 			Robot.chassis
@@ -63,15 +61,21 @@ public class ToteApproachCommand extends Command {
 											.getRangefinderDistance()));
 			break;
 		case 4:
-			chassisToteState = lastState;
-			break;
-		case 5:
-			chassisToteState = lastState;
+			Robot.chassis.mechanumDrive(-1 * 0.2, 0.0, 0.0);
 			break;
 		case 6:
 			if (rotate(RobotMap.rightsharpIRRange.getRangefinderDistance(),
 					RobotMap.leftsharpIRRange.getRangefinderDistance()) == 0) {
-				continueCommand = false;
+				double averageDistance = (RobotMap.rightsharpIRRange
+						.getRangefinderDistance() + RobotMap.leftsharpIRRange
+						.getRangefinderDistance()) / 2;
+				if (averageDistance > DRIVE_TO + 1) {
+					Robot.chassis.mechanumDrive(0.0, 0.2, 0.0);
+				} else if (averageDistance < DRIVE_TO - 1) {
+					Robot.chassis.mechanumDrive(0.0, -1 * 0.2, 0.0);
+				} else {
+					continueCommand = false;
+				}
 			}
 			Robot.chassis
 					.mechanumDrive(
@@ -95,15 +99,6 @@ public class ToteApproachCommand extends Command {
 		case 8:
 			Robot.chassis.mechanumDrive(-1 * 0.2, 0.0, 0.0);
 			break;
-		case 9:
-			chassisToteState = lastState;
-			break;
-		case 10:
-			chassisToteState = lastState;
-			break;
-		case 11:
-			chassisToteState = lastState;
-			break;
 		case 12:
 			Robot.chassis.mechanumDrive(
 					-1 * 0.2,
@@ -111,9 +106,6 @@ public class ToteApproachCommand extends Command {
 					rotate(RobotMap.leftsharpIRRange.getRangefinderDistance(),
 							RobotMap.leftArmsharpIRRange
 									.getRangefinderDistance()));
-			break;
-		case 13:
-			chassisToteState = lastState;
 			break;
 		case 14:
 			Robot.chassis.mechanumDrive(
@@ -124,9 +116,23 @@ public class ToteApproachCommand extends Command {
 									.getRangefinderDistance()));
 			break;
 		case 15:
-			if (rotate(RobotMap.rightArmsharpIRRange.getRangefinderDistance(),
-					RobotMap.leftArmsharpIRRange.getRangefinderDistance()) == 0) {
-				continueCommand = false;
+			if ((rotate(RobotMap.rightArmsharpIRRange.getRangefinderDistance(),
+					RobotMap.leftArmsharpIRRange.getRangefinderDistance()) == 0)
+					&& (rotate(
+							RobotMap.rightsharpIRRange.getRangefinderDistance(),
+							RobotMap.leftsharpIRRange.getRangefinderDistance()) == 0)) {
+				double averageDistance = (RobotMap.rightArmsharpIRRange
+						.getRangefinderDistance()
+						+ RobotMap.rightsharpIRRange.getRangefinderDistance()
+						+ RobotMap.leftsharpIRRange.getRangefinderDistance() + RobotMap.leftArmsharpIRRange
+						.getRangefinderDistance()) / 4;
+				if (averageDistance > DRIVE_TO + 1) {
+					Robot.chassis.mechanumDrive(0.0, 0.2, 0.0);
+				} else if (averageDistance < DRIVE_TO - 1) {
+					Robot.chassis.mechanumDrive(0.0, -1 * 0.2, 0.0);
+				} else {
+					continueCommand = false;
+				}
 			}
 			Robot.chassis.mechanumDrive(
 					0.0,
@@ -136,15 +142,15 @@ public class ToteApproachCommand extends Command {
 							RobotMap.leftArmsharpIRRange
 									.getRangefinderDistance()));
 		default:
+			chassisToteState = lastState;
 			break;
 		}
 
 		lastState = chassisToteState;
 
-		if (chassisToteState == 0 || chassisToteState == 4
-				|| chassisToteState == 5 || chassisToteState == 9
-				|| chassisToteState == 10 || chassisToteState == 11
-				|| chassisToteState == 13) {
+		if (chassisToteState == 0 || chassisToteState == 5
+				|| chassisToteState == 9 || chassisToteState == 10
+				|| chassisToteState == 11 || chassisToteState == 13) {
 			continueCommand = false;
 		}
 	}
@@ -175,5 +181,6 @@ public class ToteApproachCommand extends Command {
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
+		Robot.chassis.mechanumDrive(0, 0, 0);
 	}
 }
