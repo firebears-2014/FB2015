@@ -59,7 +59,7 @@ public class RobotMap {
 	public static RobotDrive chassis_robot_drive;
 	public static Gyro chassis_drive_gyro;
 	public static AnalogPotentiometer liftpot;
-	public static SpeedController lifttalon;
+	public static SpeedController liftJag;
 	public static Compressor grabbercompressor;
 
 	public static Solenoid grabbersolenoid_right_open;
@@ -130,7 +130,7 @@ public class RobotMap {
 				e.printStackTrace();
 			}
 			try {
-				chassis_back_right_controller = new CANJaguar(5);
+				chassis_back_right_controller = new CANJaguar(6);
 				LiveWindow.addActuator("chassis", "backright",
 						(CANJaguar) chassis_back_right_controller);
 			} catch (Exception e) {
@@ -198,8 +198,8 @@ public class RobotMap {
 		//LiveWindow.addSensor("Lift", "pot", liftpot);
 
 		try {
-			lifttalon = new CANJaguar(2);
-			LiveWindow.addActuator("lift", "lift", (CANJaguar) lifttalon);
+			liftJag = new CANJaguar(2);
+			LiveWindow.addActuator("lift", "lift", (CANJaguar) liftJag);
 		} catch (Exception e) {
 			System.err.println("Failed to load Jag 2");
 			e.printStackTrace();

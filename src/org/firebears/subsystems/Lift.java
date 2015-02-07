@@ -13,12 +13,14 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
  */
 public class Lift extends PIDSubsystem {
 	public HeightSensor heightSensor;
-	SpeedController liftTalon = RobotMap.lifttalon;
+
 	public final String LIFT_PICKUP_HEIGHT = "LIFT_PICKUP_HEIGHT";
 	public final String LIFT_0_HEIGHT = "LIFT_0_HEIGHT";
 	public final String LIFT_1_HEIGHT = "LIFT_1_HEIGHT";
 	public final String LIFT_2_HEIGHT = "LIFT_2_HEIGHT";
 	public final String LIFT_3_HEIGHT = "LIFT_3_HEIGHT";
+
+	SpeedController liftJag = RobotMap.liftJag;
 
 	// top of the grabbers
 	private final double INCHES_TOTE_PICKUP = RobotMap.lift_tote_pickup;
@@ -79,7 +81,7 @@ public class Lift extends PIDSubsystem {
 
 		// if statement to allow turning off of lift motor in smartdashboard
 		if (enable_motor) {
-			liftTalon.pidWrite(output);
+			liftJag.pidWrite(output);
 		}
 	}
 
