@@ -64,9 +64,11 @@ public class Lift extends PIDSubsystem {
 		// e.g. a sensor, like a potentiometer:
 		// yourPot.getAverageVoltage() / kYourMaxVoltage;
 
+		// returns inches
 		return heightSensor.getHeight();
 	}
 
+	// in inches
 	public double getLiftHeight() {
 		return heightSensor.getHeight();
 	}
@@ -77,7 +79,7 @@ public class Lift extends PIDSubsystem {
 
 		// if statement to allow turning off of lift motor in smartdashboard
 		if (enable_motor) {
-			// liftTalon.pidWrite(output);
+			liftTalon.pidWrite(output);
 		}
 	}
 

@@ -12,46 +12,49 @@ public class ChassisCommand extends Command {
 	double x;
 	double y;
 	double z;
-	
+
 	/**
 	 * 
-	 * @param px strafe speed
-	 * @param py forward/backward speed
-	 * @param pz rotation speed
+	 * @param px
+	 *            strafe speed
+	 * @param py
+	 *            forward/backward speed
+	 * @param pz
+	 *            rotation speed
 	 */
-    public ChassisCommand(double px, double py, double pz) {
-    	requires(Robot.chassis);
-    	x = px;
-    	y = py;
-    	z = py;
-    }
+	public ChassisCommand(double px, double py, double pz) {
+		requires(Robot.chassis);
+		x = px;
+		y = py;
+		z = py;
+	}
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
+	// Called just before this Command runs the first time
+	protected void initialize() {
 
-    	Robot.chassis.mechanumDrive(x, y, z);
-    }
+		Robot.chassis.mechanumDrive(x, -y, z);
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    	Robot.chassis.mechanumDrive(x, y, z);
-    }
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
+		Robot.chassis.mechanumDrive(x, -y, z);
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return false;
-    }
+	// Make this return true when this Command no longer needs to run execute()
+	protected boolean isFinished() {
+		return false;
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
+	// Called once after isFinished returns true
+	protected void end() {
 
-    	Robot.chassis.mechanumDrive(0, 0, 0);
-    }
+		Robot.chassis.mechanumDrive(0, 0, 0);
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted() {
 
-    	Robot.chassis.mechanumDrive(0, 0, 0);
-    }
+		Robot.chassis.mechanumDrive(0, 0, 0);
+	}
 }

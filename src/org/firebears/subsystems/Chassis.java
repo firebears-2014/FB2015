@@ -63,7 +63,7 @@ public class Chassis extends Subsystem {
 		// back_left.set(strafe - forward + rotation);
 		// back_right.set((strafe - forward - rotation ));
 
-		robot_drive.mecanumDrive_Cartesian(strafe, -1 * forward, rotation, angle);
+		robot_drive.mecanumDrive_Cartesian(strafe, forward, rotation, angle);
 	}
 
 	public void initDefaultCommand() {
