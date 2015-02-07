@@ -69,22 +69,20 @@ public class ToteApproachCommand extends Command {
 				double averageDistance = (RobotMap.rightsharpIRRange
 						.getRangefinderDistance() + RobotMap.leftsharpIRRange
 						.getRangefinderDistance()) / 2;
-				if (averageDistance > DRIVE_TO + 1) {
+				if (averageDistance > DRIVE_TO) {
 					Robot.chassis.mechanumDrive(0.0, 0.2, 0.0);
-				} else if (averageDistance < DRIVE_TO - 1) {
-					Robot.chassis.mechanumDrive(0.0, -1 * 0.2, 0.0);
 				} else {
 					continueCommand = false;
 				}
+			} else {
+				Robot.chassis.mechanumDrive(
+						0.0,
+						0.0,
+						rotate(RobotMap.rightsharpIRRange
+								.getRangefinderDistance(),
+								RobotMap.leftsharpIRRange
+										.getRangefinderDistance()));
 			}
-			Robot.chassis
-					.mechanumDrive(
-							0.0,
-							0.0,
-							rotate(RobotMap.rightsharpIRRange
-									.getRangefinderDistance(),
-									RobotMap.leftsharpIRRange
-											.getRangefinderDistance()));
 			break;
 		case 7:
 			Robot.chassis
@@ -116,31 +114,25 @@ public class ToteApproachCommand extends Command {
 									.getRangefinderDistance()));
 			break;
 		case 15:
-			if ((rotate(RobotMap.rightArmsharpIRRange.getRangefinderDistance(),
-					RobotMap.leftArmsharpIRRange.getRangefinderDistance()) == 0)
-					&& (rotate(
-							RobotMap.rightsharpIRRange.getRangefinderDistance(),
-							RobotMap.leftsharpIRRange.getRangefinderDistance()) == 0)) {
-				double averageDistance = (RobotMap.rightArmsharpIRRange
-						.getRangefinderDistance()
-						+ RobotMap.rightsharpIRRange.getRangefinderDistance()
-						+ RobotMap.leftsharpIRRange.getRangefinderDistance() + RobotMap.leftArmsharpIRRange
-						.getRangefinderDistance()) / 4;
-				if (averageDistance > DRIVE_TO + 1) {
+			if ((rotate(RobotMap.rightsharpIRRange.getRangefinderDistance(),
+					RobotMap.leftsharpIRRange.getRangefinderDistance()) == 0)) {
+				double averageDistance = (RobotMap.rightsharpIRRange
+						.getRangefinderDistance() + RobotMap.leftsharpIRRange
+						.getRangefinderDistance()) / 2;
+				if (averageDistance > DRIVE_TO) {
 					Robot.chassis.mechanumDrive(0.0, 0.2, 0.0);
-				} else if (averageDistance < DRIVE_TO - 1) {
-					Robot.chassis.mechanumDrive(0.0, -1 * 0.2, 0.0);
 				} else {
 					continueCommand = false;
 				}
+			} else {
+				Robot.chassis.mechanumDrive(
+						0.0,
+						0.0,
+						rotate(RobotMap.rightArmsharpIRRange
+								.getRangefinderDistance(),
+								RobotMap.leftArmsharpIRRange
+										.getRangefinderDistance()));
 			}
-			Robot.chassis.mechanumDrive(
-					0.0,
-					0.0,
-					rotate(RobotMap.rightArmsharpIRRange
-							.getRangefinderDistance(),
-							RobotMap.leftArmsharpIRRange
-									.getRangefinderDistance()));
 		default:
 			chassisToteState = lastState;
 			break;
