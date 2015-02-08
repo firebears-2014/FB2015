@@ -69,9 +69,8 @@ public class OI {
 		// ForwardCommand(-0.5));
 
 		// start of final joystick buttons
-		
+
 		slowTriggerButton = new JoystickButton(joystickDrive, 1);
-		showTriggerButton = new JoystickButton(joystickDrive, 1);
 
 		setLiftPickup = new JoystickButton(joystickLift, 1);
 		setLiftPickup.whenPressed(new SetHeightCommand(
@@ -118,6 +117,13 @@ public class OI {
 		// SmartDashboard.putData("Autonomous Command", new
 		// AutonomousCommand());
 
+		SmartDashboard.putData("lift to 1", new SetHeightCommand(
+				Robot.lift.LIFT_1_HEIGHT));
+		SmartDashboard.putData("lift to 2", new SetHeightCommand(
+				Robot.lift.LIFT_2_HEIGHT));
+		SmartDashboard.putData("lift to 3", new SetHeightCommand(
+				Robot.lift.LIFT_3_HEIGHT));
+
 		SmartDashboard.putData("Run Talon Code", new PreferenceSetup(
 				RobotMap.CHASSIS_DRIVE_TYPE_TAL));
 		SmartDashboard.putData("Run Jag Code", new PreferenceSetup(
@@ -131,7 +137,7 @@ public class OI {
 
 		SmartDashboard.putData("Set Zero", new PreferenceSetup(
 				RobotMap.LIFT_ZERO_REF));
-		SmartDashboard.putData("Set Tote Zero/Pickup", new PreferenceSetup(
+		SmartDashboard.putData("Set Tote Zero Pickup", new PreferenceSetup(
 				RobotMap.LIFT_TOTE_PICKUP));
 		SmartDashboard.putData("Set Tote One", new PreferenceSetup(
 				RobotMap.LIFT_TOTE_1));
@@ -140,8 +146,8 @@ public class OI {
 		SmartDashboard.putData("Set Tote Three", new PreferenceSetup(
 				RobotMap.LIFT_TOTE_3));
 
-		SmartDashboard.putData("Change Lights", new LightChangeCommand(0,
-				Robot.lights.RANDOM_ANIM));
+		// SmartDashboard.putData("Change Lights", new LightChangeCommand(0,
+		// Robot.lights.RANDOM_ANIM));
 
 		drivingMode = new SendableChooser();
 		drivingMode.addDefault("field", "field");

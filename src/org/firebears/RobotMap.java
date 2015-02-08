@@ -1,5 +1,6 @@
 package org.firebears;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.CANJaguar;
@@ -16,7 +17,9 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
 import java.util.Vector;
+
 import org.firebears.util.PIDRobotDrive;
 import org.firebears.util.TalonEncoder;
 
@@ -63,6 +66,8 @@ public class RobotMap {
 	public static AnalogPotentiometer liftpot;
 	public static SpeedController liftJag;
 	public static Compressor grabbercompressor;
+
+	public static AnalogInput analogInput;
 
 	public static Solenoid grabbersolenoid_right_open;
 	public static Solenoid grabbersolenoid_right_close;
@@ -204,7 +209,10 @@ public class RobotMap {
 			LiveWindow.addSensor("Chassis", "drive_gyro", chassis_drive_gyro);
 		}
 
-		liftpot = new AnalogPotentiometer(2, 1.0, 0.0);
+		analogInput = new AnalogInput(6);
+		analogInput.setAverageBits(4);
+
+		liftpot = new AnalogPotentiometer(analogInput, 1.0, 0.0);
 		LiveWindow.addSensor("Lift", "pot", liftpot);
 
 		try {
