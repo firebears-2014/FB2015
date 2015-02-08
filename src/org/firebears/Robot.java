@@ -3,6 +3,7 @@ package org.firebears;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
@@ -108,8 +109,10 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 		if (RobotMap.chassis_drive_gyro != null)
 			RobotMap.chassis_drive_gyro.reset();
-		chassis.setFieldOriented("field".equals(oi.drivingMode.getSelected()));
-
+		boolean fieldOriented = (Preferences.getInstance())
+				.getBoolean(RobotMap.CHASSIS_FIELD_ORIENTED, true);
+		System.out.println("Chassis fieldOriented = " + fieldOriented);
+		chassis.setFieldOriented(fieldOriented);
 	}
 
 	/**
@@ -139,28 +142,16 @@ public class Robot extends IterativeRobot {
 			SmartDashboard.putNumber("gyro value",
 					RobotMap.chassis_drive_gyro.getAngle());
 
-		/*
-		 * SmartDashboard.putNumber("chassis_front_left_encoder",
-		 * RobotMap.chassis_front_left_encoder.pidGet());
-		 * SmartDashboard.putNumber("chassis_back_left_encoder",
-		 * RobotMap.chassis_back_left_encoder.pidGet());
-		 * SmartDashboard.putNumber("chassis_front_right_encoder",
-		 * RobotMap.chassis_front_right_encoder.pidGet());
-		 * SmartDashboard.putNumber("chassis_back_right_encoder",
-		 * RobotMap.chassis_back_right_encoder.pidGet());
-		 */
-		SmartDashboard.putNumber("Accel X", accel.getX());
-		SmartDashboard.putNumber("Accel Y", accel.getY());
-		SmartDashboard.putNumber("Accel Z", accel.getZ());
-
-		if (RobotMap.liftpot != null)
+		if (RobotMap.DEBUG) {
+			SmartDashboard.putNumber("Accel X", accel.getX());
+			SmartDashboard.putNumber("Accel Y", accel.getY());
+			SmartDashboard.putNumber("Accel Z", accel.getZ());
 			SmartDashboard.putNumber("liftPot", RobotMap.liftpot.get());
-
-		SmartDashboard.putNumber("Lift Height (Inches)",
-				Robot.lift.getLiftHeight());
-
-		SmartDashboard.putNumber("Lift SetPoint", Robot.lift.getSetpoint());
-		SmartDashboard.putNumber("Lift Output", Robot.lift.lift_output);
+			SmartDashboard.putNumber("Lift Height (Inches)",
+					Robot.lift.getLiftHeight());
+			SmartDashboard.putNumber("Lift SetPoint", Robot.lift.getSetpoint());
+			SmartDashboard.putNumber("Lift Output", Robot.lift.lift_output);
+		}
 
 	}
 
