@@ -88,7 +88,7 @@ public class RobotMap {
 
 		Preferences preferences = Preferences.getInstance();
 
-		lift_zero_ref = preferences.getDouble(LIFT_ZERO_REF, 8.5);
+		lift_zero_ref = preferences.getDouble(LIFT_ZERO_REF, 0.0);
 		lift_tote_pickup = preferences.getDouble(LIFT_TOTE_PICKUP, 8.5);
 		lift_tote_1 = preferences.getDouble(LIFT_TOTE_1, 21.5);
 		lift_tote_2 = preferences.getDouble(LIFT_TOTE_2, 33.5);

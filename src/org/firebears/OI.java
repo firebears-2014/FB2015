@@ -97,7 +97,8 @@ public class OI {
 		closeGrabbers.whenPressed(new GrabberCommand(false));
 
 		toggleStepSwitch = new JoystickButton(joystickLift, 8);
-		toggleStepSwitch.whileHeld(new SetStep());
+		toggleStepSwitch.whenPressed(new SetStep(true));
+		toggleStepSwitch.whenReleased(new SetStep(false));
 
 		wideCentertote = new JoystickButton(joystickDrive, 11);
 		wideCentertote.whenPressed(new WidetoteCommand());

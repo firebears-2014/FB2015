@@ -48,6 +48,6 @@ public class Grabber extends Subsystem {
 		open = !close_grabbers;
 	}
 	public boolean isOpen(){
-		return open;
+		return true;
 	}
 }

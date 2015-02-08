@@ -10,6 +10,7 @@ import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.firebears.commands.PreferenceSetup;
 import org.firebears.commands.auto.*; //Autonomous Commands
 import org.firebears.subsystems.*;
 
@@ -153,6 +154,11 @@ public class Robot extends IterativeRobot {
 			SmartDashboard.putNumber("Lift Output", Robot.lift.lift_output);
 		}
 
+		SmartDashboard.putNumber("Lift 0", RobotMap.lift_tote_pickup);
+		SmartDashboard.putNumber("Lift 1", RobotMap.lift_tote_1);
+		SmartDashboard.putNumber("Lift 2", RobotMap.lift_tote_2);
+		SmartDashboard.putNumber("Lift 3", RobotMap.lift_tote_3);
+
 	}
 
 	public void testInit() {
@@ -164,6 +170,16 @@ public class Robot extends IterativeRobot {
 	 */
 	public void testPeriodic() {
 		LiveWindow.run();
+		SmartDashboard.putData("Set Zero", new PreferenceSetup(
+				RobotMap.LIFT_ZERO_REF));
+		SmartDashboard.putData("Set Tote Zero Pickup", new PreferenceSetup(
+				RobotMap.LIFT_TOTE_PICKUP));
+		SmartDashboard.putData("Set Tote One", new PreferenceSetup(
+				RobotMap.LIFT_TOTE_1));
+		SmartDashboard.putData("Set Tote Two", new PreferenceSetup(
+				RobotMap.LIFT_TOTE_2));
+		SmartDashboard.putData("Set Tote Three", new PreferenceSetup(
+				RobotMap.LIFT_TOTE_3));
 
 	}
 }
