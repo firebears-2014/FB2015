@@ -50,7 +50,7 @@ public class Chassis extends Subsystem {
 	 */
 	public void mechanumDrive(double strafe, double forward, double rotation) {
 		double angle = ((RobotMap.chassis_drive_gyro!=null) && fieldOriented) 
-				? -1 * RobotMap.chassis_drive_gyro.getAngle() 
+				? RobotMap.chassis_drive_gyro.getAngle() 
 				: 0.0;
 				
 		// double cosA = Math.cos(theta * (3.14159 / 180.0));
@@ -83,5 +83,8 @@ public class Chassis extends Subsystem {
 	 */
 	public void setFieldOriented(boolean b)  {
 		fieldOriented = b;
+	}
+	public boolean getFieldOriented(){
+		return fieldOriented;
 	}
 }

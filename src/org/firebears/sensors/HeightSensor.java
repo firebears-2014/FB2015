@@ -1,8 +1,8 @@
 package org.firebears.sensors;
 
 import org.firebears.RobotMap;
+import org.firebears.commands.PreferenceSetup;
 
-import PreferenceSetup.PreferenceSetup;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.Preferences;
 
@@ -14,16 +14,23 @@ public class HeightSensor {
 	AnalogPotentiometer pot = null;
 
 	// number used to convert volts (which the pot returns) to inches
-	//assume 0 to 5 V input, single turn on 10 turn pot  = 7.853975" = .5V, Travel = 58" PVM 1/31/15
-	public final double inchesPerVolt = 7.853975/0.5;// 15.70795 inches per volt PVM 1/31/15
+	// assume 0 to 5 V input, single turn on 10 turn pot =
+	// 7.853975" = .5V, Travel = 58" PVM 1/31/15
+	// public final double inchesPerVolt = 7.853975/0.5;// 15.70795 inches per
+	// volt PVM 1/31/15
+	public final double inchesPerVolt = 82.7586;
 	public double Zero;
 
 	public HeightSensor(AnalogPotentiometer p) {
 		Zero = RobotMap.lift_zero_ref;
 		pot = p;
-		if (pot == null)  {
+		if (pot == null) {
 			System.err.println("WARNING! Lift potentiometer is null");
 		}
+	}
+
+	public double getVolts() {
+		return pot.get();
 	}
 
 	public double getHeight() {
