@@ -8,6 +8,7 @@ import org.firebears.commands.grabber.*;
 import org.firebears.commands.lift.SetHeightCommand;
 import org.firebears.commands.lift.SetLiftMotor;
 import org.firebears.commands.lift.SetStep;
+import org.firebears.commands.lights.CelebrateCommand;
 import org.firebears.commands.lights.LightChangeCommand;
 import org.firebears.commands.drive.*;
 import org.firebears.commands.lights.*;
@@ -51,8 +52,10 @@ public class OI {
 	public JoystickButton resetGyro;
 	public JoystickButton approachTote;
 	public JoystickButton slowTriggerButton;
+	public JoystickButton celebrate;
 
 	public OI() {
+		//Initialize joysticks
 		joystickDrive = new Joystick(0);
 		joystickLift = new Joystick(1);
 
@@ -66,9 +69,7 @@ public class OI {
 		// (new JoystickButton(joystickDrive, 5)).whileHeld(new
 		// ForwardCommand(-0.5));
 
-		// start of final joystick buttons
-
-		slowTriggerButton = new JoystickButton(joystickDrive, 1);
+		// LIFT Joystick Initialization
 
 		setLiftPickup = new JoystickButton(joystickLift, 1);
 		setLiftPickup.whenPressed(new SetHeightCommand(
@@ -99,18 +100,25 @@ public class OI {
 		toggleStepSwitch = new JoystickButton(joystickLift, 8);
 		toggleStepSwitch.whenPressed(new SetStep(true));
 		toggleStepSwitch.whenReleased(new SetStep(false));
+		
+		celebrate = new JoystickButton(joystickLift, 10);
+		celebrate.whenPressed(new CelebrateCommand());
+		
+		//DRIVE Joystick Initialization
 
-		wideCentertote = new JoystickButton(joystickDrive, 11);
-		wideCentertote.whenPressed(new WidetoteCommand());
-
-		centerTote = new JoystickButton(joystickDrive, 12);
-		centerTote.whenPressed(new Totecenter());
-
+		slowTriggerButton = new JoystickButton(joystickDrive, 1);
+		
 		resetGyro = new JoystickButton(joystickDrive, 7);
 		resetGyro.whenPressed(new GyroResetCommand());
 
 		approachTote = new JoystickButton(joystickDrive, 9);
 		approachTote.whenPressed(new ToteApproachCommand());
+		
+		wideCentertote = new JoystickButton(joystickDrive, 11);
+		wideCentertote.whenPressed(new WidetoteCommand());
+
+		centerTote = new JoystickButton(joystickDrive, 12);
+		centerTote.whenPressed(new Totecenter());
 
 		// SmartDashboard Buttons
 		// SmartDashboard.putData("Autonomous Command", new
