@@ -1,5 +1,6 @@
 package org.firebears;
 
+import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.CANJaguar;
@@ -16,7 +17,9 @@ import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
 import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+
 import java.util.Vector;
+
 import org.firebears.util.PIDRobotDrive;
 import org.firebears.util.TalonEncoder;
 
@@ -28,6 +31,8 @@ import org.firebears.util.TalonEncoder;
  */
 
 public class RobotMap {
+	
+    public static final boolean DEBUG = true;
 
 	public static final String LIFT_ZERO_REF = "LIFT_ZERO_REF";
 	public static final String LIFT_TOTE_PICKUP = "LIFT_TOTE_PICKUP";
@@ -36,6 +41,7 @@ public class RobotMap {
 	public static final String LIFT_TOTE_3 = "LIFT_TOTE_3";
 	public static final String CHASSIS_DRIVE_TYPE_TAL = "CHASSIS_DRIVE_TYPE_TAL";
 	public static final String CHASSIS_DRIVE_TYPE_JAG = "CHASSIS_DRIVE_TYPE_JAG";
+	public static final String CHASSIS_FIELD_ORIENTED = "CHASSIS_FIELD_ORIENTED";
 
 	public static double lift_zero_ref;
 	public static double lift_tote_pickup;
@@ -64,6 +70,8 @@ public class RobotMap {
 	public static SpeedController liftJag;
 	public static Compressor grabbercompressor;
 
+	public static AnalogInput analogInput;
+
 	public static Solenoid grabbersolenoid_right_open;
 	public static Solenoid grabbersolenoid_right_close;
 	public static Solenoid grabbersolenoid_left_open;
@@ -80,13 +88,15 @@ public class RobotMap {
 
 		Preferences preferences = Preferences.getInstance();
 
-		lift_zero_ref = preferences.getDouble(LIFT_ZERO_REF, 8.5);
+		lift_zero_ref = preferences.getDouble(LIFT_ZERO_REF, 0.0);
 		lift_tote_pickup = preferences.getDouble(LIFT_TOTE_PICKUP, 8.5);
 		lift_tote_1 = preferences.getDouble(LIFT_TOTE_1, 21.5);
 		lift_tote_2 = preferences.getDouble(LIFT_TOTE_2, 33.5);
 		lift_tote_3 = preferences.getDouble(LIFT_TOTE_3, 46.0);
-		chassis_drive_type_tal = preferences.getBoolean(CHASSIS_DRIVE_TYPE_TAL,
-				true);
+		chassis_drive_type_tal = preferences.getBoolean(CHASSIS_DRIVE_TYPE_TAL, true);
+		if (! preferences.containsKey(CHASSIS_FIELD_ORIENTED)) {
+			preferences.putBoolean(CHASSIS_FIELD_ORIENTED, true);
+		}
 
 		// Talon code
 		/*
@@ -204,7 +214,10 @@ public class RobotMap {
 			LiveWindow.addSensor("Chassis", "drive_gyro", chassis_drive_gyro);
 		}
 
-		liftpot = new AnalogPotentiometer(2, 1.0, 0.0);
+		analogInput = new AnalogInput(6);
+		analogInput.setAverageBits(4);
+
+		liftpot = new AnalogPotentiometer(analogInput, 1.0, 0.0);
 		LiveWindow.addSensor("Lift", "pot", liftpot);
 
 		try {

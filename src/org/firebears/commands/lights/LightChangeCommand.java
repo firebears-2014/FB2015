@@ -7,7 +7,7 @@ import org.firebears.Robot;
  * Command For Changing A Strip (p_which) to a different animation (p_anim)
  */
 public class LightChangeCommand extends Command {
-	
+
 	String which;
 	String anim;
 
@@ -39,4 +39,5 @@ public class LightChangeCommand extends Command {
     // subsystems is scheduled to run
     protected void interrupted() {
     }
+
 }

@@ -8,10 +8,10 @@ import org.firebears.Robot;
  */
 public class CelebrateCommand extends Command {
 	
-	int which;
+	String which;
 	String anim;
 
-    public CelebrateCommand(int p_which, String p_anim) {
+    public CelebrateCommand(String p_which, String p_anim) {
         requires(Robot.lights);
         which = p_which;
         anim = p_anim;

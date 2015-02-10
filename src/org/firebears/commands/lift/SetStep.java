@@ -5,36 +5,42 @@ import org.firebears.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * While run, prepared for step.  When finished will go back to normal height.
+ * While run, prepared for step. When finished will go back to normal height.
  */
 public class SetStep extends Command {
 
-    public SetStep() {
-        // Use requires() here to declare subsystem dependencies
-        // eg. requires(chassis);
-    }
+	boolean Pressed;
 
-    // Called just before this Command runs the first time
-    protected void initialize() {
-    	Robot.lift.addStep = 6.0;
-    }
+	public SetStep(boolean pressed) {
+		// Use requires() here to declare subsystem dependencies
+		// eg. requires(chassis);
+		Pressed = pressed;
+	}
 
-    // Called repeatedly when this Command is scheduled to run
-    protected void execute() {
-    }
+	// Called just before this Command runs the first time
+	protected void initialize() {
+		if (Pressed) {
+			Robot.lift.addStep = 6.0;
+		} else {
+			Robot.lift.addStep = 0.0;
+		}
+	}
 
-    // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return false;
-    }
+	// Called repeatedly when this Command is scheduled to run
+	protected void execute() {
+	}
 
-    // Called once after isFinished returns true
-    protected void end() {
-    	Robot.lift.addStep = 0;
-    }
+	// Make this return true when this Command no longer needs to run execute()
+	protected boolean isFinished() {
+		return true;
+	}
 
-    // Called when another command which requires one or more of the same
-    // subsystems is scheduled to run
-    protected void interrupted() {
-    }
+	// Called once after isFinished returns true
+	protected void end() {
+	}
+
+	// Called when another command which requires one or more of the same
+	// subsystems is scheduled to run
+	protected void interrupted() {
+	}
 }

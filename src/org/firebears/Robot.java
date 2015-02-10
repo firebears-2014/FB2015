@@ -4,12 +4,14 @@ import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
+import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
+import org.firebears.commands.PreferenceSetup;
 import org.firebears.commands.auto.*; //Autonomous Commands
 import org.firebears.subsystems.*;
 
@@ -118,7 +120,12 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 		if (RobotMap.chassis_drive_gyro != null)
 			RobotMap.chassis_drive_gyro.reset();
-		chassis.setFieldOriented("field".equals(oi.drivingMode.getSelected()));
+
+		boolean fieldOriented = (Preferences.getInstance())
+				.getBoolean(RobotMap.CHASSIS_FIELD_ORIENTED, true);
+		System.out.println("Chassis fieldOriented = " + fieldOriented);
+		chassis.setFieldOriented(fieldOriented);
+		
 		//Go into teleop lights
 		lights.teleop();
 	}
@@ -150,22 +157,22 @@ public class Robot extends IterativeRobot {
 			SmartDashboard.putNumber("gyro value",
 					RobotMap.chassis_drive_gyro.getAngle());
 
-		/*
-		 * SmartDashboard.putNumber("chassis_front_left_encoder",
-		 * RobotMap.chassis_front_left_encoder.pidGet());
-		 * SmartDashboard.putNumber("chassis_back_left_encoder",
-		 * RobotMap.chassis_back_left_encoder.pidGet());
-		 * SmartDashboard.putNumber("chassis_front_right_encoder",
-		 * RobotMap.chassis_front_right_encoder.pidGet());
-		 * SmartDashboard.putNumber("chassis_back_right_encoder",
-		 * RobotMap.chassis_back_right_encoder.pidGet());
-		 */
-		SmartDashboard.putNumber("Accel X", accel.getX());
-		SmartDashboard.putNumber("Accel Y", accel.getY());
-		SmartDashboard.putNumber("Accel Z", accel.getZ());
+		if (RobotMap.DEBUG) {
+			SmartDashboard.putNumber("Accel X", accel.getX());
+			SmartDashboard.putNumber("Accel Y", accel.getY());
+			SmartDashboard.putNumber("Accel Z", accel.getZ());
+			SmartDashboard.putNumber("liftPot", RobotMap.liftpot.get());
+			SmartDashboard.putNumber("Lift Height (Inches)",
+					Robot.lift.getLiftHeight());
+			SmartDashboard.putNumber("Lift SetPoint", Robot.lift.getSetpoint());
+			SmartDashboard.putNumber("Lift Output", Robot.lift.lift_output);
+		}
 
-		if (RobotMap.liftpot != null) SmartDashboard.putNumber("liftPot", RobotMap.liftpot.get());
-		
+		SmartDashboard.putNumber("Lift 0", RobotMap.lift_tote_pickup);
+		SmartDashboard.putNumber("Lift 1", RobotMap.lift_tote_1);
+		SmartDashboard.putNumber("Lift 2", RobotMap.lift_tote_2);
+		SmartDashboard.putNumber("Lift 3", RobotMap.lift_tote_3);
+
 		//Run the teleop last twenty animations in the last 20 seconds
 		if( lights.isEarly && ds.getMatchTime() <= 20) {
 			lights.isEarly = false;
@@ -182,6 +189,16 @@ public class Robot extends IterativeRobot {
 	 */
 	public void testPeriodic() {
 		LiveWindow.run();
+		SmartDashboard.putData("Set Zero", new PreferenceSetup(
+				RobotMap.LIFT_ZERO_REF));
+		SmartDashboard.putData("Set Tote Zero Pickup", new PreferenceSetup(
+				RobotMap.LIFT_TOTE_PICKUP));
+		SmartDashboard.putData("Set Tote One", new PreferenceSetup(
+				RobotMap.LIFT_TOTE_1));
+		SmartDashboard.putData("Set Tote Two", new PreferenceSetup(
+				RobotMap.LIFT_TOTE_2));
+		SmartDashboard.putData("Set Tote Three", new PreferenceSetup(
+				RobotMap.LIFT_TOTE_3));
 
 	}
 }
