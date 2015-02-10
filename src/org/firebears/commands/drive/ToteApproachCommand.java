@@ -27,7 +27,7 @@ public class ToteApproachCommand extends Command {
 		continueCommand = true;
 		lastState = 0;
 		fieldOriented = Robot.chassis.getFieldOriented();
-		Robot.chassis.setFieldOriented(false);
+		Robot.chassis.setFieldOriented(false);//suggest capture existing field orientation first and put in class variable!!!!
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -52,7 +52,7 @@ public class ToteApproachCommand extends Command {
 			System.out.println("added 8.");
 		}
 
-		switch (chassisToteState) {
+		switch (chassisToteState) {//each case ought to check distance to tote and angle before issuing commands!!!!
 		case 1:
 			Robot.chassis.mechanumDrive(0.2, 0.0, 0.0);
 			break;
