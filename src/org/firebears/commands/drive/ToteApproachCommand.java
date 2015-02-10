@@ -120,28 +120,32 @@ public class ToteApproachCommand extends Command {
 			Robot.chassis.mechanumDrive(-1 * 0.2, 0.0, 0.0);
 			break;
 		case 12:
-			Robot.chassis.mechanumDrive(
-					-1 * 0.2,
+			Robot.chassis
+					.mechanumDrive(
+							-1 * 0.2,
 
-					forward(RobotMap.leftArmsharpIRRange
-							.getRangefinderDistance(),
-							RobotMap.leftsharpIRRange
-									.getRangefinderDistance()),
-					rotate(RobotMap.leftsharpIRRange.getRangefinderDistance(),
-							RobotMap.leftArmsharpIRRange
-									.getRangefinderDistance()));
+							forward(RobotMap.leftArmsharpIRRange
+									.getRangefinderDistance(),
+									RobotMap.leftsharpIRRange
+											.getRangefinderDistance()),
+							rotate(RobotMap.leftsharpIRRange
+									.getRangefinderDistance(),
+									RobotMap.leftArmsharpIRRange
+											.getRangefinderDistance()));
 			break;
 		case 14:
-			Robot.chassis.mechanumDrive(
-					-1 * 0.2,
+			Robot.chassis
+					.mechanumDrive(
+							-1 * 0.2,
 
-					forward(RobotMap.rightsharpIRRange
-							.getRangefinderDistance(),
-							RobotMap.leftsharpIRRange
-									.getRangefinderDistance()),
-					rotate(RobotMap.rightsharpIRRange.getRangefinderDistance(),
-							RobotMap.leftArmsharpIRRange
-									.getRangefinderDistance()));
+							forward(RobotMap.rightsharpIRRange
+									.getRangefinderDistance(),
+									RobotMap.leftsharpIRRange
+											.getRangefinderDistance()),
+							rotate(RobotMap.rightsharpIRRange
+									.getRangefinderDistance(),
+									RobotMap.leftArmsharpIRRange
+											.getRangefinderDistance()));
 			break;
 		case 15:
 			if ((rotate(RobotMap.rightsharpIRRange.getRangefinderDistance(),
@@ -209,8 +213,12 @@ public class ToteApproachCommand extends Command {
 
 	private double forward(double value1, double value2) {
 		double average = (value1 + value2) / 2;
-		if (average > DRIVE_TO) {
-			return -0.2;
+		if (average > 4) {
+			if (average > DRIVE_TO) {
+				return -0.2;
+			} else {
+				return 0.0;
+			}
 		} else {
 			return 0.0;
 		}
