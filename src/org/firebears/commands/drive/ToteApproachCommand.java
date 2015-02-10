@@ -27,7 +27,6 @@ public class ToteApproachCommand extends Command {
 		continueCommand = true;
 		lastState = 0;
 		fieldOriented = Robot.chassis.getFieldOriented();
-
 		Robot.chassis.setFieldOriented(false);
 	}
 
