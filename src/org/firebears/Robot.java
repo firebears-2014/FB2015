@@ -1,6 +1,7 @@
 package org.firebears;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
@@ -22,6 +23,9 @@ import org.firebears.subsystems.*;
  * directory.
  */
 public class Robot extends IterativeRobot {
+	
+	DriverStation ds;
+	
 	Command autonomousCommand;
 	Command AutoGM;
 	Command AutoM;
@@ -71,6 +75,9 @@ public class Robot extends IterativeRobot {
 			// */
 		if (RobotMap.chassis_drive_gyro != null)
 			RobotMap.chassis_drive_gyro.reset();
+		
+		ds = DriverStation.getInstance();
+
 	}
 
 	/**
@@ -79,6 +86,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void disabledInit() {
 		chassis.setFieldOriented(false);
+		lights.disabled();
 	}
 
 	public void disabledPeriodic() {
@@ -92,6 +100,8 @@ public class Robot extends IterativeRobot {
 		if (RobotMap.chassis_drive_gyro != null)
 			RobotMap.chassis_drive_gyro.reset();
 		chassis.setFieldOriented(false);
+		// change lights for autonomous
+		lights.autonomous();
 	}
 
 	/**
@@ -110,10 +120,14 @@ public class Robot extends IterativeRobot {
 			autonomousCommand.cancel();
 		if (RobotMap.chassis_drive_gyro != null)
 			RobotMap.chassis_drive_gyro.reset();
+
 		boolean fieldOriented = (Preferences.getInstance())
 				.getBoolean(RobotMap.CHASSIS_FIELD_ORIENTED, true);
 		System.out.println("Chassis fieldOriented = " + fieldOriented);
 		chassis.setFieldOriented(fieldOriented);
+		
+		//Go into teleop lights
+		lights.teleop();
 	}
 
 	/**
@@ -159,6 +173,11 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Lift 2", RobotMap.lift_tote_2);
 		SmartDashboard.putNumber("Lift 3", RobotMap.lift_tote_3);
 
+		//Run the teleop last twenty animations in the last 20 seconds
+		if( lights.isEarly && ds.getMatchTime() <= 20) {
+			lights.isEarly = false;
+			lights.last_twenty();
+		}
 	}
 
 	public void testInit() {
