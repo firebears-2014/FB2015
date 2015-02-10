@@ -56,7 +56,7 @@ public class OI {
 		joystickDrive = new Joystick(0);
 		joystickLift = new Joystick(1);
 
-		// scoringPlatformSensor = new DigitalInput(0);
+		scoringPlatformSensor = new DigitalInput(8);
 		// autoSelect1 = new DigitalInput(1);
 		// autoSelect2 = new DigitalInput(2);
 		// autoSelect3 = new DigitalInput(3);
@@ -116,25 +116,27 @@ public class OI {
 		// SmartDashboard.putData("Autonomous Command", new
 		// AutonomousCommand());
 
-		if (RobotMap.DEBUG)  {
+		if (RobotMap.DEBUG) {
 			SmartDashboard.putData("lift to 1", new SetHeightCommand(
 					Robot.lift.LIFT_1_HEIGHT));
 			SmartDashboard.putData("lift to 2", new SetHeightCommand(
 					Robot.lift.LIFT_2_HEIGHT));
 			SmartDashboard.putData("lift to 3", new SetHeightCommand(
 					Robot.lift.LIFT_3_HEIGHT));
-	
+
 			SmartDashboard.putData("Run Talon Code", new PreferenceSetup(
 					RobotMap.CHASSIS_DRIVE_TYPE_TAL));
 			SmartDashboard.putData("Run Jag Code", new PreferenceSetup(
 					RobotMap.CHASSIS_DRIVE_TYPE_JAG));
-	
+
 			if (Robot.lift != null)
-				SmartDashboard.putBoolean("Lift Motor", Robot.lift.enable_motor);
-	
+				SmartDashboard
+						.putBoolean("Lift Motor", Robot.lift.enable_motor);
+
 			SmartDashboard.putData("Enable Lift Motor", new SetLiftMotor(true));
-			SmartDashboard.putData("Disable Lift Motor", new SetLiftMotor(false));
-	
+			SmartDashboard.putData("Disable Lift Motor",
+					new SetLiftMotor(false));
+
 			SmartDashboard.putData("Set Zero", new PreferenceSetup(
 					RobotMap.LIFT_ZERO_REF));
 			SmartDashboard.putData("Set Tote Zero Pickup", new PreferenceSetup(
@@ -145,8 +147,9 @@ public class OI {
 					RobotMap.LIFT_TOTE_2));
 			SmartDashboard.putData("Set Tote Three", new PreferenceSetup(
 					RobotMap.LIFT_TOTE_3));
-	
-			// SmartDashboard.putData("Change Lights", new LightChangeCommand(0, Robot.lights.RANDOM_ANIM));
+
+			// SmartDashboard.putData("Change Lights", new LightChangeCommand(0,
+			// Robot.lights.RANDOM_ANIM));
 		}
 	}
 

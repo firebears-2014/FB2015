@@ -70,7 +70,8 @@ public class ToteApproachCommand extends Command {
 		case 3:
 			Robot.chassis.mechanumDrive(speedStrafe,
 
-			forward(rightArm, rightInner), rotate(rightArm, rightInner));
+			/* forward(rightArm, rightInner) */0.0,
+					rotate(rightArm, rightInner));
 			break;
 		case 4:
 			Robot.chassis.mechanumDrive(-1 * speedStrafe, 0.0, 0.0);
@@ -78,57 +79,64 @@ public class ToteApproachCommand extends Command {
 		case 6:
 			if (rotate(rightInner, leftInner) == 0) {
 				double averageDistance = (rightInner + leftInner) / 2;
-				if (averageDistance > DRIVE_TO) {
-					Robot.chassis.mechanumDrive(0.0, -1 * 0.2, 0.0);
+				if (averageDistance < 1.5 * DRIVE_TO) {
+					if (averageDistance > 0.5 * DRIVE_TO) {
+						continueCommand = false;
+					} else {
+						Robot.chassis.mechanumDrive(0.0,
+								backward(rightInner, leftInner), 0.0);
+					}
+
 				} else {
-					continueCommand = false;
+					Robot.chassis.mechanumDrive(0.0,
+							forward(rightInner, leftInner), 0.0);
 				}
 			} else {
 				Robot.chassis.mechanumDrive(0.0,
-
-				forward(rightInner, leftInner), rotate(rightInner, leftInner));
+				/* forward(rightInner, leftInner) */0.0,
+						rotate(rightInner, leftInner));
 			}
 			break;
 		case 7:
 			Robot.chassis.mechanumDrive(speedStrafe,
 
-			forward(rightInner, leftInner), rotate(rightArm, leftInner));
+			/* forward(rightInner, leftInner) */0.0,
+					rotate(rightArm, leftInner));
 			break;
 		case 8:
 			Robot.chassis.mechanumDrive(-1 * speedStrafe, 0.0, 0.0);
 			break;
 		case 12:
-			Robot.chassis
-					.mechanumDrive(
-							-1 * speedStrafe,
+			Robot.chassis.mechanumDrive(-1 * speedStrafe,
 
-							forward(RobotMap.leftArmsharpIRRange
-									.getRangefinderDistance(),
-									RobotMap.leftsharpIRRange
-											.getRangefinderDistance()),
-							rotate(RobotMap.leftsharpIRRange
-									.getRangefinderDistance(),
-									RobotMap.leftArmsharpIRRange
-											.getRangefinderDistance()));
+			/*
+			 * forward(leftInner, leftArm)
+			 */0.0, rotate(leftInner, leftArm));
 			break;
 		case 14:
 			Robot.chassis.mechanumDrive(-1 * speedStrafe,
 
-			forward(rightInner, leftInner), rotate(rightInner, leftArm));
+			/* forward(rightInner, leftInner) */0.0,
+					rotate(rightInner, leftArm));
 			break;
 		case 15:
-			if ((rotate(rightInner, leftInner) == 0)) {
-				double averageDistance = (rightInner + leftInner) / 2;
-				if (averageDistance > DRIVE_TO) {
-					Robot.chassis.mechanumDrive(0.0,
-							forward(rightInner, leftInner), 0.0);
+			if (rotate(rightArm, leftArm) == 0) {
+				double averageDistance = (rightArm + leftArm) / 2;
+				if (averageDistance < 1.5 * DRIVE_TO) {
+					if (averageDistance > 0.5 * DRIVE_TO) {
+						continueCommand = false;
+					} else {
+						Robot.chassis.mechanumDrive(0.0,
+								backward(rightArm, leftArm), 0.0);
+					}
+
 				} else {
-					continueCommand = false;
+					Robot.chassis.mechanumDrive(0.0,
+							forward(rightArm, leftArm), 0.0);
 				}
 			} else {
-				Robot.chassis.mechanumDrive(0.0,
-
-				forward(rightInner, leftInner), rotate(rightArm, leftArm));
+				Robot.chassis.mechanumDrive(0.0, /* forward(rightArm, leftArm) */
+						0.0, rotate(rightArm, leftArm));
 			}
 		default:
 			if (lastState == 0 || lastState == 5 || lastState == 9
@@ -150,7 +158,6 @@ public class ToteApproachCommand extends Command {
 				+ RobotMap.leftsharpIRRange.getRangefinderDistance());
 		System.out.println("Far Left: "
 				+ RobotMap.leftArmsharpIRRange.getRangefinderDistance());
-
 	}
 
 	// 2 values to compare
@@ -167,8 +174,25 @@ public class ToteApproachCommand extends Command {
 
 	private double forward(double value1, double value2) {
 		double average = (value1 + value2) / 2;
+		double speed = ((average + 6) / MAX_RANGE) * speedForward;
+		if (speed > 0.2) {
+			speed = 0.2;
+		}
 		if (average > DRIVE_TO && average < MAX_RANGE) {
-			return -speedForward;
+			return -speed;
+		} else {
+			return 0.0;
+		}
+	}
+
+	private double backward(double value1, double value2) {
+		double average = (value1 + value2) / 2;
+		double speed = ((average + 6) / MAX_RANGE) * speedForward;
+		if (speed > 0.2) {
+			speed = 0.2;
+		}
+		if (average > DRIVE_TO && average < MAX_RANGE) {
+			return speed;
 		} else {
 			return 0.0;
 		}
