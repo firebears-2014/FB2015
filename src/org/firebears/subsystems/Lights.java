@@ -21,13 +21,13 @@ public class Lights extends Subsystem {
 	public static final String STRIP_CELEBRATE = "celebrate";
 	
 	// Constants for  animations
-	public static final String PULSING_GREEN_ANIM = "PULSING_GREEN_ANIM";
-	public static final String MOVING_BLUE_ANIM = "MOVING_BLUE_ANIM";
-	public static final String FIRE_ANIM = "FIRE_ANIM";
-	public static final String LIFT = "LIFT";
-	public static final String CRAZY = "CRAZY";
-	public static final String BINARY = "BIN_ANIM";
-	public static final String BULB = "BULB";
+	public static final String ANIM_PULSE = "PULSING_GREEN_ANIM";
+	public static final String ANIM_MOVE = "MOVING_BLUE_ANIM";
+	public static final String ANIM_FIRE = "FIRE_ANIM";
+	public static final String ANIM_LIFT = "LIFT";
+	public static final String ANIM_CRAZY = "CRAZY";
+	public static final String ANIM_BINARY = "BIN_ANIM";
+	public static final String ANIM_BULB = "BULB";
 	
 	//TODO: Change #s to the proper id's and add undefined light strips
 
@@ -37,14 +37,15 @@ public class Lights extends Subsystem {
 //	public static final int UNDERGLOW_LIGHTS = 0;
 
 	double old_value;
+	public boolean isEarly = true;
 	
 	public Lights() {
 		table = NetworkTable.getTable("lights");
-		setStrip(STRIP_LIFT1, FIRE_ANIM);
-		setStrip(STRIP_LIFT2, FIRE_ANIM);
-		setStrip(STRIP_BOX, FIRE_ANIM);
-		setStrip(STRIP_UNDERGLOW, FIRE_ANIM);
-		setStrip(STRIP_CELEBRATE, FIRE_ANIM);
+		setStrip(STRIP_LIFT1, ANIM_FIRE);
+		setStrip(STRIP_LIFT2, ANIM_FIRE);
+		setStrip(STRIP_BOX, ANIM_FIRE);
+		setStrip(STRIP_UNDERGLOW, ANIM_FIRE);
+		setStrip(STRIP_CELEBRATE, ANIM_FIRE);
 	}
 	
 	//Have no default command - would overload message bus.
@@ -73,5 +74,36 @@ public class Lights extends Subsystem {
 //        	Robot.lights.setLiftHeight(Lights.LIFT_LIGHTS_LEFT, Robot.lift.getLiftHeight());
 //       	Robot.lights.setLiftHeight(Lights.LIFT_LIGHTS_RIGHT, Robot.lift.getLiftHeight());
     }
+    
+    //Called from Robot.disabledInit()
+    public void disabled() {
+    	setStrip(STRIP_LIFT1, ANIM_FIRE);
+    	setStrip(STRIP_LIFT2, ANIM_FIRE);
+    	setStrip(STRIP_BOX, ANIM_FIRE);
+    	setStrip(STRIP_UNDERGLOW, ANIM_FIRE);
+    	setStrip(STRIP_CELEBRATE, ANIM_FIRE);
+    }
+    
+    public void autonomous() {
+    	setStrip(STRIP_LIFT1, ANIM_BINARY);
+    	setStrip(STRIP_LIFT2, ANIM_BINARY);
+    	setStrip(STRIP_BOX, ANIM_PULSE);
+//    	setStrip(STRIP_UNDERGLOW, x); //TODO: NYI catapiller
+//    	setStrip(STRIP_CELEBRATE, x); //TODO: NYI alliance color
+    }
+    
+    public void teleop() {
+    	setStrip(STRIP_LIFT1, ANIM_LIFT);
+    	setStrip(STRIP_LIFT2, ANIM_LIFT);
+//    	setStrip(STRIP_BOX, ANIM_PULSE); //TODO: nyi Pulsing red/yellow
+//    	setStrip(STRIP_UNDERGLOW, x); //TODO: catapiller yellow
+//    	setStrip(STRIP_CELEBRATE, ANIM_PULSE); //TODO: Pulsing red/yellow
+    }
+    
+    public void last_twenty() {
+    	//No change required for lift lights
+//    	setStrip(STRIP_BOX, ANIM_PULSE); //NYI: Pulsing red white
+//    	setStrip(STRIP_UNDERGLOW, x); //Caterpillar white
+//    	setStrip(STRIP_CELEBRATE, ANIM_PULSE);//NYI: Pulsing red white
+    }
 }
-

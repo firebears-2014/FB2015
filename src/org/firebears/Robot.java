@@ -1,6 +1,7 @@
 package org.firebears;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.command.Command;
@@ -20,6 +21,9 @@ import org.firebears.subsystems.*;
  * directory.
  */
 public class Robot extends IterativeRobot {
+	
+	DriverStation ds;
+	
 	Command autonomousCommand;
 	Command AutoGM;
 	Command AutoM;
@@ -69,6 +73,9 @@ public class Robot extends IterativeRobot {
 			// */
 		if (RobotMap.chassis_drive_gyro != null)
 			RobotMap.chassis_drive_gyro.reset();
+		
+		ds = DriverStation.getInstance();
+
 	}
 
 	/**
@@ -77,6 +84,7 @@ public class Robot extends IterativeRobot {
 	 */
 	public void disabledInit() {
 		chassis.setFieldOriented(false);
+		lights.disabled();
 	}
 
 	public void disabledPeriodic() {
@@ -90,6 +98,8 @@ public class Robot extends IterativeRobot {
 		if (RobotMap.chassis_drive_gyro != null)
 			RobotMap.chassis_drive_gyro.reset();
 		chassis.setFieldOriented(false);
+		// change lights for autonomous
+		lights.autonomous();
 	}
 
 	/**
@@ -109,7 +119,8 @@ public class Robot extends IterativeRobot {
 		if (RobotMap.chassis_drive_gyro != null)
 			RobotMap.chassis_drive_gyro.reset();
 		chassis.setFieldOriented("field".equals(oi.drivingMode.getSelected()));
-
+		//Go into teleop lights
+		lights.teleop();
 	}
 
 	/**
@@ -154,8 +165,12 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Accel Z", accel.getZ());
 
 		if (RobotMap.liftpot != null) SmartDashboard.putNumber("liftPot", RobotMap.liftpot.get());
-
-
+		
+		//Run the teleop last twenty animations in the last 20 seconds
+		if( lights.isEarly && ds.getMatchTime() <= 20) {
+			lights.isEarly = false;
+			lights.last_twenty();
+		}
 	}
 
 	public void testInit() {

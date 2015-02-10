@@ -6,12 +6,12 @@ import org.firebears.Robot;
 /**
  * Command For Changing A Strip (p_which) to a different animation (p_anim)
  */
-public class LightChangeCommand extends Command {
+public class CelebrateCommand extends Command {
 	
-	String which;
+	int which;
 	String anim;
 
-    public LightChangeCommand(String p_which, String p_anim) {
+    public CelebrateCommand(int p_which, String p_anim) {
         requires(Robot.lights);
         which = p_which;
         anim = p_anim;
