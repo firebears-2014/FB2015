@@ -106,4 +106,12 @@ public class Lights extends Subsystem {
 //    	setStrip(STRIP_UNDERGLOW, x); //Caterpillar white
 //    	setStrip(STRIP_CELEBRATE, ANIM_PULSE);//NYI: Pulsing red white
     }
+    
+    public void celebrate() {
+    	setStrip(STRIP_LIFT1, ANIM_CRAZY);
+    	setStrip(STRIP_LIFT2, ANIM_CRAZY);
+    	setStrip(STRIP_BOX, ANIM_CRAZY);
+    	setStrip(STRIP_UNDERGLOW, ANIM_CRAZY);
+    	setStrip(STRIP_CELEBRATE, ANIM_CRAZY);
+    }
 }
