@@ -84,8 +84,9 @@ public class Lift extends PIDSubsystem {
 		// e.g. yourMotor.set(output);
 
 		// if statement to allow turning off of lift motor in smartdashboard
+
+		lift_output = output;
 		if (enable_motor) {
-			lift_output = output;
 			liftJag.pidWrite(-1 * output);
 		}
 	}
