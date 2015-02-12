@@ -2,6 +2,7 @@ package org.firebears;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.DriverStation;
+import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
@@ -24,7 +25,7 @@ import org.firebears.subsystems.*;
  */
 public class Robot extends IterativeRobot {
 	
-	DriverStation ds;
+	public DriverStation ds;
 	
 	Command autonomousCommand;
 	Command AutoGM;
@@ -100,8 +101,13 @@ public class Robot extends IterativeRobot {
 		if (RobotMap.chassis_drive_gyro != null)
 			RobotMap.chassis_drive_gyro.reset();
 		chassis.setFieldOriented(false);
+		ds.getAlliance();
 		// change lights for autonomous
-		lights.autonomous();
+		if(ds.getAlliance().equals(Alliance.Red)) {
+			lights.autonomous(true);
+		}else{
+			lights.autonomous(false);
+		}
 	}
 
 	/**
