@@ -50,11 +50,22 @@ public class Lights extends Subsystem {
 	
 	public Lights() {
 		table = NetworkTable.getTable("lights");
-		setStrip(STRIP_LIFT1, ANIM_FIRE);
-		setStrip(STRIP_LIFT2, ANIM_FIRE);
-		setStrip(STRIP_BOX, ANIM_FIRE);
-		setStrip(STRIP_UNDERGLOW, ANIM_FIRE);
-		setStrip(STRIP_CELEBRATE, ANIM_FIRE);
+		disabled();
+		setColor(STRIP_LIFT1, CS_RED);
+		setColor(STRIP_LIFT2, CS_RED);
+		setColor(STRIP_BOX, CS_RED);
+		setColor(STRIP_UNDERGLOW, CS_RED);
+		setColor(STRIP_CELEBRATE, CS_RED);
+		setLiftHeight(STRIP_LIFT1, 0);
+		setLiftHeight(STRIP_LIFT2, 0);
+		setLiftHeight(STRIP_BOX, 0);
+		setLiftHeight(STRIP_UNDERGLOW, 0);
+		setLiftHeight(STRIP_CELEBRATE, 0);
+		setBg(STRIP_LIFT1, 64, ANIM_FIRE);
+		setBg(STRIP_LIFT2, 64, ANIM_FIRE);
+		setBg(STRIP_BOX, 64, ANIM_FIRE);
+		setBg(STRIP_UNDERGLOW, 64, ANIM_FIRE);
+		setBg(STRIP_CELEBRATE, 64, ANIM_FIRE);
 	}
 	
 	//Have no default command - would overload message bus.
@@ -72,6 +83,11 @@ public class Lights extends Subsystem {
     	table.putNumber(which + ".color", (double) height);
     }
     
+    private void setBg(String which, int fade, String anim) {
+        table.putString(which + ".bg", anim);
+    	table.putNumber(which + ".dim", (double) fade);
+    }
+    
     public void updateLiftHeight() {
     	double new_value =
         		Robot.lift.getLiftHeight();
@@ -86,6 +102,10 @@ public class Lights extends Subsystem {
 
 //        	Robot.lights.setLiftHeight(Lights.LIFT_LIGHTS_LEFT, Robot.lift.getLiftHeight());
 //       	Robot.lights.setLiftHeight(Lights.LIFT_LIGHTS_RIGHT, Robot.lift.getLiftHeight());
+    }
+    
+    public void updateUnderglow(double forward) {
+    	setLiftHeight(STRIP_UNDERGLOW, forward);
     }
     
     //Called from Robot.disabledInit()
