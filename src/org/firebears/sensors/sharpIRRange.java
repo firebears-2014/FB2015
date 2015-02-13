@@ -12,7 +12,7 @@ public class sharpIRRange extends AnalogInput {
 	public sharpIRRange(int channel) {
 		super(channel);
 		setOversampleBits(5);
-
+		setAverageBits(4);
 	}
 
 	// distance will be close to the distance that the robot is
