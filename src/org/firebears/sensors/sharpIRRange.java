@@ -11,7 +11,7 @@ public class sharpIRRange extends AnalogInput {
 
 	public sharpIRRange(int channel) {
 		super(channel);
-		setOversampleBits(5);
+		setOversampleBits(4);
 
 	}
 

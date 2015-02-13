@@ -91,7 +91,9 @@ public class ToteApproachCommand extends Command {
 									// and angle before issuing commands!!!!
 		case 1:
 
-			Robot.chassis.mechanumDrive(getStrafeSpeed(rightArm),
+			//Robot.chassis.mechanumDrive(getStrafeSpeed(rightArm),
+					//getSpeed(rightArm), 0.0);// ****PVM 2/11
+			Robot.chassis.mechanumDrive(0.0,
 					getSpeed(rightArm), 0.0);// ****PVM 2/11
 			break;
 		case 2:
@@ -225,6 +227,8 @@ public class ToteApproachCommand extends Command {
 			}
 			break;
 		}
+		
+		
 
 		// lastState = chassisToteState;//****PVM 2/11
 		System.out.println("chassisToteState State: " + chassisToteState);
@@ -272,14 +276,6 @@ public class ToteApproachCommand extends Command {
 			return 0;
 		else
 			return speed;
-
-		/*
-		 * 20 / 5 * 4
-		 * 
-		 * 5 * 4 = 20 20 / 20 = 1
-		 * 
-		 * 20 / 5 = 4 4 * 4 = 16
-		 */
 	}
 
 	private double getRotateSpeed(double distance) {// ****PVM 2/11

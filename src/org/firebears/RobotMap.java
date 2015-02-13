@@ -250,7 +250,7 @@ public class RobotMap {
 		accelerometer = new BuiltInAccelerometer();
 		LiveWindow.addSensor("Accelerometer", "accelerometer", accelerometer);
 
-		rightArmsharpIRRange = new org.firebears.sensors.sharpIRRange(5);
+		rightArmsharpIRRange = new org.firebears.sensors.sharpIRRange(5);//5
 		rightsharpIRRange = new org.firebears.sensors.sharpIRRange(3);
 		leftsharpIRRange = new org.firebears.sensors.sharpIRRange(1);
 		leftArmsharpIRRange = new org.firebears.sensors.sharpIRRange(4);
