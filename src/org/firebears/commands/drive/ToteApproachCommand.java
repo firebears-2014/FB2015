@@ -3,6 +3,7 @@ package org.firebears.commands.drive;
 import org.firebears.Robot;
 import org.firebears.RobotMap;
 
+import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
@@ -15,14 +16,27 @@ public class ToteApproachCommand extends Command {
 	int lastState;
 	public final double DRIVE_TO = 4.0;
 	public final double MAX_RANGE = 30.0;
+	public final double MAX_SPEED = .5;//****PVM 2/11   ???? no timer and no termination when distance <= DRIVE_TO
+	public final double MIN_SPEED = .2;//****PVM 2/11  need to evaluate zones where distance is reliable, sorta reliable and stinks
+	public final double MAX_ROTATE = .4;//****PVM 2/11
+	public final double MIN_ROTATE = .2;//****PVM 2/11
+	public final double MAX_ROTATE_TOL = 3;//****PVM 2/11
+	public final double MIN_ROTATE_TOL = .3;//****PVM 2/11
+	public final double MAX_STRAFE = .5;//****PVM 2/11
+	public final double MIN_STRAFE = .2;//****PVM 2/11
 	public boolean fieldOriented;
-	private double speedStrafe = 0.2;
-	private double speedForward = 0.2;
-	private double speedRotate = 0.2;
+	//private double speedStrafe = 0.2;
+	//private double speedForward = 0.2;
+	//private double speedRotate = 0.2;
+	
+	private final double TIME = 10.00;
+	
+	private Timer timer;
 
 	public ToteApproachCommand() {
 		// Use requires() here to declare subsystem dependencies
 		requires(Robot.chassis);
+		timer = new Timer();
 	}
 
 	// Called just before this Command runs the first time
@@ -31,6 +45,8 @@ public class ToteApproachCommand extends Command {
 		lastState = 0;
 		fieldOriented = Robot.chassis.getFieldOriented();
 		Robot.chassis.setFieldOriented(false);//suggest capture existing field orientation first and put in class variable!!!!
+		timer.reset();
+		timer.start();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -62,93 +78,132 @@ public class ToteApproachCommand extends Command {
 
 		switch (chassisToteState) {//each case ought to check distance to tote and angle before issuing commands!!!!
 		case 1:
-			Robot.chassis.mechanumDrive(speedStrafe, 0.0, 0.0);
+			
+			Robot.chassis.mechanumDrive(getStrafeSpeed(rightArm),
+					getSpeed(rightArm), 0.0);//****PVM 2/11
 			break;
 		case 2:
-			Robot.chassis.mechanumDrive(speedStrafe, 0.0, 0.0);
+			Robot.chassis.mechanumDrive(getStrafeSpeed(rightInner),
+					getSpeed(rightInner), 0.0);//****PVM 2/11
 			break;
 		case 3:
-			Robot.chassis.mechanumDrive(speedStrafe,
-
-			/* forward(rightArm, rightInner) */0.0,
-					rotate(rightArm, rightInner));
+			double distance3 = (rightArm + rightInner)/2.0 ;		//****PVM 2/11
+			Robot.chassis.mechanumDrive(getStrafeSpeed(distance3),//****PVM 2/11
+					getSpeed(distance3),rotate(rightArm, rightInner));//****PVM 2/11
 			break;
-		case 4:
-			Robot.chassis.mechanumDrive(-1 * speedStrafe, 0.0, 0.0);
+		case 4://narrow tote
+			Robot.chassis.mechanumDrive(-1 * getStrafeSpeed(leftInner), getSpeed(leftInner), 0.0);//****PVM 2/11
 			break;
+		case 5:	//use only for distance, invalid strafe or rotate case, probably at marginal distance
+			double distance5 = (rightArm + leftInner)/2.0;//****PVM 2/11
+		Robot.chassis.mechanumDrive(0.0, getSpeed(distance5), 0.0);//****PVM 2/11
+		break;
+			
+			
 		case 6:
+			double distance6 = (leftInner + rightInner)/2.0 ;		//****PVM 2/11
 			if (rotate(rightInner, leftInner) == 0) {
-				double averageDistance = (rightInner + leftInner) / 2;
-				if (averageDistance < 1.5 * DRIVE_TO) {
-					if (averageDistance > 0.5 * DRIVE_TO) {
+				if (distance6 < 1.5 * DRIVE_TO) {
+					if (distance6 > 0.5 * DRIVE_TO) {
 						continueCommand = false;
 					} else {
 						Robot.chassis.mechanumDrive(0.0,
-								backward(rightInner, leftInner), 0.0);
+								-1 * getSpeed(distance6), 0.0);
 					}
 
 				} else {
 					Robot.chassis.mechanumDrive(0.0,
-							forward(rightInner, leftInner), 0.0);
+							getSpeed(distance6), 0.0);
 				}
 			} else {
-				Robot.chassis.mechanumDrive(0.0,
-				/* forward(rightInner, leftInner) */0.0,
+				Robot.chassis.mechanumDrive(0.0, getSpeed(distance6),
 						rotate(rightInner, leftInner));
 			}
 			break;
 		case 7:
-			Robot.chassis.mechanumDrive(speedStrafe,
+			double distance7 = (leftInner + rightInner + rightArm)/3.0 ;//****PVM 2/11
+			Robot.chassis.mechanumDrive(getStrafeSpeed(distance7),
 
-			/* forward(rightInner, leftInner) */0.0,
+			/* forward(rightInner, leftInner) */getSpeed(distance7),
 					rotate(rightArm, leftInner));
 			break;
 		case 8:
-			Robot.chassis.mechanumDrive(-1 * speedStrafe, 0.0, 0.0);
+			double distance8 = leftArm  ;//****PVM 2/11
+			Robot.chassis.mechanumDrive(-1 * getStrafeSpeed(distance8), getSpeed(distance8), 0.0);
 			break;
+		
+		case 9:	//use only for distance, invalid strafe or rotate case, probably at marginal distance
+			double distance9 = (leftArm + rightArm)/2.0;//****PVM 2/11
+		Robot.chassis.mechanumDrive(0.0, getSpeed(distance9), 0.0);//****PVM 2/11
+		break;
+		
+		case 10:	//use only for distance, invalid strafe or rotate case, probably at marginal distance
+			double distance10 = (leftArm + rightInner)/2.0;//****PVM 2/11
+		Robot.chassis.mechanumDrive(0.0, getSpeed(distance10), 0.0);//****PVM 2/11
+		break;
+		
+		case 11:	//use only for distance, invalid strafe or rotate case, probably at marginal distance
+			double distance11 = (leftArm + rightInner + rightArm)/3.0;//****PVM 2/11
+		Robot.chassis.mechanumDrive(0.0, getSpeed(distance11), 0.0);//****PVM 2/11
+		break;
+			
+			
 		case 12:
-			Robot.chassis.mechanumDrive(-1 * speedStrafe,
+			double distance12 = (leftArm + leftInner)/2.0;//****PVM 2/11
+			Robot.chassis.mechanumDrive(-1 * getStrafeSpeed(distance12),
 
 			/*
 			 * forward(leftInner, leftArm)
-			 */0.0, rotate(leftInner, leftArm));
+			 */-1 * getSpeed(distance12), rotate(leftInner, leftArm));
 			break;
+			
+		case 13:	//use only for distance, invalid strafe or rotate case, probably at marginal distance
+			double distance13 = (leftArm + leftInner + rightArm)/3.0;
+		Robot.chassis.mechanumDrive(0.0, getSpeed(distance13), 0.0);//****PVM 2/11
+		break;	
+			
+			
+			
 		case 14:
-			Robot.chassis.mechanumDrive(-1 * speedStrafe,
+			double distance14 = (leftArm + leftInner + rightInner) / 3.0;
+			Robot.chassis.mechanumDrive(-1 * getStrafeSpeed(distance14),
 
-			/* forward(rightInner, leftInner) */0.0,
+			/* forward(rightInner, leftInner) */getSpeed(distance14),
 					rotate(rightInner, leftArm));
 			break;
 		case 15:
+			double distance15 = (leftArm + leftInner + rightArm + rightArm)/4.0;
 			if (rotate(rightArm, leftArm) == 0) {
-				double averageDistance = (rightArm + leftArm) / 2;
-				if (averageDistance < 1.5 * DRIVE_TO) {
-					if (averageDistance > 0.5 * DRIVE_TO) {
+				if (distance15 < 1.5 * DRIVE_TO) {
+					if (distance15 > 0.5 * DRIVE_TO) {
 						continueCommand = false;
 					} else {
 						Robot.chassis.mechanumDrive(0.0,
-								backward(rightArm, leftArm), 0.0);
+								-1 * getSpeed(distance15), 0.0);
 					}
 
 				} else {
 					Robot.chassis.mechanumDrive(0.0,
-							forward(rightArm, leftArm), 0.0);
+							getSpeed(distance15), 0.0);
 				}
 			} else {
 				Robot.chassis.mechanumDrive(0.0, /* forward(rightArm, leftArm) */
-						0.0, rotate(rightArm, leftArm));
+						getSpeed(distance15), rotate(rightArm, leftArm));
 			}
 		default:
-			if (lastState == 0 || lastState == 5 || lastState == 9
-					|| lastState == 10 || lastState == 11 || lastState == 13) {
-				continueCommand = false;
+			if (lastState == 0 
+			||(rightInner +leftInner) <= 2.1 * DRIVE_TO //****PVM 2/11
+			&& rightInner <= DRIVE_TO +  MIN_ROTATE_TOL
+			&& leftInner <= DRIVE_TO +  MIN_ROTATE_TOL){
+					  
+				continueCommand = false;//timer?  at DRIVE TO? ****PVM 2/11
 			} else {
-				chassisToteState = lastState;
+				//chassisToteState = lastState;//****PVM 2/11
 			}
 			break;
 		}
 
-		lastState = chassisToteState;
+		//lastState = chassisToteState;//****PVM 2/11
 		System.out.println("chassisToteState State: " + chassisToteState);
 		System.out.println("Far Right: "
 				+ RobotMap.rightArmsharpIRRange.getRangefinderDistance());
@@ -163,16 +218,17 @@ public class ToteApproachCommand extends Command {
 	// 2 values to compare
 	private double rotate(double value1, double value2) {
 		// make value1 be rightmost sensor being tested
-		if (value1 > value2 + 2) {
-			return -1 * speedRotate;
-		} else if (value2 > value1 + 2) {
-			return speedRotate;
+		double avDistance = (value1 + value2)/2.0;  //****PVM 2/11
+		if (value1 > value2 + getRotateTolerance(avDistance)) {//****PVM 2/11
+			return -1 * getRotateSpeed(avDistance);//****PVM 2/11
+		} else if (value2 > value1 + getRotateTolerance(avDistance)) {//****PVM 2/11
+			return getRotateSpeed(avDistance);//****PVM 2/11
 		} else {
 			return 0.0;
 		}
 	}
 
-	private double forward(double value1, double value2) {
+	/*private double forward(double value1, double value2) {
 		double average = (value1 + value2) / 2;
 		double speed = ((average + 6) / MAX_RANGE) * speedForward;
 		if (speed > 0.2) {
@@ -196,11 +252,32 @@ public class ToteApproachCommand extends Command {
 		} else {
 			return 0.0;
 		}
+	}*/
+	
+	private double getSpeed(double distance){	//****PVM 2/11
+		double speed = (distance - DRIVE_TO)/(MAX_RANGE - DRIVE_TO )*(MAX_SPEED - MIN_SPEED )+MIN_SPEED;
+		if((distance - DRIVE_TO) <= 0)return 0;
+		else return speed;
 	}
+	
+	private double getRotateSpeed(double distance){//****PVM 2/11
+		return (distance - DRIVE_TO)/(MAX_RANGE - DRIVE_TO )*(MAX_ROTATE - MIN_ROTATE )+MIN_ROTATE;
+	}
+	private double getRotateTolerance(double distance){//****PVM 2/11
+		return (distance - DRIVE_TO)/(MAX_RANGE - DRIVE_TO )*(MAX_ROTATE_TOL - MIN_ROTATE_TOL )+MIN_ROTATE_TOL;
+	}
+	private double getStrafeSpeed(double distance){	//****PVM 2/11
+		return (distance - DRIVE_TO)/(MAX_RANGE - DRIVE_TO )*(MAX_STRAFE - MIN_STRAFE )+MIN_STRAFE;
+	}
+	
+	
+	
+	
+
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return !continueCommand;
+		return !continueCommand || timer.get() > TIME;
 	}
 
 	// Called once after isFinished returns true
