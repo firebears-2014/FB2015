@@ -102,7 +102,7 @@ public class OI {
 		toggleStepSwitch.whenReleased(new SetStep(false));
 
 		celebrate = new JoystickButton(joystickLift, 10);
-		celebrate.whenPressed(new CelebrateCommand());
+		celebrate.whileHeld(new CelebrateCommand());
 
 		// DRIVE Joystick Initialization
 
