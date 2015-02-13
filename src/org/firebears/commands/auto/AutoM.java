@@ -1,6 +1,7 @@
 package org.firebears.commands.auto;
 
 import org.firebears.commands.drive.ForwardCommand;
+
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 
@@ -12,6 +13,7 @@ public class  AutoM extends CommandGroup {
     public AutoM() {
     	//ToDo: add in a way to stop movement depending on where the robot is
     	addSequential(new ForwardCommand(-1));
+    	System.out.println("Currently in autonomous 'AutoM'");
     }
 
     // Called just before this Command runs the first time

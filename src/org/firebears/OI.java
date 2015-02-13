@@ -55,14 +55,14 @@ public class OI {
 	public JoystickButton celebrate;
 
 	public OI() {
-		//Initialize joysticks
+		// Initialize joysticks
 		joystickDrive = new Joystick(0);
 		joystickLift = new Joystick(1);
 
 		scoringPlatformSensor = new DigitalInput(8);
-		// autoSelect1 = new DigitalInput(1);
-		// autoSelect2 = new DigitalInput(2);
-		// autoSelect3 = new DigitalInput(3);
+		autoSelect1 = new DigitalInput(11);
+		autoSelect2 = new DigitalInput(12);
+		autoSelect3 = new DigitalInput(13);
 
 		// (new JoystickButton(joystickDrive, 3)).whileHeld(new
 		// ForwardCommand(0.5));
@@ -100,20 +100,20 @@ public class OI {
 		toggleStepSwitch = new JoystickButton(joystickLift, 8);
 		toggleStepSwitch.whenPressed(new SetStep(true));
 		toggleStepSwitch.whenReleased(new SetStep(false));
-		
+
 		celebrate = new JoystickButton(joystickLift, 10);
 		celebrate.whenPressed(new CelebrateCommand());
-		
-		//DRIVE Joystick Initialization
+
+		// DRIVE Joystick Initialization
 
 		slowTriggerButton = new JoystickButton(joystickDrive, 1);
-		
+
 		resetGyro = new JoystickButton(joystickDrive, 7);
 		resetGyro.whenPressed(new GyroResetCommand());
 
 		approachTote = new JoystickButton(joystickDrive, 9);
 		approachTote.whenPressed(new ToteApproachCommand());
-		
+
 		wideCentertote = new JoystickButton(joystickDrive, 11);
 		wideCentertote.whenPressed(new WidetoteCommand());
 

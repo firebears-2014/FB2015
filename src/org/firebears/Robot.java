@@ -23,9 +23,9 @@ import org.firebears.subsystems.*;
  * directory.
  */
 public class Robot extends IterativeRobot {
-	
+
 	DriverStation ds;
-	
+
 	Command autonomousCommand;
 	Command AutoGM;
 	Command AutoM;
@@ -63,19 +63,19 @@ public class Robot extends IterativeRobot {
 		// uncomment next 3 lines to override defaults.
 		// autonomousCommand = new AutoStrafeCommand();
 		// /*
-		if (oi.autoSelect1 != null && oi.autoSelect1.get() == false) {
-			autonomousCommand = new AutoSM();
-		} else if (oi.autoSelect2 != null && oi.autoSelect2.get() == false) {
-			autonomousCommand = new AutoGM();
-		} else if (oi.autoSelect3 != null && oi.autoSelect3.get() == false) {
-			autonomousCommand = new AutoM();
+		if (oi.autoSelect1 != null && oi.autoSelect1.get() == true) {
+			autonomousCommand = new AutoSM(); // rotary switch position 4
+		} else if (oi.autoSelect2 != null && oi.autoSelect2.get() == true) {
+			autonomousCommand = new AutoGM(); // rotary switch position 5
+		} else if (oi.autoSelect3 != null && oi.autoSelect3.get() == true) {
+			autonomousCommand = new AutoM(); // rotary switch position 6
 		}// else if (OI.autoSelect4.get()==false){autonomousCommand = new
 			// AutonomousCommand();
 			// }
 			// */
 		if (RobotMap.chassis_drive_gyro != null)
 			RobotMap.chassis_drive_gyro.reset();
-		
+
 		ds = DriverStation.getInstance();
 
 	}
@@ -121,12 +121,12 @@ public class Robot extends IterativeRobot {
 		if (RobotMap.chassis_drive_gyro != null)
 			RobotMap.chassis_drive_gyro.reset();
 
-		boolean fieldOriented = (Preferences.getInstance())
-				.getBoolean(RobotMap.CHASSIS_FIELD_ORIENTED, true);
+		boolean fieldOriented = (Preferences.getInstance()).getBoolean(
+				RobotMap.CHASSIS_FIELD_ORIENTED, true);
 		System.out.println("Chassis fieldOriented = " + fieldOriented);
 		chassis.setFieldOriented(fieldOriented);
-		
-		//Go into teleop lights
+
+		// Go into teleop lights
 		lights.teleop();
 	}
 
@@ -141,16 +141,16 @@ public class Robot extends IterativeRobot {
 			SmartDashboard.putBoolean("Color Sensor Value",
 					oi.scoringPlatformSensor.get());
 		if (RobotMap.leftArmsharpIRRange != null)
-			SmartDashboard.putNumber("far left Distance from object",
+			SmartDashboard.putNumber("Far Left Distance from object",
 					RobotMap.leftArmsharpIRRange.getRangefinderDistance());
 		if (RobotMap.leftsharpIRRange != null)
-			SmartDashboard.putNumber("left side Distance from object",
+			SmartDashboard.putNumber("Left side Distance from object",
 					RobotMap.leftsharpIRRange.getRangefinderDistance());
 		if (RobotMap.rightArmsharpIRRange != null)
-			SmartDashboard.putNumber("far right Distance from object",
+			SmartDashboard.putNumber("Far Right Distance from object",
 					RobotMap.rightArmsharpIRRange.getRangefinderDistance());
 		if (RobotMap.rightsharpIRRange != null)
-			SmartDashboard.putNumber("right side Distance from object",
+			SmartDashboard.putNumber("Right side Distance from object",
 					RobotMap.rightsharpIRRange.getRangefinderDistance());
 
 		if (RobotMap.chassis_drive_gyro != null)
@@ -173,13 +173,14 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Lift 2", RobotMap.lift_tote_2);
 		SmartDashboard.putNumber("Lift 3", RobotMap.lift_tote_3);
 
-		//Run the teleop last twenty animations in the last 20 seconds
-		if( lights.isEarly && ds.getMatchTime() <= 20) {
+		// Run the teleop last twenty animations in the last 20 seconds
+		if (lights.isEarly && ds.getMatchTime() <= 20) {
 			lights.isEarly = false;
 			lights.last_twenty();
 		}
 	}
 
+	// hihihi
 	public void testInit() {
 		chassis.setFieldOriented(false);
 	}
