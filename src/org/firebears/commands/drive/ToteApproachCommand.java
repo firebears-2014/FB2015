@@ -266,26 +266,34 @@ public class ToteApproachCommand extends Command {
 	 */
 
 	private double getSpeed(double distance) { // ****PVM 2/11
-		double speed = (distance - DRIVE_TO) / (MAX_RANGE - DRIVE_TO)
+		double speed = ((distance - DRIVE_TO) / (MAX_RANGE - DRIVE_TO))
 				* (MAX_SPEED - MIN_SPEED) + MIN_SPEED;
 		if ((distance - DRIVE_TO) <= 0)
 			return 0;
 		else
 			return speed;
+
+		/*
+		 * 20 / 5 * 4
+		 * 
+		 * 5 * 4 = 20 20 / 20 = 1
+		 * 
+		 * 20 / 5 = 4 4 * 4 = 16
+		 */
 	}
 
 	private double getRotateSpeed(double distance) {// ****PVM 2/11
-		return (distance - DRIVE_TO) / (MAX_RANGE - DRIVE_TO)
+		return ((distance - DRIVE_TO) / (MAX_RANGE - DRIVE_TO))
 				* (MAX_ROTATE - MIN_ROTATE) + MIN_ROTATE;
 	}
 
 	private double getRotateTolerance(double distance) {// ****PVM 2/11
-		return (distance - DRIVE_TO) / (MAX_RANGE - DRIVE_TO)
+		return ((distance - DRIVE_TO) / (MAX_RANGE - DRIVE_TO))
 				* (MAX_ROTATE_TOL - MIN_ROTATE_TOL) + MIN_ROTATE_TOL;
 	}
 
 	private double getStrafeSpeed(double distance) { // ****PVM 2/11
-		return (distance - DRIVE_TO) / (MAX_RANGE - DRIVE_TO)
+		return ((distance - DRIVE_TO) / (MAX_RANGE - DRIVE_TO))
 				* (MAX_STRAFE - MIN_STRAFE) + MIN_STRAFE;
 	}
 
