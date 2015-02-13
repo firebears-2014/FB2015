@@ -1,5 +1,6 @@
 package org.firebears.subsystems;
 
+import org.firebears.Robot;
 import org.firebears.RobotMap;
 import org.firebears.commands.drive.DriveCommand;
 import org.firebears.sensors.sharpIRRange;
@@ -64,6 +65,7 @@ public class Chassis extends Subsystem {
 		// back_right.set((strafe - forward - rotation ));
 
 		robot_drive.mecanumDrive_Cartesian(strafe, forward, rotation, angle);
+		Robot.lights.updateUnderglow(forward);
 	}
 
 	public void initDefaultCommand() {

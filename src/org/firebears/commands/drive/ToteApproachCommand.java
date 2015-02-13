@@ -139,7 +139,7 @@ public class ToteApproachCommand extends Command {
 					|| lastState == 10 || lastState == 11 || lastState == 13) {
 				continueCommand = false;
 			} else {
-				chassisToteState = lastState;
+				// chassisToteState = lastState;
 			}
 			break;
 		}

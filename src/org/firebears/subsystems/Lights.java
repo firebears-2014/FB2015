@@ -28,6 +28,15 @@ public class Lights extends Subsystem {
 	public static final String ANIM_CRAZY = "CRAZY";
 	public static final String ANIM_BINARY = "BIN_ANIM";
 	public static final String ANIM_BULB = "BULB";
+	public static final String ANIM_CATERPILLAR = "ANIM_CATERPILLAR";
+	
+	//Color Schemes
+	public static final int CS_RED = 0;
+	public static final int CS_BLUE = 1;
+	public static final int CS_YELLOW = 2;
+	public static final int CS_RED_YELLOW = 3;
+	public static final int CS_RED_WHITE = 4;
+	public static final int CS_WHITE = 5;
 	
 	//TODO: Change #s to the proper id's and add undefined light strips
 
@@ -41,11 +50,22 @@ public class Lights extends Subsystem {
 	
 	public Lights() {
 		table = NetworkTable.getTable("lights");
-		setStrip(STRIP_LIFT1, ANIM_FIRE);
-		setStrip(STRIP_LIFT2, ANIM_FIRE);
-		setStrip(STRIP_BOX, ANIM_FIRE);
-		setStrip(STRIP_UNDERGLOW, ANIM_FIRE);
-		setStrip(STRIP_CELEBRATE, ANIM_FIRE);
+		disabled();
+		setColor(STRIP_LIFT1, CS_RED);
+		setColor(STRIP_LIFT2, CS_RED);
+		setColor(STRIP_BOX, CS_RED);
+		setColor(STRIP_UNDERGLOW, CS_RED);
+		setColor(STRIP_CELEBRATE, CS_RED);
+		setLiftHeight(STRIP_LIFT1, 0);
+		setLiftHeight(STRIP_LIFT2, 0);
+		setLiftHeight(STRIP_BOX, 0);
+		setLiftHeight(STRIP_UNDERGLOW, 0);
+		setLiftHeight(STRIP_CELEBRATE, 0);
+		setBg(STRIP_LIFT1, 64, ANIM_FIRE);
+		setBg(STRIP_LIFT2, 64, ANIM_FIRE);
+		setBg(STRIP_BOX, 64, ANIM_FIRE);
+		setBg(STRIP_UNDERGLOW, 64, ANIM_FIRE);
+		setBg(STRIP_CELEBRATE, 64, ANIM_FIRE);
 	}
 	
 	//Have no default command - would overload message bus.
@@ -57,6 +77,15 @@ public class Lights extends Subsystem {
     
     private void setLiftHeight(String which, double height) {
         table.putNumber(which + ".value", height);
+    }
+    
+    private void setColor(String which, int height) {
+    	table.putNumber(which + ".color", (double) height);
+    }
+    
+    private void setBg(String which, int fade, String anim) {
+        table.putString(which + ".bg", anim);
+    	table.putNumber(which + ".dim", (double) fade);
     }
     
     public void updateLiftHeight() {
@@ -75,6 +104,10 @@ public class Lights extends Subsystem {
 //       	Robot.lights.setLiftHeight(Lights.LIFT_LIGHTS_RIGHT, Robot.lift.getLiftHeight());
     }
     
+    public void updateUnderglow(double forward) {
+    	setLiftHeight(STRIP_UNDERGLOW, forward);
+    }
+    
     //Called from Robot.disabledInit()
     public void disabled() {
     	setStrip(STRIP_LIFT1, ANIM_FIRE);
@@ -84,27 +117,38 @@ public class Lights extends Subsystem {
     	setStrip(STRIP_CELEBRATE, ANIM_FIRE);
     }
     
-    public void autonomous() {
+    public void autonomous(boolean red) {
     	setStrip(STRIP_LIFT1, ANIM_BINARY);
     	setStrip(STRIP_LIFT2, ANIM_BINARY);
     	setStrip(STRIP_BOX, ANIM_PULSE);
-//    	setStrip(STRIP_UNDERGLOW, x); //TODO: NYI catapiller
-//    	setStrip(STRIP_CELEBRATE, x); //TODO: NYI alliance color
-    }
+    	setStrip(STRIP_UNDERGLOW, ANIM_CATERPILLAR);
+    	setStrip(STRIP_CELEBRATE, ANIM_PULSE);
+    	if(red) {
+    		setColor(STRIP_CELEBRATE, CS_RED);
+    	}else{
+    		setColor(STRIP_CELEBRATE, CS_BLUE);	
+    	}
+	}
     
     public void teleop() {
     	setStrip(STRIP_LIFT1, ANIM_LIFT);
     	setStrip(STRIP_LIFT2, ANIM_LIFT);
-//    	setStrip(STRIP_BOX, ANIM_PULSE); //TODO: nyi Pulsing red/yellow
-//    	setStrip(STRIP_UNDERGLOW, x); //TODO: catapiller yellow
-//    	setStrip(STRIP_CELEBRATE, ANIM_PULSE); //TODO: Pulsing red/yellow
+    	setStrip(STRIP_BOX, ANIM_PULSE);
+    		setColor(STRIP_BOX, CS_RED_YELLOW);
+    	setStrip(STRIP_UNDERGLOW, ANIM_CATERPILLAR);
+			setColor(STRIP_UNDERGLOW, CS_YELLOW);
+		setStrip(STRIP_CELEBRATE, ANIM_PULSE);
+    		setColor(STRIP_CELEBRATE, CS_RED_YELLOW);
     }
     
     public void last_twenty() {
-    	//No change required for lift lights
-//    	setStrip(STRIP_BOX, ANIM_PULSE); //NYI: Pulsing red white
-//    	setStrip(STRIP_UNDERGLOW, x); //Caterpillar white
-//    	setStrip(STRIP_CELEBRATE, ANIM_PULSE);//NYI: Pulsing red white
+		//No change required for lift lights
+		setStrip(STRIP_BOX, ANIM_PULSE);
+			setColor(STRIP_BOX, CS_RED_WHITE);
+		setStrip(STRIP_UNDERGLOW, ANIM_CATERPILLAR);
+			setColor(STRIP_UNDERGLOW, CS_WHITE);
+		setStrip(STRIP_CELEBRATE, ANIM_PULSE);
+			setColor(STRIP_CELEBRATE, CS_RED_WHITE);
     }
     
     public void celebrate() {
