@@ -29,6 +29,7 @@ public class Lights extends Subsystem {
 	public static final String ANIM_BINARY = "BIN_ANIM";
 	public static final String ANIM_BULB = "BULB";
 	public static final String ANIM_CATERPILLAR = "ANIM_CATERPILLAR";
+	public static final String ANIM_SPARK = "SPARK";
 	
 	//Color Schemes
 	public static final int CS_RED = 0;
@@ -56,11 +57,11 @@ public class Lights extends Subsystem {
 		setColor(STRIP_BOX, CS_RED);
 		setColor(STRIP_UNDERGLOW, CS_RED);
 		setColor(STRIP_CELEBRATE, CS_RED);
-		setLiftHeight(STRIP_LIFT1, 0);
-		setLiftHeight(STRIP_LIFT2, 0);
-		setLiftHeight(STRIP_BOX, 0);
-		setLiftHeight(STRIP_UNDERGLOW, 0);
-		setLiftHeight(STRIP_CELEBRATE, 0);
+		setValue(STRIP_LIFT1, 0);
+		setValue(STRIP_LIFT2, 0);
+		setValue(STRIP_BOX, 0);
+		setValue(STRIP_UNDERGLOW, 0);
+		setValue(STRIP_CELEBRATE, 0);
 		setBg(STRIP_LIFT1, 64, ANIM_FIRE);
 		setBg(STRIP_LIFT2, 64, ANIM_FIRE);
 		setBg(STRIP_BOX, 64, ANIM_FIRE);
@@ -75,7 +76,7 @@ public class Lights extends Subsystem {
         table.putString(which, anim);
     }
     
-    private void setLiftHeight(String which, double height) {
+    private void setValue(String which, double height) {
         table.putNumber(which + ".value", height);
     }
     
@@ -94,8 +95,8 @@ public class Lights extends Subsystem {
         	new_value = (double)Math.round(new_value * 60);
         	
         	if(new_value != old_value) {
-    			setLiftHeight(STRIP_LIFT1, new_value);
-    			setLiftHeight(STRIP_LIFT2, new_value);
+    			setValue(STRIP_LIFT1, new_value);
+    			setValue(STRIP_LIFT2, new_value);
         	}
         	
         	old_value = new_value;
@@ -105,7 +106,7 @@ public class Lights extends Subsystem {
     }
     
     public void updateUnderglow(double forward) {
-    	setLiftHeight(STRIP_UNDERGLOW, forward);
+    	setValue(STRIP_UNDERGLOW, forward);
     }
     
     //Called from Robot.disabledInit()
@@ -157,5 +158,12 @@ public class Lights extends Subsystem {
     	setStrip(STRIP_BOX, ANIM_CRAZY);
     	setStrip(STRIP_UNDERGLOW, ANIM_CRAZY);
     	setStrip(STRIP_CELEBRATE, ANIM_CRAZY);
+    	
+    	double crazyValue = 100.0;
+    	setValue(STRIP_LIFT1, crazyValue);
+    	setValue(STRIP_LIFT2, crazyValue);
+    	setValue(STRIP_BOX, crazyValue);
+    	setValue(STRIP_UNDERGLOW, crazyValue);
+    	setValue(STRIP_CELEBRATE, crazyValue);
     }
 }

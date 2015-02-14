@@ -6,8 +6,7 @@ import org.firebears.commands.drive.StrafeCommand;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
- * Autonomous command:
- * 	moves sideways, forward then back.
+ * Autonomous command: moves sideways, forward then back.
  */
 public class  AutoStrafeCommand extends CommandGroup {
 
@@ -19,6 +18,8 @@ public class  AutoStrafeCommand extends CommandGroup {
     	addSequential(new StrafeCommand(-.75), 1.0);
     	addSequential(new ForwardCommand(.5), 1.0);
     	addSequential(new StrafeCommand(.75), 1.0);
+    	
+		System.out.println("Currently in autonomous 'AutoStrafeCommand'");
     }
 
 }

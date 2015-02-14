@@ -18,6 +18,7 @@ public class  AutoGM extends CommandGroup {
     	addSequential(new GrabberCommand(true));
     	//todo: add in a way to stop movement depending on where the robot is
     	addSequential(new ForwardCommand(-1), 2.0);
+    	System.out.println("Currently in autonomous 'AutoGM'");
     }
 
 }
