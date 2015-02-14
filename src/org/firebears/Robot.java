@@ -46,6 +46,7 @@ public class Robot extends IterativeRobot {
 	 * used for any initialization code.
 	 */
 	public void robotInit() {
+		System.out.println("Starting robot code...");
 		RobotMap.init();
 
 		chassis = new Chassis();
@@ -65,10 +66,16 @@ public class Robot extends IterativeRobot {
 		// /*
 		if (oi.autoSelect1 != null && oi.autoSelect1.get() == true) {
 			autonomousCommand = new AutoSM(); // rotary switch position 4
+			System.out.println("AUTONOMOUS IS Auto SM:");
+			System.out.println("Does: Stacks up the 3 totes in the auto zone");
 		} else if (oi.autoSelect2 != null && oi.autoSelect2.get() == true) {
 			autonomousCommand = new AutoGM(); // rotary switch position 5
+			System.out.println("AUTONOMOUS IS Auto GM:");
+			System.out.println("Does:Grabs tote and brings it into auto zone ");
 		} else if (oi.autoSelect3 != null && oi.autoSelect3.get() == true) {
 			autonomousCommand = new AutoM(); // rotary switch position 6
+			System.out.println("AUTONOMOUS IS Auto M:");
+			System.out.println("Does: pushes a tote into the auto zone");
 		}// else if (OI.autoSelect4.get()==false){autonomousCommand = new
 			// AutonomousCommand();
 			// }
@@ -77,7 +84,7 @@ public class Robot extends IterativeRobot {
 			RobotMap.chassis_drive_gyro.reset();
 
 		ds = DriverStation.getInstance();
-
+		System.out.println("Started Robot Code!");
 	}
 
 	/**

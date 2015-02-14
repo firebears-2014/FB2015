@@ -10,14 +10,14 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 
 /**
- * Autonomous command currently does nothing, will do ____
+ * Autonomous command: Grabs tote and brings it into auto zone
  */
 public class  AutoGM extends CommandGroup {
 
     public AutoGM() {
-    	addSequential(new GrabberCommand(true));
+    	addSequential(new GrabberCommand(true)); //Grab Tote
     	//todo: add in a way to stop movement depending on where the robot is
-    	addSequential(new ForwardCommand(-1), 2.0);
+    	addSequential(new ForwardCommand(1), 2.0);
     	System.out.println("Currently in autonomous 'AutoGM'");
     }
 

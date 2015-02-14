@@ -9,6 +9,8 @@ import org.firebears.commands.lift.SetHeightCommand;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
 /**
+ * Autonomous Command: Stacks up the 3 totes in the auto zone
+ * 
  * Dumb stack and move auto, needs interrupts
  */
 public class AutoSM extends CommandGroup {

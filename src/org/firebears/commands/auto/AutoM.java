@@ -6,13 +6,13 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 
 
 /**
- * Autonomous command currently does nothing, will do ____
+ * Autonomous command : pushes a tote into the auto zone
  */
 public class  AutoM extends CommandGroup {
 
     public AutoM() {
     	//todo: add in a way to stop movement depending on where the robot is
-    	addSequential(new ForwardCommand(-1), 1.0);
+    	addSequential(new ForwardCommand(1), 1.0);
     	System.out.println("Currently in autonomous 'AutoM'");
     }
 
