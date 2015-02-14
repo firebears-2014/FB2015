@@ -19,7 +19,7 @@ public class AutoSM extends CommandGroup {
 		// tote 1 logic
 		addSequential(new GrabberCommand(true));
 		addParallel(new SetHeightCommand("Lift_Tote_2"));
-		addParallel(new StrafeCommand(1)); // add an interrupt
+		addParallel(new StrafeCommand(1), 1.0); // change interrupt?
 		addParallel(new Totecenter());
 		// tote 2 logic
 		addSequential(new SetHeightCommand("Lift_Tote_1"));
@@ -27,7 +27,7 @@ public class AutoSM extends CommandGroup {
 		addParallel(new SetHeightCommand("Lift_Tote_0"));
 		addSequential(new GrabberCommand(true));
 		addParallel(new SetHeightCommand("Lift_Tote_2"));
-		addParallel(new StrafeCommand(1)); // add an interrupt
+		addParallel(new StrafeCommand(1), 1.0); // change interrupt
 		addParallel(new Totecenter());
 		// tote 3 logic
 		addSequential(new SetHeightCommand("Lift_Tote_1"));
@@ -36,10 +36,10 @@ public class AutoSM extends CommandGroup {
 		addSequential(new GrabberCommand(true));
 		addSequential(new SetHeightCommand("Lift_Tote_1"));
 		// scoring logic
-		addSequential(new ForwardCommand(-1)); // add an interrupt
+		addSequential(new ForwardCommand(-1), 1.0); // change interrupt
 		addSequential(new SetHeightCommand("Lift_Tote_0"));
 		addSequential(new GrabberCommand(false));
-		addSequential(new ForwardCommand(-.1)); // add an interrupt
+		addSequential(new ForwardCommand(-.1), 1.0); // change interrupt
 		System.out.println("Currently in autonomous 'AutoSM'");
 	}
 
