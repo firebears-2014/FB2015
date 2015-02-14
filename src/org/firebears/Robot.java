@@ -54,6 +54,9 @@ public class Robot extends IterativeRobot {
 		grabber = new Grabber();
 		lights = new Lights();
 		vision = new Vision();
+		
+		chassis.setReversed(RobotMap.chassis_drive_type_tal);
+		
 		// OI must be constructed after subsystems. If the OI creates Commands
 		// (which it very likely will), subsystems are not guaranteed to be
 		// constructed yet. Thus, their requires() statements may grab null
