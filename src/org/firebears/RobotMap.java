@@ -231,7 +231,7 @@ public class RobotMap {
 
 		grabbercompressor = new Compressor(0);
 
-		grabbersolenoid_left_open = new Solenoid(2);
+		grabbersolenoid_left_open = new Solenoid(1);
 		LiveWindow.addActuator("Grabber", "solenoid_left_open",
 				grabbersolenoid_left_open);
 
@@ -243,7 +243,7 @@ public class RobotMap {
 		LiveWindow.addActuator("Grabber", "solenoid_right_open",
 				grabbersolenoid_right_open);
 
-		grabbersolenoid_right_close = new Solenoid(1);
+		grabbersolenoid_right_close = new Solenoid(2);
 		LiveWindow.addActuator("Grabber", "solenoid_right_close",
 				grabbersolenoid_right_close);
 

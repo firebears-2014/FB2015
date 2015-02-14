@@ -26,6 +26,7 @@ public class Chassis extends Subsystem {
 	SpeedController back_left = RobotMap.chassis_back_left_controller;
 	SpeedController front_right = RobotMap.chassis_front_right_controller;
 	SpeedController back_right = RobotMap.chassis_back_right_controller;
+	boolean reversed = true;
 
 	boolean fieldOriented = false;
 
@@ -66,7 +67,9 @@ public class Chassis extends Subsystem {
 		// back_left.set(strafe - forward + rotation);
 		// back_right.set((strafe - forward - rotation ));
 
-		robot_drive.mecanumDrive_Cartesian(strafe, forward, rotation, angle);
+		robot_drive.mecanumDrive_Cartesian(strafe, 
+				( reversed ? -1 : 1) * forward, 
+				rotation, angle);
 		Robot.lights.updateUnderglow(forward);
 	}
 
@@ -91,5 +94,12 @@ public class Chassis extends Subsystem {
 
 	public boolean getFieldOriented() {
 		return fieldOriented;
+	}
+	
+	/**
+	 * @param b whether the direction should be reversed.
+	 */
+	public void setReversed(boolean b) {
+		reversed = b;
 	}
 }
