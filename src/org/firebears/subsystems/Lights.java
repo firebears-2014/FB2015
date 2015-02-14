@@ -143,6 +143,7 @@ public class Lights extends Subsystem {
     }
     
     public void last_twenty() {
+    	System.out.println("LAST TWENTY");
 		//No change required for lift lights
 		setStrip(STRIP_BOX, ANIM_PULSE);
 			setColor(STRIP_BOX, CS_RED_WHITE);

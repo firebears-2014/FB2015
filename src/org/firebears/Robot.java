@@ -65,7 +65,8 @@ public class Robot extends IterativeRobot {
 		// autonomousCommand = new AutoStrafeCommand();
 		// /*
 		if (oi.autoSelect1 != null && oi.autoSelect1.get() == true) {
-			autonomousCommand = new AutoSM(); // rotary switch position 4
+			autonomousCommand = new AutoM();
+			//autonomousCommand = new AutoSM(); // rotary switch position 4
 			System.out.println("AUTONOMOUS IS Auto SM:");
 			System.out.println("Does: Stacks up the 3 totes in the auto zone");
 		} else if (oi.autoSelect2 != null && oi.autoSelect2.get() == true) {
