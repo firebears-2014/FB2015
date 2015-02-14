@@ -20,7 +20,7 @@ public class SetStep extends Command {
 	// Called just before this Command runs the first time
 	protected void initialize() {
 		if (Pressed) {
-			Robot.lift.addStep = 6.0;
+			Robot.lift.addStep = 8.0;
 		} else {
 			Robot.lift.addStep = 0.0;
 		}

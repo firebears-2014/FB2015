@@ -67,23 +67,27 @@ public class Robot extends IterativeRobot {
 		// uncomment next 3 lines to override defaults.
 		// autonomousCommand = new AutoStrafeCommand();
 		// /*
-		if (oi.autoSelect1 != null && oi.autoSelect1.get() == true) {
+		/*if (oi.autoSelect1 != null && oi.autoSelect1.get() == true) {
 			autonomousCommand = new AutoM();
-			//autonomousCommand = new AutoSM(); // rotary switch position 4
-			System.out.println("AUTONOMOUS IS Auto SM:");
-			System.out.println("Does: Stacks up the 3 totes in the auto zone");
+			System.out.println("AUTONOMOUS IS Auto M:");
+			System.out.println("Does: moves into the auto zone");
 		} else if (oi.autoSelect2 != null && oi.autoSelect2.get() == true) {
 			autonomousCommand = new AutoGM(); // rotary switch position 5
 			System.out.println("AUTONOMOUS IS Auto GM:");
 			System.out.println("Does:Grabs tote and brings it into auto zone ");
 		} else if (oi.autoSelect3 != null && oi.autoSelect3.get() == true) {
-			autonomousCommand = new AutoM(); // rotary switch position 6
+			autonomousCommand = new AutoSM(); // rotary switch position 6
 			System.out.println("AUTONOMOUS IS Auto M:");
 			System.out.println("Does: pushes a tote into the auto zone");
 		}// else if (OI.autoSelect4.get()==false){autonomousCommand = new
 			// AutonomousCommand();
 			// }
-			// */
+			 */
+		
+		autonomousCommand = new AutoM();
+		System.out.println("AUTONOMOUS IS Auto M:");
+		System.out.println("Does: moves into the auto zone");
+		
 		if (RobotMap.chassis_drive_gyro != null)
 			RobotMap.chassis_drive_gyro.reset();
 

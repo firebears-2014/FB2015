@@ -98,8 +98,8 @@ public class OI {
 		closeGrabbers.whenPressed(new GrabberCommand(false));
 
 		toggleStepSwitch = new JoystickButton(joystickLift, 8);
-		toggleStepSwitch.whenPressed(new SetStep(true));
-		toggleStepSwitch.whenReleased(new SetStep(false));
+		toggleStepSwitch.whenPressed(new SetStep(false));
+		toggleStepSwitch.whenReleased(new SetStep(true));
 
 		celebrate = new JoystickButton(joystickLift, 10);
 		celebrate.whileHeld(new CelebrateCommand());
@@ -112,13 +112,13 @@ public class OI {
 		resetGyro.whenPressed(new GyroResetCommand());
 
 		approachTote = new JoystickButton(joystickDrive, 9);
-		approachTote.whenPressed(new ToteApproachCommand());
+		//approachTote.whenPressed(new ToteApproachCommand());
 
 		wideCentertote = new JoystickButton(joystickDrive, 11);
-		wideCentertote.whenPressed(new WidetoteCommand());
+		//wideCentertote.whenPressed(new WidetoteCommand());
 
 		centerTote = new JoystickButton(joystickDrive, 12);
-		centerTote.whenPressed(new Totecenter());
+		//centerTote.whenPressed(new Totecenter());
 
 		// SmartDashboard Buttons
 		// SmartDashboard.putData("Autonomous Command", new
