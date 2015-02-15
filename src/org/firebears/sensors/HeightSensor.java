@@ -19,10 +19,8 @@ public class HeightSensor {
 	// public final double inchesPerVolt = 7.853975/0.5;// 15.70795 inches per
 	// volt PVM 1/31/15
 	public final double inchesPerVolt = 82.7586;
-	public double Zero;
 
 	public HeightSensor(AnalogPotentiometer p) {
-		Zero = RobotMap.lift_zero_ref;
 		pot = p;
 		if (pot == null) {
 			System.err.println("WARNING! Lift potentiometer is null");
@@ -38,17 +36,7 @@ public class HeightSensor {
 		if (pot == null) {
 			return 0.0;
 		}
-		return (pot.get() - Zero) * inchesPerVolt;
-	}
-
-	public double getZero() {
-		return Zero;
-	}
-
-	public void setZero() {
-		new PreferenceSetup(RobotMap.LIFT_ZERO_REF);
-
-		Zero = RobotMap.lift_zero_ref;
+		return (pot.get() - RobotMap.lift_zero_ref) * inchesPerVolt;
 	}
 
 }
