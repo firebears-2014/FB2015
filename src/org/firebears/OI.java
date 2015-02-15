@@ -30,11 +30,7 @@ public class OI {
 
 	public Joystick joystickDrive;
 	public Joystick joystickLift;
-	public DigitalInput scoringPlatformSensor;
 	public DigitalInput ContainerSensor;
-	public DigitalInput autoSelect1;
-	public DigitalInput autoSelect2;
-	public DigitalInput autoSelect3;
 	// only three, unless we get a new rotary switch
 	// public DigitalInput autoSelect4;
 
@@ -58,11 +54,6 @@ public class OI {
 		// Initialize joysticks
 		joystickDrive = new Joystick(0);
 		joystickLift = new Joystick(1);
-
-		scoringPlatformSensor = new DigitalInput(8);
-		autoSelect1 = new DigitalInput(11);
-		autoSelect2 = new DigitalInput(12);
-		autoSelect3 = new DigitalInput(13);
 
 		// (new JoystickButton(joystickDrive, 3)).whileHeld(new
 		// ForwardCommand(0.5));
@@ -98,8 +89,8 @@ public class OI {
 		closeGrabbers.whenPressed(new GrabberCommand(false));
 
 		toggleStepSwitch = new JoystickButton(joystickLift, 8);
-		toggleStepSwitch.whenPressed(new SetStep(true));
-		toggleStepSwitch.whenReleased(new SetStep(false));
+		toggleStepSwitch.whenPressed(new SetStep(false));
+		toggleStepSwitch.whenReleased(new SetStep(true));
 
 		celebrate = new JoystickButton(joystickLift, 10);
 		celebrate.whileHeld(new CelebrateCommand());
@@ -125,6 +116,8 @@ public class OI {
 		// AutonomousCommand());
 
 		if (RobotMap.DEBUG) {
+			SmartDashboard.putData("lift to 0", new SetHeightCommand(
+					Robot.lift.LIFT_0_HEIGHT));
 			SmartDashboard.putData("lift to 1", new SetHeightCommand(
 					Robot.lift.LIFT_1_HEIGHT));
 			SmartDashboard.putData("lift to 2", new SetHeightCommand(

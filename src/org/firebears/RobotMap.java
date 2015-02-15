@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.CANJaguar;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
@@ -69,6 +70,10 @@ public class RobotMap {
 	public static AnalogPotentiometer liftpot;
 	public static SpeedController liftJag;
 	public static Compressor grabbercompressor;
+	public static DigitalInput autoSelect1;
+	public static DigitalInput autoSelect2;
+	public static DigitalInput autoSelect3;
+	public static DigitalInput scoringPlatformSensor;
 
 	public static AnalogInput analogInput;
 
@@ -231,7 +236,7 @@ public class RobotMap {
 
 		grabbercompressor = new Compressor(0);
 
-		grabbersolenoid_left_open = new Solenoid(2);
+		grabbersolenoid_left_open = new Solenoid(1);
 		LiveWindow.addActuator("Grabber", "solenoid_left_open",
 				grabbersolenoid_left_open);
 
@@ -243,12 +248,18 @@ public class RobotMap {
 		LiveWindow.addActuator("Grabber", "solenoid_right_open",
 				grabbersolenoid_right_open);
 
-		grabbersolenoid_right_close = new Solenoid(1);
+		grabbersolenoid_right_close = new Solenoid(2);
 		LiveWindow.addActuator("Grabber", "solenoid_right_close",
 				grabbersolenoid_right_close);
 
 		accelerometer = new BuiltInAccelerometer();
 		LiveWindow.addSensor("Accelerometer", "accelerometer", accelerometer);
+
+		scoringPlatformSensor = new DigitalInput(8);
+
+		autoSelect1 = new DigitalInput(11);
+		autoSelect2 = new DigitalInput(12);
+		autoSelect3 = new DigitalInput(13);
 
 		rightArmsharpIRRange = new org.firebears.sensors.sharpIRRange(5);
 		rightsharpIRRange = new org.firebears.sensors.sharpIRRange(3);

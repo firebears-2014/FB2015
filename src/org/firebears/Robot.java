@@ -64,15 +64,17 @@ public class Robot extends IterativeRobot {
 		// uncomment next 3 lines to override defaults.
 		// autonomousCommand = new AutoStrafeCommand();
 		// /*
-		if (oi.autoSelect1 != null && oi.autoSelect1.get() == true) {
+		if (RobotMap.autoSelect1 != null && RobotMap.autoSelect1.get() == true) {
 			autonomousCommand = new AutoSM(); // rotary switch position 4
 			System.out.println("AUTONOMOUS IS Auto SM:");
 			System.out.println("Does: Stacks up the 3 totes in the auto zone");
-		} else if (oi.autoSelect2 != null && oi.autoSelect2.get() == true) {
+		} else if (RobotMap.autoSelect2 != null
+				&& RobotMap.autoSelect2.get() == true) {
 			autonomousCommand = new AutoGM(); // rotary switch position 5
 			System.out.println("AUTONOMOUS IS Auto GM:");
 			System.out.println("Does:Grabs tote and brings it into auto zone ");
-		} else if (oi.autoSelect3 != null && oi.autoSelect3.get() == true) {
+		} else if (RobotMap.autoSelect3 != null
+				&& RobotMap.autoSelect3.get() == true) {
 			autonomousCommand = new AutoM(); // rotary switch position 6
 			System.out.println("AUTONOMOUS IS Auto M:");
 			System.out.println("Does: pushes a tote into the auto zone");
@@ -149,9 +151,9 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 
-		if (oi.scoringPlatformSensor != null)
+		if (RobotMap.scoringPlatformSensor != null)
 			SmartDashboard.putBoolean("Color Sensor Value",
-					oi.scoringPlatformSensor.get());
+					RobotMap.scoringPlatformSensor.get());
 		if (RobotMap.leftArmsharpIRRange != null)
 			SmartDashboard.putNumber("Far Left Distance from object",
 					RobotMap.leftArmsharpIRRange.getRangefinderDistance());
