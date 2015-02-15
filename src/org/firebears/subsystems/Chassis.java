@@ -69,15 +69,15 @@ public class Chassis extends Subsystem {
 		// back_left.set(strafe - forward + rotation);
 		// back_right.set((strafe - forward - rotation ));
 
-		double speed = ((CANTalon) front_left).getSpeed();
-		double analogVelocity = ((CANTalon) front_left).getAnalogInVelocity();
-		double encVelocity = ((CANTalon) front_left).getEncVelocity();
+//		double speed = ((CANTalon) front_left).getSpeed();
+//		double analogVelocity = ((CANTalon) front_left).getAnalogInVelocity();
+//		double encVelocity = ((CANTalon) front_left).getEncVelocity();
 
-		SmartDashboard.putNumber("frontLeft Talon .getSpeed", speed);
-		SmartDashboard.putNumber("frontLeft Talon .getAnalogInVelocity",
-				analogVelocity);
-		SmartDashboard
-				.putNumber("frontLeft Talon .getEncVelocity", encVelocity);
+//		SmartDashboard.putNumber("frontLeft Talon .getSpeed", speed);
+//		SmartDashboard.putNumber("frontLeft Talon .getAnalogInVelocity",
+//				analogVelocity);
+//		SmartDashboard
+//				.putNumber("frontLeft Talon .getEncVelocity", encVelocity);
 
 		robot_drive.mecanumDrive_Cartesian(strafe, (reversed ? -1 : 1)
 				* forward, rotation, (reversed ? -1 : 1) * angle);
