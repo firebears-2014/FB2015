@@ -58,12 +58,10 @@ public class RobotMap {
 	public static SpeedController chassis_front_right_controller;
 	public static SpeedController chassis_back_right_controller;
 
-	/*
-	 * public static Encoder chassis_front_left_encoder; public static Encoder
-	 * chassis_back_left_encoder; public static Encoder
-	 * chassis_front_right_encoder; public static Encoder
-	 * chassis_back_right_encoder;
-	 */
+	// public static Encoder chassis_front_left_encoder;
+	// public static Encoder chassis_back_left_encoder;
+	// public static Encoder chassis_front_right_encoder;
+	// public static Encoder chassis_back_right_encoder;
 
 	public static RobotDrive chassis_robot_drive;
 	public static Gyro chassis_drive_gyro;
@@ -103,13 +101,6 @@ public class RobotMap {
 		if (!preferences.containsKey(CHASSIS_FIELD_ORIENTED)) {
 			preferences.putBoolean(CHASSIS_FIELD_ORIENTED, true);
 		}
-
-		// Talon code
-		/*
-		 * chassis_front_left = new CANTalon(5); chassis_back_left = new
-		 * CANTalon(3); chassis_front_right = new CANTalon(4);
-		 * chassis_back_right = new CANTalon(2);
-		 */
 
 		// Talon Code
 		if (chassis_drive_type_tal) {

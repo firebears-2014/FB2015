@@ -103,13 +103,13 @@ public class OI {
 		resetGyro.whenPressed(new GyroResetCommand());
 
 		approachTote = new JoystickButton(joystickDrive, 9);
-		approachTote.whenPressed(new ToteApproachCommand());
+		//approachTote.whenPressed(new ToteApproachCommand());
 
 		wideCentertote = new JoystickButton(joystickDrive, 11);
-		wideCentertote.whenPressed(new WidetoteCommand());
+		//wideCentertote.whenPressed(new WidetoteCommand());
 
 		centerTote = new JoystickButton(joystickDrive, 12);
-		centerTote.whenPressed(new Totecenter());
+		//centerTote.whenPressed(new Totecenter());
 
 		// SmartDashboard Buttons
 		// SmartDashboard.putData("Autonomous Command", new
@@ -137,21 +137,18 @@ public class OI {
 			SmartDashboard.putData("Enable Lift Motor", new SetLiftMotor(true));
 			SmartDashboard.putData("Disable Lift Motor",
 					new SetLiftMotor(false));
-
-			SmartDashboard.putData("Set Zero", new PreferenceSetup(
-					RobotMap.LIFT_ZERO_REF));
-			SmartDashboard.putData("Set Tote Zero Pickup", new PreferenceSetup(
-					RobotMap.LIFT_TOTE_PICKUP));
-			SmartDashboard.putData("Set Tote One", new PreferenceSetup(
-					RobotMap.LIFT_TOTE_1));
-			SmartDashboard.putData("Set Tote Two", new PreferenceSetup(
-					RobotMap.LIFT_TOTE_2));
-			SmartDashboard.putData("Set Tote Three", new PreferenceSetup(
-					RobotMap.LIFT_TOTE_3));
-
-			// SmartDashboard.putData("Change Lights", new LightChangeCommand(0,
-			// Robot.lights.RANDOM_ANIM));
 		}
+		SmartDashboard.putData("Set Zero", new PreferenceSetup(
+				RobotMap.LIFT_ZERO_REF));
+		SmartDashboard.putData("Set Tote Zero Pickup", new PreferenceSetup(
+				RobotMap.LIFT_TOTE_PICKUP));
+		SmartDashboard.putData("Set Tote One", new PreferenceSetup(
+				RobotMap.LIFT_TOTE_1));
+		SmartDashboard.putData("Set Tote Two", new PreferenceSetup(
+				RobotMap.LIFT_TOTE_2));
+		SmartDashboard.putData("Set Tote Three", new PreferenceSetup(
+				RobotMap.LIFT_TOTE_3));
+
 	}
 
 	public Joystick getJoystickZero() {

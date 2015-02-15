@@ -9,16 +9,19 @@ import edu.wpi.first.wpilibj.command.Command;
  * 	@close_grabbers: whether to close the grabber or open it.
  */
 public class GrabberCommand extends Command {
+	
+	boolean closeGrabber = true;
 
 	public GrabberCommand(boolean close_grabbers) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		requires(Robot.grabber);
-		Robot.grabber.setGrabbers(close_grabbers);
+		closeGrabber = close_grabbers;
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+		Robot.grabber.setGrabbers(closeGrabber);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
