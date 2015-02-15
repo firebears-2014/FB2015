@@ -147,6 +147,7 @@ public class Robot extends IterativeRobot {
 		chassis.setFieldOriented(fieldOriented);
 
 		// Go into teleop lights
+		lights.isEarly = false;
 		lights.teleop();
 	}
 
@@ -186,18 +187,18 @@ public class Robot extends IterativeRobot {
 					Robot.lift.getLiftHeight());
 			SmartDashboard.putNumber("Lift SetPoint", Robot.lift.getSetpoint());
 			SmartDashboard.putNumber("Lift Output", Robot.lift.lift_output);
+
+
+			SmartDashboard.putNumber("Lift 0", RobotMap.lift_tote_pickup);
+			SmartDashboard.putNumber("Lift 1", RobotMap.lift_tote_1);
+			SmartDashboard.putNumber("Lift 2", RobotMap.lift_tote_2);
+			SmartDashboard.putNumber("Lift 3", RobotMap.lift_tote_3);
+	
+			SmartDashboard.putNumber("Tote State", chassis.toteState);
+			SmartDashboard.putNumber("Tote Speed", chassis.approachSpeed);
 		}
-
-		SmartDashboard.putNumber("Lift 0", RobotMap.lift_tote_pickup);
-		SmartDashboard.putNumber("Lift 1", RobotMap.lift_tote_1);
-		SmartDashboard.putNumber("Lift 2", RobotMap.lift_tote_2);
-		SmartDashboard.putNumber("Lift 3", RobotMap.lift_tote_3);
-
-		SmartDashboard.putNumber("Tote State", chassis.toteState);
-		SmartDashboard.putNumber("Tote Speed", chassis.approachSpeed);
-
 		// Run the teleop last twenty animations in the last 20 seconds
-		if (lights.isEarly && ds.getMatchTime() <= 20) {
+		if (lights.isEarly && ds.getMatchTime() >= 130.0) {
 			lights.isEarly = false;
 			lights.last_twenty();
 		}

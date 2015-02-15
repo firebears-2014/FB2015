@@ -1,10 +1,8 @@
 package org.firebears.sensors;
 
 import org.firebears.RobotMap;
-import org.firebears.commands.PreferenceSetup;
 
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
-import edu.wpi.first.wpilibj.Preferences;
 
 /*
  * this is the pot that senses the lift height.
