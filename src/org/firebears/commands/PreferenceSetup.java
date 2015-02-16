@@ -37,9 +37,9 @@ public class PreferenceSetup extends Command {
 		if (m_key.equals(RobotMap.LIFT_ZERO_REF)) {
 			preferences.putDouble(m_key, RobotMap.lift_zero_ref);
 			RobotMap.lift_zero_ref = liftPotVolts;
-		} else if (m_key.equals(RobotMap.LIFT_TOTE_PICKUP)) {
-			preferences.putDouble(m_key, RobotMap.lift_tote_pickup);
-			RobotMap.lift_tote_pickup = height;
+		} else if (m_key.equals(RobotMap.LIFT_TOTE_0)) {
+			preferences.putDouble(m_key, RobotMap.lift_tote_0);
+			RobotMap.lift_tote_0 = height;
 		} else if (m_key.equals(RobotMap.LIFT_TOTE_1)) {
 			preferences.putDouble(m_key, RobotMap.lift_tote_1);
 			RobotMap.lift_tote_1 = height;
@@ -49,6 +49,9 @@ public class PreferenceSetup extends Command {
 		} else if (m_key.equals(RobotMap.LIFT_TOTE_3)) {
 			preferences.putDouble(m_key, RobotMap.lift_tote_3);
 			RobotMap.lift_tote_3 = height;
+		} else if (m_key.equals(RobotMap.LIFT_TOTE_HIGH)) {
+			preferences.putDouble(m_key, RobotMap.lift_tote_high);
+			RobotMap.lift_tote_high = height;
 		} else if (m_key.equals(RobotMap.CHASSIS_DRIVE_TYPE_TAL)) {
 			preferences.putBoolean(RobotMap.CHASSIS_DRIVE_TYPE_TAL, true);
 			RobotMap.chassis_drive_type_tal = true;

@@ -24,10 +24,10 @@ public class Chassis extends Subsystem {
 
 	public int toteState = 0;
 	public double approachSpeed = 0.0;
-	SpeedController front_left = RobotMap.chassis_front_left_controller;
-	SpeedController back_left = RobotMap.chassis_back_left_controller;
-	SpeedController front_right = RobotMap.chassis_front_right_controller;
-	SpeedController back_right = RobotMap.chassis_back_right_controller;
+	public SpeedController front_left = RobotMap.chassis_front_left_controller;
+	public SpeedController back_left = RobotMap.chassis_back_left_controller;
+	public SpeedController front_right = RobotMap.chassis_front_right_controller;
+	public SpeedController back_right = RobotMap.chassis_back_right_controller;
 	boolean reversed = true;
 
 	boolean fieldOriented = false;
@@ -69,15 +69,14 @@ public class Chassis extends Subsystem {
 		// back_left.set(strafe - forward + rotation);
 		// back_right.set((strafe - forward - rotation ));
 
-//		double speed = ((CANTalon) front_left).getSpeed();
-//		double analogVelocity = ((CANTalon) front_left).getAnalogInVelocity();
-//		double encVelocity = ((CANTalon) front_left).getEncVelocity();
-
-//		SmartDashboard.putNumber("frontLeft Talon .getSpeed", speed);
-//		SmartDashboard.putNumber("frontLeft Talon .getAnalogInVelocity",
-//				analogVelocity);
-//		SmartDashboard
-//				.putNumber("frontLeft Talon .getEncVelocity", encVelocity);
+		SmartDashboard.putNumber("frontLeft Talon .getEncVelocity",
+				((CANTalon) front_left).getEncVelocity());
+		SmartDashboard.putNumber("backLeft Talon .getEncVelocity",
+				((CANTalon) back_left).getEncVelocity());
+		SmartDashboard.putNumber("frontRight Talon .getEncVelocity",
+				((CANTalon) front_right).getEncVelocity());
+		SmartDashboard.putNumber("backRight Talon .getEncVelocity",
+				((CANTalon) back_right).getEncVelocity());
 
 		robot_drive.mecanumDrive_Cartesian(strafe, (reversed ? -1 : 1)
 				* forward, rotation, (reversed ? -1 : 1) * angle);

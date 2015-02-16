@@ -44,6 +44,7 @@ public class Robot extends IterativeRobot {
 	public static double accX;
 	public static double accZ;
 	public static double accY;
+	private final double STARTING_HEIGHT = 20;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -71,27 +72,24 @@ public class Robot extends IterativeRobot {
 		// uncomment next 3 lines to override defaults.
 		// autonomousCommand = new AutoStrafeCommand();
 		// /*
-
 		
-//		  if (oi.autoSelect1 != null && oi.autoSelect1.get() == true) {
+//		if (oi.autoSelect1 != null && oi.autoSelect1.get() == true) {
 			autonomousCommand = new AutoM();
 		  	System.out.println("AUTONOMOUS IS Auto M:");
 		  	System.out.println("Does: moves into the auto zone"); 
-/*		 } else if(oi.autoSelect2 != null && oi.autoSelect2.get() == true) { 
+/*		} else if (oi.autoSelect2 != null && oi.autoSelect2.get() == true) { 
 			autonomousCommand = new AutoGM();
-		  	System.out.println("AUTONOMOUS IS Auto GM:");
-		  	System.out.println("Does:Grabs tote and brings it into auto zone ");
-		 } else if (RobotMap.autoSelect3 != null && RobotMap.autoSelect3.get() == true) { 
-			 autonomousCommand = new AutoSM(); 
-		 } else if(oi.autoSelect3 != null && oi.autoSelect3.get() == true) {
+			System.out.println("AUTONOMOUS IS Auto GM:");
+			System.out.println("Does:Grabs tote and brings it into auto zone ");
+		} else if (oi.autoSelect3 != null && oi.autoSelect3.get() == true) {
 			autonomousCommand = new AutoSM();
 			System.out.println("AUTONOMOUS IS Auto SM:");
-		  	System.out.println("Does: stacks 3 totes and moves");
-		 } else if (oi.autoSelect4 != null && oi.autoSelect4.get()==true){
-			autonomousCommand = new AutoTM(); 
+			System.out.println("Does: stacks 3 totes and moves");
+		} else if (oi.autoSelect4 != null && oi.autoSelect4.get() == true) {
+			autonomousCommand = new AutoTM();
 			System.out.println("AUTONOMOUS IS Auto TM:");
 			System.out.println("Does:stacks conainter on tote and moves");
-		 }
+		}
 		 */
 
 		if (RobotMap.chassis_drive_gyro != null)
@@ -197,15 +195,14 @@ public class Robot extends IterativeRobot {
 			SmartDashboard.putNumber("Lift SetPoint", Robot.lift.getSetpoint());
 			SmartDashboard.putNumber("Lift Output", Robot.lift.lift_output);
 
-			SmartDashboard.putNumber("Lift 0", RobotMap.lift_tote_pickup);
+			SmartDashboard.putNumber("Lift 0", RobotMap.lift_tote_0);
 			SmartDashboard.putNumber("Lift 1", RobotMap.lift_tote_1);
 			SmartDashboard.putNumber("Lift 2", RobotMap.lift_tote_2);
 			SmartDashboard.putNumber("Lift 3", RobotMap.lift_tote_3);
 
 			SmartDashboard.putNumber("Tote State", chassis.toteState);
 			SmartDashboard.putNumber("Tote Speed", chassis.approachSpeed);
-			
-			
+
 		}
 		// Run the teleop last twenty animations in the last 20 seconds
 		if (lights.isEarly && ds.getMatchTime() >= 130.0) {
@@ -226,14 +223,14 @@ public class Robot extends IterativeRobot {
 		LiveWindow.run();
 		SmartDashboard.putData("Set Zero", new PreferenceSetup(
 				RobotMap.LIFT_ZERO_REF));
-		SmartDashboard.putData("Set Tote Zero Pickup", new PreferenceSetup(
-				RobotMap.LIFT_TOTE_PICKUP));
+		SmartDashboard.putData("Set Tote Zero 0", new PreferenceSetup(
+				RobotMap.LIFT_TOTE_0));
 		SmartDashboard.putData("Set Tote One", new PreferenceSetup(
 				RobotMap.LIFT_TOTE_1));
 		SmartDashboard.putData("Set Tote Two", new PreferenceSetup(
 				RobotMap.LIFT_TOTE_2));
 		SmartDashboard.putData("Set Tote Three", new PreferenceSetup(
 				RobotMap.LIFT_TOTE_3));
-
+		lift.setSetpoint(STARTING_HEIGHT);
 	}
 }

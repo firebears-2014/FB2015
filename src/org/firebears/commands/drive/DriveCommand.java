@@ -45,7 +45,7 @@ public class DriveCommand extends Command {
 
 		boolean slowMode = Robot.oi.slowTriggerButton.get();
 		double slowModeMultiplier = slowMode ? 0.3 : 1.0;
-		
+
 		x = Math.signum(x) * x * x * slowModeMultiplier;
 		y = Math.signum(y) * y * y * slowModeMultiplier;
 		rotation = Math.signum(rotation)

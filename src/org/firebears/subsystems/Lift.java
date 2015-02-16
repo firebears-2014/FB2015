@@ -15,11 +15,11 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 public class Lift extends PIDSubsystem {
 	public HeightSensor heightSensor;
 
-	public final String LIFT_PICKUP_HEIGHT = "LIFT_PICKUP_HEIGHT";
 	public final String LIFT_0_HEIGHT = "LIFT_0_HEIGHT";
 	public final String LIFT_1_HEIGHT = "LIFT_1_HEIGHT";
 	public final String LIFT_2_HEIGHT = "LIFT_2_HEIGHT";
 	public final String LIFT_3_HEIGHT = "LIFT_3_HEIGHT";
+	public final String LIFT_HIGH_HEIGHT = "LIFT_HIGH_HEIGHT";
 
 	SpeedController liftJag = RobotMap.liftJag;
 
@@ -27,6 +27,9 @@ public class Lift extends PIDSubsystem {
 
 	public boolean manual_mode = false;
 	public boolean enable_motor = true;
+	
+	public boolean manual_up = false;
+	public boolean manual_down = false;
 
 	private static double m_P = 0.2;
 	private static double m_I = 0.0;
@@ -88,35 +91,46 @@ public class Lift extends PIDSubsystem {
 	}
 
 	public void setSetpointInches(String setpoint) {
-		// set pid to pickup height
-		// set to inches above "ground height"
-
-		boolean picking_up = Robot.grabber.isOpen();
-		// as opposed to droping
-		if (picking_up) {
-			if (setpoint.equals(LIFT_PICKUP_HEIGHT)) {
-				// addStep will be 0 or 6, depending on if the switch is flicked
-				setSetpoint(RobotMap.lift_tote_pickup + addStep);
-			} else if (setpoint.equals(LIFT_0_HEIGHT)) {
-				setSetpoint(RobotMap.lift_tote_pickup + addStep);
-			} else if (setpoint.equals(LIFT_1_HEIGHT)) {
-				setSetpoint(RobotMap.lift_tote_1 + addStep);
-			} else if (setpoint.equals(LIFT_2_HEIGHT)) {
-				setSetpoint(RobotMap.lift_tote_2 + addStep);
-			} else if (setpoint.equals(LIFT_3_HEIGHT)) {
-				setSetpoint(RobotMap.lift_tote_3 + addStep);
+		if (manual_mode == false) {
+			// set pid to pickup height
+			// set to inches above "zero height"
+			boolean picking_up = Robot.grabber.isOpen();
+			// as opposed to droping
+			if (picking_up) {
+				// addStep will be 0 or 8, depending on if the switch is
+				// flicked
+				if (setpoint.equals(LIFT_0_HEIGHT)) {
+					setSetpoint(RobotMap.lift_tote_0 + addStep);
+				} else if (setpoint.equals(LIFT_1_HEIGHT)) {
+					setSetpoint(RobotMap.lift_tote_1 + addStep);
+				} else if (setpoint.equals(LIFT_2_HEIGHT)) {
+					setSetpoint(RobotMap.lift_tote_2 + addStep);
+				} else if (setpoint.equals(LIFT_3_HEIGHT)) {
+					setSetpoint(RobotMap.lift_tote_3 + addStep);
+				} else if (setpoint.equals(LIFT_HIGH_HEIGHT)) {
+					setSetpoint(RobotMap.lift_tote_high + addStep);
+				}
+			} else {
+				if (setpoint.equals(LIFT_0_HEIGHT)) {
+					setSetpoint(RobotMap.lift_tote_0 + addStep + 3);
+				} else if (setpoint.equals(LIFT_1_HEIGHT)) {
+					setSetpoint(RobotMap.lift_tote_1 + addStep + 3);
+				} else if (setpoint.equals(LIFT_2_HEIGHT)) {
+					setSetpoint(RobotMap.lift_tote_2 + addStep + 3);
+				} else if (setpoint.equals(LIFT_3_HEIGHT)) {
+					setSetpoint(RobotMap.lift_tote_3 + addStep + 3);
+				} else if (setpoint.equals(LIFT_HIGH_HEIGHT)) {
+					setSetpoint(RobotMap.lift_tote_high + addStep + 3);
+				}
 			}
 		} else {
-			if (setpoint.equals(LIFT_PICKUP_HEIGHT)) {
-				setSetpoint(RobotMap.lift_tote_pickup + addStep + 3);
-			} else if (setpoint.equals(LIFT_0_HEIGHT)) {
-				setSetpoint(RobotMap.lift_tote_pickup + addStep + 3);
+			System.out.println("manual mode");
+			if (setpoint.equals(LIFT_0_HEIGHT)) {
+				manual_down = true;
+				manual_up = false;
 			} else if (setpoint.equals(LIFT_1_HEIGHT)) {
-				setSetpoint(RobotMap.lift_tote_1 + addStep + 3);
-			} else if (setpoint.equals(LIFT_2_HEIGHT)) {
-				setSetpoint(RobotMap.lift_tote_2 + addStep + 3);
-			} else if (setpoint.equals(LIFT_3_HEIGHT)) {
-				setSetpoint(RobotMap.lift_tote_3 + addStep + 3);
+				manual_down = false;
+				manual_up = true;
 			}
 		}
 	}
