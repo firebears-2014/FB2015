@@ -19,7 +19,7 @@ public class Lift extends PIDSubsystem {
 	public final String LIFT_1_HEIGHT = "LIFT_1_HEIGHT";
 	public final String LIFT_2_HEIGHT = "LIFT_2_HEIGHT";
 	public final String LIFT_3_HEIGHT = "LIFT_3_HEIGHT";
-	public final String LIFT_HIGH_HEIGHT = "LIFT_3_HEIGHT";
+	public final String LIFT_HIGH_HEIGHT = "LIFT_HIGH_HEIGHT";
 
 	SpeedController liftJag = RobotMap.liftJag;
 
@@ -27,6 +27,9 @@ public class Lift extends PIDSubsystem {
 
 	public boolean manual_mode = false;
 	public boolean enable_motor = true;
+	
+	public boolean manual_up = false;
+	public boolean manual_down = false;
 
 	private static double m_P = 0.2;
 	private static double m_I = 0.0;
@@ -121,10 +124,13 @@ public class Lift extends PIDSubsystem {
 				}
 			}
 		} else {
+			System.out.println("manual mode");
 			if (setpoint.equals(LIFT_0_HEIGHT)) {
-				setSetpoint(getSetpoint() - 10);
+				manual_down = true;
+				manual_up = false;
 			} else if (setpoint.equals(LIFT_1_HEIGHT)) {
-				setSetpoint(getSetpoint() + 10);
+				manual_down = false;
+				manual_up = true;
 			}
 		}
 	}

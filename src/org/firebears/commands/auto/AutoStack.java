@@ -34,7 +34,7 @@ public class  AutoStack extends CommandGroup {
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_0_HEIGHT)); //Move lift to grab
     	addSequential(new GrabberCommand(true)); //Grab the tote
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_2_HEIGHT)); //Lift the tote
-    	addSequential(new ForwardCommand(-1), 1.0); // Move backward into auto zone    	
+    	addSequential(new ForwardCommand(-.5), 2.0); // Move backward into auto zone    	
 		System.out.println("Currently in autonomous 'AutoStack'");
     }
 

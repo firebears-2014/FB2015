@@ -1,6 +1,7 @@
 package org.firebears;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
 import edu.wpi.first.wpilibj.Encoder;
@@ -30,6 +31,7 @@ public class Robot extends IterativeRobot {
 	Command AutoGM;
 	Command AutoM;
 	Command AutoSM;
+	Command AutoTM;
 	private BuiltInAccelerometer accel = new BuiltInAccelerometer();
 	public static OI oi;
 	public static Chassis chassis;
@@ -40,6 +42,7 @@ public class Robot extends IterativeRobot {
 	public static double accX;
 	public static double accZ;
 	public static double accY;
+	private final double STARTING_HEIGHT = 20;
 
 	/**
 	 * This function is run when the robot is first started up and should be
@@ -68,27 +71,26 @@ public class Robot extends IterativeRobot {
 		// autonomousCommand = new AutoStrafeCommand();
 		// /*
 
-		/*
-		 * if (oi.autoSelect1 != null && oi.autoSelect1.get() == true) {
-		 * autonomousCommand = new AutoM();
-		 * System.out.println("AUTONOMOUS IS Auto M:");
-		 * System.out.println("Does: moves into the auto zone"); } else if
-		 * (oi.autoSelect2 != null && oi.autoSelect2.get() == true) { >>>>>>>
-		 * branch 'master' of https://github.com/firebears-2014/FB2015.git
-		 * autonomousCommand = new AutoGM(); // rotary switch position 5
-		 * System.out.println("AUTONOMOUS IS Auto GM:");
-		 * System.out.println("Does:Grabs tote and brings it into auto zone ");
-		 * <<<<<<< HEAD } else if (RobotMap.autoSelect3 != null &&
-		 * RobotMap.autoSelect3.get() == true) { autonomousCommand = new
-		 * AutoM(); // rotary switch position 6 ======= } else if
-		 * (oi.autoSelect3 != null && oi.autoSelect3.get() == true) {
-		 * autonomousCommand = new AutoSM(); // rotary switch position 6 >>>>>>>
-		 * branch 'master' of https://github.com/firebears-2014/FB2015.git
-		 * System.out.println("AUTONOMOUS IS Auto M:");
-		 * System.out.println("Does: pushes a tote into the auto zone"); }//
-		 * else if (OI.autoSelect4.get()==false){autonomousCommand = new //
-		 * AutonomousCommand(); // }
-		 */
+		if (oi.autoSelect1 != null && oi.autoSelect1.get() == true) {
+			autonomousCommand = new AutoM();
+			System.out.println("AUTONOMOUS IS Auto M:");
+			System.out.println("Does: moves into the auto zone");
+		} else if (oi.autoSelect2 != null && oi.autoSelect2.get() == true) {
+			autonomousCommand = new AutoGM();
+			System.out.println("AUTONOMOUS IS Auto GM:");
+			System.out.println("Does:Grabs tote and brings it into auto zone ");
+		} else if (RobotMap.autoSelect3 != null
+				&& RobotMap.autoSelect3.get() == true) {
+			autonomousCommand = new AutoSM();
+		} else if (oi.autoSelect3 != null && oi.autoSelect3.get() == true) {
+			autonomousCommand = new AutoSM();
+			System.out.println("AUTONOMOUS IS Auto SM:");
+			System.out.println("Does: stacks 3 totes and moves");
+		} else if (oi.autoSelect4 != null && oi.autoSelect4.get() == true) {
+			autonomousCommand = new AutoTM();
+			System.out.println("AUTONOMOUS IS Auto TM:");
+			System.out.println("Does:stacks conainter on tote and moves");
+		}
 
 		autonomousCommand = new AutoM();
 		System.out.println("AUTONOMOUS IS Auto M:");
@@ -230,6 +232,6 @@ public class Robot extends IterativeRobot {
 				RobotMap.LIFT_TOTE_2));
 		SmartDashboard.putData("Set Tote Three", new PreferenceSetup(
 				RobotMap.LIFT_TOTE_3));
-
+		lift.setSetpoint(STARTING_HEIGHT);
 	}
 }
