@@ -92,8 +92,8 @@ public class OI {
 		toggleStepSwitch.whenReleased(new SetStepCommand(true));
 
 		toggleManualSwitch = new JoystickButton(joystickLift, 9);
-		toggleManualSwitch.whenPressed(new SetManualCommand(true));
-		toggleManualSwitch.whenReleased(new SetManualCommand(false));
+		toggleManualSwitch.whenPressed(new SetManualCommand(false));
+		toggleManualSwitch.whenReleased(new SetManualCommand(true));
 
 		celebrate = new JoystickButton(joystickLift, 11);
 		celebrate.whenPressed(new CelebrateCommand());
@@ -109,10 +109,10 @@ public class OI {
 		// approachTote.whenPressed(new ToteApproachCommand());
 
 		wideCentertote = new JoystickButton(joystickDrive, 11);
-		// wideCentertote.whenPressed(new WidetoteCommand());
+		wideCentertote.whenPressed(new WidetoteCommand());
 
 		centerTote = new JoystickButton(joystickDrive, 12);
-		// centerTote.whenPressed(new Totecenter());
+		centerTote.whenPressed(new Totecenter());
 
 		// SmartDashboard Buttons
 		// SmartDashboard.putData("Autonomous Command", new

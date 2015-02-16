@@ -35,8 +35,8 @@ public class DriveCommand extends Command {
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		double x = Robot.oi.getJoystickZero().getRawAxis(0); // strafe
-																// left/right
+		// strafe left/right
+		double x = Robot.oi.getJoystickZero().getRawAxis(0); 
 		double y = Robot.oi.getJoystickZero().getRawAxis(1); // forward /
 																// backwards
 		double rotation = Robot.oi.getJoystickZero().getRawAxis(2);

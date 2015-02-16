@@ -8,6 +8,8 @@ import org.firebears.RobotMap;
  */
 public class RotateCommand {
 	
+	public boolean fieldOriented;
+	
 	float rotateDegrees;
 	float rotateSpeed;
 	
@@ -19,7 +21,15 @@ public class RotateCommand {
     protected void initialize() {
 		fieldOriented = Robot.chassis.getFieldOriented();
 		Robot.chassis.setFieldOriented(false);
-    	Robot.chassis.mechanumDrive(0, -speed, 0);
+    	execute();
+    }
+    
+    protected void execute() {
+    	Robot.chassis.mechanumDrive(0, 0, rotateSpeed);
+    }
+    
+    protected boolean isFinished() {
+    	return 
     }
 
 }
