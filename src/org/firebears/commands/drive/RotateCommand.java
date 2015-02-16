@@ -29,7 +29,16 @@ public class RotateCommand {
     }
     
     protected boolean isFinished() {
-    	return 
+    	return false;
+    }
+    
+    protected void end() {
+    	Robot.chassis.mechanumDrive(0, 0, 0);
+		Robot.chassis.setFieldOriented(fieldOriented);
+    }
+    
+    protected void interrupted() {
+    	end();
     }
 
 }
