@@ -1,6 +1,7 @@
 package org.firebears;
 
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
+import edu.wpi.first.wpilibj.CameraServer;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
@@ -54,7 +55,9 @@ public class Robot extends IterativeRobot {
 		// constructed yet. Thus, their requires() statements may grab null
 		// pointers. Bad news. Don't move it.
 		oi = new OI();
-
+		//CameraServer server = CameraServer.getInstance();
+		//server.setQuality(50);
+		//server.startAutomaticCapture("cam0");
 		// instantiate which command should be used for the autonomous period
 		// uncomment next 3 lines to override defaults.
 		// autonomousCommand = new AutoStrafeCommand();
