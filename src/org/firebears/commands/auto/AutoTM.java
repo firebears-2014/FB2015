@@ -30,7 +30,6 @@ public class  AutoTM extends CommandGroup {
     	addSequential(new ForwardCommand(-.5, false), 2.0);
     	addSequential(new SetHeightCommand("Lift_Tote_0"));
     	addSequential(new GrabberCommand(false));
-    	System.out.println("Currently in autonomous 'AutoTM'");
     }
 
 }

@@ -16,7 +16,6 @@ public class  AutoM extends CommandGroup {
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_2_HEIGHT));
     	//Move Backward: Stop depends on color sensor
     	addSequential(new ForwardCommand(-.5, true), 2.0);
-    	System.out.println("Currently in autonomous 'AutoM'");
     }
 
 }

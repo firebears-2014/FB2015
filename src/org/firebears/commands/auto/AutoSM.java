@@ -40,7 +40,6 @@ public class AutoSM extends CommandGroup {
 		addSequential(new SetHeightCommand("Lift_Tote_0"));
 		addSequential(new GrabberCommand(false));
 		addSequential(new ForwardCommand(-.1, false), 1.0); // change interrupt
-		System.out.println("Currently in autonomous 'AutoSM'");
 	}
 
 }
