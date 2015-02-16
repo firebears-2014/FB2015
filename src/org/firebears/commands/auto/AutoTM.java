@@ -27,7 +27,7 @@ public class  AutoTM extends CommandGroup {
 		addSequential(new GrabberCommand(true));  			 //grabs tote
 		addSequential(new SetHeightCommand("Lift_Tote_1"));  //moves conatainer
     	//todo: add in a way to stop movement depending on where the robot is
-    	addSequential(new ForwardCommand(-.5), 2.0);
+    	addSequential(new ForwardCommand(-.5, false), 2.0);
     	System.out.println("Currently in autonomous 'AutoTM'");
     }
 
