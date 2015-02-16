@@ -31,8 +31,11 @@ public class OI {
 	public Joystick joystickDrive;
 	public Joystick joystickLift;
 	public DigitalInput ContainerSensor;
-	// only three, unless we get a new rotary switch
-	// public DigitalInput autoSelect4;
+	
+	public DigitalInput autoSelect1;
+	public DigitalInput autoSelect2;
+	public DigitalInput autoSelect3;
+	public DigitalInput autoSelect4;
 
 	public JoystickButton setLiftPickup;
 	public JoystickButton setLiftTote0;
@@ -93,7 +96,7 @@ public class OI {
 		toggleStepSwitch.whenReleased(new SetStep(true));
 
 		celebrate = new JoystickButton(joystickLift, 10);
-		celebrate.whileHeld(new CelebrateCommand());
+		celebrate.whenPressed(new CelebrateCommand());
 
 		// DRIVE Joystick Initialization
 
