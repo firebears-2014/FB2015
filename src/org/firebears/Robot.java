@@ -194,15 +194,14 @@ public class Robot extends IterativeRobot {
 			SmartDashboard.putNumber("Lift SetPoint", Robot.lift.getSetpoint());
 			SmartDashboard.putNumber("Lift Output", Robot.lift.lift_output);
 
-			SmartDashboard.putNumber("Lift 0", RobotMap.lift_tote_pickup);
+			SmartDashboard.putNumber("Lift 0", RobotMap.lift_tote_0);
 			SmartDashboard.putNumber("Lift 1", RobotMap.lift_tote_1);
 			SmartDashboard.putNumber("Lift 2", RobotMap.lift_tote_2);
 			SmartDashboard.putNumber("Lift 3", RobotMap.lift_tote_3);
 
 			SmartDashboard.putNumber("Tote State", chassis.toteState);
 			SmartDashboard.putNumber("Tote Speed", chassis.approachSpeed);
-			
-			
+
 		}
 		// Run the teleop last twenty animations in the last 20 seconds
 		if (lights.isEarly && ds.getMatchTime() >= 130.0) {
@@ -223,8 +222,8 @@ public class Robot extends IterativeRobot {
 		LiveWindow.run();
 		SmartDashboard.putData("Set Zero", new PreferenceSetup(
 				RobotMap.LIFT_ZERO_REF));
-		SmartDashboard.putData("Set Tote Zero Pickup", new PreferenceSetup(
-				RobotMap.LIFT_TOTE_PICKUP));
+		SmartDashboard.putData("Set Tote Zero 0", new PreferenceSetup(
+				RobotMap.LIFT_TOTE_0));
 		SmartDashboard.putData("Set Tote One", new PreferenceSetup(
 				RobotMap.LIFT_TOTE_1));
 		SmartDashboard.putData("Set Tote Two", new PreferenceSetup(

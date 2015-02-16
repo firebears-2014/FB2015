@@ -36,19 +36,21 @@ public class RobotMap {
 	public static final boolean DEBUG = true;
 
 	public static final String LIFT_ZERO_REF = "LIFT_ZERO_REF";
-	public static final String LIFT_TOTE_PICKUP = "LIFT_TOTE_PICKUP";
+	public static final String LIFT_TOTE_0 = "LIFT_TOTE_0";
 	public static final String LIFT_TOTE_1 = "LIFT_TOTE_1";
 	public static final String LIFT_TOTE_2 = "LIFT_TOTE_2";
 	public static final String LIFT_TOTE_3 = "LIFT_TOTE_3";
+	public static final String LIFT_TOTE_HIGH = "LIFT_TOTE_HIGH";
 	public static final String CHASSIS_DRIVE_TYPE_TAL = "CHASSIS_DRIVE_TYPE_TAL";
 	public static final String CHASSIS_DRIVE_TYPE_JAG = "CHASSIS_DRIVE_TYPE_JAG";
 	public static final String CHASSIS_FIELD_ORIENTED = "CHASSIS_FIELD_ORIENTED";
 
 	public static double lift_zero_ref;
-	public static double lift_tote_pickup;
+	public static double lift_tote_0;
 	public static double lift_tote_1;
 	public static double lift_tote_2;
 	public static double lift_tote_3;
+	public static double lift_tote_high;
 	public static boolean chassis_drive_type_tal;
 
 	// Talon Code
@@ -92,10 +94,11 @@ public class RobotMap {
 		Preferences preferences = Preferences.getInstance();
 
 		lift_zero_ref = preferences.getDouble(LIFT_ZERO_REF, 0.0);
-		lift_tote_pickup = preferences.getDouble(LIFT_TOTE_PICKUP, 8.5);
+		lift_tote_0 = preferences.getDouble(LIFT_TOTE_0, 8.5);
 		lift_tote_1 = preferences.getDouble(LIFT_TOTE_1, 21.5);
 		lift_tote_2 = preferences.getDouble(LIFT_TOTE_2, 33.5);
 		lift_tote_3 = preferences.getDouble(LIFT_TOTE_3, 46.0);
+		lift_tote_high = preferences.getDouble(LIFT_TOTE_HIGH, 58.0);
 		chassis_drive_type_tal = preferences.getBoolean(CHASSIS_DRIVE_TYPE_TAL,
 				true);
 		if (!preferences.containsKey(CHASSIS_FIELD_ORIENTED)) {

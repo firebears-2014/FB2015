@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * While run, prepared for step. When finished will go back to normal height.
  */
-public class SetStep extends Command {
+public class SetStepCommand extends Command {
 
 	boolean Pressed;
 
-	public SetStep(boolean pressed) {
+	public SetStepCommand(boolean pressed) {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
 		Pressed = pressed;
