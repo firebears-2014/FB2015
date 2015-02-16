@@ -15,8 +15,8 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class  AutoGM extends CommandGroup {
     public AutoGM() {
     	addSequential(new GrabberCommand(true)); //Grab Tote
-    	//todo: add in a way to stop movement depending on where the robot is
-    	addSequential(new ForwardCommand(-.5), 2.0);
+    	//Stop depends on color sensor
+    	addSequential(new ForwardCommand(-.5, true), 2.0);
     	System.out.println("Currently in autonomous 'AutoGM'");
     }
 

@@ -14,8 +14,8 @@ public class  AutoM extends CommandGroup {
 
     public AutoM() {
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_2_HEIGHT));
-    	//todo: add in a way to stop movement depending on where the robot is
-    	addSequential(new ForwardCommand(.5), 3.0);
+    	//Stop depends on color sensor
+    	addSequential(new ForwardCommand(.5, true), 2.0);
     	System.out.println("Currently in autonomous 'AutoM'");
     }
 

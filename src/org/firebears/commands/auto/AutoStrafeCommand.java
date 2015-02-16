@@ -16,7 +16,7 @@ public class  AutoStrafeCommand extends CommandGroup {
     	
     	//1 second, full speed
     	addSequential(new StrafeCommand(-.75), 1.0);
-    	addSequential(new ForwardCommand(.5), 1.0);
+    	addSequential(new ForwardCommand(.5, false), 1.0);
     	addSequential(new StrafeCommand(.75), 1.0);
     	
 		System.out.println("Currently in autonomous 'AutoStrafeCommand'");

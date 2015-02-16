@@ -15,16 +15,20 @@ public class ForwardCommand extends Command {
 	public boolean fieldOriented;
 	private boolean which;
 	private int which_count = 0;
+	private boolean cs;
 	
-    public ForwardCommand(double s) {
+    public ForwardCommand(double s, boolean colorSensor) {
     	requires(Robot.chassis);
     	speed=s;
+    	cs = colorSensor;
     }
 
     // Called just before this Command runs the first time
     protected void initialize() {
-    	which_count = 0;
-    	which = RobotMap.scoringPlatformSensor.get();
+    	if(cs) {
+			which_count = 0;
+    		which = RobotMap.scoringPlatformSensor.get();
+    	}
 		fieldOriented = Robot.chassis.getFieldOriented();
 		Robot.chassis.setFieldOriented(false);
     	Robot.chassis.mechanumDrive(0, -speed, 0);
@@ -32,7 +36,7 @@ public class ForwardCommand extends Command {
 
     // Called repeatedly when this Command is scheduled to run
     protected void execute() {
-    	if(RobotMap.scoringPlatformSensor.get() != which) {
+    	if((RobotMap.scoringPlatformSensor.get() != which) && cs) {
     		which_count++;
     		System.out.println("More whiches");
     	}
@@ -41,11 +45,15 @@ public class ForwardCommand extends Command {
 
     // Make this return true when this Command no longer needs to run execute()
     protected boolean isFinished() {
-    	if(which_count > 1) {
-    		System.out.println("witch kill robot");
-            return true;
+    	if(cs) {
+	    	if(which_count > 1) {
+	    		System.out.println("witch kill robot");
+	            return true;
+	    	}else{
+	    		return false;	
+	    	}
     	}else{
-    		return false;	
+    		return speed == 0;
     	}
     }
 
@@ -58,7 +66,6 @@ public class ForwardCommand extends Command {
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
-    	Robot.chassis.mechanumDrive(0, 0, 0);
-		Robot.chassis.setFieldOriented(fieldOriented);
+    	end();
     }
 }
