@@ -36,10 +36,10 @@ public class AutoSM extends CommandGroup {
 		addSequential(new GrabberCommand(true));
 		addSequential(new SetHeightCommand("Lift_Tote_1"));
 		// scoring logic
-		addSequential(new ForwardCommand(-1), 1.0); // change interrupt
+		addSequential(new ForwardCommand(-1, false), 1.0); // change interrupt
 		addSequential(new SetHeightCommand("Lift_Tote_0"));
 		addSequential(new GrabberCommand(false));
-		addSequential(new ForwardCommand(-.1), 1.0); // change interrupt
+		addSequential(new ForwardCommand(-.1, false), 1.0); // change interrupt
 		System.out.println("Currently in autonomous 'AutoSM'");
 	}
 
