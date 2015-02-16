@@ -6,6 +6,7 @@ import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.CANJaguar;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Compressor;
+import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.CounterBase.EncodingType;
 import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
@@ -31,8 +32,8 @@ import org.firebears.util.TalonEncoder;
  */
 
 public class RobotMap {
-	
-    public static final boolean DEBUG = true;
+
+	public static final boolean DEBUG = true;
 
 	public static final String LIFT_ZERO_REF = "LIFT_ZERO_REF";
 	public static final String LIFT_TOTE_PICKUP = "LIFT_TOTE_PICKUP";
@@ -57,18 +58,20 @@ public class RobotMap {
 	public static SpeedController chassis_front_right_controller;
 	public static SpeedController chassis_back_right_controller;
 
-	/*
-	 * public static Encoder chassis_front_left_encoder; public static Encoder
-	 * chassis_back_left_encoder; public static Encoder
-	 * chassis_front_right_encoder; public static Encoder
-	 * chassis_back_right_encoder;
-	 */
+	// public static Encoder chassis_front_left_encoder;
+	// public static Encoder chassis_back_left_encoder;
+	// public static Encoder chassis_front_right_encoder;
+	// public static Encoder chassis_back_right_encoder;
 
 	public static RobotDrive chassis_robot_drive;
 	public static Gyro chassis_drive_gyro;
 	public static AnalogPotentiometer liftpot;
 	public static SpeedController liftJag;
 	public static Compressor grabbercompressor;
+	public static DigitalInput autoSelect1;
+	public static DigitalInput autoSelect2;
+	public static DigitalInput autoSelect3;
+	public static DigitalInput scoringPlatformSensor;
 
 	public static AnalogInput analogInput;
 
@@ -93,17 +96,11 @@ public class RobotMap {
 		lift_tote_1 = preferences.getDouble(LIFT_TOTE_1, 21.5);
 		lift_tote_2 = preferences.getDouble(LIFT_TOTE_2, 33.5);
 		lift_tote_3 = preferences.getDouble(LIFT_TOTE_3, 46.0);
-		chassis_drive_type_tal = preferences.getBoolean(CHASSIS_DRIVE_TYPE_TAL, true);
-		if (! preferences.containsKey(CHASSIS_FIELD_ORIENTED)) {
+		chassis_drive_type_tal = preferences.getBoolean(CHASSIS_DRIVE_TYPE_TAL,
+				true);
+		if (!preferences.containsKey(CHASSIS_FIELD_ORIENTED)) {
 			preferences.putBoolean(CHASSIS_FIELD_ORIENTED, true);
 		}
-
-		// Talon code
-		/*
-		 * chassis_front_left = new CANTalon(5); chassis_back_left = new
-		 * CANTalon(3); chassis_front_right = new CANTalon(4);
-		 * chassis_back_right = new CANTalon(2);
-		 */
 
 		// Talon Code
 		if (chassis_drive_type_tal) {
@@ -230,7 +227,7 @@ public class RobotMap {
 
 		grabbercompressor = new Compressor(0);
 
-		grabbersolenoid_left_open = new Solenoid(2);
+		grabbersolenoid_left_open = new Solenoid(1);
 		LiveWindow.addActuator("Grabber", "solenoid_left_open",
 				grabbersolenoid_left_open);
 
@@ -242,12 +239,18 @@ public class RobotMap {
 		LiveWindow.addActuator("Grabber", "solenoid_right_open",
 				grabbersolenoid_right_open);
 
-		grabbersolenoid_right_close = new Solenoid(1);
+		grabbersolenoid_right_close = new Solenoid(2);
 		LiveWindow.addActuator("Grabber", "solenoid_right_close",
 				grabbersolenoid_right_close);
 
 		accelerometer = new BuiltInAccelerometer();
 		LiveWindow.addSensor("Accelerometer", "accelerometer", accelerometer);
+
+		scoringPlatformSensor = new DigitalInput(8);
+
+		autoSelect1 = new DigitalInput(11);
+		autoSelect2 = new DigitalInput(12);
+		autoSelect3 = new DigitalInput(13);
 
 		rightArmsharpIRRange = new org.firebears.sensors.sharpIRRange(5);
 		rightsharpIRRange = new org.firebears.sensors.sharpIRRange(3);
