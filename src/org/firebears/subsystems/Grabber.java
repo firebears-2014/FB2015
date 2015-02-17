@@ -3,7 +3,6 @@ package org.firebears.subsystems;
 import org.firebears.RobotMap;
 
 import edu.wpi.first.wpilibj.Compressor;
-import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.command.Subsystem;
 
 /**

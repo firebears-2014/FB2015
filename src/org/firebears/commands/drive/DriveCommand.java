@@ -11,8 +11,6 @@
 package org.firebears.commands.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import org.firebears.Robot;
 
 /**

@@ -1,27 +1,19 @@
 package org.firebears;
 
 import org.firebears.commands.*;
-import org.firebears.commands.drive.DriveCommand;
-import org.firebears.commands.drive.ForwardCommand;
-import org.firebears.commands.drive.StrafeCommand;
 import org.firebears.commands.grabber.*;
 import org.firebears.commands.lift.SetHeightCommand;
 import org.firebears.commands.lift.SetLiftMotorCommand;
 import org.firebears.commands.lift.SetManualCommand;
 import org.firebears.commands.lift.SetStepCommand;
 import org.firebears.commands.lights.CelebrateCommand;
-import org.firebears.commands.lights.LightChangeCommand;
 import org.firebears.commands.drive.*;
-import org.firebears.commands.lights.*;
 import org.firebears.sensors.GyroResetCommand;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.DigitalInput;
 
 /**
  * This class is the glue that binds the controls on the physical operator
