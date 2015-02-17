@@ -109,10 +109,10 @@ public class RobotMap {
 		// Talon Code
 		if (chassis_drive_type_tal) {
 			System.out.println("Configuring RobotDrive for CANTalons");
-			chassis_front_left_controller = new CANTalon(3);
-			chassis_front_right_controller = new CANTalon(5);
+			chassis_front_left_controller = new CANTalon(5);
+			chassis_front_right_controller = new CANTalon(1);
 			chassis_back_left_controller = new CANTalon(4);
-			chassis_back_right_controller = new CANTalon(2);
+			chassis_back_right_controller = new CANTalon(3);
 
 		} else {
 			// Jag Code
