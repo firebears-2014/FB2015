@@ -6,17 +6,16 @@ import org.firebears.commands.lift.SetHeightCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
 
-
 /**
  * Autonomous command : moves into the auto zone
  */
 public class  AutoM extends CommandGroup {
 
     public AutoM() {
+    	//Lift lift as to not damage it.
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_2_HEIGHT));
-    	//Stop depends on color sensor
-    	addSequential(new ForwardCommand(.5, true), 2.0);
-    	System.out.println("Currently in autonomous 'AutoM'");
+    	//Move Backward: Stop depends on color sensor
+    	addSequential(new ForwardCommand(-.5, true), 2.0);
     }
 
 }

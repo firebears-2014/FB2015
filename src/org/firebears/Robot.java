@@ -11,6 +11,7 @@ import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
 import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.firebears.commands.PreferenceSetup;
@@ -26,6 +27,7 @@ import org.firebears.subsystems.*;
  */
 public class Robot extends IterativeRobot {
 	public DriverStation ds;
+	SendableChooser autoChooser;
 
 	Command autonomousCommand;
 	Command AutoGM;
@@ -70,36 +72,33 @@ public class Robot extends IterativeRobot {
 		// uncomment next 3 lines to override defaults.
 		// autonomousCommand = new AutoStrafeCommand();
 		// /*
-
-		if (oi.autoSelect1 != null && oi.autoSelect1.get() == true) {
+		
+//		if (oi.autoSelect1 != null && oi.autoSelect1.get() == true) {
 			autonomousCommand = new AutoM();
-			System.out.println("AUTONOMOUS IS Auto M:");
-			System.out.println("Does: moves into the auto zone");
-		} else if (oi.autoSelect2 != null && oi.autoSelect2.get() == true) {
+		  	System.out.println("AUTONOMOUS IS Auto M:");
+		  	System.out.println("Does: moves into the auto zone"); 
+/*		} else if (oi.autoSelect2 != null && oi.autoSelect2.get() == true) { 
 			autonomousCommand = new AutoGM();
-			System.out.println("AUTONOMOUS IS Auto GM:");
+			System.out.println("AUTONOMOUS IS Auto GM");
 			System.out.println("Does:Grabs tote and brings it into auto zone ");
-		} else if (RobotMap.autoSelect3 != null
-				&& RobotMap.autoSelect3.get() == true) {
-			autonomousCommand = new AutoSM();
 		} else if (oi.autoSelect3 != null && oi.autoSelect3.get() == true) {
 			autonomousCommand = new AutoSM();
-			System.out.println("AUTONOMOUS IS Auto SM:");
+			System.out.println("AUTONOMOUS IS Auto SM");
 			System.out.println("Does: stacks 3 totes and moves");
 		} else if (oi.autoSelect4 != null && oi.autoSelect4.get() == true) {
 			autonomousCommand = new AutoTM();
-			System.out.println("AUTONOMOUS IS Auto TM:");
+			System.out.println("AUTONOMOUS IS Auto TM");
 			System.out.println("Does:stacks conainter on tote and moves");
 		}
-
-		autonomousCommand = new AutoM();
-		System.out.println("AUTONOMOUS IS Auto M:");
-		System.out.println("Does: moves into the auto zone");
+		 */
 
 		if (RobotMap.chassis_drive_gyro != null)
 			RobotMap.chassis_drive_gyro.reset();
 
 		ds = DriverStation.getInstance();
+//		autoChooser = new SendableChooser();
+//		autoChooser.addDefault("Rotary Switch", (Double) 0.);
+		
 		System.out.println("Started Robot Code!");
 	}
 
