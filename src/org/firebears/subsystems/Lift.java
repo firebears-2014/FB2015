@@ -26,7 +26,7 @@ public class Lift extends PIDSubsystem {
 
 	public boolean manual_mode = false;
 	public boolean enable_motor = true;
-	
+
 	public boolean manual_up = false;
 	public boolean manual_down = false;
 
@@ -85,7 +85,8 @@ public class Lift extends PIDSubsystem {
 
 		lift_output = output;
 		if (enable_motor) {
-			liftJag.pidWrite(-1 * output);
+			if (liftJag != null)
+				liftJag.pidWrite(-1 * output);
 		}
 	}
 

@@ -69,17 +69,19 @@ public class Chassis extends Subsystem {
 		// back_left.set(strafe - forward + rotation);
 		// back_right.set((strafe - forward - rotation ));
 
-/*		SmartDashboard.putNumber("frontLeft Talon .getEncVelocity",
-				((CANTalon) front_left).getEncVelocity());
-		SmartDashboard.putNumber("backLeft Talon .getEncVelocity",
-				((CANTalon) back_left).getEncVelocity());
-		SmartDashboard.putNumber("frontRight Talon .getEncVelocity",
-				((CANTalon) front_right).getEncVelocity());
-		SmartDashboard.putNumber("backRight Talon .getEncVelocity",
-				((CANTalon) back_right).getEncVelocity());*/
-
-		robot_drive.mecanumDrive_Cartesian(strafe, (reversed ? -1 : 1)
-				* forward, rotation, (reversed ? -1 : 1) * angle);
+		/*
+		 * SmartDashboard.putNumber("frontLeft Talon .getEncVelocity",
+		 * ((CANTalon) front_left).getEncVelocity());
+		 * SmartDashboard.putNumber("backLeft Talon .getEncVelocity",
+		 * ((CANTalon) back_left).getEncVelocity());
+		 * SmartDashboard.putNumber("frontRight Talon .getEncVelocity",
+		 * ((CANTalon) front_right).getEncVelocity());
+		 * SmartDashboard.putNumber("backRight Talon .getEncVelocity",
+		 * ((CANTalon) back_right).getEncVelocity());
+		 */
+		if (robot_drive != null)
+			robot_drive.mecanumDrive_Cartesian(strafe, (reversed ? -1 : 1)
+					* forward, rotation, (reversed ? -1 : 1) * angle);
 		Robot.lights.updateUnderglow(forward);
 	}
 
