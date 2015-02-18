@@ -148,6 +148,7 @@ public class OI {
 				RobotMap.LIFT_TOTE_3));
 		SmartDashboard.putData("Set Tote High", new PreferenceSetup(
 				RobotMap.LIFT_TOTE_HIGH));
+		SmartDashboard.putData("Rotate 90", new RotateCommand(.5, 90.));
 
 	}
 
