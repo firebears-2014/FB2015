@@ -244,7 +244,6 @@ public class RobotMap {
 
 		accelerometer = new BuiltInAccelerometer();
 		LiveWindow.addSensor("Accelerometer", "accelerometer", accelerometer);
-
 		scoringPlatformSensor = new DigitalInput(8);
 
 		autoSelect1 = new DigitalInput(11);

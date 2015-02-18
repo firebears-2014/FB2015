@@ -3,27 +3,29 @@ package org.firebears.commands.drive;
 import org.firebears.Robot;
 import org.firebears.RobotMap;
 
+import edu.wpi.first.wpilibj.command.Command;
+
 /*
  * This command rotates the robot by "degrees" degrees
  */
-public class RotateCommand {
+public class RotateCommand extends Command{
 	
 	public boolean fieldOriented;
 	
-	float rotateDegrees;
-	float rotateSpeed;
+	double rotateDegrees;
+	double rotateSpeed;
 	private double initialAngle;
 	private boolean isNegative = false;
 	
-	public RotateCommand(float speed, float degrees) {
+	public RotateCommand(double d, double degrees) {
 		rotateDegrees = degrees;
-		rotateSpeed = speed;
+		rotateSpeed = d;
 		if(degrees < 0) {
 			isNegative = true;
 		}
 	}
-	
-    protected void initialize() {
+
+	protected void initialize() {
 		fieldOriented = Robot.chassis.getFieldOriented();
 		Robot.chassis.setFieldOriented(false);
     	initialAngle = RobotMap.chassis_drive_gyro.getAngle();
@@ -31,17 +33,17 @@ public class RotateCommand {
     }
     
     protected void execute() {
-    	Robot.chassis.mechanumDrive(0, 0, rotateSpeed);
+    	Robot.chassis.mechanumDrive(0, 0, rotateSpeed * (isNegative ? -1. : 1.));
     }
     
     protected boolean isFinished() {
     	//If difference in angle is more than rotateDegrees
-		if(initialAngle - RobotMap.chassis_drive_gyro.getAngle() >
-			rotateDegrees * (isNegative ? -1. : 1.))
+		if(RobotMap.chassis_drive_gyro.getAngle() - initialAngle  >
+			rotateDegrees)
 		{
 			return !isNegative;
 		}else{
-	    	return isNegative;	
+	    	return isNegative;
 		}
     }
     
