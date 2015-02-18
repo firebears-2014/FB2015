@@ -11,8 +11,6 @@
 package org.firebears.commands.drive;
 
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-
 import org.firebears.Robot;
 
 /**
@@ -41,7 +39,7 @@ public class DriveCommand extends Command {
 		double y = Robot.oi.getJoystickZero().getRawAxis(1);
 		// rotation
 		double rotation = Robot.oi.getJoystickZero().getRawAxis(2);
-		double rotationMultiplier = 0.4;
+		double rotationMultiplier = 0.4; 
 		// SmartDashboard.putNumber("rotationMultiplier", rotationMultiplier);
 
 		boolean slowMode = Robot.oi.slowTriggerButton.get();
@@ -52,7 +50,7 @@ public class DriveCommand extends Command {
 		rotation = Math.signum(rotation)
 				* removeDeadband(rotation * rotation, 0.2) * rotationMultiplier;
 
-		Robot.chassis.mechanumDrive(x, y, rotation);
+		Robot.chassis.mechanumDrive(x, -1 * y, rotation);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

@@ -7,22 +7,12 @@ import edu.wpi.first.wpilibj.CANJaguar;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.CounterBase.EncodingType;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.Gyro;
-import edu.wpi.first.wpilibj.PIDSource;
-import edu.wpi.first.wpilibj.PIDSource.PIDSourceParameter;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
 import edu.wpi.first.wpilibj.SpeedController;
-import edu.wpi.first.wpilibj.Talon;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
-
-import java.util.Vector;
-
-import org.firebears.util.PIDRobotDrive;
-import org.firebears.util.TalonEncoder;
 
 /**
  * The RobotMap is a mapping from the ports sensors and actuators are wired into
@@ -109,10 +99,10 @@ public class RobotMap {
 		// Talon Code
 		if (chassis_drive_type_tal) {
 			System.out.println("Configuring RobotDrive for CANTalons");
-			chassis_front_left_controller = new CANTalon(3);
-			chassis_front_right_controller = new CANTalon(5);
+			chassis_front_left_controller = new CANTalon(5);
+			chassis_front_right_controller = new CANTalon(1);
 			chassis_back_left_controller = new CANTalon(4);
-			chassis_back_right_controller = new CANTalon(2);
+			chassis_back_right_controller = new CANTalon(3);
 
 		} else {
 			// Jag Code
