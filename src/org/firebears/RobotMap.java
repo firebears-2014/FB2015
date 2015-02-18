@@ -85,11 +85,11 @@ public class RobotMap {
 		Preferences preferences = Preferences.getInstance();
 
 		lift_zero_ref = preferences.getDouble(LIFT_ZERO_REF, 0.0);
-		lift_tote_0 = preferences.getDouble(LIFT_TOTE_0, 8.5);
-		lift_tote_1 = preferences.getDouble(LIFT_TOTE_1, 21.5);
-		lift_tote_2 = preferences.getDouble(LIFT_TOTE_2, 33.5);
-		lift_tote_3 = preferences.getDouble(LIFT_TOTE_3, 46.0);
-		lift_tote_high = preferences.getDouble(LIFT_TOTE_HIGH, 58.0);
+		lift_tote_0 = preferences.getDouble(LIFT_TOTE_0, 0.5);
+		lift_tote_1 = preferences.getDouble(LIFT_TOTE_1, 12.0);
+		lift_tote_2 = preferences.getDouble(LIFT_TOTE_2, 23.3);
+		lift_tote_3 = preferences.getDouble(LIFT_TOTE_3, 35.5);
+		lift_tote_high = preferences.getDouble(LIFT_TOTE_HIGH, 46.5);
 		chassis_drive_type_tal = preferences.getBoolean(CHASSIS_DRIVE_TYPE_TAL,
 				true);
 		if (!preferences.containsKey(CHASSIS_FIELD_ORIENTED)) {
@@ -244,8 +244,6 @@ public class RobotMap {
 
 		accelerometer = new BuiltInAccelerometer();
 		LiveWindow.addSensor("Accelerometer", "accelerometer", accelerometer);
-
-		rightArmsharpIRRange = new org.firebears.sensors.sharpIRRange(5);//5
 
 		scoringPlatformSensor = new DigitalInput(8);
 

@@ -204,13 +204,10 @@ public class Robot extends IterativeRobot {
 
 		}
 
-
 		SmartDashboard.putNumber("Lift 0", RobotMap.lift_tote_0);
 		SmartDashboard.putNumber("Lift 1", RobotMap.lift_tote_1);
 		SmartDashboard.putNumber("Lift 2", RobotMap.lift_tote_2);
 		SmartDashboard.putNumber("Lift 3", RobotMap.lift_tote_3);
-
-
 
 		// Run the teleop last twenty animations in the last 20 seconds
 		if (lights.isEarly && ds.getMatchTime() >= 130.0) {
@@ -229,16 +226,16 @@ public class Robot extends IterativeRobot {
 	 */
 	public void testPeriodic() {
 		LiveWindow.run();
-		SmartDashboard.putData("Set Zero", new PreferenceSetup(
-				RobotMap.LIFT_ZERO_REF));
-		SmartDashboard.putData("Set Tote Zero 0", new PreferenceSetup(
-				RobotMap.LIFT_TOTE_0));
-		SmartDashboard.putData("Set Tote One", new PreferenceSetup(
-				RobotMap.LIFT_TOTE_1));
-		SmartDashboard.putData("Set Tote Two", new PreferenceSetup(
-				RobotMap.LIFT_TOTE_2));
-		SmartDashboard.putData("Set Tote Three", new PreferenceSetup(
-				RobotMap.LIFT_TOTE_3));
+		/*
+		 * SmartDashboard.putData("Set Zero", new PreferenceSetup(
+		 * RobotMap.LIFT_ZERO_REF)); SmartDashboard.putData("Set Tote Zero 0",
+		 * new PreferenceSetup( RobotMap.LIFT_TOTE_0));
+		 * SmartDashboard.putData("Set Tote One", new PreferenceSetup(
+		 * RobotMap.LIFT_TOTE_1)); SmartDashboard.putData("Set Tote Two", new
+		 * PreferenceSetup( RobotMap.LIFT_TOTE_2));
+		 * SmartDashboard.putData("Set Tote Three", new PreferenceSetup(
+		 * RobotMap.LIFT_TOTE_3));
+		 */
 		lift.setSetpoint(STARTING_HEIGHT);
 	}
 }
