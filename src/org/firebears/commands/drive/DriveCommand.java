@@ -37,8 +37,9 @@ public class DriveCommand extends Command {
 	protected void execute() {
 		// strafe left/right
 		double x = Robot.oi.getJoystickZero().getRawAxis(0); 
-		double y = Robot.oi.getJoystickZero().getRawAxis(1); // forward /
-																// backwards
+		// forward / backwards
+		double y = Robot.oi.getJoystickZero().getRawAxis(1);
+		// rotation
 		double rotation = Robot.oi.getJoystickZero().getRawAxis(2);
 		double rotationMultiplier = 0.4;
 		// SmartDashboard.putNumber("rotationMultiplier", rotationMultiplier);
