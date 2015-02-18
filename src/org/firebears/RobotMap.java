@@ -245,8 +245,6 @@ public class RobotMap {
 		accelerometer = new BuiltInAccelerometer();
 		LiveWindow.addSensor("Accelerometer", "accelerometer", accelerometer);
 
-		rightArmsharpIRRange = new org.firebears.sensors.sharpIRRange(5);//5
-
 		scoringPlatformSensor = new DigitalInput(8);
 
 		autoSelect1 = new DigitalInput(11);
