@@ -169,32 +169,37 @@ public class RobotMap {
 		 * chassis_back_right_encoder
 		 * .setPIDSourceParameter(PIDSourceParameter.kRate);
 		 */
+		if (chassis_front_left_controller != null
+				|| chassis_front_left_controller != null
+				|| chassis_front_left_controller != null
+				|| chassis_front_left_controller != null) {
+			chassis_robot_drive = new RobotDrive(chassis_front_left_controller,
+					chassis_back_left_controller,
+					chassis_front_right_controller,
+					chassis_back_right_controller);
+			// PID Robot Drive: warning DANGEROUS
+			/*
+			 * chassis_robot_drive = new PIDRobotDrive(
+			 * chassis_front_left_controller, chassis_back_left_controller,
+			 * chassis_front_right_controller, chassis_back_right_controller,
+			 * chassis_front_left_encoder, chassis_back_left_encoder,
+			 * chassis_front_right_encoder,chassis_back_right_encoder, 1.0);
+			 */
 
-		chassis_robot_drive = new RobotDrive(chassis_front_left_controller,
-				chassis_back_left_controller, chassis_front_right_controller,
-				chassis_back_right_controller);
-		// PID Robot Drive: warning DANGEROUS
-		/*
-		 * chassis_robot_drive = new PIDRobotDrive(
-		 * chassis_front_left_controller, chassis_back_left_controller,
-		 * chassis_front_right_controller, chassis_back_right_controller,
-		 * chassis_front_left_encoder, chassis_back_left_encoder,
-		 * chassis_front_right_encoder,chassis_back_right_encoder, 1.0);
-		 */
+			chassis_robot_drive.setInvertedMotor(
+					RobotDrive.MotorType.kFrontRight, true);
+			chassis_robot_drive.setInvertedMotor(
+					RobotDrive.MotorType.kFrontLeft, false);
+			chassis_robot_drive.setInvertedMotor(
+					RobotDrive.MotorType.kRearRight, true);
+			chassis_robot_drive.setInvertedMotor(
+					RobotDrive.MotorType.kRearLeft, false);
 
-		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kFrontRight,
-				true);
-		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft,
-				false);
-		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kRearRight,
-				true);
-		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft,
-				false);
-
-		chassis_robot_drive.setSafetyEnabled(true);
-		chassis_robot_drive.setExpiration(0.1);
-		chassis_robot_drive.setSensitivity(0.5);
-		chassis_robot_drive.setMaxOutput(1.0);
+			chassis_robot_drive.setSafetyEnabled(true);
+			chassis_robot_drive.setExpiration(0.1);
+			chassis_robot_drive.setSensitivity(0.5);
+			chassis_robot_drive.setMaxOutput(1.0);
+		}
 
 		chassis_drive_gyro = new Gyro(0);
 		LiveWindow.addSensor("Chassis", "drive_gyro", chassis_drive_gyro);
