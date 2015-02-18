@@ -1,6 +1,7 @@
 package org.firebears.commands.drive;
 
 import org.firebears.Robot;
+import org.firebears.RobotMap;
 
 /*
  * This command rotates the robot by "degrees" degrees
@@ -11,15 +12,21 @@ public class RotateCommand {
 	
 	float rotateDegrees;
 	float rotateSpeed;
+	private double initialAngle;
+	private boolean isNegative = false;
 	
 	public RotateCommand(float speed, float degrees) {
 		rotateDegrees = degrees;
 		rotateSpeed = speed;
+		if(degrees < 0) {
+			isNegative = true;
+		}
 	}
 	
     protected void initialize() {
 		fieldOriented = Robot.chassis.getFieldOriented();
 		Robot.chassis.setFieldOriented(false);
+    	initialAngle = RobotMap.chassis_drive_gyro.getAngle();
     	execute();
     }
     
@@ -28,7 +35,14 @@ public class RotateCommand {
     }
     
     protected boolean isFinished() {
-    	return false;
+    	//If difference in angle is more than rotateDegrees
+		if(initialAngle - RobotMap.chassis_drive_gyro.getAngle() >
+			rotateDegrees * (isNegative ? -1. : 1.))
+		{
+			return !isNegative;
+		}else{
+	    	return isNegative;	
+		}
     }
     
     protected void end() {
