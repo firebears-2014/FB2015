@@ -50,7 +50,6 @@ public class OI {
 		// Initialize joysticks
 		joystickDrive = new Joystick(0);
 		joystickLift = new Joystick(1);
-
 		// LIFT Joystick Initialization
 
 		setLiftTote0 = new JoystickButton(joystickLift, 1);

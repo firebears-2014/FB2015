@@ -33,17 +33,17 @@ public class RotateCommand extends Command{
     }
     
     protected void execute() {
-    	Robot.chassis.mechanumDrive(0, 0, rotateSpeed);
+    	Robot.chassis.mechanumDrive(0, 0, rotateSpeed * (isNegative ? -1. : 1.));
     }
     
     protected boolean isFinished() {
     	//If difference in angle is more than rotateDegrees
-		if(initialAngle - RobotMap.chassis_drive_gyro.getAngle() >
-			rotateDegrees * (isNegative ? -1. : 1.))
+		if(RobotMap.chassis_drive_gyro.getAngle() - initialAngle  >
+			rotateDegrees)
 		{
 			return !isNegative;
 		}else{
-	    	return isNegative;	
+	    	return isNegative;
 		}
     }
     

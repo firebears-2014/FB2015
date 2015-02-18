@@ -16,7 +16,8 @@ public class Lights extends Subsystem {
 	// Constants for pixel strips 
 	public static final String STRIP_LIFT1 = "lift1";
 	public static final String STRIP_LIFT2 = "lift2";
-	public static final String STRIP_BOX = "box";
+	public static final String STRIP_BOX_1 = "box_1";
+	public static final String STRIP_BOX_2 = "box_2";
 	public static final String STRIP_UNDERGLOW = "underglow";
 	public static final String STRIP_CELEBRATE = "celebrate";
 	
@@ -54,17 +55,20 @@ public class Lights extends Subsystem {
 		disabled();
 		setColor(STRIP_LIFT1, CS_RED);
 		setColor(STRIP_LIFT2, CS_RED);
-		setColor(STRIP_BOX, CS_RED);
+		setColor(STRIP_BOX_1, CS_RED);
+		setColor(STRIP_BOX_2, CS_RED);
 		setColor(STRIP_UNDERGLOW, CS_RED);
 		setColor(STRIP_CELEBRATE, CS_RED);
 		setValue(STRIP_LIFT1, 0);
 		setValue(STRIP_LIFT2, 0);
-		setValue(STRIP_BOX, 0);
+		setValue(STRIP_BOX_1, 0);
+		setValue(STRIP_BOX_2, 0);
 		setValue(STRIP_UNDERGLOW, 0);
 		setValue(STRIP_CELEBRATE, 0);
 		setBg(STRIP_LIFT1, 64, ANIM_FIRE);
 		setBg(STRIP_LIFT2, 64, ANIM_FIRE);
-		setBg(STRIP_BOX, 64, ANIM_FIRE);
+		setBg(STRIP_BOX_1, 64, ANIM_FIRE);
+		setBg(STRIP_BOX_2, 64, ANIM_FIRE);
 		setBg(STRIP_UNDERGLOW, 64, ANIM_FIRE);
 		setBg(STRIP_CELEBRATE, 64, ANIM_FIRE);
 	}
@@ -113,7 +117,8 @@ public class Lights extends Subsystem {
     public void disabled() {
     	setStrip(STRIP_LIFT1, ANIM_FIRE);
     	setStrip(STRIP_LIFT2, ANIM_FIRE);
-    	setStrip(STRIP_BOX, ANIM_FIRE);
+    	setStrip(STRIP_BOX_1, ANIM_FIRE);
+    	setStrip(STRIP_BOX_2, ANIM_FIRE);
     	setStrip(STRIP_UNDERGLOW, ANIM_FIRE);
     	setStrip(STRIP_CELEBRATE, ANIM_FIRE);
     }
@@ -121,7 +126,8 @@ public class Lights extends Subsystem {
     public void autonomous(boolean red) {
     	setStrip(STRIP_LIFT1, ANIM_BINARY);
     	setStrip(STRIP_LIFT2, ANIM_BINARY);
-    	setStrip(STRIP_BOX, ANIM_PULSE);
+    	setStrip(STRIP_BOX_1, ANIM_PULSE);
+    	setStrip(STRIP_BOX_2, ANIM_PULSE);
     	setStrip(STRIP_UNDERGLOW, ANIM_CATERPILLAR);
     	setStrip(STRIP_CELEBRATE, ANIM_PULSE);
     	if(red) {
@@ -134,8 +140,10 @@ public class Lights extends Subsystem {
     public void teleop() {
     	setStrip(STRIP_LIFT1, ANIM_LIFT);
     	setStrip(STRIP_LIFT2, ANIM_LIFT);
-    	setStrip(STRIP_BOX, ANIM_PULSE);
-    		setColor(STRIP_BOX, CS_RED_YELLOW);
+    	setStrip(STRIP_BOX_1, ANIM_PULSE);
+    		setColor(STRIP_BOX_1, CS_RED_YELLOW);
+        setStrip(STRIP_BOX_2, ANIM_PULSE);
+    		setColor(STRIP_BOX_2, CS_RED_YELLOW);
     	setStrip(STRIP_UNDERGLOW, ANIM_CATERPILLAR);
 			setColor(STRIP_UNDERGLOW, CS_YELLOW);
 		setStrip(STRIP_CELEBRATE, ANIM_PULSE);
@@ -145,8 +153,10 @@ public class Lights extends Subsystem {
     public void last_twenty() {
     	System.out.println("LAST TWENTY");
 		//No change required for lift lights
-		setStrip(STRIP_BOX, ANIM_PULSE);
-			setColor(STRIP_BOX, CS_RED_WHITE);
+		setStrip(STRIP_BOX_1, ANIM_PULSE);
+			setColor(STRIP_BOX_1, CS_RED_WHITE);
+		setStrip(STRIP_BOX_2, ANIM_PULSE);
+			setColor(STRIP_BOX_2, CS_RED_WHITE);
 		setStrip(STRIP_UNDERGLOW, ANIM_CATERPILLAR);
 			setColor(STRIP_UNDERGLOW, CS_WHITE);
 		setStrip(STRIP_CELEBRATE, ANIM_PULSE);
@@ -156,14 +166,16 @@ public class Lights extends Subsystem {
     public void celebrate() {
     	setStrip(STRIP_LIFT1, ANIM_CRAZY);
     	setStrip(STRIP_LIFT2, ANIM_CRAZY);
-    	setStrip(STRIP_BOX, ANIM_CRAZY);
+    	setStrip(STRIP_BOX_1, ANIM_CRAZY);
+    	setStrip(STRIP_BOX_2, ANIM_CRAZY);
     	setStrip(STRIP_UNDERGLOW, ANIM_CRAZY);
     	setStrip(STRIP_CELEBRATE, ANIM_CRAZY);
     	
     	double crazyValue = 100.0;
     	setValue(STRIP_LIFT1, crazyValue);
     	setValue(STRIP_LIFT2, crazyValue);
-    	setValue(STRIP_BOX, crazyValue);
+    	setValue(STRIP_BOX_1, crazyValue);
+    	setValue(STRIP_BOX_2, crazyValue);
     	setValue(STRIP_UNDERGLOW, crazyValue);
     	setValue(STRIP_CELEBRATE, crazyValue);
     }
