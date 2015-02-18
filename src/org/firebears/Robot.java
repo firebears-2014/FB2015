@@ -203,6 +203,15 @@ public class Robot extends IterativeRobot {
 			SmartDashboard.putNumber("Tote Speed", chassis.approachSpeed);
 
 		}
+
+
+		SmartDashboard.putNumber("Lift 0", RobotMap.lift_tote_0);
+		SmartDashboard.putNumber("Lift 1", RobotMap.lift_tote_1);
+		SmartDashboard.putNumber("Lift 2", RobotMap.lift_tote_2);
+		SmartDashboard.putNumber("Lift 3", RobotMap.lift_tote_3);
+
+
+
 		// Run the teleop last twenty animations in the last 20 seconds
 		if (lights.isEarly && ds.getMatchTime() >= 130.0) {
 			lights.isEarly = false;
