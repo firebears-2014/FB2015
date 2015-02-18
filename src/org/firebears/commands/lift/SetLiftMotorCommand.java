@@ -7,11 +7,11 @@ import edu.wpi.first.wpilibj.command.Command;
 /**
  * sets whether the motor for the lift is enabled or not.
  */
-public class SetLiftMotor extends Command {
+public class SetLiftMotorCommand extends Command {
 	
 	boolean enable_motor;
 	
-    public SetLiftMotor(boolean enable) {
+    public SetLiftMotorCommand(boolean enable) {
         // Use requires() here to declare subsystem dependencies
         // eg. requires(chassis);
     	if (Robot.lift!=null) requires(Robot.lift);

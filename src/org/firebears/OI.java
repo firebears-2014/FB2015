@@ -1,26 +1,19 @@
 package org.firebears;
 
 import org.firebears.commands.*;
-import org.firebears.commands.drive.DriveCommand;
-import org.firebears.commands.drive.ForwardCommand;
-import org.firebears.commands.drive.StrafeCommand;
 import org.firebears.commands.grabber.*;
 import org.firebears.commands.lift.SetHeightCommand;
-import org.firebears.commands.lift.SetLiftMotor;
-import org.firebears.commands.lift.SetStep;
+import org.firebears.commands.lift.SetLiftMotorCommand;
+import org.firebears.commands.lift.SetManualCommand;
+import org.firebears.commands.lift.SetStepCommand;
 import org.firebears.commands.lights.CelebrateCommand;
-import org.firebears.commands.lights.LightChangeCommand;
 import org.firebears.commands.drive.*;
-import org.firebears.commands.lights.*;
 import org.firebears.sensors.GyroResetCommand;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
-import edu.wpi.first.wpilibj.Sendable;
 import edu.wpi.first.wpilibj.buttons.JoystickButton;
-import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
-import edu.wpi.first.wpilibj.DigitalInput;
 
 /**
  * This class is the glue that binds the controls on the physical operator
@@ -30,23 +23,22 @@ public class OI {
 
 	public Joystick joystickDrive;
 	public Joystick joystickLift;
-	public DigitalInput scoringPlatformSensor;
 	public DigitalInput ContainerSensor;
+
 	public DigitalInput autoSelect1;
 	public DigitalInput autoSelect2;
 	public DigitalInput autoSelect3;
-	// only three, unless we get a new rotary switch
-	// public DigitalInput autoSelect4;
+	public DigitalInput autoSelect4;
 
-	public JoystickButton setLiftPickup;
 	public JoystickButton setLiftTote0;
 	public JoystickButton setLiftTote1;
 	public JoystickButton setLiftTote2;
 	public JoystickButton setLiftTote3;
+	public JoystickButton setLiftToteHigh;
 	public JoystickButton openGrabbers;
 	public JoystickButton closeGrabbers;
 	public JoystickButton toggleStepSwitch;
-	public JoystickButton toggleAutomatedSwitch;
+	public JoystickButton toggleManualSwitch;
 	public JoystickButton wideCentertote;
 	public JoystickButton centerTote;
 	public JoystickButton resetGyro;
@@ -59,37 +51,27 @@ public class OI {
 		joystickDrive = new Joystick(0);
 		joystickLift = new Joystick(1);
 
-		scoringPlatformSensor = new DigitalInput(8);
-		autoSelect1 = new DigitalInput(11);
-		autoSelect2 = new DigitalInput(12);
-		autoSelect3 = new DigitalInput(13);
-
-		// (new JoystickButton(joystickDrive, 3)).whileHeld(new
-		// ForwardCommand(0.5));
-		// (new JoystickButton(joystickDrive, 5)).whileHeld(new
-		// ForwardCommand(-0.5));
-
 		// LIFT Joystick Initialization
 
-		setLiftPickup = new JoystickButton(joystickLift, 1);
-		setLiftPickup.whenPressed(new SetHeightCommand(
-				Robot.lift.LIFT_PICKUP_HEIGHT));
-
-		setLiftTote0 = new JoystickButton(joystickLift, 2);
+		setLiftTote0 = new JoystickButton(joystickLift, 1);
 		setLiftTote0
 				.whenPressed(new SetHeightCommand(Robot.lift.LIFT_0_HEIGHT));
 
-		setLiftTote1 = new JoystickButton(joystickLift, 3);
+		setLiftTote1 = new JoystickButton(joystickLift, 2);
 		setLiftTote1
 				.whenPressed(new SetHeightCommand(Robot.lift.LIFT_1_HEIGHT));
 
-		setLiftTote2 = new JoystickButton(joystickLift, 4);
+		setLiftTote2 = new JoystickButton(joystickLift, 3);
 		setLiftTote2
 				.whenPressed(new SetHeightCommand(Robot.lift.LIFT_2_HEIGHT));
 
-		setLiftTote3 = new JoystickButton(joystickLift, 5);
+		setLiftTote3 = new JoystickButton(joystickLift, 4);
 		setLiftTote3
 				.whenPressed(new SetHeightCommand(Robot.lift.LIFT_3_HEIGHT));
+
+		setLiftToteHigh = new JoystickButton(joystickLift, 5);
+		setLiftToteHigh.whenPressed(new SetHeightCommand(
+				Robot.lift.LIFT_HIGH_HEIGHT));
 
 		openGrabbers = new JoystickButton(joystickLift, 6);
 		openGrabbers.whenPressed(new GrabberCommand(true));
@@ -98,11 +80,15 @@ public class OI {
 		closeGrabbers.whenPressed(new GrabberCommand(false));
 
 		toggleStepSwitch = new JoystickButton(joystickLift, 8);
-		toggleStepSwitch.whenPressed(new SetStep(true));
-		toggleStepSwitch.whenReleased(new SetStep(false));
+		toggleStepSwitch.whenPressed(new SetStepCommand(false));
+		toggleStepSwitch.whenReleased(new SetStepCommand(true));
 
-		celebrate = new JoystickButton(joystickLift, 10);
-		celebrate.whileHeld(new CelebrateCommand());
+		toggleManualSwitch = new JoystickButton(joystickLift, 9);
+		toggleManualSwitch.whenPressed(new SetManualCommand(false));
+		toggleManualSwitch.whenReleased(new SetManualCommand(true));
+
+		celebrate = new JoystickButton(joystickLift, 11);
+		celebrate.whenPressed(new CelebrateCommand());
 
 		// DRIVE Joystick Initialization
 
@@ -112,7 +98,7 @@ public class OI {
 		resetGyro.whenPressed(new GyroResetCommand());
 
 		approachTote = new JoystickButton(joystickDrive, 9);
-		approachTote.whenPressed(new ToteApproachCommand());
+		// approachTote.whenPressed(new ToteApproachCommand());
 
 		wideCentertote = new JoystickButton(joystickDrive, 11);
 		wideCentertote.whenPressed(new WidetoteCommand());
@@ -125,12 +111,16 @@ public class OI {
 		// AutonomousCommand());
 
 		if (RobotMap.DEBUG) {
+			SmartDashboard.putData("lift to 0", new SetHeightCommand(
+					Robot.lift.LIFT_0_HEIGHT));
 			SmartDashboard.putData("lift to 1", new SetHeightCommand(
 					Robot.lift.LIFT_1_HEIGHT));
 			SmartDashboard.putData("lift to 2", new SetHeightCommand(
 					Robot.lift.LIFT_2_HEIGHT));
 			SmartDashboard.putData("lift to 3", new SetHeightCommand(
 					Robot.lift.LIFT_3_HEIGHT));
+			SmartDashboard.putData("lift to high", new SetHeightCommand(
+					Robot.lift.LIFT_HIGH_HEIGHT));
 
 			SmartDashboard.putData("Run Talon Code", new PreferenceSetup(
 					RobotMap.CHASSIS_DRIVE_TYPE_TAL));
@@ -141,24 +131,24 @@ public class OI {
 				SmartDashboard
 						.putBoolean("Lift Motor", Robot.lift.enable_motor);
 
-			SmartDashboard.putData("Enable Lift Motor", new SetLiftMotor(true));
+			SmartDashboard.putData("Enable Lift Motor",
+					new SetLiftMotorCommand(true));
 			SmartDashboard.putData("Disable Lift Motor",
-					new SetLiftMotor(false));
-
-			SmartDashboard.putData("Set Zero", new PreferenceSetup(
-					RobotMap.LIFT_ZERO_REF));
-			SmartDashboard.putData("Set Tote Zero Pickup", new PreferenceSetup(
-					RobotMap.LIFT_TOTE_PICKUP));
-			SmartDashboard.putData("Set Tote One", new PreferenceSetup(
-					RobotMap.LIFT_TOTE_1));
-			SmartDashboard.putData("Set Tote Two", new PreferenceSetup(
-					RobotMap.LIFT_TOTE_2));
-			SmartDashboard.putData("Set Tote Three", new PreferenceSetup(
-					RobotMap.LIFT_TOTE_3));
-
-			// SmartDashboard.putData("Change Lights", new LightChangeCommand(0,
-			// Robot.lights.RANDOM_ANIM));
+					new SetLiftMotorCommand(false));
 		}
+		SmartDashboard.putData("Set Zero", new PreferenceSetup(
+				RobotMap.LIFT_ZERO_REF));
+		SmartDashboard.putData("Set Tote Zero Pickup", new PreferenceSetup(
+				RobotMap.LIFT_TOTE_0));
+		SmartDashboard.putData("Set Tote One", new PreferenceSetup(
+				RobotMap.LIFT_TOTE_1));
+		SmartDashboard.putData("Set Tote Two", new PreferenceSetup(
+				RobotMap.LIFT_TOTE_2));
+		SmartDashboard.putData("Set Tote Three", new PreferenceSetup(
+				RobotMap.LIFT_TOTE_3));
+		SmartDashboard.putData("Set Tote High", new PreferenceSetup(
+				RobotMap.LIFT_TOTE_HIGH));
+
 	}
 
 	public Joystick getJoystickZero() {

@@ -3,13 +3,12 @@ package org.firebears;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.DriverStation;
 import edu.wpi.first.wpilibj.DriverStation.Alliance;
-import edu.wpi.first.wpilibj.Encoder;
 import edu.wpi.first.wpilibj.IterativeRobot;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.command.Command;
 import edu.wpi.first.wpilibj.command.Scheduler;
-import edu.wpi.first.wpilibj.command.Subsystem;
 import edu.wpi.first.wpilibj.livewindow.LiveWindow;
+import edu.wpi.first.wpilibj.smartdashboard.SendableChooser;
 import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 import org.firebears.commands.PreferenceSetup;
@@ -25,11 +24,13 @@ import org.firebears.subsystems.*;
  */
 public class Robot extends IterativeRobot {
 	public DriverStation ds;
+	SendableChooser autoChooser;
 
 	Command autonomousCommand;
 	Command AutoGM;
 	Command AutoM;
 	Command AutoSM;
+	Command AutoTM;
 	private BuiltInAccelerometer accel = new BuiltInAccelerometer();
 	public static OI oi;
 	public static Chassis chassis;
@@ -40,12 +41,14 @@ public class Robot extends IterativeRobot {
 	public static double accX;
 	public static double accZ;
 	public static double accY;
+	private final double STARTING_HEIGHT = 20;
 
 	/**
 	 * This function is run when the robot is first started up and should be
 	 * used for any initialization code.
 	 */
 	public void robotInit() {
+		System.out.println("Starting robot code...");
 		RobotMap.init();
 
 		chassis = new Chassis();
@@ -53,6 +56,9 @@ public class Robot extends IterativeRobot {
 		grabber = new Grabber();
 		lights = new Lights();
 		vision = new Vision();
+
+		chassis.setReversed(RobotMap.chassis_drive_type_tal);
+
 		// OI must be constructed after subsystems. If the OI creates Commands
 		// (which it very likely will), subsystems are not guaranteed to be
 		// constructed yet. Thus, their requires() statements may grab null
@@ -63,21 +69,34 @@ public class Robot extends IterativeRobot {
 		// uncomment next 3 lines to override defaults.
 		// autonomousCommand = new AutoStrafeCommand();
 		// /*
-		if (oi.autoSelect1 != null && oi.autoSelect1.get() == true) {
-			autonomousCommand = new AutoSM(); // rotary switch position 4
-		} else if (oi.autoSelect2 != null && oi.autoSelect2.get() == true) {
-			autonomousCommand = new AutoGM(); // rotary switch position 5
+		
+//		if (oi.autoSelect1 != null && oi.autoSelect1.get() == true) {
+			autonomousCommand = new AutoM();
+		  	System.out.println("AUTONOMOUS IS Auto M:");
+		  	System.out.println("Does: moves into the auto zone"); 
+/*		} else if (oi.autoSelect2 != null && oi.autoSelect2.get() == true) { 
+			autonomousCommand = new AutoGM();
+			System.out.println("AUTONOMOUS IS Auto GM");
+			System.out.println("Does:Grabs tote and brings it into auto zone ");
 		} else if (oi.autoSelect3 != null && oi.autoSelect3.get() == true) {
-			autonomousCommand = new AutoM(); // rotary switch position 6
-		}// else if (OI.autoSelect4.get()==false){autonomousCommand = new
-			// AutonomousCommand();
-			// }
-			// */
+			autonomousCommand = new AutoSM();
+			System.out.println("AUTONOMOUS IS Auto SM");
+			System.out.println("Does: stacks 3 totes and moves");
+		} else if (oi.autoSelect4 != null && oi.autoSelect4.get() == true) {
+			autonomousCommand = new AutoTM();
+			System.out.println("AUTONOMOUS IS Auto TM");
+			System.out.println("Does:stacks conainter on tote and moves");
+		}
+		 */
+
 		if (RobotMap.chassis_drive_gyro != null)
 			RobotMap.chassis_drive_gyro.reset();
 
 		ds = DriverStation.getInstance();
-
+//		autoChooser = new SendableChooser();
+//		autoChooser.addDefault("Rotary Switch", (Double) 0.);
+		
+		System.out.println("Started Robot Code!");
 	}
 
 	/**
@@ -132,6 +151,7 @@ public class Robot extends IterativeRobot {
 		chassis.setFieldOriented(fieldOriented);
 
 		// Go into teleop lights
+		lights.isEarly = false;
 		lights.teleop();
 	}
 
@@ -142,9 +162,9 @@ public class Robot extends IterativeRobot {
 	public void teleopPeriodic() {
 		Scheduler.getInstance().run();
 
-		if (oi.scoringPlatformSensor != null)
+		if (RobotMap.scoringPlatformSensor != null)
 			SmartDashboard.putBoolean("Color Sensor Value",
-					oi.scoringPlatformSensor.get());
+					RobotMap.scoringPlatformSensor.get());
 		if (RobotMap.leftArmsharpIRRange != null)
 			SmartDashboard.putNumber("Far Left Distance from object",
 					RobotMap.leftArmsharpIRRange.getRangefinderDistance());
@@ -171,15 +191,27 @@ public class Robot extends IterativeRobot {
 					Robot.lift.getLiftHeight());
 			SmartDashboard.putNumber("Lift SetPoint", Robot.lift.getSetpoint());
 			SmartDashboard.putNumber("Lift Output", Robot.lift.lift_output);
+
+			SmartDashboard.putNumber("Lift 0", RobotMap.lift_tote_0);
+			SmartDashboard.putNumber("Lift 1", RobotMap.lift_tote_1);
+			SmartDashboard.putNumber("Lift 2", RobotMap.lift_tote_2);
+			SmartDashboard.putNumber("Lift 3", RobotMap.lift_tote_3);
+
+			SmartDashboard.putNumber("Tote State", chassis.toteState);
+			SmartDashboard.putNumber("Tote Speed", chassis.approachSpeed);
+
 		}
 
-		SmartDashboard.putNumber("Lift 0", RobotMap.lift_tote_pickup);
+
+		SmartDashboard.putNumber("Lift 0", RobotMap.lift_tote_0);
 		SmartDashboard.putNumber("Lift 1", RobotMap.lift_tote_1);
 		SmartDashboard.putNumber("Lift 2", RobotMap.lift_tote_2);
 		SmartDashboard.putNumber("Lift 3", RobotMap.lift_tote_3);
 
+
+
 		// Run the teleop last twenty animations in the last 20 seconds
-		if (lights.isEarly && ds.getMatchTime() <= 20) {
+		if (lights.isEarly && ds.getMatchTime() >= 130.0) {
 			lights.isEarly = false;
 			lights.last_twenty();
 		}
@@ -197,14 +229,14 @@ public class Robot extends IterativeRobot {
 		LiveWindow.run();
 		SmartDashboard.putData("Set Zero", new PreferenceSetup(
 				RobotMap.LIFT_ZERO_REF));
-		SmartDashboard.putData("Set Tote Zero Pickup", new PreferenceSetup(
-				RobotMap.LIFT_TOTE_PICKUP));
+		SmartDashboard.putData("Set Tote Zero 0", new PreferenceSetup(
+				RobotMap.LIFT_TOTE_0));
 		SmartDashboard.putData("Set Tote One", new PreferenceSetup(
 				RobotMap.LIFT_TOTE_1));
 		SmartDashboard.putData("Set Tote Two", new PreferenceSetup(
 				RobotMap.LIFT_TOTE_2));
 		SmartDashboard.putData("Set Tote Three", new PreferenceSetup(
 				RobotMap.LIFT_TOTE_3));
-
+		lift.setSetpoint(STARTING_HEIGHT);
 	}
 }

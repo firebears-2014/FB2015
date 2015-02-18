@@ -5,7 +5,6 @@ import org.firebears.RobotMap;
 
 import edu.wpi.first.wpilibj.Timer;
 import edu.wpi.first.wpilibj.command.Command;
-import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  *
@@ -262,14 +261,6 @@ public class ToteApproachCommand extends Command {
 			return 0;
 		else
 			return -1 * speed;
-
-		/*
-		 * 20 / 5 * 4
-		 * 
-		 * 5 * 4 = 20 20 / 20 = 1
-		 * 
-		 * 20 / 5 = 4 4 * 4 = 16
-		 */
 	}
 
 	private double getRotateSpeed(double distance) {// ****PVM 2/11

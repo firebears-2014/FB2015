@@ -21,6 +21,7 @@ public class Totecenter extends Command {
     protected void initialize() {
 		fieldOriented = Robot.chassis.getFieldOriented();
 		Robot.chassis.setFieldOriented(false);
+		setTimeout(3);
     }
 
     // Called repeatedly when this Command is scheduled to run  distance in inches

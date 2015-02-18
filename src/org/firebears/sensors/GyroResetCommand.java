@@ -1,39 +1,27 @@
 package org.firebears.sensors;
 
-import org.firebears.Robot;
+import org.firebears.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- * reset the gyro to zero degrees
+ * Reset the gyro to zero degrees.
  */
 public class GyroResetCommand extends Command {
 
-	public GyroResetCommand() {
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
-	}
+	public GyroResetCommand() { }
 
-	// Called just before this Command runs the first time
 	protected void initialize() {
-		Robot.chassis.drive_gyro.reset();
+		RobotMap.chassis_drive_gyro.reset();
 	}
 
-	// Called repeatedly when this Command is scheduled to run
-	protected void execute() {
-	}
+	protected void execute() { }
 
-	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
 		return true;
 	}
 
-	// Called once after isFinished returns true
-	protected void end() {
-	}
+	protected void end() { }
 
-	// Called when another command which requires one or more of the same
-	// subsystems is scheduled to run
-	protected void interrupted() {
-	}
+	protected void interrupted() { }
 }
