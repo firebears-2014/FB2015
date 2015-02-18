@@ -2,6 +2,7 @@ package org.firebears.subsystems;
 
 import org.firebears.Robot;
 import org.firebears.RobotMap;
+import org.firebears.commands.PreferenceSetup;
 import org.firebears.sensors.HeightSensor;
 
 import edu.wpi.first.wpilibj.*;
@@ -52,6 +53,8 @@ public class Lift extends PIDSubsystem {
 		// setSetpoint() - Sets where the PID controller should move the system
 		// to
 		// enable() - Enables the PID controller.
+
+		new PreferenceSetup(RobotMap.LIFT_ZERO_REF);
 
 	}
 
