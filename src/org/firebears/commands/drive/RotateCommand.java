@@ -1,6 +1,7 @@
 package org.firebears.commands.drive;
 
 import org.firebears.Robot;
+import org.firebears.RobotMap;
 
 /*
  * This command rotates the robot by "degrees" degrees
