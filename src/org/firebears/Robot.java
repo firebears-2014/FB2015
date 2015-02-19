@@ -88,15 +88,35 @@ public class Robot extends IterativeRobot {
 			System.out.println("AUTONOMOUS IS Auto TM");
 			System.out.println("Does:stacks conainter on tote and moves");
 		}
+=======
+
+		// if (oi.autoSelect1 != null && oi.autoSelect1.get() == true) {
+		autonomousCommand = new AutoM();
+		System.out.println("AUTONOMOUS IS Auto M:");
+		System.out.println("Does: moves into the auto zone");
+		/*
+		 * } else if (oi.autoSelect2 != null && oi.autoSelect2.get() == true) {
+		 * autonomousCommand = new AutoGM();
+		 * System.out.println("AUTONOMOUS IS Auto GM");
+		 * System.out.println("Does:Grabs tote and brings it into auto zone ");
+		 * } else if (oi.autoSelect3 != null && oi.autoSelect3.get() == true) {
+		 * autonomousCommand = new AutoSM();
+		 * System.out.println("AUTONOMOUS IS Auto SM");
+		 * System.out.println("Does: stacks 3 totes and moves"); } else if
+		 * (oi.autoSelect4 != null && oi.autoSelect4.get() == true) {
+		 * autonomousCommand = new AutoTM();
+		 * System.out.println("AUTONOMOUS IS Auto TM");
+		 * System.out.println("Does:stacks conainter on tote and moves"); }
+>>>>>>> 569ccabf210b0509bf1249385001ad9b5f3fd1e4
 		 */
 
 		if (RobotMap.chassis_drive_gyro != null)
 			RobotMap.chassis_drive_gyro.reset();
 
 		ds = DriverStation.getInstance();
-//		autoChooser = new SendableChooser();
-//		autoChooser.addDefault("Rotary Switch", (Double) 0.);
-		
+		// autoChooser = new SendableChooser();
+		// autoChooser.addDefault("Rotary Switch", (Double) 0.);
+
 		System.out.println("Started Robot Code!");
 	}
 
@@ -127,6 +147,7 @@ public class Robot extends IterativeRobot {
 		} else {
 			lights.autonomous(false);
 		}
+		lift.setSetpointInches(lift.LIFT_1_HEIGHT);
 	}
 
 	/**
@@ -154,6 +175,7 @@ public class Robot extends IterativeRobot {
 		// Go into teleop lights
 		lights.isEarly = false;
 		lights.teleop();
+		lift.setSetpointInches(lift.LIFT_1_HEIGHT);
 	}
 
 	/**
@@ -202,6 +224,12 @@ public class Robot extends IterativeRobot {
 			SmartDashboard.putNumber("Tote Speed", chassis.approachSpeed);
 
 		}
+
+		SmartDashboard.putNumber("Lift 0", RobotMap.lift_tote_0);
+		SmartDashboard.putNumber("Lift 1", RobotMap.lift_tote_1);
+		SmartDashboard.putNumber("Lift 2", RobotMap.lift_tote_2);
+		SmartDashboard.putNumber("Lift 3", RobotMap.lift_tote_3);
+
 		// Run the teleop last twenty animations in the last 20 seconds
 		if (lights.isEarly && ds.getMatchTime() >= 130.0) {
 			lights.isEarly = false;
@@ -219,16 +247,16 @@ public class Robot extends IterativeRobot {
 	 */
 	public void testPeriodic() {
 		LiveWindow.run();
-		SmartDashboard.putData("Set Zero", new PreferenceSetup(
-				RobotMap.LIFT_ZERO_REF));
-		SmartDashboard.putData("Set Tote Zero 0", new PreferenceSetup(
-				RobotMap.LIFT_TOTE_0));
-		SmartDashboard.putData("Set Tote One", new PreferenceSetup(
-				RobotMap.LIFT_TOTE_1));
-		SmartDashboard.putData("Set Tote Two", new PreferenceSetup(
-				RobotMap.LIFT_TOTE_2));
-		SmartDashboard.putData("Set Tote Three", new PreferenceSetup(
-				RobotMap.LIFT_TOTE_3));
+		/*
+		 * SmartDashboard.putData("Set Zero", new PreferenceSetup(
+		 * RobotMap.LIFT_ZERO_REF)); SmartDashboard.putData("Set Tote Zero 0",
+		 * new PreferenceSetup( RobotMap.LIFT_TOTE_0));
+		 * SmartDashboard.putData("Set Tote One", new PreferenceSetup(
+		 * RobotMap.LIFT_TOTE_1)); SmartDashboard.putData("Set Tote Two", new
+		 * PreferenceSetup( RobotMap.LIFT_TOTE_2));
+		 * SmartDashboard.putData("Set Tote Three", new PreferenceSetup(
+		 * RobotMap.LIFT_TOTE_3));
+		 */
 		lift.setSetpoint(STARTING_HEIGHT);
 	}
 }

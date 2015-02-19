@@ -17,7 +17,7 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
- * interface to the commands and command groups that allow control of the robot.
+ * interface to the commands and command groups that allow control of the robot.  ping roborio-2846-local
  */
 public class OI {
 
@@ -50,7 +50,6 @@ public class OI {
 		// Initialize joysticks
 		joystickDrive = new Joystick(0);
 		joystickLift = new Joystick(1);
-
 		// LIFT Joystick Initialization
 
 		setLiftTote0 = new JoystickButton(joystickLift, 1);
@@ -148,6 +147,7 @@ public class OI {
 				RobotMap.LIFT_TOTE_3));
 		SmartDashboard.putData("Set Tote High", new PreferenceSetup(
 				RobotMap.LIFT_TOTE_HIGH));
+		SmartDashboard.putData("Rotate 90", new RotateCommand(.5, 90.));
 
 	}
 

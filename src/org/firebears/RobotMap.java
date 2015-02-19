@@ -85,11 +85,11 @@ public class RobotMap {
 		Preferences preferences = Preferences.getInstance();
 
 		lift_zero_ref = preferences.getDouble(LIFT_ZERO_REF, 0.0);
-		lift_tote_0 = preferences.getDouble(LIFT_TOTE_0, 8.5);
-		lift_tote_1 = preferences.getDouble(LIFT_TOTE_1, 21.5);
-		lift_tote_2 = preferences.getDouble(LIFT_TOTE_2, 33.5);
-		lift_tote_3 = preferences.getDouble(LIFT_TOTE_3, 46.0);
-		lift_tote_high = preferences.getDouble(LIFT_TOTE_HIGH, 58.0);
+		lift_tote_0 = preferences.getDouble(LIFT_TOTE_0, 0.5);
+		lift_tote_1 = preferences.getDouble(LIFT_TOTE_1, 12.0);
+		lift_tote_2 = preferences.getDouble(LIFT_TOTE_2, 23.3);
+		lift_tote_3 = preferences.getDouble(LIFT_TOTE_3, 35.5);
+		lift_tote_high = preferences.getDouble(LIFT_TOTE_HIGH, 46.5);
 		chassis_drive_type_tal = preferences.getBoolean(CHASSIS_DRIVE_TYPE_TAL,
 				true);
 		if (!preferences.containsKey(CHASSIS_FIELD_ORIENTED)) {
@@ -169,32 +169,37 @@ public class RobotMap {
 		 * chassis_back_right_encoder
 		 * .setPIDSourceParameter(PIDSourceParameter.kRate);
 		 */
+		if (chassis_front_left_controller != null
+				|| chassis_front_left_controller != null
+				|| chassis_front_left_controller != null
+				|| chassis_front_left_controller != null) {
+			chassis_robot_drive = new RobotDrive(chassis_front_left_controller,
+					chassis_back_left_controller,
+					chassis_front_right_controller,
+					chassis_back_right_controller);
+			// PID Robot Drive: warning DANGEROUS
+			/*
+			 * chassis_robot_drive = new PIDRobotDrive(
+			 * chassis_front_left_controller, chassis_back_left_controller,
+			 * chassis_front_right_controller, chassis_back_right_controller,
+			 * chassis_front_left_encoder, chassis_back_left_encoder,
+			 * chassis_front_right_encoder,chassis_back_right_encoder, 1.0);
+			 */
 
-		chassis_robot_drive = new RobotDrive(chassis_front_left_controller,
-				chassis_back_left_controller, chassis_front_right_controller,
-				chassis_back_right_controller);
-		// PID Robot Drive: warning DANGEROUS
-		/*
-		 * chassis_robot_drive = new PIDRobotDrive(
-		 * chassis_front_left_controller, chassis_back_left_controller,
-		 * chassis_front_right_controller, chassis_back_right_controller,
-		 * chassis_front_left_encoder, chassis_back_left_encoder,
-		 * chassis_front_right_encoder,chassis_back_right_encoder, 1.0);
-		 */
+			chassis_robot_drive.setInvertedMotor(
+					RobotDrive.MotorType.kFrontRight, true);
+			chassis_robot_drive.setInvertedMotor(
+					RobotDrive.MotorType.kFrontLeft, false);
+			chassis_robot_drive.setInvertedMotor(
+					RobotDrive.MotorType.kRearRight, true);
+			chassis_robot_drive.setInvertedMotor(
+					RobotDrive.MotorType.kRearLeft, false);
 
-		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kFrontRight,
-				true);
-		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kFrontLeft,
-				false);
-		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kRearRight,
-				true);
-		chassis_robot_drive.setInvertedMotor(RobotDrive.MotorType.kRearLeft,
-				false);
-
-		chassis_robot_drive.setSafetyEnabled(true);
-		chassis_robot_drive.setExpiration(0.1);
-		chassis_robot_drive.setSensitivity(0.5);
-		chassis_robot_drive.setMaxOutput(1.0);
+			chassis_robot_drive.setSafetyEnabled(true);
+			chassis_robot_drive.setExpiration(0.1);
+			chassis_robot_drive.setSensitivity(0.5);
+			chassis_robot_drive.setMaxOutput(1.0);
+		}
 
 		chassis_drive_gyro = new Gyro(0);
 		LiveWindow.addSensor("Chassis", "drive_gyro", chassis_drive_gyro);
@@ -239,7 +244,6 @@ public class RobotMap {
 
 		accelerometer = new BuiltInAccelerometer();
 		LiveWindow.addSensor("Accelerometer", "accelerometer", accelerometer);
-
 		scoringPlatformSensor = new DigitalInput(8);
 
 		autoSelect1 = new DigitalInput(11);
