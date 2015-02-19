@@ -70,11 +70,12 @@ public class Robot extends IterativeRobot {
 		// autonomousCommand = new AutoStrafeCommand();
 		// /*
 		
-//		if (oi.autoSelect1 != null && oi.autoSelect1.get() == true) {
+		autonomousCommand = new AutoM();
+/*		if (oi.autoSelect1 != null && oi.autoSelect1.get() == true) {
 			autonomousCommand = new AutoM();
 		  	System.out.println("AUTONOMOUS IS Auto M:");
 		  	System.out.println("Does: moves into the auto zone"); 
-/*		} else if (oi.autoSelect2 != null && oi.autoSelect2.get() == true) { 
+		} else if (oi.autoSelect2 != null && oi.autoSelect2.get() == true) { 
 			autonomousCommand = new AutoGM();
 			System.out.println("AUTONOMOUS IS Auto GM");
 			System.out.println("Does:Grabs tote and brings it into auto zone ");
