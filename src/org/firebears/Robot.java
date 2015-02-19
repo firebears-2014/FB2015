@@ -70,8 +70,8 @@ public class Robot extends IterativeRobot {
 		// autonomousCommand = new AutoStrafeCommand();
 		// /*
 		
-		autonomousCommand = new AutoM();
-/*		if (oi.autoSelect1 != null && oi.autoSelect1.get() == true) {
+		//autonomousCommand = new AutoM();
+		if (oi.autoSelect1 != null && oi.autoSelect1.get() == true) {
 			autonomousCommand = new AutoM();
 		  	System.out.println("AUTONOMOUS IS Auto M:");
 		  	System.out.println("Does: moves into the auto zone"); 
@@ -88,12 +88,12 @@ public class Robot extends IterativeRobot {
 			System.out.println("AUTONOMOUS IS Auto TM");
 			System.out.println("Does:stacks conainter on tote and moves");
 		}
-=======
 
-		// if (oi.autoSelect1 != null && oi.autoSelect1.get() == true) {
-		autonomousCommand = new AutoM();
-		System.out.println("AUTONOMOUS IS Auto M:");
-		System.out.println("Does: moves into the auto zone");
+
+		//if (oi.autoSelect1 != null && oi.autoSelect1.get() == true) {
+		//autonomousCommand = new AutoM();
+		//System.out.println("AUTONOMOUS IS Auto M:");
+		//System.out.println("Does: moves into the auto zone");
 		/*
 		 * } else if (oi.autoSelect2 != null && oi.autoSelect2.get() == true) {
 		 * autonomousCommand = new AutoGM();
@@ -107,7 +107,6 @@ public class Robot extends IterativeRobot {
 		 * autonomousCommand = new AutoTM();
 		 * System.out.println("AUTONOMOUS IS Auto TM");
 		 * System.out.println("Does:stacks conainter on tote and moves"); }
->>>>>>> 569ccabf210b0509bf1249385001ad9b5f3fd1e4
 		 */
 
 		if (RobotMap.chassis_drive_gyro != null)
