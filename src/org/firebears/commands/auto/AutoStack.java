@@ -1,13 +1,17 @@
 package org.firebears.commands.auto;
 
 import org.firebears.Robot;
+import org.firebears.commands.drive.ChassisCommand;
 import org.firebears.commands.drive.ForwardCommand;
 import org.firebears.commands.drive.RotateCommand;
 import org.firebears.commands.drive.StrafeCommand;
+import org.firebears.commands.drive.ToteApproachCommand;
+import org.firebears.commands.drive.Totecenter;
 import org.firebears.commands.grabber.GrabberCommand;
 import org.firebears.commands.lift.SetHeightCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 /**
  * Autonomous command:
@@ -29,14 +33,19 @@ public class  AutoStack extends CommandGroup {
     	
     	addSequential(new GrabberCommand(true)); //Close Grabbers
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_3_HEIGHT)); //Lift Bin
-    	addSequential(new StrafeCommand(-.5), .5); //Move left to the tote
+    	addSequential(new WaitCommand(1.5)); //Wait for lift
+    	addSequential(new RotateCommand(.5, 45)); //Rotate
+//    	addSequential(new ChassisCommand(.5, .5, 0), .5); //MOVE AND STRAFE AT THE SAME TIME!!!
+    	addSequential(new ToteApproachCommand());
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_2_HEIGHT)); //Set Bin
+    	addSequential(new WaitCommand(1.5));
     	addSequential(new GrabberCommand(false)); //Release the bin
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_0_HEIGHT)); //Move lift to grab
+    	addSequential(new WaitCommand(1.5));
     	addSequential(new GrabberCommand(true)); //Grab the tote
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_2_HEIGHT)); //Lift the tote
-    	addSequential(new ForwardCommand(-.5, true), 2.0); // Move backward into auto zone   
-    	addSequential(new RotateCommand(.75, 90));//Rotate as to fit in auto zone.
+    	addSequential(new WaitCommand(1.));
+    	addSequential(new StrafeCommand(-.5), 2.0); // Move left into auto zone   
 		System.out.println("Currently in autonomous 'AutoStack'");
     }
 

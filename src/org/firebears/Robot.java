@@ -93,7 +93,7 @@ public class Robot extends IterativeRobot {
 			autonomousCommand = new AutoM();
 		}
 */
-		autonomousCommand = new AutoM();
+		autonomousCommand = new AutoStack();
 	
 		if (RobotMap.chassis_drive_gyro != null)
 			RobotMap.chassis_drive_gyro.reset();
