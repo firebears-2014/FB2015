@@ -83,138 +83,124 @@ public class ToteApproachCommand extends Command {
 
 		switch (chassisToteState) {// each case ought to check distance to tote
 									// and angle before issuing commands!!!!
-		case 1:
-
+		case 1://LEGAL strafe right 
 			Robot.chassis.mechanumDrive(getStrafeSpeed(rightArm),
 					getSpeed(rightArm), 0.0);// ****PVM 2/11
 			break;
-		case 2:
+			
+		case 2://LEGAL (narrow tote) strafe right
 			Robot.chassis.mechanumDrive(getStrafeSpeed(rightInner),
 					getSpeed(rightInner), 0.0);// ****PVM 2/11
 			break;
-		case 3:
+		case 3://LEGAL  strafe right
 			double distance3 = (rightArm + rightInner) / 2.0; // ****PVM 2/11
-			Robot.chassis.mechanumDrive(getStrafeSpeed(distance3),// ****PVM
-																	// 2/11
-					getSpeed(distance3), rotate(rightInner, leftInner));// ****PVM
-																		// 2/11
+			Robot.chassis.mechanumDrive(getStrafeSpeed(distance3),// ****PVM																	// 2/11
+					getSpeed(distance3), 0.0);// ****PVM																		// 2/11
 			break;
-		case 4:// narrow tote
+			
+		case 4:// LEGAL (narrow tote) strafe left
 			Robot.chassis.mechanumDrive(-1 * getStrafeSpeed(leftInner),
 					getSpeed(leftInner), 0.0);// ****PVM 2/11
 			break;
+			
 		case 5: // use only for distance, invalid strafe or rotate case,
-				// probably at marginal distance
 			double distance5 = (rightArm + leftInner) / 2.0;// ****PVM 2/11
-			Robot.chassis.mechanumDrive(0.0, getSpeed(distance5), 0.0);// ****PVM
-																		// 2/11
-			break;
+			Robot.chassis.mechanumDrive(0.0, getSpeed(distance5), 0.0);// ****PVM																		// 2/11
+		break;
 
-		case 6:
+		case 6://**** LEGAL  narrow tote centered, 
+			//stop if close, go fwd only if rotate within tolerance, else rotate only to tolerance
 			double distance6 = (leftInner + rightInner) / 2.0; // ****PVM 2/11
-			/*
-			 * if (rotate(rightInner, leftInner) == 0) { if (distance6 < 1.5 *
-			 * DRIVE_TO) { if (distance6 < 0.5 * DRIVE_TO) {
-			 * Robot.chassis.mechanumDrive(0.0, -1 getSpeed(distance6), 0.0); }
-			 * 
-			 * } else { Robot.chassis.mechanumDrive(0.0, getSpeed(distance6),
-			 * 0.0); } } else { Robot.chassis.mechanumDrive(0.0,
-			 * getSpeed(distance6), rotate(rightInner, leftInner)); }
-			 */
-			Robot.chassis.mechanumDrive(0.0, getSpeed(distance6),
-					rotate(rightInner, leftInner));
+			
+			if (distance6 <= 1.2 * DRIVE_TO // ****PVM
+			&& rotate(leftInner, rightInner)== 0.0)
+				{continueCommand = false;}
+							
+			else if (rotate(leftInner, rightInner)== 0.0)			
+				Robot.chassis.mechanumDrive(0.0, getSpeed(distance6),0.0);					
+			else
+				Robot.chassis.mechanumDrive(0.0, 0.0,rotate(rightInner, leftInner));	
+		break;
+			
 
-			if ((rightInner + leftInner) <= 2.1 * DRIVE_TO // ****PVM
-					// 2/11
-					&& rightInner <= DRIVE_TO + MIN_ROTATE_TOL
-					&& leftInner <= DRIVE_TO + MIN_ROTATE_TOL) {
-
-				continueCommand = false;// timer? at DRIVE TO? ****PVM 2/11
-			}
-			break;
-		case 7:
+		case 7://**** LEGAL strafe right and rotate 
+			//go fwd only if rotate within tolerance, else rotate only to tolerance
 			double distance7 = (leftInner + rightInner + rightArm) / 3.0;// ****PVM
-																			// 2/11
-			Robot.chassis.mechanumDrive(getStrafeSpeed(distance7),
+	
+			if (rotate(leftInner, rightInner)== 0.0)			
+					Robot.chassis.mechanumDrive(getStrafeSpeed(distance7), getSpeed(distance7),0.0);					
+			else
+					Robot.chassis.mechanumDrive(getStrafeSpeed(distance7), 0.0,rotate(rightInner, leftInner));	
+		break;		
 
-			/* forward(rightInner, leftInner) */getSpeed(distance7),
-					rotate(rightInner, leftInner));
-			break;
-		case 8:
+			
+		case 8://****LEGAL strafe left no rotate go foreward 
 			double distance8 = leftArm;// ****PVM 2/11
 			Robot.chassis.mechanumDrive(-1 * getStrafeSpeed(distance8),
 					getSpeed(distance8), 0.0);
 			break;
 
 		case 9: // use only for distance, invalid strafe or rotate case,
-				// probably at marginal distance
 			double distance9 = (leftArm + rightArm) / 2.0;// ****PVM 2/11
 			Robot.chassis.mechanumDrive(0.0, getSpeed(distance9), 0.0);// ****PVM
 																		// 2/11
 			break;
 
 		case 10: // use only for distance, invalid strafe or rotate case,
-					// probably at marginal distance
 			double distance10 = (leftArm + rightInner) / 2.0;// ****PVM 2/11
 			Robot.chassis.mechanumDrive(0.0, getSpeed(distance10), 0.0);// ****PVM
 																		// 2/11
 			break;
 
-		case 11: // use only for distance, invalid strafe or rotate case,
-					// probably at marginal distance
+		case 11: // use only for distance, invalid strafe or rotate case
 			double distance11 = (leftArm + rightInner + rightArm) / 3.0;// ****PVM
 																		// 2/11
 			Robot.chassis.mechanumDrive(0.0, getSpeed(distance11), 0.0);// ****PVM
 																		// 2/11
 			break;
 
-		case 12:
+		case 12://LEGAL  Strafe left, no rotate, go forward
 			double distance12 = (leftArm + leftInner) / 2.0;// ****PVM 2/11
 			Robot.chassis.mechanumDrive(-1 * getStrafeSpeed(distance12),
-					getSpeed(distance12), rotate(rightInner, leftInner));
+					getSpeed(distance12), 0.0);
 			break;
 
 		case 13: // use only for distance, invalid strafe or rotate case,
-					// probably at marginal distance
 			double distance13 = (leftArm + leftInner + rightArm) / 3.0;
-			Robot.chassis.mechanumDrive(0.0, getSpeed(distance13), 0.0);// ****PVM
-																		// 2/11
+			Robot.chassis.mechanumDrive(0.0, getSpeed(distance13), 0.0);// ****PVM																		// 2/11
 			break;
 
-		case 14:
+		case 14://****LEGAL strafe left, rotate and forward
+			//go fwd only if rotate within tolerance, else rotate only to tolerance
 			double distance14 = (leftArm + leftInner + rightInner) / 3.0;
-			Robot.chassis.mechanumDrive(-1 * getStrafeSpeed(distance14),
-					getSpeed(distance14), rotate(rightInner, leftInner));
+			if (rotate(leftInner, rightInner)== 0.0)			
+				Robot.chassis.mechanumDrive(-1 * getStrafeSpeed(distance14), getSpeed(distance14),0.0);					
+		else
+				Robot.chassis.mechanumDrive(-1 * getStrafeSpeed(distance14), 0.0,rotate(rightInner, leftInner));
 			break;
-		case 15:
+			
+		case 15://LEGAL wide tote centered
+			//stop if close, go fwd only if rotate within tolerance, else rotate only to tolerance
+			//****left arm or rt arm can be way different than the inner sensors but still be here
 			double distance15 = (leftArm + leftInner + rightArm + rightArm) / 4.0;
-			/*
-			 * if (rotate(rightArm, leftArm) == 0) { if (distance15 < 1.5 *
-			 * DRIVE_TO) { if (distance15 < 0.5 * DRIVE_TO) {
-			 * Robot.chassis.mechanumDrive(0.0, -1 getSpeed(distance15), 0.0); }
-			 * 
-			 * } else { Robot.chassis.mechanumDrive(0.0, getSpeed(distance15),
-			 * 0.0); } } else { Robot.chassis.mechanumDrive(0.0,
-			 * getSpeed(distance15), rotate(rightArm, leftArm)); }
-			 */
-			Robot.chassis.mechanumDrive(0.0, getSpeed(distance15),
-					rotate(rightInner, leftInner));
-
-			if ((rightArm + leftArm) <= 2.1 * DRIVE_TO // ****PVM
-					// 2/11
-					&& rightArm <= DRIVE_TO + MIN_ROTATE_TOL
-					&& leftArm <= DRIVE_TO + MIN_ROTATE_TOL) {
-
-				continueCommand = false;// timer? at DRIVE TO? ****PVM 2/11
-			}
-			break;
+			
+			if (distance15 <= 1.2 * DRIVE_TO // ****PVM
+					&& rotate(leftInner, rightInner)== 0.0)
+						{continueCommand = false;}
+			
+			else if (rotate(leftInner, rightInner)== 0.0)			
+				Robot.chassis.mechanumDrive(0.0, getSpeed(distance15),0.0);					
+			else
+				Robot.chassis.mechanumDrive(0.0, 0.0,rotate(rightInner, leftInner));	
+		break;
+			
 		default:
 			continueCommand = false;
 			break;
 		}
 
 		Robot.chassis.toteState = chassisToteState;
-		Robot.chassis.approachSpeed = getSpeed(rightArm);
+		Robot.chassis.approachSpeed = getSpeed(rightArm);//????????
 		// lastState = chassisToteState;//****PVM 2/11
 		System.out.println("chassisToteState State: " + chassisToteState);
 		/*

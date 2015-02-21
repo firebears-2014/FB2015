@@ -7,11 +7,13 @@ import org.firebears.commands.grabber.GrabberCommand;
 import org.firebears.commands.lift.SetHeightCommand;
 
 import edu.wpi.first.wpilibj.command.CommandGroup;
+import edu.wpi.first.wpilibj.command.WaitCommand;
 
 
 
 /**
- * Autonomous command: Grabs tote and brings it into auto zone
+ * Autonomous command: Grabs tote and drives backwards it into auto zone.
+ * Position the robot facing the drivers stations, with grabbers around the tote.
  */
 public class  AutoGM extends CommandGroup {
     public AutoGM() {
@@ -22,11 +24,15 @@ public class  AutoGM extends CommandGroup {
     	//Stop depends on color sensor
     	addSequential(new ForwardCommand(-.5, true), 1.7);
     	//Rotate as to fit in auto zone.
-    	addSequential(new RotateCommand(.75, 90));
+    	addSequential(new RotateCommand(.40, 90));
     	//Drop
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_0_HEIGHT));
     	//Release
+<<<<<<< HEAD
     	
+=======
+    	addSequential(new WaitCommand(1.5));
+>>>>>>> 5f2fc5948bdd29a773223c33f4dc3dc9f7baa2bb
     	addSequential(new GrabberCommand(false)); //release Tote
     }
 
