@@ -2,6 +2,7 @@ package org.firebears.commands.auto;
 
 import org.firebears.Robot;
 import org.firebears.commands.drive.ForwardCommand;
+import org.firebears.commands.drive.RotateCommand;
 import org.firebears.commands.drive.StrafeCommand;
 import org.firebears.commands.grabber.GrabberCommand;
 import org.firebears.commands.lift.SetHeightCommand;
@@ -34,7 +35,8 @@ public class  AutoStack extends CommandGroup {
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_0_HEIGHT)); //Move lift to grab
     	addSequential(new GrabberCommand(true)); //Grab the tote
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_2_HEIGHT)); //Lift the tote
-    	addSequential(new ForwardCommand(-.5, true), 2.0); // Move backward into auto zone    	
+    	addSequential(new ForwardCommand(-.5, true), 2.0); // Move backward into auto zone   
+    	addSequential(new RotateCommand(.75, 90));//Rotate as to fit in auto zone.
 		System.out.println("Currently in autonomous 'AutoStack'");
     }
 
