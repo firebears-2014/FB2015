@@ -16,17 +16,17 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class  AutoGM extends CommandGroup {
     public AutoGM() {
     	addSequential(new GrabberCommand(false));
-    	addSequential(new ForwardCommand(.5, true), 2.0);
     	addSequential(new GrabberCommand(true)); //Grab Tote
     	//Lift lift as to not damage it.
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_3_HEIGHT));
     	//Stop depends on color sensor
-    	addSequential(new ForwardCommand(-.5, true), 2.0);
+    	addSequential(new ForwardCommand(-.5, true), 1.7);
     	//Rotate as to fit in auto zone.
     	addSequential(new RotateCommand(.75, 90));
     	//Drop
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_0_HEIGHT));
     	//Release
+    	
     	addSequential(new GrabberCommand(false)); //release Tote
     }
 
