@@ -18,7 +18,6 @@ public class AutoSM extends CommandGroup {
 	public AutoSM() {
 		// tote 1 logic
 		addSequential(new GrabberCommand(false));
-		addSequential(new ForwardCommand(.1, false), 1.0);
 		addSequential(new GrabberCommand(true));
 		addParallel(new SetHeightCommand("Lift_Tote_2"));
 		addParallel(new StrafeCommand(1), 1.0); // change interrupt?

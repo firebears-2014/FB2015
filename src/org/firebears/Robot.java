@@ -68,13 +68,9 @@ public class Robot extends IterativeRobot {
 		// instantiate which command should be used for the autonomous period
 		// uncomment next 3 lines to override defaults.
 		// autonomousCommand = new AutoStrafeCommand();
-		// /*
-		
-<<<<<<< HEAD
+		// 
 
-=======
-		//autonomousCommand = new AutoM();
-		if (RobotMap.autoSelect1 != null && RobotMap.autoSelect1.get() == true) {
+	/*	if (RobotMap.autoSelect1 != null && RobotMap.autoSelect1.get() == true) {
 			autonomousCommand = new AutoM();
 		  	System.out.println("AUTONOMOUS IS Auto M: Move");
 		  	System.out.println("Does: moves backwards into the auto zone"); 
@@ -96,27 +92,8 @@ public class Robot extends IterativeRobot {
 			System.out.println("NO AUTONOMOUS SELECTED, defaulting to AutoM");	
 			autonomousCommand = new AutoM();
 		}
->>>>>>> 5f2fc5948bdd29a773223c33f4dc3dc9f7baa2bb
-
-		if (RobotMap.autoSelect1 != null && RobotMap.autoSelect1.get() == true) {
-		autonomousCommand = new AutoM();
-		System.out.println("AUTONOMOUS IS Auto M:");
-		System.out.println("Does: moves into the auto zone");
-		 } else if (RobotMap.autoSelect2 != null && RobotMap.autoSelect2.get() == true) {
-		 autonomousCommand = new AutoGM();
-		 System.out.println("AUTONOMOUS IS Auto GM");
-		 System.out.println("Does:Grabs tote and brings it into auto zone ");
-		 } else if (RobotMap.autoSelect3 != null && RobotMap.autoSelect3.get() == true) {
-		 autonomousCommand = new AutoSM();
-		 System.out.println("AUTONOMOUS IS Auto SM");
-		 System.out.println("Does: stacks 3 totes and moves"); } 
-		 else if (RobotMap.autoSelect4 != null && RobotMap.autoSelect4.get() == true) {
-		 autonomousCommand = new AutoTM();
-		 System.out.println("AUTONOMOUS IS Auto TM");
-		 System.out.println("Does:stacks conainter on tote and moves"); 
-		 }
-		
-
+*/
+		autonomousCommand = new AutoSM();
 	
 		if (RobotMap.chassis_drive_gyro != null)
 			RobotMap.chassis_drive_gyro.reset();

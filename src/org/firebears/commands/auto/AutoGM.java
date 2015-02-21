@@ -28,11 +28,7 @@ public class  AutoGM extends CommandGroup {
     	//Drop
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_0_HEIGHT));
     	//Release
-<<<<<<< HEAD
-    	
-=======
     	addSequential(new WaitCommand(1.5));
->>>>>>> 5f2fc5948bdd29a773223c33f4dc3dc9f7baa2bb
     	addSequential(new GrabberCommand(false)); //release Tote
     }
 
