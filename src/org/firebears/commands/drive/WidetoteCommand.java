@@ -10,7 +10,7 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class WidetoteCommand extends Command {
 
-	public boolean fieldOriented;
+	public boolean isFieldOriented;
 	
     public WidetoteCommand() {
         // Use requires() here to declare subsystem dependencies
@@ -20,7 +20,7 @@ public class WidetoteCommand extends Command {
 
     // Called just before this Command runs the first time
     protected void initialize() {
-		fieldOriented = Robot.chassis.getFieldOriented();
+		isFieldOriented = Robot.chassis.getFieldOriented();
 		Robot.chassis.setFieldOriented(false);
 		setTimeout(3);
     }
@@ -29,7 +29,7 @@ public class WidetoteCommand extends Command {
     protected void execute() {
 
     	if (Robot.chassis.leftsharpIRRange.getRangefinderDistance() > 8 && Robot.chassis.rightsharpIRRange.getRangefinderDistance() > 8) {
-    		Robot.chassis.mechanumDrive(0,.1,0);
+    		Robot.chassis.mechanumDrive(0,-.1,0);
 
     	}
     	else if (Robot.chassis.leftsharpIRRange.getRangefinderDistance() > 8) {
@@ -47,20 +47,25 @@ public class WidetoteCommand extends Command {
     }
 
     // Make this return true when this Command no longer needs to run execute()
-    protected boolean isFinished() {
-        return (Robot.chassis.leftsharpIRRange.getRangefinderDistance() < 8 && Robot.chassis.rightsharpIRRange.getRangefinderDistance() < 8 && Robot.chassis.leftArmsharpIRRange.getRangefinderDistance() < 8 && Robot.chassis.rightArmsharpIRRange.getRangefinderDistance() < 8);
-    }
+	protected boolean isFinished() {
+		if (isTimedOut()) { return true; }
+		return (Robot.chassis.leftsharpIRRange.getRangefinderDistance() < 8
+				&& Robot.chassis.rightsharpIRRange.getRangefinderDistance() < 8
+				&& Robot.chassis.leftArmsharpIRRange.getRangefinderDistance() < 8 
+				&& Robot.chassis.rightArmsharpIRRange
+					.getRangefinderDistance() < 8);
+	}
 
     // Called once after isFinished returns true
     protected void end() {
 		Robot.chassis.mechanumDrive(0, 0, 0);
-		Robot.chassis.setFieldOriented(fieldOriented);
+		Robot.chassis.setFieldOriented(isFieldOriented);
     }
 
     // Called when another command which requires one or more of the same
     // subsystems is scheduled to run
     protected void interrupted() {
 		Robot.chassis.mechanumDrive(0, 0, 0);
-		Robot.chassis.setFieldOriented(fieldOriented);
+		Robot.chassis.setFieldOriented(isFieldOriented);
     }
 }

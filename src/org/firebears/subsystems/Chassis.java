@@ -79,9 +79,15 @@ public class Chassis extends Subsystem {
 		 * SmartDashboard.putNumber("backRight Talon .getEncVelocity",
 		 * ((CANTalon) back_right).getEncVelocity());
 		 */
-		if (robot_drive != null)
-			robot_drive.mecanumDrive_Cartesian(strafe, (reversed ? -1 : 1)
-					* forward, rotation, (reversed ? -1 : 1) * angle);
+		if (robot_drive != null)   {
+			try {
+				robot_drive.mecanumDrive_Cartesian(strafe, (reversed ? -1 : 1)
+						* forward, rotation, (reversed ? -1 : 1) * angle);
+			} catch (Exception e) {
+				System.err.println("ERROR: " + e);
+				if (RobotMap.DEBUG)  { e.printStackTrace(); }
+			}
+		}
 		Robot.lights.updateUnderglow(forward);
 	}
 
