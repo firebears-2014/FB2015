@@ -3,14 +3,16 @@ package org.firebears.commands.drive;
 import org.firebears.Robot;
 import org.firebears.RobotMap;
 
-import edu.wpi.first.wpilibj.command.Command;
+import edu.wpi.first.wpilibj.command.PIDCommand;
 
 /*
  * This command rotates the robot by "degrees" degrees
  */
-public class RotateCommand extends Command{
+public class RotateCommand extends PIDCommand{
 	
 	public boolean fieldOriented;
+	
+    final double targetDegrees;
 	
 	double rotateDegrees;
 	double rotateSpeed;
@@ -18,33 +20,29 @@ public class RotateCommand extends Command{
 	private boolean isNegative = false;
 	
 	public RotateCommand(double d, double degrees) {
-		rotateDegrees = degrees;
+        super(0.02, 0.0, 0.0); //P, I, D
+		targetDegrees = degrees;
 		rotateSpeed = d;
 		if(degrees < 0) {
 			isNegative = true;
 		}
+        getPIDController().setAbsoluteTolerance(5);
 	}
 
 	protected void initialize() {
 		fieldOriented = Robot.chassis.getFieldOriented();
 		Robot.chassis.setFieldOriented(false);
     	initialAngle = RobotMap.chassis_drive_gyro.getAngle();
-    	execute();
+        getPIDController().setSetpoint(targetDegrees);
+        setTimeout(2);
     }
     
     protected void execute() {
-    	Robot.chassis.mechanumDrive(0, 0, rotateSpeed * (isNegative ? -1. : 1.));
+    	
     }
     
     protected boolean isFinished() {
-    	//If difference in angle is more than rotateDegrees
-		if(RobotMap.chassis_drive_gyro.getAngle() - initialAngle  >
-			rotateDegrees)
-		{
-			return !isNegative;
-		}else{
-	    	return isNegative;
-		}
+        return getPIDController().onTarget() || isTimedOut();
     }
     
     protected void end() {
@@ -55,5 +53,15 @@ public class RotateCommand extends Command{
     protected void interrupted() {
     	end();
     }
+
+	@Override
+	protected double returnPIDInput() {
+		return RobotMap.chassis_drive_gyro.getAngle() - initialAngle;
+	}
+
+	@Override
+	protected void usePIDOutput(double output) {
+		Robot.chassis.mechanumDrive(0, 0, output * rotateSpeed /** (isNegative ? -1. : 1.)*/);
+	}
 
 }

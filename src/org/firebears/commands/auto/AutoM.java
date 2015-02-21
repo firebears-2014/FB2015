@@ -17,7 +17,7 @@ public class  AutoM extends CommandGroup {
     	//Lift lift as to not damage it.
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_2_HEIGHT));
     	//Move Backward: Stop depends on color sensor
-    	addSequential(new ForwardCommand(-.5, true), 1.7);
+    	addSequential(new ForwardCommand(-.5, true), 2);
     	//Rotate as to fit in auto zone.
     	addSequential(new RotateCommand(.50, 90));
     }
