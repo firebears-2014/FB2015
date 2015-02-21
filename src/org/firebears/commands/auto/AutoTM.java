@@ -44,7 +44,6 @@ public class  AutoTM extends CommandGroup {
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_0_HEIGHT));
     	addSequential(new WaitCommand(.5));
     	addSequential(new GrabberCommand(false));
-    	System.out.println("sup");
     }
 
 }	
