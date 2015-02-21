@@ -2,6 +2,7 @@ package org.firebears.commands.auto;
 
 import org.firebears.commands.drive.ForwardCommand;
 import org.firebears.commands.drive.RotateCommand;
+import org.firebears.commands.drive.StrafeCommand;
 import org.firebears.commands.drive.Totecenter;
 import org.firebears.commands.drive.WidetoteCommand;
 import org.firebears.commands.grabber.GrabberCommand;
@@ -22,7 +23,7 @@ public class  AutoTM extends CommandGroup {
        	//addSequential(new RotateCommand(.75, 90)); //TODO: is right?
     	
     	addSequential(new SetHeightCommand("Lift_Tote_3"));  //moves container up
-
+    	addSequential(new StrafeCommand(-1), 1.0);
 		addSequential(new WidetoteCommand());  					 //centers on tote
 		addSequential(new SetHeightCommand("Lift_Tote_2"));  //moves container down
 		addParallel(new GrabberCommand(false));				//releases
