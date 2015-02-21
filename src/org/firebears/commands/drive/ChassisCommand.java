@@ -12,6 +12,8 @@ public class ChassisCommand extends Command {
 	double x;
 	double y;
 	double z;
+	
+	public boolean fieldOriented;
 
 	/**
 	 * 
@@ -26,13 +28,16 @@ public class ChassisCommand extends Command {
 		requires(Robot.chassis);
 		x = px;
 		y = py;
-		z = py;
+		z = pz;
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
 
 		Robot.chassis.mechanumDrive(x, -y, z);
+		
+		fieldOriented = Robot.chassis.getFieldOriented();
+		Robot.chassis.setFieldOriented(false);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
@@ -47,14 +52,14 @@ public class ChassisCommand extends Command {
 
 	// Called once after isFinished returns true
 	protected void end() {
-
+		Robot.chassis.setFieldOriented(fieldOriented);
 		Robot.chassis.mechanumDrive(0, 0, 0);
 	}
 
 	// Called when another command which requires one or more of the same
 	// subsystems is scheduled to run
 	protected void interrupted() {
-
+		Robot.chassis.setFieldOriented(fieldOriented);
 		Robot.chassis.mechanumDrive(0, 0, 0);
 	}
 }

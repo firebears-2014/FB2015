@@ -80,6 +80,14 @@ public class ToteApproachCommand extends Command {
 			chassisToteState += 8;
 			// System.out.println("added 8.");
 		}
+		
+		
+		if(chassisToteState== 15){
+			double avg = (leftArm + leftInner + rightArm + rightArm) / 4.0;
+			if(leftArm > 1.5 *avg ){chassisToteState = 7;}
+			else if(rightArm > 1.5 *avg ){chassisToteState = 14;} 
+			
+		}
 
 		switch (chassisToteState) {// each case ought to check distance to tote
 									// and angle before issuing commands!!!!
@@ -94,8 +102,8 @@ public class ToteApproachCommand extends Command {
 			break;
 		case 3://LEGAL  strafe right
 			double distance3 = (rightArm + rightInner) / 2.0; // ****PVM 2/11
-			Robot.chassis.mechanumDrive(getStrafeSpeed(distance3),// ****PVM																	// 2/11
-					getSpeed(distance3), 0.0);// ****PVM																		// 2/11
+			Robot.chassis.mechanumDrive(getStrafeSpeed(distance3),// ****PVM																	
+					getSpeed(distance3), 0.0);// ****PVM																	
 			break;
 			
 		case 4:// LEGAL (narrow tote) strafe left
@@ -105,7 +113,7 @@ public class ToteApproachCommand extends Command {
 			
 		case 5: // use only for distance, invalid strafe or rotate case,
 			double distance5 = (rightArm + leftInner) / 2.0;// ****PVM 2/11
-			Robot.chassis.mechanumDrive(0.0, getSpeed(distance5), 0.0);// ****PVM																		// 2/11
+			Robot.chassis.mechanumDrive(0.0, getSpeed(distance5), 0.0);// ****PVM																		
 		break;
 
 		case 6://**** LEGAL  narrow tote centered, 

@@ -35,9 +35,10 @@ public class  AutoStack extends CommandGroup {
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_3_HEIGHT)); //Lift Bin
     	addSequential(new WaitCommand(1.5)); //Wait for lift
     	addSequential(new RotateCommand(.5, 45)); //Rotate
-//    	addSequential(new ChassisCommand(.5, .5, 0), .5); //MOVE AND STRAFE AT THE SAME TIME!!!
-    	addSequential(new ToteApproachCommand());
+    	addSequential(new ChassisCommand(-.8, .5, 0), .5); //Approach the tote.
+//    	addSequential(new ToteApproachCommand()); //Approach the tote.
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_2_HEIGHT)); //Set Bin
+    	addParallel(new ForwardCommand(.5, false), .5);
     	addSequential(new WaitCommand(1.5));
     	addSequential(new GrabberCommand(false)); //Release the bin
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_0_HEIGHT)); //Move lift to grab
