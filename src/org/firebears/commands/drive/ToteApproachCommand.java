@@ -58,10 +58,19 @@ public class ToteApproachCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		int chassisToteState = 0;
+		
 		rightArm = RobotMap.rightArmsharpIRRange.getRangefinderDistance();
 		rightInner = RobotMap.rightsharpIRRange.getRangefinderDistance();
 		leftInner = RobotMap.leftsharpIRRange.getRangefinderDistance();
 		leftArm = RobotMap.leftArmsharpIRRange.getRangefinderDistance();
+		
+		double minSensor = Math.min(rightArm,rightInner);
+		minSensor = Math.min(minSensor,leftInner);
+		minSensor = Math.min(minSensor,rightArm);
+		if (rightArm > 1.5* minSensor)rightArm = 1000;
+		if (rightInner > 1.5* minSensor)rightInner = 1000;
+		if (leftArm > 1.5* minSensor)leftArm = 1000;
+		if (leftInner > 1.5* minSensor)leftInner = 1000;
 
 		// add to chassisToteState depending on sensors
 		if (rightArm < MAX_RANGE) {
@@ -81,13 +90,17 @@ public class ToteApproachCommand extends Command {
 			// System.out.println("added 8.");
 		}
 		
-		
+		/*
 		if(chassisToteState== 15){
 			double avg = (leftArm + leftInner + rightArm + rightArm) / 4.0;
 			if(leftArm > 1.5 *avg ){chassisToteState = 7;}
 			else if(rightArm > 1.5 *avg ){chassisToteState = 14;} 
 			
-		}
+		}*/
+		
+		
+		
+		
 
 		switch (chassisToteState) {// each case ought to check distance to tote
 									// and angle before issuing commands!!!!
