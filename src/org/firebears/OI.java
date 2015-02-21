@@ -25,11 +25,6 @@ public class OI {
 	public Joystick joystickLift;
 	public DigitalInput ContainerSensor;
 
-	public DigitalInput autoSelect1;
-	public DigitalInput autoSelect2;
-	public DigitalInput autoSelect3;
-	public DigitalInput autoSelect4;
-
 	public JoystickButton setLiftTote0;
 	public JoystickButton setLiftTote1;
 	public JoystickButton setLiftTote2;
