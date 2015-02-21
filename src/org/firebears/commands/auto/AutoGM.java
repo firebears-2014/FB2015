@@ -19,10 +19,12 @@ public class  AutoGM extends CommandGroup {
     public AutoGM() {
     	addSequential(new GrabberCommand(false));
     	addSequential(new GrabberCommand(true)); //Grab Tote
+    	addSequential(new WaitCommand(0.5));
     	//Lift lift as to not damage it.
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_3_HEIGHT));
     	//Stop depends on color sensor
-    	addSequential(new ForwardCommand(-.5, true), 1.7);
+    	addSequential(new ForwardCommand(-.5, true), 2.2);
+
     	//Rotate as to fit in auto zone.
     	addSequential(new RotateCommand(.40, 90));
     	//Drop
