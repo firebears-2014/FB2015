@@ -71,43 +71,27 @@ public class Robot extends IterativeRobot {
 		// /*
 		
 		//autonomousCommand = new AutoM();
-		if (oi.autoSelect1 != null && oi.autoSelect1.get() == true) {
+		if (RobotMap.autoSelect1 != null && RobotMap.autoSelect1.get() == true) {
 			autonomousCommand = new AutoM();
 		  	System.out.println("AUTONOMOUS IS Auto M:");
 		  	System.out.println("Does: moves into the auto zone"); 
-		} else if (oi.autoSelect2 != null && oi.autoSelect2.get() == true) { 
+		} else if (RobotMap.autoSelect2 != null && RobotMap.autoSelect2.get() == true) { 
 			autonomousCommand = new AutoGM();
 			System.out.println("AUTONOMOUS IS Auto GM");
 			System.out.println("Does:Grabs tote and brings it into auto zone ");
-		} else if (oi.autoSelect3 != null && oi.autoSelect3.get() == true) {
+		} else if (RobotMap.autoSelect3 != null && RobotMap.autoSelect3.get() == true) {
 			autonomousCommand = new AutoSM();
 			System.out.println("AUTONOMOUS IS Auto SM");
 			System.out.println("Does: stacks 3 totes and moves");
-		} else if (oi.autoSelect4 != null && oi.autoSelect4.get() == true) {
+		} else if (RobotMap.autoSelect4 != null && RobotMap.autoSelect4.get() == true) {
 			autonomousCommand = new AutoTM();
 			System.out.println("AUTONOMOUS IS Auto TM");
 			System.out.println("Does:stacks conainter on tote and moves");
+		} else {
+			System.out.println("NO AUTONOMOUS SELECTED, defaulting to Auto M");	
+			autonomousCommand = new AutoM();
 		}
 
-
-		//if (oi.autoSelect1 != null && oi.autoSelect1.get() == true) {
-		//autonomousCommand = new AutoM();
-		//System.out.println("AUTONOMOUS IS Auto M:");
-		//System.out.println("Does: moves into the auto zone");
-		/*
-		 * } else if (oi.autoSelect2 != null && oi.autoSelect2.get() == true) {
-		 * autonomousCommand = new AutoGM();
-		 * System.out.println("AUTONOMOUS IS Auto GM");
-		 * System.out.println("Does:Grabs tote and brings it into auto zone ");
-		 * } else if (oi.autoSelect3 != null && oi.autoSelect3.get() == true) {
-		 * autonomousCommand = new AutoSM();
-		 * System.out.println("AUTONOMOUS IS Auto SM");
-		 * System.out.println("Does: stacks 3 totes and moves"); } else if
-		 * (oi.autoSelect4 != null && oi.autoSelect4.get() == true) {
-		 * autonomousCommand = new AutoTM();
-		 * System.out.println("AUTONOMOUS IS Auto TM");
-		 * System.out.println("Does:stacks conainter on tote and moves"); }
-		 */
 
 		if (RobotMap.chassis_drive_gyro != null)
 			RobotMap.chassis_drive_gyro.reset();
