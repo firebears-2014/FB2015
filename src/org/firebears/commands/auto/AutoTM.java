@@ -26,23 +26,30 @@ public class  AutoTM extends CommandGroup {
     	
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_3_HEIGHT));		//moves container up
     	addSequential(new WaitCommand(1.5));
-    	addSequential(new StrafeCommand(-1), .6);
-		addSequential(new WidetoteCommand());  					 //centers on tote
+    	addSequential(new StrafeCommand(-.6), 1);
+		addSequential(new WidetoteCommand());  
+		addSequential(new ForwardCommand(-.3, true), .2);//centers on tote
 		addSequential(new SetHeightCommand(Robot.lift.LIFT_2_HEIGHT));
 		addSequential(new WaitCommand(.3));//moves container down
-		addSequential(new GrabberCommand(false));				//releases
+		addSequential(new GrabberCommand(false));
+		addSequential(new WaitCommand(.3));//releases
+		addSequential(new StrafeCommand(-.5), .4);
 		addSequential(new WidetoteCommand());  
 		addSequential(new GrabberCommand(false));
-		addSequential(new SetHeightCommand(Robot.lift.LIFT_0_HEIGHT));  //sets arm to floor position 
+		addSequential(new ForwardCommand(-.3, true), .4); 
+		addSequential(new SetHeightCommand(Robot.lift.LIFT_0_HEIGHT));
+		addSequential(new WaitCommand(1.3));//sets arm to floor position 
 		addSequential(new GrabberCommand(true));
-		addSequential(new WaitCommand(.4));//grabs tote
+		addSequential(new WaitCommand(.3));//grabs tote
 		addSequential(new SetHeightCommand(Robot.lift.LIFT_1_HEIGHT));  //moves conatainer
     	//todo: add in a way to stop movement depending on where the robot is
 		addSequential(new WaitCommand(.4));
-    	addSequential(new ForwardCommand(-.3, true), 2.0); //TODO: is right?
-    	addSequential(new RotateCommand(.75, 90)); //TODO: is right?
+		addSequential(new RotateCommand(.4, 180, false));
+    	addSequential(new ForwardCommand(.5, true), 2.1); //TODO: is right?
+    	addSequential(new WaitCommand(.2));
+    	addSequential(new RotateCommand(.6, 90, true)); //TODO: is right?
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_0_HEIGHT));
-    	addSequential(new WaitCommand(.5));
+    	addSequential(new WaitCommand(.4));
     	addSequential(new GrabberCommand(false));
     }
 

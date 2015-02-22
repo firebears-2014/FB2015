@@ -19,7 +19,7 @@ public class  AutoM extends CommandGroup {
     	//Move Backward: Stop depends on color sensor
     	addSequential(new ForwardCommand(-.5, true), 2);
     	//Rotate as to fit in auto zone.
-    	addSequential(new RotateCommand(.50, 90));
+    	addSequential(new RotateCommand(.50, 90, true));
     }
 
 }
