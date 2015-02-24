@@ -35,18 +35,24 @@ public class  AutoStack extends CommandGroup {
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_3_HEIGHT)); //Lift Bin
     	addSequential(new WaitCommand(1.5)); //Wait for lift
     	addSequential(new RotateCommand(.5, 45, true)); //Rotate
-    	addSequential(new ChassisCommand(-.8, .5, 0), .5); //Approach the tote.
+    	addSequential(new ChassisCommand(-.5, .1, 0), 1); //Approach the tote.
 //    	addSequential(new ToteApproachCommand()); //Approach the tote.
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_2_HEIGHT)); //Set Bin
-    	addParallel(new ForwardCommand(.5, false), .5);
+    	addParallel(new ForwardCommand(.5, false), .25);
     	addSequential(new WaitCommand(1.5));
     	addSequential(new GrabberCommand(false)); //Release the bin
+    	addSequential(new ForwardCommand(-.4, false), .3);
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_0_HEIGHT)); //Move lift to grab
+    	addSequential(new WaitCommand(.8));
+    	addSequential(new ForwardCommand(.6, false), .3);
     	addSequential(new WaitCommand(1.5));
     	addSequential(new GrabberCommand(true)); //Grab the tote
+    	addSequential(new WaitCommand(.8));
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_2_HEIGHT)); //Lift the tote
     	addSequential(new WaitCommand(1.));
-    	addSequential(new StrafeCommand(-.5), 2.0); // Move left into auto zone   
+    	addSequential(new RotateCommand(.5, -90, true));
+    	addSequential(new ForwardCommand(.5, false), 2.0); // Move Forward into auto zone 
+    	addSequential(new RotateCommand(.5, -80, true)); //Fit
 		System.out.println("Currently in autonomous 'AutoStack'");
     }
 
