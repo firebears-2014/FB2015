@@ -6,7 +6,11 @@ import org.firebears.Robot;
 import edu.wpi.first.wpilibj.command.Command;
 
 /**
- *
+ * Command that approaches a tote aligned the long way.
+ * ex: 
+ *  /=======/-|
+ *  |       | /
+ *  ---------/
  */
 public class WidetoteCommand extends Command {
 

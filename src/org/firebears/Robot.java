@@ -70,6 +70,7 @@ public class Robot extends IterativeRobot {
 		// autonomousCommand = new AutoStrafeCommand();
 		// 
 
+
 		if (RobotMap.autoSelect1 != null && RobotMap.autoSelect1.get() == false) {
 			autonomousCommand = new AutoM();
 		  	System.out.println("AUTONOMOUS IS Auto M: Move");
@@ -88,6 +89,14 @@ public class Robot extends IterativeRobot {
 			autonomousCommand = new AutoTM();
 			System.out.println("AUTONOMOUS IS Auto TM");
 			System.out.println("Does:stacks conainter on tote and moves");
+		} else if (RobotMap.autoSelect5 != null && RobotMap.autoSelect5.get() == false) {
+			autonomousCommand = new AutoStack(false);
+			System.out.println("AUTONOMOUS IS AutoStack(false)");
+			System.out.println("Does:left stacks container on tote and moves to autozone");	
+		} else if (RobotMap.autoSelect6 != null && RobotMap.autoSelect6.get() == false) {
+			autonomousCommand = new AutoStack(true);
+			System.out.println("AUTONOMOUS IS AutoStack(true)");
+			System.out.println("Does: right stacks container on tote and moves to autozone");	
 		} else {
 			System.out.println("NO AUTONOMOUS SELECTED, defaulting to AutoM");	
 			autonomousCommand = new AutoM();
