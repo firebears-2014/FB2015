@@ -93,9 +93,7 @@ public class Robot extends IterativeRobot {
 			autonomousCommand = new AutoM();
 		}
 */
-
 		autonomousCommand = new AutoTM();
-
 	
 		if (RobotMap.chassis_drive_gyro != null)
 			RobotMap.chassis_drive_gyro.reset();

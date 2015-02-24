@@ -26,7 +26,7 @@ public class  AutoGM extends CommandGroup {
     	addSequential(new ForwardCommand(-.5, true), 2.2);
 
     	//Rotate as to fit in auto zone.
-    	addSequential(new RotateCommand(.40, 90));
+    	addSequential(new RotateCommand(.40, 90, true));
     	//Drop
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_0_HEIGHT));
     	//Release

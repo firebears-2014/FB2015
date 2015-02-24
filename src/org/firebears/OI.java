@@ -92,7 +92,7 @@ public class OI {
 		resetGyro.whenPressed(new GyroResetCommand());
 
 		approachTote = new JoystickButton(joystickDrive, 9);
-		// approachTote.whenPressed(new ToteApproachCommand());
+		approachTote.whenPressed(new ToteApproachCommand());
 
 		wideCentertote = new JoystickButton(joystickDrive, 11);
 		wideCentertote.whenPressed(new WidetoteCommand());
@@ -142,7 +142,7 @@ public class OI {
 				RobotMap.LIFT_TOTE_3));
 		SmartDashboard.putData("Set Tote High", new PreferenceSetup(
 				RobotMap.LIFT_TOTE_HIGH));
-		SmartDashboard.putData("Rotate 90", new RotateCommand(.5, 90.));
+		SmartDashboard.putData("Rotate 90", new RotateCommand(.5, 90., true));
 
 	}
 

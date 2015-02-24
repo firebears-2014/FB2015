@@ -18,11 +18,13 @@ public class RotateCommand extends PIDCommand{
 	double rotateSpeed;
 	private double initialAngle;
 	private boolean isNegative = false;
+	boolean timeo;
 	
-	public RotateCommand(double d, double degrees) {
+	public RotateCommand(double d, double degrees, boolean to) {
         super(0.02, 0.0, 0.0); //P, I, D
 		targetDegrees = degrees;
 		rotateSpeed = d;
+		timeo = to;
 		if(degrees < 0) {
 			isNegative = true;
 		}
@@ -34,7 +36,9 @@ public class RotateCommand extends PIDCommand{
 		Robot.chassis.setFieldOriented(false);
     	initialAngle = RobotMap.chassis_drive_gyro.getAngle();
         getPIDController().setSetpoint(targetDegrees);
+        if(timeo==true){
         setTimeout(2);
+        }
     }
     
     protected void execute() {

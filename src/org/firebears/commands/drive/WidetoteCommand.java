@@ -22,7 +22,7 @@ public class WidetoteCommand extends Command {
     protected void initialize() {
 		isFieldOriented = Robot.chassis.getFieldOriented();
 		Robot.chassis.setFieldOriented(false);
-		setTimeout(3);
+		setTimeout(1);
     }
 
     // Called repeatedly when this Command is scheduled to run
