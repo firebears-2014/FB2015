@@ -70,21 +70,21 @@ public class Robot extends IterativeRobot {
 		// autonomousCommand = new AutoStrafeCommand();
 		// 
 
-	/*	if (RobotMap.autoSelect1 != null && RobotMap.autoSelect1.get() == true) {
+		if (RobotMap.autoSelect1 != null && RobotMap.autoSelect1.get() == false) {
 			autonomousCommand = new AutoM();
 		  	System.out.println("AUTONOMOUS IS Auto M: Move");
 		  	System.out.println("Does: moves backwards into the auto zone"); 
 		  	System.out.println("Position the robot facing the drivers."); 
-		} else if (RobotMap.autoSelect2 != null && RobotMap.autoSelect2.get() == true) { 
+		} else if (RobotMap.autoSelect2 != null && RobotMap.autoSelect2.get() == false) { 
 			autonomousCommand = new AutoGM();
 			System.out.println("AUTONOMOUS IS Auto GM : Grab and Move");
 			System.out.println("Does:Grabs tote and brings it into auto zone ");
 		  	System.out.println("Position the robot facing the drivers, with grabbers around a tote."); 
-		} else if (RobotMap.autoSelect3 != null && RobotMap.autoSelect3.get() == true) {
+		} else if (RobotMap.autoSelect3 != null && RobotMap.autoSelect3.get() == false) {
 			autonomousCommand = new AutoSM();
 			System.out.println("AUTONOMOUS IS Auto SM");
 			System.out.println("Does: stacks 3 totes and moves");
-		} else if (RobotMap.autoSelect4 != null && RobotMap.autoSelect4.get() == true) {
+		} else if (RobotMap.autoSelect4 != null && RobotMap.autoSelect4.get() == false) {
 			autonomousCommand = new AutoTM();
 			System.out.println("AUTONOMOUS IS Auto TM");
 			System.out.println("Does:stacks conainter on tote and moves");
@@ -92,8 +92,6 @@ public class Robot extends IterativeRobot {
 			System.out.println("NO AUTONOMOUS SELECTED, defaulting to AutoM");	
 			autonomousCommand = new AutoM();
 		}
-*/
-		autonomousCommand = new AutoTM();
 	
 		if (RobotMap.chassis_drive_gyro != null)
 			RobotMap.chassis_drive_gyro.reset();
@@ -219,7 +217,7 @@ public class Robot extends IterativeRobot {
 		if (lights.isEarly && ds.getMatchTime() >= 130.0) {
 			lights.isEarly = false;
 			lights.last_twenty();
-		}
+		}		
 	}
 
 	// hihihi
