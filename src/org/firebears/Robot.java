@@ -75,7 +75,7 @@ public class Robot extends IterativeRobot {
 			autonomousCommand = new AutoM();
 		  	System.out.println("AUTONOMOUS IS Auto M: Move");
 		  	System.out.println("Does: moves backwards into the auto zone"); 
-		  	System.out.println("Position the robot facing the drivers."); 
+		  	System.out.println("Position the robot facing the drivers.");
 		} else if (RobotMap.autoSelect2 != null && RobotMap.autoSelect2.get() == false) { 
 			autonomousCommand = new AutoGM();
 			System.out.println("AUTONOMOUS IS Auto GM : Grab and Move");
