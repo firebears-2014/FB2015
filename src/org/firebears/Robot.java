@@ -97,6 +97,8 @@ public class Robot extends IterativeRobot {
 			autonomousCommand = new AutoStack(true);
 			System.out.println("AUTONOMOUS IS AutoStack(true)");
 			System.out.println("Does: right stacks container on tote and moves to autozone");	
+		}else if (RobotMap.autoSelect7 != null && RobotMap.autoSelect7.get() == false) {
+			autonomousCommand = new AutoS();	
 		} else {
 			System.out.println("NO AUTONOMOUS SELECTED, defaulting to AutoM");	
 			autonomousCommand = new AutoM();
