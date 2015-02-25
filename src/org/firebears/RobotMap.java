@@ -66,6 +66,7 @@ public class RobotMap {
 	public static DigitalInput autoSelect4;
 	public static DigitalInput autoSelect5;
 	public static DigitalInput autoSelect6;
+	public static DigitalInput autoSelect7;
 	public static DigitalInput scoringPlatformSensor;
 
 	public static AnalogInput analogInput;
@@ -254,6 +255,7 @@ public class RobotMap {
 		autoSelect4 = new DigitalInput(14);
 		autoSelect5 = new DigitalInput(15);
 		autoSelect6 = new DigitalInput(16);
+		autoSelect7 = new DigitalInput(17);
 
 		rightArmsharpIRRange = new org.firebears.sensors.sharpIRRange(5);
 		rightsharpIRRange = new org.firebears.sensors.sharpIRRange(3);
