@@ -2,6 +2,7 @@ package org.firebears.commands.auto;
 
 import org.firebears.Robot;
 import org.firebears.commands.drive.ForwardCommand;
+import org.firebears.commands.drive.RotateCommand;
 import org.firebears.commands.drive.StrafeCommand;
 import org.firebears.commands.drive.WidetoteCommand;
 import org.firebears.commands.grabber.GrabberCommand;
@@ -25,7 +26,8 @@ public class AutoSM extends CommandGroup {
 		addSequential(new SetHeightCommand(Robot.lift.LIFT_3_HEIGHT));
 		addSequential(new WaitCommand(2.1));
 		// tote 2 logic
-		addSequential(new StrafeCommand(1), 1.47); // change interrupt?
+		addSequential(new StrafeCommand(1), 1.47);
+		addParallel(new RotateCommand(1.0, -30, true));											// change interrupt?
 		addSequential(new ForwardCommand(-.3, true), .4);
 		addSequential(new WidetoteCommand());
 		addSequential(new WaitCommand(.3));
@@ -44,6 +46,7 @@ public class AutoSM extends CommandGroup {
 		addSequential(new SetHeightCommand(Robot.lift.LIFT_3_HEIGHT));
 		addSequential(new WaitCommand(2.1));
 		addSequential(new StrafeCommand(1), 1.45);
+		addParallel(new RotateCommand(1.0, -30, true));	
 		//tote 3 logic
 		addSequential(new ForwardCommand(-.3, true), .4);
 		addSequential(new WidetoteCommand());
