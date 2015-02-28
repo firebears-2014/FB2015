@@ -226,13 +226,13 @@ public class Robot extends IterativeRobot {
 		
 		if (RobotMap.DEBUG)  {
 			SmartDashboard.putString("Autonomous Switch", 
-				(RobotMap.autoSelect1.get() ? "a1-d11 " : "") +
-				(RobotMap.autoSelect2.get() ? "a2-d12 " : "") +
-				(RobotMap.autoSelect3.get() ? "a3-d13 " : "") +
-				(RobotMap.autoSelect4.get() ? "a4-d14 " : "") +
-				(RobotMap.autoSelect5.get() ? "a5-d15 " : "") +
-				(RobotMap.autoSelect6.get() ? "a6-d16 " : "") +
-				(RobotMap.autoSelect7.get() ? "a7-d17 " : "") 
+				(!RobotMap.autoSelect1.get() ? "a1-d11 " : "") +
+				(!RobotMap.autoSelect2.get() ? "a2-d12 " : "") +
+				(!RobotMap.autoSelect3.get() ? "a3-d13 " : "") +
+				(!RobotMap.autoSelect4.get() ? "a4-d14 " : "") +
+				(!RobotMap.autoSelect5.get() ? "a5-d15 " : "") +
+				(!RobotMap.autoSelect6.get() ? "a6-d16 " : "") +
+				(!RobotMap.autoSelect7.get() ? "a7-d17 " : "") 
 			);
 		}
 

@@ -41,7 +41,7 @@ public class  AutoTM extends CommandGroup {
 		addSequential(new SetHeightCommand(Robot.lift.LIFT_1_HEIGHT));  	
 		addSequential(new WaitCommand(.4));
 		addSequential(new RotateCommand(.4, 180, false));					//turns around 
-    	addSequential(new ForwardCommand(.5, true), 2.1); 					//drives over hump
+    	addSequential(new ForwardCommand(.5, false), 2.1); 					//drives over hump
     	addSequential(new WaitCommand(.7));
     	addSequential(new RotateCommand(.4, -75, true)); 					//rotates
     	addSequential(new SetHeightCommand(Robot.lift.LIFT_0_HEIGHT));		//releases tote
