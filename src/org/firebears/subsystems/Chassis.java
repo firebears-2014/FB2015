@@ -57,9 +57,9 @@ public class Chassis extends Subsystem {
 	 */
 	public void mechanumDrive(double strafe, double forward, double rotation) {
 		double angle = 
-				/*((RobotMap.chassis_drive_gyro != null) && fieldOriented) ? RobotMap.chassis_drive_gyro
-				.getAngle() : 0.0;*/
-				0.0;
+				((RobotMap.chassis_drive_gyro != null) && fieldOriented) 
+				? RobotMap.chassis_drive_gyro.getAngle() 
+				: 0.0;
 
 		// double cosA = Math.cos(theta * (3.14159 / 180.0));
 		// double sinA = Math.sin(theta * (3.14159 / 180.0));
