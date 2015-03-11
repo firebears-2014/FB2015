@@ -34,6 +34,7 @@ public class RobotMap {
 	public static final String CHASSIS_DRIVE_TYPE_TAL = "CHASSIS_DRIVE_TYPE_TAL";
 	public static final String CHASSIS_DRIVE_TYPE_JAG = "CHASSIS_DRIVE_TYPE_JAG";
 	public static final String CHASSIS_FIELD_ORIENTED = "CHASSIS_FIELD_ORIENTED";
+	public static final String CHASSIS_BRAKING_MODE = "CHASSIS_BRAKING_MODE";
 
 	public static double lift_zero_ref;
 	public static double lift_tote_0;
@@ -98,14 +99,24 @@ public class RobotMap {
 		if (!preferences.containsKey(CHASSIS_FIELD_ORIENTED)) {
 			preferences.putBoolean(CHASSIS_FIELD_ORIENTED, true);
 		}
+		if (!preferences.containsKey(CHASSIS_BRAKING_MODE)) {
+			preferences.putBoolean(CHASSIS_BRAKING_MODE, true);
+		}
 
 		// Talon Code
+		boolean isBrakingOn = preferences.getBoolean(CHASSIS_BRAKING_MODE, true);
 		if (chassis_drive_type_tal) {
 			System.out.println("Configuring RobotDrive for CANTalons");
 			chassis_front_left_controller = new CANTalon(5);
 			chassis_front_right_controller = new CANTalon(1);
 			chassis_back_left_controller = new CANTalon(4);
 			chassis_back_right_controller = new CANTalon(3);
+			if (isBrakingOn) {
+				((CANTalon)chassis_front_left_controller).enableBrakeMode(isBrakingOn);
+				((CANTalon)chassis_front_right_controller).enableBrakeMode(isBrakingOn);
+				((CANTalon)chassis_back_left_controller).enableBrakeMode(isBrakingOn);
+				((CANTalon)chassis_back_right_controller).enableBrakeMode(isBrakingOn);
+			}
 
 		} else {
 			// Jag Code

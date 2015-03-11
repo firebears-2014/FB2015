@@ -56,8 +56,10 @@ public class Chassis extends Subsystem {
 	 *            angular rotation, in the range -1.0 to 1.0.
 	 */
 	public void mechanumDrive(double strafe, double forward, double rotation) {
-		double angle = ((RobotMap.chassis_drive_gyro != null) && fieldOriented) ? RobotMap.chassis_drive_gyro
-				.getAngle() : 0.0;
+		double angle = 
+				((RobotMap.chassis_drive_gyro != null) && fieldOriented) 
+				? RobotMap.chassis_drive_gyro.getAngle() 
+				: 0.0;
 
 		// double cosA = Math.cos(theta * (3.14159 / 180.0));
 		// double sinA = Math.sin(theta * (3.14159 / 180.0));
@@ -81,8 +83,11 @@ public class Chassis extends Subsystem {
 		 */
 		if (robot_drive != null)   {
 			try {
-				robot_drive.mecanumDrive_Cartesian(strafe, (reversed ? -1 : 1)
-						* forward, rotation, (reversed ? -1 : 1) * angle);
+				robot_drive.mecanumDrive_Cartesian(strafe, 
+//						(reversed ? -1 : 1) *
+						forward, 
+						rotation, 
+						(reversed ? -1 : 1) * angle);
 			} catch (Exception e) {
 				System.err.println("ERROR: " + e);
 				if (RobotMap.DEBUG)  { e.printStackTrace(); }

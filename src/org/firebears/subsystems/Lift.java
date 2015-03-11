@@ -31,7 +31,7 @@ public class Lift extends PIDSubsystem {
 	public boolean manual_up = false;
 	public boolean manual_down = false;
 
-	private static double m_P = 0.2;
+	private static double m_P = 0.12;
 	private static double m_I = 0.0;
 	private static double m_D = 0.0;
 

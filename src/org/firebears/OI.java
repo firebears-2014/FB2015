@@ -7,8 +7,10 @@ import org.firebears.commands.lift.SetLiftMotorCommand;
 import org.firebears.commands.lift.SetManualCommand;
 import org.firebears.commands.lift.SetStepCommand;
 import org.firebears.commands.lights.CelebrateCommand;
+import org.firebears.commands.lights.LightChangeCommand;
 import org.firebears.commands.drive.*;
 import org.firebears.sensors.GyroResetCommand;
+import org.firebears.subsystems.Lights;
 
 import edu.wpi.first.wpilibj.DigitalInput;
 import edu.wpi.first.wpilibj.Joystick;
@@ -129,6 +131,12 @@ public class OI {
 					new SetLiftMotorCommand(true));
 			SmartDashboard.putData("Disable Lift Motor",
 					new SetLiftMotorCommand(false));
+			
+			SmartDashboard.putData("Lights lift1 Crazy", new LightChangeCommand(Lights.STRIP_LIFT1, Lights.ANIM_CRAZY));
+			SmartDashboard.putData("Lights lift2 Fire", new LightChangeCommand(Lights.STRIP_LIFT2, Lights.ANIM_FIRE));
+			SmartDashboard.putData("Lights lift1 Fire", new LightChangeCommand(Lights.STRIP_LIFT1, Lights.ANIM_FIRE));
+			SmartDashboard.putData("Lights lift2 Crazy", new LightChangeCommand(Lights.STRIP_LIFT2, Lights.ANIM_CRAZY));
+
 		}
 		SmartDashboard.putData("Set Zero", new PreferenceSetup(
 				RobotMap.LIFT_ZERO_REF));

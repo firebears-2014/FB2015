@@ -31,7 +31,7 @@ public class SetManualCommand extends Command {
 		if (Robot.lift.manual_up && Robot.lift.manual_down) {
 			Robot.lift.setSetpoint(Robot.lift.getLiftHeight());
 		} else if (Robot.lift.manual_up) {
-			Robot.lift.setSetpoint(Robot.lift.getLiftHeight() + 3);
+			Robot.lift.setSetpoint(Robot.lift.getLiftHeight() + 4.5);
 		} else if (Robot.lift.manual_down) {
 			Robot.lift.setSetpoint(Robot.lift.getLiftHeight() - 3);
 		}
