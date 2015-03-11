@@ -96,7 +96,7 @@ public class Lights extends Subsystem {
     public void updateLiftHeight() {
     	double new_value =
         		Robot.lift.getLiftHeight();
-        	new_value = (double)Math.round(new_value * 60);
+        	new_value = (double)Math.round(new_value);
         	
         	if(new_value != old_value) {
     			setValue(STRIP_LIFT1, new_value);

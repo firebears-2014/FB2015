@@ -79,6 +79,10 @@ public class Robot extends IterativeRobot {
 		// autoChooser = new SendableChooser();
 		// autoChooser.addDefault("Rotary Switch", (Double) 0.);
 
+		// Reset the lift zero reference, since the lift should be at the lowest point.
+		PreferenceSetup tempSetup = new PreferenceSetup(RobotMap.LIFT_ZERO_REF);
+		tempSetup.initialize();
+		
 		System.out.println("Started Robot Code!");
 	}
 
@@ -210,6 +214,7 @@ public class Robot extends IterativeRobot {
 			lights.isEarly = false;
 			lights.last_twenty();
 		}		
+		lights.updateLiftHeight();
 	}
 
 	// hihihi
