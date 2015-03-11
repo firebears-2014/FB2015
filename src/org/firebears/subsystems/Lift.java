@@ -54,7 +54,8 @@ public class Lift extends PIDSubsystem {
 		// to
 		// enable() - Enables the PID controller.
 
-		new PreferenceSetup(RobotMap.LIFT_ZERO_REF);
+		PreferenceSetup tempSetup = new PreferenceSetup(RobotMap.LIFT_ZERO_REF);
+		tempSetup.initialize();
 
 	}
 

@@ -21,9 +21,8 @@ public class PreferenceSetup extends Command {
 		m_key = key;
 		preferences = Preferences.getInstance();
 	}
-
 	// Called just before this Command runs the first time
-	protected void initialize() {
+	public void initialize() {
 		/*
 		 * ex: if(m_key.equals(RobotMap.String)){
 		 * 
