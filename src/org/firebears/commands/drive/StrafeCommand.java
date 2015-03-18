@@ -1,6 +1,7 @@
 package org.firebears.commands.drive;
 
 import org.firebears.Robot;
+import org.firebears.RobotMap;
 
 import edu.wpi.first.wpilibj.command.Command;
 
@@ -11,6 +12,7 @@ public class StrafeCommand extends Command {
 
 	double direction;
 	public boolean fieldOriented;
+	double angle;
 
 	public StrafeCommand(double s) {
 		requires(Robot.chassis);
@@ -22,11 +24,16 @@ public class StrafeCommand extends Command {
 		fieldOriented = Robot.chassis.getFieldOriented();
 		Robot.chassis.setFieldOriented(false);
 		Robot.chassis.mechanumDrive(direction, 0, 0);
+		angle = RobotMap.chassis_drive_gyro.getAngle();
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.chassis.mechanumDrive(direction, 0, 0);
+		double x = RobotMap.chassis_drive_gyro.getAngle();
+		double y = (angle - x) * .2;
+		
+		System.out.println("Speed: " + y);
+		Robot.chassis.mechanumDrive(direction, 0, y);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

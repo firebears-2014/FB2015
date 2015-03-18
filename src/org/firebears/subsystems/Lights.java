@@ -104,9 +104,6 @@ public class Lights extends Subsystem {
         	}
         	
         	old_value = new_value;
-
-//        	Robot.lights.setLiftHeight(Lights.LIFT_LIGHTS_LEFT, Robot.lift.getLiftHeight());
-//       	Robot.lights.setLiftHeight(Lights.LIFT_LIGHTS_RIGHT, Robot.lift.getLiftHeight());
     }
     
     public void updateUnderglow(double forward) {
