@@ -13,10 +13,18 @@ public class StrafeCommand extends Command {
 	double direction;
 	public boolean fieldOriented;
 	double angle;
+	double correction;
 
 	public StrafeCommand(double s) {
 		requires(Robot.chassis);
 		direction = s;
+		correction = 1./3.;
+	}
+	
+	public StrafeCommand(double s, double pcorrection) {
+		requires(Robot.chassis);
+		direction = s;
+		correction = pcorrection;
 	}
 
 	// Called just before this Command runs the first time
@@ -33,7 +41,7 @@ public class StrafeCommand extends Command {
 		double y = (angle - x) * .2;
 		
 		System.out.println("Speed: " + y);
-		Robot.chassis.mechanumDrive(direction, 0, y);
+		Robot.chassis.mechanumDrive(direction, 0, y * correction);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

@@ -42,6 +42,8 @@ public class OI {
 	public JoystickButton approachTote;
 	public JoystickButton slowTriggerButton;
 	public JoystickButton celebrate;
+	public JoystickButton strafe;
+	public JoystickButton strafe2;
 
 	public OI() {
 		// Initialize joysticks
@@ -101,7 +103,13 @@ public class OI {
 
 		centerTote = new JoystickButton(joystickDrive, 12);
 		centerTote.whenPressed(new Totecenter());
-
+		
+//		strafe = new JoystickButton(joystickDrive, 3);
+//		strafe.whileHeld(new StrafeCommand(.75, 1./3.));
+		
+//		strafe2 = new JoystickButton(joystickDrive, 4);
+//		strafe2.whileHeld(new StrafeCommand(.75, 0.));
+		
 		// SmartDashboard Buttons
 		// SmartDashboard.putData("Autonomous Command", new
 		// AutonomousCommand());

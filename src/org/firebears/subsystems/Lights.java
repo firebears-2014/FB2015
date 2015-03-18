@@ -31,6 +31,7 @@ public class Lights extends Subsystem {
 	public static final String ANIM_BULB = "BULB";
 	public static final String ANIM_CATERPILLAR = "ANIM_CATERPILLAR";
 	public static final String ANIM_SPARK = "SPARK";
+	public static final String ANIM_THEATER = "THEATER";
 	
 	//Color Schemes
 	public static final int CS_RED = 0;
@@ -161,7 +162,14 @@ public class Lights extends Subsystem {
     }
     
     public void celebrate() {
-    	setStrip(STRIP_LIFT1, ANIM_CRAZY);
+		setStrip(STRIP_LIFT1, ANIM_THEATER);
+		setStrip(STRIP_LIFT2, ANIM_THEATER);
+		setStrip(STRIP_BOX_1, ANIM_THEATER);
+		setStrip(STRIP_BOX_2, ANIM_THEATER);
+		setStrip(STRIP_UNDERGLOW, ANIM_THEATER);
+		setStrip(STRIP_CELEBRATE, ANIM_THEATER);
+    	
+/*    	setStrip(STRIP_LIFT1, ANIM_CRAZY);
     	setStrip(STRIP_LIFT2, ANIM_CRAZY);
     	setStrip(STRIP_BOX_1, ANIM_CRAZY);
     	setStrip(STRIP_BOX_2, ANIM_CRAZY);
@@ -174,6 +182,6 @@ public class Lights extends Subsystem {
     	setValue(STRIP_BOX_1, crazyValue);
     	setValue(STRIP_BOX_2, crazyValue);
     	setValue(STRIP_UNDERGLOW, crazyValue);
-    	setValue(STRIP_CELEBRATE, crazyValue);
+    	setValue(STRIP_CELEBRATE, crazyValue);*/
     }
 }
