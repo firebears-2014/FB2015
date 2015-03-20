@@ -31,6 +31,8 @@ public class Lights extends Subsystem {
 	public static final String ANIM_BULB = "BULB";
 	public static final String ANIM_CATERPILLAR = "ANIM_CATERPILLAR";
 	public static final String ANIM_SPARK = "SPARK";
+	public static final String ANIM_THEATER = "THEATER";
+	public static final String ANIM_EXPLODE = "ANIM_EXPLODE";
 	
 	//Color Schemes
 	public static final int CS_RED = 0;
