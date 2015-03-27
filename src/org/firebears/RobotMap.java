@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 public class RobotMap {
 
-	public static final boolean DEBUG = true;
+	public static final boolean DEBUG = false;
 
 	public static final String LIFT_ZERO_REF = "LIFT_ZERO_REF";
 	public static final String LIFT_TOTE_0 = "LIFT_TOTE_0";
