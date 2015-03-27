@@ -84,7 +84,7 @@ public class OI {
 		toggleManualSwitch.whenReleased(new SetManualCommand(true));
 
 		celebrate = new JoystickButton(joystickLift, 11);
-		celebrate.whenPressed(new CelebrateCommand());
+		celebrate.whileHeld(new CelebrateCommand());
 
 		// DRIVE Joystick Initialization
 
