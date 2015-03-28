@@ -278,6 +278,8 @@ public class Robot extends IterativeRobot {
 		} else if (RobotMap.autoSelect7 != null
 				&& RobotMap.autoSelect7.get() == false) {
 			autonomousCommand = new AutoS();
+			System.out.println("AUTONOMOUS IS AutoStrafe");
+			System.out.println("Does: strafes left of chassis.");
 		} else {
 			System.out.println("NO AUTONOMOUS SELECTED, defaulting to AutoM");
 			autonomousCommand = new AutoM();

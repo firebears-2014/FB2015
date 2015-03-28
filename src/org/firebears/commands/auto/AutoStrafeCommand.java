@@ -13,13 +13,12 @@ public class AutoStrafeCommand extends CommandGroup {
 	public AutoStrafeCommand() {
 		// Use requires() here to declare subsystem dependencies
 		// eg. requires(chassis);
-
-		// 1 second, full speed
-		addSequential(new StrafeCommand(-.75), 3.0);
-		addSequential(new ForwardCommand(.5, false), 1.0);
-		addSequential(new StrafeCommand(.75), 1.0);
-
 		System.out.println("Currently in autonomous 'AutoStrafeCommand'");
+
+		addSequential(new StrafeCommand(-.75), 12.0);
+		// addSequential(new ForwardCommand(.5, false), 1.0);
+		// addSequential(new StrafeCommand(.75), 1.0);
+
 	}
 
 }

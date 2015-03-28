@@ -12,7 +12,7 @@ public class ChassisCommand extends Command {
 	double x;
 	double y;
 	double z;
-	
+
 	public boolean fieldOriented;
 
 	/**
@@ -35,9 +35,9 @@ public class ChassisCommand extends Command {
 	protected void initialize() {
 
 		Robot.chassis.mechanumDrive(x, -y, z);
-		
+
 		fieldOriented = Robot.chassis.getFieldOriented();
-		Robot.chassis.setFieldOriented(false);
+		Robot.chassis.setFieldOriented(true);
 	}
 
 	// Called repeatedly when this Command is scheduled to run
