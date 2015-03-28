@@ -21,6 +21,9 @@ public class StrafeCommand extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+
+		if (RobotMap.chassis_drive_gyro != null)
+			RobotMap.chassis_drive_gyro.reset();
 		fieldOriented = Robot.chassis.getFieldOriented();
 		Robot.chassis.setFieldOriented(true);
 		Robot.chassis.mechanumDrive(direction, 0, 0);
