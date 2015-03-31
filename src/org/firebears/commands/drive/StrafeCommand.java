@@ -29,8 +29,11 @@ public class StrafeCommand extends Command {
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
+
+		if (RobotMap.chassis_drive_gyro != null)
+			RobotMap.chassis_drive_gyro.reset();
 		fieldOriented = Robot.chassis.getFieldOriented();
-		Robot.chassis.setFieldOriented(false);
+		Robot.chassis.setFieldOriented(true);
 		Robot.chassis.mechanumDrive(direction, 0, 0);
 		angle = RobotMap.chassis_drive_gyro.getAngle();
 	}
@@ -39,9 +42,9 @@ public class StrafeCommand extends Command {
 	protected void execute() {
 		double x = RobotMap.chassis_drive_gyro.getAngle();
 		double y = (angle - x) * .2;
-		
+
 		System.out.println("Speed: " + y);
-		Robot.chassis.mechanumDrive(direction, 0, y * correction);
+		Robot.chassis.mechanumDrive(direction, 0, 0/*y * correction*/);
 	}
 
 	// Make this return true when this Command no longer needs to run execute()

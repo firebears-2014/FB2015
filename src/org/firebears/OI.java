@@ -19,7 +19,8 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
 
 /**
  * This class is the glue that binds the controls on the physical operator
- * interface to the commands and command groups that allow control of the robot.  ping roborio-2846-local
+ * interface to the commands and command groups that allow control of the robot.
+ * ping roborio-2846-local
  */
 public class OI {
 
@@ -44,6 +45,9 @@ public class OI {
 	public JoystickButton celebrate;
 	public JoystickButton strafe;
 	public JoystickButton strafe2;
+
+	public JoystickButton strafeLeft;
+	public JoystickButton strafeRight;
 
 	public OI() {
 		// Initialize joysticks
@@ -82,15 +86,21 @@ public class OI {
 		toggleStepSwitch.whenReleased(new SetStepCommand(true));
 
 		toggleManualSwitch = new JoystickButton(joystickLift, 9);
-		toggleManualSwitch.whenPressed(new SetManualCommand(false));
-		toggleManualSwitch.whenReleased(new SetManualCommand(true));
+		toggleManualSwitch.whenPressed(new SetManualCommand(true));
+		toggleManualSwitch.whenReleased(new SetManualCommand(false));
 
 		celebrate = new JoystickButton(joystickLift, 11);
-		celebrate.whenPressed(new CelebrateCommand());
+		celebrate.whileHeld(new CelebrateCommand());
 
 		// DRIVE Joystick Initialization
 
 		slowTriggerButton = new JoystickButton(joystickDrive, 1);
+
+		strafeLeft = new JoystickButton(joystickDrive, 5);
+		strafeLeft.whileHeld(new StrafeCommand(-0.75));
+
+		strafeRight = new JoystickButton(joystickDrive, 6);
+		strafeRight.whileHeld(new StrafeCommand(0.75));
 
 		resetGyro = new JoystickButton(joystickDrive, 7);
 		resetGyro.whenPressed(new GyroResetCommand());
@@ -139,11 +149,17 @@ public class OI {
 					new SetLiftMotorCommand(true));
 			SmartDashboard.putData("Disable Lift Motor",
 					new SetLiftMotorCommand(false));
-			
-			SmartDashboard.putData("Lights lift1 Crazy", new LightChangeCommand(Lights.STRIP_LIFT1, Lights.ANIM_CRAZY));
-			SmartDashboard.putData("Lights lift2 Fire", new LightChangeCommand(Lights.STRIP_LIFT2, Lights.ANIM_FIRE));
-			SmartDashboard.putData("Lights lift1 Fire", new LightChangeCommand(Lights.STRIP_LIFT1, Lights.ANIM_FIRE));
-			SmartDashboard.putData("Lights lift2 Crazy", new LightChangeCommand(Lights.STRIP_LIFT2, Lights.ANIM_CRAZY));
+
+			SmartDashboard.putData("Lights lift1 Crazy",
+					new LightChangeCommand(Lights.STRIP_LIFT1,
+							Lights.ANIM_CRAZY));
+			SmartDashboard.putData("Lights lift2 Fire", new LightChangeCommand(
+					Lights.STRIP_LIFT2, Lights.ANIM_FIRE));
+			SmartDashboard.putData("Lights lift1 Fire", new LightChangeCommand(
+					Lights.STRIP_LIFT1, Lights.ANIM_FIRE));
+			SmartDashboard.putData("Lights lift2 Crazy",
+					new LightChangeCommand(Lights.STRIP_LIFT2,
+							Lights.ANIM_CRAZY));
 
 		}
 		SmartDashboard.putData("Set Zero", new PreferenceSetup(

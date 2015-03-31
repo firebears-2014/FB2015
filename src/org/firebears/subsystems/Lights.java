@@ -32,6 +32,7 @@ public class Lights extends Subsystem {
 	public static final String ANIM_CATERPILLAR = "ANIM_CATERPILLAR";
 	public static final String ANIM_SPARK = "SPARK";
 	public static final String ANIM_THEATER = "THEATER";
+	public static final String ANIM_EXPLODE = "ANIM_EXPLODE";
 	
 	//Color Schemes
 	public static final int CS_RED = 0;
@@ -162,26 +163,20 @@ public class Lights extends Subsystem {
     }
     
     public void celebrate() {
-		setStrip(STRIP_LIFT1, ANIM_THEATER);
-		setStrip(STRIP_LIFT2, ANIM_THEATER);
-		setStrip(STRIP_BOX_1, ANIM_THEATER);
-		setStrip(STRIP_BOX_2, ANIM_THEATER);
-		setStrip(STRIP_UNDERGLOW, ANIM_THEATER);
-		setStrip(STRIP_CELEBRATE, ANIM_THEATER);
+
+    	setStrip(STRIP_LIFT1, ANIM_EXPLODE);
+    	setStrip(STRIP_LIFT2, ANIM_EXPLODE);
+    	setStrip(STRIP_BOX_1, ANIM_EXPLODE);
+    	setStrip(STRIP_BOX_2, ANIM_EXPLODE);
+    	setStrip(STRIP_UNDERGLOW, ANIM_EXPLODE);
+    	setStrip(STRIP_CELEBRATE, ANIM_EXPLODE);
     	
-/*    	setStrip(STRIP_LIFT1, ANIM_CRAZY);
-    	setStrip(STRIP_LIFT2, ANIM_CRAZY);
-    	setStrip(STRIP_BOX_1, ANIM_CRAZY);
-    	setStrip(STRIP_BOX_2, ANIM_CRAZY);
-    	setStrip(STRIP_UNDERGLOW, ANIM_CRAZY);
-    	setStrip(STRIP_CELEBRATE, ANIM_CRAZY);
-    	
-    	double crazyValue = 100.0;
-    	setValue(STRIP_LIFT1, crazyValue);
-    	setValue(STRIP_LIFT2, crazyValue);
-    	setValue(STRIP_BOX_1, crazyValue);
-    	setValue(STRIP_BOX_2, crazyValue);
-    	setValue(STRIP_UNDERGLOW, crazyValue);
-    	setValue(STRIP_CELEBRATE, crazyValue);*/
+//    	double crazyValue = 100.0;
+//    	setValue(STRIP_LIFT1, crazyValue);
+//    	setValue(STRIP_LIFT2, crazyValue);
+//    	setValue(STRIP_BOX_1, crazyValue);
+//    	setValue(STRIP_BOX_2, crazyValue);
+//    	setValue(STRIP_UNDERGLOW, crazyValue);
+//    	setValue(STRIP_CELEBRATE, crazyValue);
     }
 }

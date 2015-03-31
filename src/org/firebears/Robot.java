@@ -70,7 +70,7 @@ public class Robot extends IterativeRobot {
 		// autonomousCommand = new AutoStrafeCommand();
 
 		autoSelect();
-		
+
 		if (RobotMap.chassis_drive_gyro != null)
 			RobotMap.chassis_drive_gyro.reset();
 
@@ -78,10 +78,11 @@ public class Robot extends IterativeRobot {
 		// autoChooser = new SendableChooser();
 		// autoChooser.addDefault("Rotary Switch", (Double) 0.);
 
-		// Reset the lift zero reference, since the lift should be at the lowest point.
+		// Reset the lift zero reference, since the lift should be at the lowest
+		// point.
 		PreferenceSetup tempSetup = new PreferenceSetup(RobotMap.LIFT_ZERO_REF);
 		tempSetup.initialize();
-		
+
 		System.out.println("Started Robot Code!");
 	}
 
@@ -113,7 +114,7 @@ public class Robot extends IterativeRobot {
 		} else {
 			lights.autonomous(false);
 		}
-		lift.setSetpointInches(lift.LIFT_1_HEIGHT);
+		// lift.setSetpointInches(lift.LIFT_1_HEIGHT);
 	}
 
 	/**
@@ -141,7 +142,7 @@ public class Robot extends IterativeRobot {
 		// Go into teleop lights
 		lights.isEarly = false;
 		lights.teleop();
-		lift.setSetpointInches(lift.LIFT_1_HEIGHT);
+		// lift.setSetpointInches(lift.LIFT_1_HEIGHT);
 	}
 
 	/**
@@ -195,24 +196,23 @@ public class Robot extends IterativeRobot {
 		SmartDashboard.putNumber("Lift 1", RobotMap.lift_tote_1);
 		SmartDashboard.putNumber("Lift 2", RobotMap.lift_tote_2);
 		SmartDashboard.putNumber("Lift 3", RobotMap.lift_tote_3);
-		
-		if (RobotMap.DEBUG)  {
-			SmartDashboard.putString("Autonomous Switch", 
-				(!RobotMap.autoSelect1.get() ? "a1-d11 " : "") +
-				(!RobotMap.autoSelect2.get() ? "a2-d12 " : "") +
-				(!RobotMap.autoSelect3.get() ? "a3-d13 " : "") +
-				(!RobotMap.autoSelect4.get() ? "a4-d14 " : "") +
-				(!RobotMap.autoSelect5.get() ? "a5-d15 " : "") +
-				(!RobotMap.autoSelect6.get() ? "a6-d16 " : "") +
-				(!RobotMap.autoSelect7.get() ? "a7-d17 " : "") 
-			);
+
+		if (RobotMap.DEBUG) {
+			SmartDashboard.putString("Autonomous Switch",
+					(!RobotMap.autoSelect1.get() ? "a1-d11 " : "")
+							+ (!RobotMap.autoSelect2.get() ? "a2-d12 " : "")
+							+ (!RobotMap.autoSelect3.get() ? "a3-d13 " : "")
+							+ (!RobotMap.autoSelect4.get() ? "a4-d14 " : "")
+							+ (!RobotMap.autoSelect5.get() ? "a5-d15 " : "")
+							+ (!RobotMap.autoSelect6.get() ? "a6-d16 " : "")
+							+ (!RobotMap.autoSelect7.get() ? "a7-d17 " : ""));
 		}
 
 		// Run the teleop last twenty animations in the last 20 seconds
 		if (lights.isEarly && ds.getMatchTime() >= 130.0) {
 			lights.isEarly = false;
 			lights.last_twenty();
-		}		
+		}
 		lights.updateLiftHeight();
 	}
 
@@ -237,39 +237,51 @@ public class Robot extends IterativeRobot {
 		 * RobotMap.LIFT_TOTE_3));
 		 */
 		lift.setSetpoint(STARTING_HEIGHT);
-		
+
 	}
-	private void autoSelect(){
+
+	private void autoSelect() {
 		if (RobotMap.autoSelect1 != null && RobotMap.autoSelect1.get() == false) {
 			autonomousCommand = new AutoM();
-		  	System.out.println("AUTONOMOUS IS Auto M: Move");
-		  	System.out.println("Does: moves backwards into the auto zone"); 
-		  	System.out.println("Position the robot facing the drivers."); 
-		} else if (RobotMap.autoSelect2 != null && RobotMap.autoSelect2.get() == false) { 
+			System.out.println("AUTONOMOUS IS Auto M: Move");
+			System.out.println("Does: moves backwards into the auto zone");
+			System.out.println("Position the robot facing the drivers.");
+		} else if (RobotMap.autoSelect2 != null
+				&& RobotMap.autoSelect2.get() == false) {
 			autonomousCommand = new AutoGM();
 			System.out.println("AUTONOMOUS IS Auto GM : Grab and Move");
 			System.out.println("Does:Grabs tote and brings it into auto zone ");
-		  	System.out.println("Position the robot facing the drivers, with grabbers around a tote."); 
-		} else if (RobotMap.autoSelect3 != null && RobotMap.autoSelect3.get() == false) {
+			System.out
+					.println("Position the robot facing the drivers, with grabbers around a tote.");
+		} else if (RobotMap.autoSelect3 != null
+				&& RobotMap.autoSelect3.get() == false) {
 			autonomousCommand = new AutoSM();
 			System.out.println("AUTONOMOUS IS Auto SM");
 			System.out.println("Does: stacks 3 totes and moves");
-		} else if (RobotMap.autoSelect4 != null && RobotMap.autoSelect4.get() == false) {
+		} else if (RobotMap.autoSelect4 != null
+				&& RobotMap.autoSelect4.get() == false) {
 			autonomousCommand = new AutoTM();
 			System.out.println("AUTONOMOUS IS Auto TM");
 			System.out.println("Does:stacks conainter on tote and moves");
-		} else if (RobotMap.autoSelect5 != null && RobotMap.autoSelect5.get() == false) {
+		} else if (RobotMap.autoSelect5 != null
+				&& RobotMap.autoSelect5.get() == false) {
 			autonomousCommand = new AutoStack(false);
 			System.out.println("AUTONOMOUS IS AutoStack(false)");
-			System.out.println("Does:left stacks container on tote and moves to autozone");	
-		} else if (RobotMap.autoSelect6 != null && RobotMap.autoSelect6.get() == false) {
+			System.out
+					.println("Does:left stacks container on tote and moves to autozone");
+		} else if (RobotMap.autoSelect6 != null
+				&& RobotMap.autoSelect6.get() == false) {
 			autonomousCommand = new AutoStack(true);
 			System.out.println("AUTONOMOUS IS AutoStack(true)");
-			System.out.println("Does: right stacks container on tote and moves to autozone");	
-		}else if (RobotMap.autoSelect7 != null && RobotMap.autoSelect7.get() == false) {
-			autonomousCommand = new AutoS();	
+			System.out
+					.println("Does: right stacks container on tote and moves to autozone");
+		} else if (RobotMap.autoSelect7 != null
+				&& RobotMap.autoSelect7.get() == false) {
+			autonomousCommand = new AutoS();
+			System.out.println("AUTONOMOUS IS AutoStrafe");
+			System.out.println("Does: strafes left of chassis.");
 		} else {
-			System.out.println("NO AUTONOMOUS SELECTED, defaulting to AutoM");	
+			System.out.println("NO AUTONOMOUS SELECTED, defaulting to AutoM");
 			autonomousCommand = new AutoM();
 		}
 	}

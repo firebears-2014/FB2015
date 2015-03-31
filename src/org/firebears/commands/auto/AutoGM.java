@@ -9,29 +9,29 @@ import org.firebears.commands.lift.SetHeightCommand;
 import edu.wpi.first.wpilibj.command.CommandGroup;
 import edu.wpi.first.wpilibj.command.WaitCommand;
 
-
-
 /**
  * Autonomous command: Grabs tote and drives backwards it into auto zone.
- * Position the robot facing the drivers stations, with grabbers around the tote.
+ * Position the robot facing the drivers stations, with grabbers around the
+ * tote.
  */
-public class  AutoGM extends CommandGroup {
-    public AutoGM() {
-    	addSequential(new GrabberCommand(false));
-    	addSequential(new GrabberCommand(true)); //Grab Tote
-    	addSequential(new WaitCommand(0.5));
-    	//Lift lift as to not damage it.
-    	addSequential(new SetHeightCommand(Robot.lift.LIFT_3_HEIGHT));
-    	//Stop depends on color sensor
-    	addSequential(new ForwardCommand(-.5, false), 2.1);
 
-    	//Rotate as to fit in auto zone.
-    	addSequential(new RotateCommand(.40, 90, true));
-    	//Drop
-    	addSequential(new SetHeightCommand(Robot.lift.LIFT_0_HEIGHT));
-    	//Release
-    	addSequential(new WaitCommand(1.5));
-    	addSequential(new GrabberCommand(false)); //release Tote
-    }
+public class AutoGM extends CommandGroup {
+	public AutoGM() {
+		addSequential(new GrabberCommand(false));
+		addSequential(new GrabberCommand(true)); // Grab Tote
+		addSequential(new WaitCommand(0.5));
+		// Lift lift as to not damage it.
+		addSequential(new SetHeightCommand(Robot.lift.LIFT_3_HEIGHT));
+		// Stop depends on color sensor
+		addSequential(new ForwardCommand(-.5, false), 1.95);
+
+		// Rotate as to fit in auto zone.
+		addSequential(new RotateCommand(.40, 90, true));
+		// Drop
+		addSequential(new SetHeightCommand(Robot.lift.LIFT_0_HEIGHT));
+		// Release
+		addSequential(new WaitCommand(1.5));
+		addSequential(new GrabberCommand(false)); // release Tote
+	}
 
 }
