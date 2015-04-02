@@ -27,11 +27,6 @@ public class AutoGM extends CommandGroup {
 
 		// Rotate as to fit in auto zone.
 		addSequential(new RotateCommand(.40, 90, true));
-		// Drop
-		addSequential(new SetHeightCommand(Robot.lift.LIFT_0_HEIGHT));
-		// Release
-		addSequential(new WaitCommand(1.5));
-		addSequential(new GrabberCommand(false)); // release Tote
 	}
 
 }

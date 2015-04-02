@@ -114,11 +114,11 @@ public class OI {
 		centerTote = new JoystickButton(joystickDrive, 12);
 		centerTote.whenPressed(new Totecenter());
 		
-//		strafe = new JoystickButton(joystickDrive, 3);
-//		strafe.whileHeld(new StrafeCommand(.75, 1./3.));
-		
-//		strafe2 = new JoystickButton(joystickDrive, 4);
-//		strafe2.whileHeld(new StrafeCommand(.75, 0.));
+/*		strafe = new JoystickButton(joystickDrive, 3);
+		strafe.whileHeld(new StrafeCommand(.75));
+
+		strafe2 = new JoystickButton(joystickDrive, 4);
+		strafe2.whileHeld(new StrafeCommand(-.75, 0.));*/
 		
 		// SmartDashboard Buttons
 		// SmartDashboard.putData("Autonomous Command", new
