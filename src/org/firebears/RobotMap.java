@@ -23,7 +23,7 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 
 public class RobotMap {
 
-	public static final boolean DEBUG = false;
+	public static final boolean DEBUG = true;
 
 	public static final String LIFT_ZERO_REF = "LIFT_ZERO_REF";
 	public static final String LIFT_TOTE_0 = "LIFT_TOTE_0";
@@ -104,19 +104,16 @@ public class RobotMap {
 		}
 
 		// Talon Code
-		boolean isBrakingOn = preferences.getBoolean(CHASSIS_BRAKING_MODE, true);
 		if (chassis_drive_type_tal) {
 			System.out.println("Configuring RobotDrive for CANTalons");
 			chassis_front_left_controller = new CANTalon(5);
 			chassis_front_right_controller = new CANTalon(1);
 			chassis_back_left_controller = new CANTalon(4);
 			chassis_back_right_controller = new CANTalon(3);
-			if (isBrakingOn) {
-				((CANTalon)chassis_front_left_controller).enableBrakeMode(isBrakingOn);
-				((CANTalon)chassis_front_right_controller).enableBrakeMode(isBrakingOn);
-				((CANTalon)chassis_back_left_controller).enableBrakeMode(isBrakingOn);
-				((CANTalon)chassis_back_right_controller).enableBrakeMode(isBrakingOn);
-			}
+			((CANTalon)chassis_front_left_controller).enableBrakeMode(false);
+			((CANTalon)chassis_front_right_controller).enableBrakeMode(false);
+			((CANTalon)chassis_back_left_controller).enableBrakeMode(true);
+			((CANTalon)chassis_back_right_controller).enableBrakeMode(true);
 
 		} else {
 			// Jag Code

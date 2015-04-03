@@ -28,8 +28,7 @@ public class AutoStack extends CommandGroup {
 		// eg. requires(chassis);
 
 		addSequential(new GrabberCommand(true)); // Close Grabbers
-		addSequential(new SetHeightCommand(Robot.lift.LIFT_3_HEIGHT)); // Lift
-																		// Bin
+		addSequential(new SetHeightCommand(Robot.lift.LIFT_3_HEIGHT)); // Lift Bin
 		addSequential(new WaitCommand(1.5)); // Wait for lift
 		addSequential(new RotateCommand(0.5, 45 * r, true)); // Rotate
 		addSequential(new ChassisCommand(-0.5 * r, 0.5, 0), 1); // Approach the

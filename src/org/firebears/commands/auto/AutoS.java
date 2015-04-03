@@ -12,7 +12,7 @@ import edu.wpi.first.wpilibj.command.CommandGroup;
 public class AutoS extends CommandGroup {
 	public AutoS() {
 		Robot.lift.setSetpoint(5);
-		addSequential(new ChassisCommand(-0.65, 0, 0.0164), 4.3);
+		addSequential(new ChassisCommand(-0.65, 0, 0.0164), 3.9);
 		addSequential(new ChassisCommand(0.1, 0, 0), 1);
 	}
 

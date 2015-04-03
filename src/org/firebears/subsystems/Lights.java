@@ -97,9 +97,16 @@ public class Lights extends Subsystem {
     
     public void updateLiftHeight() {
     	double new_value =
-        		Robot.lift.getLiftHeight();
+        		Robot.lift.getLiftHeight() * .9;
         	new_value = (double)Math.round(new_value);
         	
+        	//Adjust
+        	new_value -= 4;
+        	if(new_value < 4) {
+        		new_value =4;
+        	}
+        	
+        	//Send value to lights
         	if(new_value != old_value) {
     			setValue(STRIP_LIFT1, new_value);
     			setValue(STRIP_LIFT2, new_value);

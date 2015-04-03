@@ -87,7 +87,7 @@ public class Chassis extends Subsystem {
 //						(reversed ? -1 : 1) *
 						forward, 
 						rotation, 
-						(reversed ? -1 : 1) * angle);
+						(reversed ? -1 : 1) * 0);
 			} catch (Exception e) {
 				System.err.println("ERROR: " + e);
 				if (RobotMap.DEBUG)  { e.printStackTrace(); }
