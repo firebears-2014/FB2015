@@ -76,10 +76,10 @@ public class PIDRobotDrive extends RobotDrive {
 
         normalize(wheelSpeeds);
 
-        frontLeftPID.setSetpoint(wheelSpeeds[kFrontLeft_val] * m_invertedMotors[kFrontLeft_val] * g_maxOutput * g_maxEncoderSpeed);
-        frontRightPID.setSetpoint(wheelSpeeds[kFrontRight_val] * m_invertedMotors[kFrontRight_val] * g_maxOutput * g_maxEncoderSpeed);
-        backLeftPID.setSetpoint(wheelSpeeds[kRearLeft_val] * m_invertedMotors[kRearLeft_val] * g_maxOutput * g_maxEncoderSpeed);
-        backRightPID.setSetpoint(wheelSpeeds[kRearRight_val] * m_invertedMotors[kRearRight_val] * g_maxOutput * g_maxEncoderSpeed);
+        frontLeftPID.setSetpoint(wheelSpeeds[kFrontLeft_val] * g_maxOutput * g_maxEncoderSpeed);
+        frontRightPID.setSetpoint(wheelSpeeds[kFrontRight_val] * g_maxOutput * g_maxEncoderSpeed);
+        backLeftPID.setSetpoint(wheelSpeeds[kRearLeft_val] * g_maxOutput * g_maxEncoderSpeed);
+        backRightPID.setSetpoint(wheelSpeeds[kRearRight_val] * g_maxOutput * g_maxEncoderSpeed);
 
     }
 

@@ -7,7 +7,7 @@ import edu.wpi.first.wpilibj.CANJaguar;
 import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.Gyro;
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -57,7 +57,7 @@ public class RobotMap {
 	// public static Encoder chassis_back_right_encoder;
 
 	public static RobotDrive chassis_robot_drive;
-	public static Gyro chassis_drive_gyro;
+	public static AnalogGyro chassis_drive_gyro;
 	public static AnalogPotentiometer liftpot;
 	public static SpeedController liftJag;
 	public static Compressor grabbercompressor;
@@ -212,7 +212,7 @@ public class RobotMap {
 			chassis_robot_drive.setMaxOutput(1.0);
 		}
 
-		chassis_drive_gyro = new Gyro(0);
+		chassis_drive_gyro = new AnalogGyro(0);
 		LiveWindow.addSensor("Chassis", "drive_gyro", chassis_drive_gyro);
 		chassis_drive_gyro.setSensitivity(0.007);
 		// chassis_drive_gyro.initGyro();
