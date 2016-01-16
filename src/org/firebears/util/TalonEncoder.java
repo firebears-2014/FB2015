@@ -6,9 +6,10 @@ import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.SpeedController;
 
 public class TalonEncoder implements PIDSource {
-	
+
 	CANTalon talon;
-	
+	PIDSourceType pidSource;
+
 	public TalonEncoder(SpeedController chassis_front_left_controller) {
 		talon = (CANTalon) chassis_front_left_controller;
 	}
@@ -20,14 +21,12 @@ public class TalonEncoder implements PIDSource {
 
 	@Override
 	public void setPIDSourceType(PIDSourceType pidSource) {
-		// TODO Auto-generated method stub
-		
+		this.pidSource = pidSource;
 	}
 
 	@Override
 	public PIDSourceType getPIDSourceType() {
-		// TODO Auto-generated method stub
-		return null;
+		return pidSource;
 	}
 
 }

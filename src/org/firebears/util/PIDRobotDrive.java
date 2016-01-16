@@ -14,17 +14,17 @@ public class PIDRobotDrive extends RobotDrive {
     static final int kFrontRight_val = 1;
     static final int kRearLeft_val = 2;
     static final int kRearRight_val = 3;
-    
+
     PIDController frontLeftPID;
     PIDController backLeftPID;
     PIDController frontRightPID;
     PIDController backRightPID;
-    
+
     public double g_p = 1.0;
     public double g_i = 0.0;
     public double g_d = 0.0;
     public double g_maxEncoderSpeed = .2;
-    
+
     public double g_maxOutput = 0.05;
 
 	public PIDRobotDrive(
@@ -53,7 +53,7 @@ public class PIDRobotDrive extends RobotDrive {
 		backRightPID.enable();
 		g_maxEncoderSpeed = maxEncoderSpeed;
 	}
-	
+
 	public void mecanumDrive_Cartesian(double x, double y, double rotation, double gyroAngle) {
         if(!kMecanumCartesian_Reported) {
             UsageReporting.report(tResourceType.kResourceType_RobotDrive, getNumMotors(), tInstances.kRobotDrive_MecanumCartesian);
@@ -76,11 +76,10 @@ public class PIDRobotDrive extends RobotDrive {
 
         normalize(wheelSpeeds);
 
-        frontLeftPID.setSetpoint(wheelSpeeds[kFrontLeft_val] * g_maxOutput * g_maxEncoderSpeed);
+       frontLeftPID.setSetpoint(wheelSpeeds[kFrontLeft_val] * g_maxOutput * g_maxEncoderSpeed);
         frontRightPID.setSetpoint(wheelSpeeds[kFrontRight_val] * g_maxOutput * g_maxEncoderSpeed);
         backLeftPID.setSetpoint(wheelSpeeds[kRearLeft_val] * g_maxOutput * g_maxEncoderSpeed);
         backRightPID.setSetpoint(wheelSpeeds[kRearRight_val] * g_maxOutput * g_maxEncoderSpeed);
-
     }
 
 }

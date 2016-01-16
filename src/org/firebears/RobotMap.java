@@ -161,19 +161,19 @@ public class RobotMap {
 		 * chassis_front_left_encoder.setDistancePerPulse(1.0);
 		 * chassis_front_left_encoder
 		 * .setPIDSourceParameter(PIDSourceParameter.kRate);
-		 * 
+		 *
 		 * chassis_back_left_encoder = new Encoder(6, 7, false,
 		 * EncodingType.k4X);
 		 * chassis_back_left_encoder.setDistancePerPulse(1.0);
 		 * chassis_back_left_encoder
 		 * .setPIDSourceParameter(PIDSourceParameter.kRate);
-		 * 
+		 *
 		 * chassis_front_right_encoder = new Encoder(0, 1, false,
 		 * EncodingType.k4X);
 		 * chassis_front_right_encoder.setDistancePerPulse(1.0);
 		 * chassis_front_right_encoder
 		 * .setPIDSourceParameter(PIDSourceParameter.kRate);
-		 * 
+		 *
 		 * chassis_back_right_encoder = new Encoder(4, 5, false,
 		 * EncodingType.k4X);
 		 * chassis_back_right_encoder.setDistancePerPulse(1.0);
