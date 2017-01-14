@@ -1,6 +1,6 @@
 package org.firebears.util;
 
-import edu.wpi.first.wpilibj.CANTalon;
+import com.ctre.*;
 import edu.wpi.first.wpilibj.PIDSource;
 import edu.wpi.first.wpilibj.PIDSourceType;
 import edu.wpi.first.wpilibj.SpeedController;

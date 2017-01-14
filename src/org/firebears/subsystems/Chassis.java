@@ -5,7 +5,6 @@ import org.firebears.RobotMap;
 import org.firebears.commands.drive.DriveCommand;
 import org.firebears.sensors.sharpIRRange;
 
-import edu.wpi.first.wpilibj.CANTalon;
 import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.SpeedController;
