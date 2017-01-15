@@ -1,13 +1,14 @@
 package org.firebears;
 
+import com.ctre.CANTalon;
+
+import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.AnalogInput;
 import edu.wpi.first.wpilibj.AnalogPotentiometer;
 import edu.wpi.first.wpilibj.BuiltInAccelerometer;
 import edu.wpi.first.wpilibj.CANJaguar;
-import com.ctre.*;
 import edu.wpi.first.wpilibj.Compressor;
 import edu.wpi.first.wpilibj.DigitalInput;
-import edu.wpi.first.wpilibj.AnalogGyro;
 import edu.wpi.first.wpilibj.Preferences;
 import edu.wpi.first.wpilibj.RobotDrive;
 import edu.wpi.first.wpilibj.Solenoid;
@@ -143,7 +144,7 @@ public class RobotMap {
 				e.printStackTrace();
 			}
 			try {
-				chassis_back_right_controller = new CANJaguar(6);
+				chassis_back_right_controller = new CANJaguar(2);
 				LiveWindow.addActuator("chassis", "backright",
 						(CANJaguar) chassis_back_right_controller);
 			} catch (Exception e) {
