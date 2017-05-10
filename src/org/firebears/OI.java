@@ -23,96 +23,108 @@ import edu.wpi.first.wpilibj.smartdashboard.SmartDashboard;
  * ping roborio-2846-local
  */
 public class OI {
-
-	public Joystick joystickDrive;
-	public Joystick joystickLift;
+	public Joystick joystick;
 	public DigitalInput ContainerSensor;
 
 	public JoystickButton setLiftTote0;
 	public JoystickButton setLiftTote1;
 	public JoystickButton setLiftTote2;
 	public JoystickButton setLiftTote3;
-	public JoystickButton setLiftToteHigh;
+	public JoystickButton setLiftTote4;
 	public JoystickButton openGrabbers;
 	public JoystickButton closeGrabbers;
-	public JoystickButton toggleStepSwitch;
-	public JoystickButton toggleManualSwitch;
-	public JoystickButton wideCentertote;
-	public JoystickButton centerTote;
-	public JoystickButton resetGyro;
-	public JoystickButton approachTote;
-	public JoystickButton slowTriggerButton;
+	public JoystickButton stepOn;
+	public JoystickButton stepOff;
+	public JoystickButton manualUp;
+	public JoystickButton manualDown;
+//	public JoystickButton wideCentertote;
+//	public JoystickButton centerTote;
+//	public JoystickButton resetGyro;
+//	public JoystickButton approachTote;
+//	public JoystickButton slowTriggerButton;
 	public JoystickButton celebrate;
-	public JoystickButton strafe;
-	public JoystickButton strafe2;
+//	public JoystickButton strafe;
+//	public JoystickButton strafe2;
 
 	public JoystickButton strafeLeft;
 	public JoystickButton strafeRight;
 
+	// Configure Controls
+	// http://tinyurl.com/ky34flv
+	private final int TOTE_0 = 11;
+	private final int TOTE_1 = 9;
+	private final int TOTE_2 = 7;
+	private final int TOTE_3 = 12;
+	private final int TOTE_4 = 10;
+	private final int GRABBER_OPEN = 5;
+	private final int GRABBER_CLOSE = 3;
+	private final int CELEBRATE = 8;
+	private final int MANUAL_UP = 6;
+	private final int MANUAL_DOWN = 4;
+	private final int STEP_ON = 2;
+	private final int STEP_OFF = 1;
+	
 	public OI() {
-		// Initialize joysticks
-		joystickDrive = new Joystick(0);
-		joystickLift = new Joystick(1);
-		// LIFT Joystick Initialization
+		// Initialize joystick.
+		joystick = new Joystick(0);
 
-		setLiftTote0 = new JoystickButton(joystickLift, 1);
-		setLiftTote0
-				.whenPressed(new SetHeightCommand(Robot.lift.LIFT_0_HEIGHT));
+		setLiftTote0 = new JoystickButton(joystick, TOTE_0);
+		setLiftTote0.whenPressed(new SetHeightCommand(Robot.lift.HEIGHT_0));
 
-		setLiftTote1 = new JoystickButton(joystickLift, 2);
-		setLiftTote1
-				.whenPressed(new SetHeightCommand(Robot.lift.LIFT_1_HEIGHT));
+		setLiftTote1 = new JoystickButton(joystick, TOTE_1);
+		setLiftTote1.whenPressed(new SetHeightCommand(Robot.lift.HEIGHT_1));
 
-		setLiftTote2 = new JoystickButton(joystickLift, 3);
-		setLiftTote2
-				.whenPressed(new SetHeightCommand(Robot.lift.LIFT_2_HEIGHT));
+		setLiftTote2 = new JoystickButton(joystick, TOTE_2);
+		setLiftTote2.whenPressed(new SetHeightCommand(Robot.lift.HEIGHT_2));
 
-		setLiftTote3 = new JoystickButton(joystickLift, 4);
-		setLiftTote3
-				.whenPressed(new SetHeightCommand(Robot.lift.LIFT_3_HEIGHT));
+		setLiftTote3 = new JoystickButton(joystick, TOTE_3);
+		setLiftTote3.whenPressed(new SetHeightCommand(Robot.lift.HEIGHT_3));
 
-		setLiftToteHigh = new JoystickButton(joystickLift, 5);
-		setLiftToteHigh.whenPressed(new SetHeightCommand(
-				Robot.lift.LIFT_HIGH_HEIGHT));
+		setLiftTote4 = new JoystickButton(joystick, TOTE_4);
+		setLiftTote4.whenPressed(new SetHeightCommand(Robot.lift.HEIGHT_4));
 
-		openGrabbers = new JoystickButton(joystickLift, 6);
+		openGrabbers = new JoystickButton(joystick, GRABBER_OPEN);
 		openGrabbers.whenPressed(new GrabberCommand(true));
 
-		closeGrabbers = new JoystickButton(joystickLift, 7);
+		closeGrabbers = new JoystickButton(joystick, GRABBER_CLOSE);
 		closeGrabbers.whenPressed(new GrabberCommand(false));
 
-		toggleStepSwitch = new JoystickButton(joystickLift, 8);
-		toggleStepSwitch.whenPressed(new SetStepCommand(false));
-		toggleStepSwitch.whenReleased(new SetStepCommand(true));
+		stepOn = new JoystickButton(joystick, STEP_ON);
+		stepOn.whenPressed(new SetStepCommand(true));
+		
+		stepOff = new JoystickButton(joystick, STEP_OFF);
+		stepOff.whenPressed(new SetStepCommand(false));
 
-		toggleManualSwitch = new JoystickButton(joystickLift, 9);
-		toggleManualSwitch.whenPressed(new SetManualCommand(true));
-		toggleManualSwitch.whenReleased(new SetManualCommand(false));
+		manualUp = new JoystickButton(joystick, MANUAL_UP);
+		manualUp.whileHeld(new SetManualCommand(true));
+		
+		manualDown = new JoystickButton(joystick, MANUAL_DOWN);
+		manualDown.whileHeld(new SetManualCommand(false));
 
-		celebrate = new JoystickButton(joystickLift, 11);
+		celebrate = new JoystickButton(joystick, CELEBRATE);
 		celebrate.whileHeld(new CelebrateCommand());
 
 		// DRIVE Joystick Initialization
 
-		slowTriggerButton = new JoystickButton(joystickDrive, 1);
+//		slowTriggerButton = new JoystickButton(joystick, 1);
 
-		strafeLeft = new JoystickButton(joystickDrive, 5);
-		strafeLeft.whileHeld(new StrafeCommand(-0.75));
+//		strafeLeft = new JoystickButton(joystick, 5);
+//		strafeLeft.whileHeld(new StrafeCommand(-0.75));
 
-		strafeRight = new JoystickButton(joystickDrive, 6);
-		strafeRight.whileHeld(new StrafeCommand(0.75));
+//		strafeRight = new JoystickButton(joystick, 6);
+//		strafeRight.whileHeld(new StrafeCommand(0.75));
 
-		resetGyro = new JoystickButton(joystickDrive, 7);
-		resetGyro.whenPressed(new GyroResetCommand());
+//		resetGyro = new JoystickButton(joystick, 7);
+//		resetGyro.whenPressed(new GyroResetCommand());
 
-		approachTote = new JoystickButton(joystickDrive, 9);
-		approachTote.whenPressed(new ToteApproachCommand());
+//		approachTote = new JoystickButton(joystick, 9);
+//		approachTote.whenPressed(new ToteApproachCommand());
 
-		wideCentertote = new JoystickButton(joystickDrive, 11);
-		wideCentertote.whenPressed(new WidetoteCommand());
+//		wideCentertote = new JoystickButton(joystick, 11);
+//		wideCentertote.whenPressed(new WidetoteCommand());
 
-		centerTote = new JoystickButton(joystickDrive, 12);
-		centerTote.whenPressed(new Totecenter());
+//		centerTote = new JoystickButton(joystick, 12);
+//		centerTote.whenPressed(new Totecenter());
 		
 /*		strafe = new JoystickButton(joystickDrive, 3);
 		strafe.whileHeld(new StrafeCommand(.75));
@@ -126,15 +138,15 @@ public class OI {
 
 		if (RobotMap.DEBUG) {
 			SmartDashboard.putData("lift to 0", new SetHeightCommand(
-					Robot.lift.LIFT_0_HEIGHT));
+					Robot.lift.HEIGHT_0));
 			SmartDashboard.putData("lift to 1", new SetHeightCommand(
-					Robot.lift.LIFT_1_HEIGHT));
+					Robot.lift.HEIGHT_1));
 			SmartDashboard.putData("lift to 2", new SetHeightCommand(
-					Robot.lift.LIFT_2_HEIGHT));
+					Robot.lift.HEIGHT_2));
 			SmartDashboard.putData("lift to 3", new SetHeightCommand(
-					Robot.lift.LIFT_3_HEIGHT));
+					Robot.lift.HEIGHT_3));
 			SmartDashboard.putData("lift to high", new SetHeightCommand(
-					Robot.lift.LIFT_HIGH_HEIGHT));
+					Robot.lift.HEIGHT_4));
 
 			SmartDashboard.putData("Run Talon Code", new PreferenceSetup(
 					RobotMap.CHASSIS_DRIVE_TYPE_TAL));
@@ -178,11 +190,7 @@ public class OI {
 
 	}
 
-	public Joystick getJoystickZero() {
-		return joystickDrive;
-	}
-
-	public Joystick getJoystickLift() {
-		return joystickLift;
+	public Joystick getJoystick() {
+		return joystick;
 	}
 }

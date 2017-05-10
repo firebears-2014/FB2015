@@ -9,38 +9,29 @@ import edu.wpi.first.wpilibj.command.Command;
  */
 public class SetManualCommand extends Command {
 
-	private boolean manual;
+	private boolean manualUp;
 
-	public SetManualCommand(boolean set) {
-		// Use requires() here to declare subsystem dependencies
-		// eg. requires(chassis);
+	public SetManualCommand(boolean goUp) {
 		requires(Robot.lift);
-		manual = set;
+		manualUp = goUp;
 	}
 
 	// Called just before this Command runs the first time
 	protected void initialize() {
-		Robot.lift.manual_mode = manual;
 	}
 
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
-		Robot.lift.manual_down = Robot.oi.getJoystickLift().getRawButton(1);
-		Robot.lift.manual_up = Robot.oi.getJoystickLift().getRawButton(2);
-
-		if (Robot.lift.manual_up && Robot.lift.manual_down) {
-			Robot.lift.setSetpoint(Robot.lift.getLiftHeight());
-		} else if (Robot.lift.manual_up) {
+		if(manualUp) {
 			Robot.lift.setSetpoint(Robot.lift.getLiftHeight() + 4.5);
-		} else if (Robot.lift.manual_down) {
+		} else {
 			Robot.lift.setSetpoint(Robot.lift.getLiftHeight() - 3);
 		}
-
 	}
 
 	// Make this return true when this Command no longer needs to run execute()
 	protected boolean isFinished() {
-		return !(Robot.lift.manual_mode);
+		return Robot.lift.onTarget();
 	}
 
 	// Called once after isFinished returns true

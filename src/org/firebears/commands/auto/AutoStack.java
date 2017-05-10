@@ -28,19 +28,19 @@ public class AutoStack extends CommandGroup {
 		// eg. requires(chassis);
 
 		addSequential(new GrabberCommand(true)); // Close Grabbers
-		addSequential(new SetHeightCommand(Robot.lift.LIFT_3_HEIGHT)); // Lift Bin
+		addSequential(new SetHeightCommand(Robot.lift.HEIGHT_3)); // Lift Bin
 		addSequential(new WaitCommand(1.5)); // Wait for lift
 		addSequential(new RotateCommand(0.5, 45 * r, true)); // Rotate
 		addSequential(new ChassisCommand(-0.5 * r, 0.5, 0), 1); // Approach the
 																// tote.
 		// addSequential(new ToteApproachCommand()); //Approach the tote.
-		addSequential(new SetHeightCommand(Robot.lift.LIFT_2_HEIGHT)); // Set
+		addSequential(new SetHeightCommand(Robot.lift.HEIGHT_2)); // Set
 																		// Bin
 		addParallel(new ForwardCommand(0.5, false), 0.25);
 		addSequential(new WaitCommand(0.25));
 		addSequential(new GrabberCommand(false)); // Release the bin
 		addSequential(new ForwardCommand(-0.4, false), .3);
-		addSequential(new SetHeightCommand(Robot.lift.LIFT_0_HEIGHT)); // Move
+		addSequential(new SetHeightCommand(Robot.lift.HEIGHT_0)); // Move
 																		// lift
 																		// to
 																		// grab
@@ -49,7 +49,7 @@ public class AutoStack extends CommandGroup {
 		addSequential(new WaitCommand(1.5));
 		addSequential(new GrabberCommand(true)); // Grab the tote
 		addSequential(new WaitCommand(0.8));
-		addSequential(new SetHeightCommand(Robot.lift.LIFT_1_HEIGHT)); // Lift
+		addSequential(new SetHeightCommand(Robot.lift.HEIGHT_1)); // Lift
 																		// the
 																		// tote
 		addSequential(new WaitCommand(1.0));

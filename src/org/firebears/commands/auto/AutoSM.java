@@ -23,7 +23,7 @@ public class AutoSM extends CommandGroup {
 		addSequential(new GrabberCommand(false));
 		addSequential(new GrabberCommand(true));
 		addSequential(new WaitCommand(.2));
-		addSequential(new SetHeightCommand(Robot.lift.LIFT_3_HEIGHT));
+		addSequential(new SetHeightCommand(Robot.lift.HEIGHT_3));
 		addSequential(new WaitCommand(2.1));
 		// tote 2 logic
 		addSequential(new StrafeCommand(1), 1.47);
@@ -31,7 +31,7 @@ public class AutoSM extends CommandGroup {
 		addSequential(new ForwardCommand(-.3, true), .4);
 		addSequential(new WidetoteCommand());
 		addSequential(new WaitCommand(.3));
-		addSequential(new SetHeightCommand(Robot.lift.LIFT_1_HEIGHT));
+		addSequential(new SetHeightCommand(Robot.lift.HEIGHT_1));
 		addSequential(new WaitCommand(.8));
 		addSequential(new GrabberCommand(false));
 		addSequential(new WaitCommand(0.2));
@@ -40,10 +40,10 @@ public class AutoSM extends CommandGroup {
 		addSequential(new GrabberCommand(false));	
 		addSequential(new ForwardCommand(-.3, true), .1);
 		addSequential(new WidetoteCommand());  
-		addSequential(new SetHeightCommand(Robot.lift.LIFT_0_HEIGHT));
+		addSequential(new SetHeightCommand(Robot.lift.HEIGHT_0));
 		addSequential(new WaitCommand(.6));
 		addSequential(new GrabberCommand(true));
-		addSequential(new SetHeightCommand(Robot.lift.LIFT_3_HEIGHT));
+		addSequential(new SetHeightCommand(Robot.lift.HEIGHT_3));
 		addSequential(new WaitCommand(2.1));
 		addSequential(new StrafeCommand(1), 1.45);
 		addParallel(new RotateCommand(1.0, -30, true));	
@@ -51,7 +51,7 @@ public class AutoSM extends CommandGroup {
 		addSequential(new ForwardCommand(-.3, true), .4);
 		addSequential(new WidetoteCommand());
 		addSequential(new WaitCommand(.3));
-		addSequential(new SetHeightCommand(Robot.lift.LIFT_1_HEIGHT));
+		addSequential(new SetHeightCommand(Robot.lift.HEIGHT_1));
 		addSequential(new WaitCommand(.8));
 		addSequential(new GrabberCommand(false));
 		addSequential(new WaitCommand(.5));
@@ -60,14 +60,14 @@ public class AutoSM extends CommandGroup {
 		addSequential(new GrabberCommand(false));	
 		addSequential(new ForwardCommand(-.3, true), .1);
 		addSequential(new WidetoteCommand());  
-		addSequential(new SetHeightCommand(Robot.lift.LIFT_0_HEIGHT));
+		addSequential(new SetHeightCommand(Robot.lift.HEIGHT_0));
 		addSequential(new WaitCommand(.6));
 		addSequential(new GrabberCommand(true));
-		addSequential(new SetHeightCommand(Robot.lift.LIFT_1_HEIGHT));
+		addSequential(new SetHeightCommand(Robot.lift.HEIGHT_1));
 		addSequential(new WaitCommand(.3));
 		// scoring logic
 		addSequential(new ForwardCommand(-1, false), 1.0); 
-		addSequential(new SetHeightCommand(Robot.lift.LIFT_0_HEIGHT));
+		addSequential(new SetHeightCommand(Robot.lift.HEIGHT_0));
 		addSequential(new WaitCommand(.2));
 		addSequential(new GrabberCommand(false));
 

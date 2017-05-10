@@ -15,21 +15,21 @@ import edu.wpi.first.wpilibj.livewindow.LiveWindow;
 public class Lift extends PIDSubsystem {
 	public HeightSensor heightSensor;
 
-	public final String LIFT_0_HEIGHT = "LIFT_0_HEIGHT";
-	public final String LIFT_1_HEIGHT = "LIFT_1_HEIGHT";
-	public final String LIFT_2_HEIGHT = "LIFT_2_HEIGHT";
-	public final String LIFT_3_HEIGHT = "LIFT_3_HEIGHT";
-	public final String LIFT_HIGH_HEIGHT = "LIFT_HIGH_HEIGHT";
+	public final String HEIGHT_0 = "LIFT_0_HEIGHT";
+	public final String HEIGHT_1 = "LIFT_1_HEIGHT";
+	public final String HEIGHT_2 = "LIFT_2_HEIGHT";
+	public final String HEIGHT_3 = "LIFT_3_HEIGHT";
+	public final String HEIGHT_4 = "LIFT_HIGH_HEIGHT";
 
 	SpeedController liftJag = RobotMap.liftJag;
 
 	public double addStep = 0;
 
-	public boolean manual_mode = false;
+//	public boolean manual_mode = false;
 	public boolean enable_motor = true;
 
-	public boolean manual_up = false;
-	public boolean manual_down = false;
+//	public boolean manual_up = false;
+//	public boolean manual_down = false;
 
 	private static double m_P = 0.12;
 	private static double m_I = 0.0;
@@ -87,7 +87,7 @@ public class Lift extends PIDSubsystem {
 	}
 
 	public void setSetpointInches(String setpoint) {
-		if (manual_mode == false) {
+//		if (manual_mode == false) {
 			// set pid to pickup height
 			// set to inches above "zero height"
 			boolean picking_up = Robot.grabber.isOpen();
@@ -95,40 +95,40 @@ public class Lift extends PIDSubsystem {
 			if (picking_up) {
 				// addStep will be 0 or 8, depending on if the switch is
 				// flicked
-				if (setpoint.equals(LIFT_0_HEIGHT)) {
+				if (setpoint.equals(HEIGHT_0)) {
 					setSetpoint(RobotMap.lift_tote_0 + addStep);
-				} else if (setpoint.equals(LIFT_1_HEIGHT)) {
+				} else if (setpoint.equals(HEIGHT_1)) {
 					setSetpoint(RobotMap.lift_tote_1 + addStep);
-				} else if (setpoint.equals(LIFT_2_HEIGHT)) {
+				} else if (setpoint.equals(HEIGHT_2)) {
 					setSetpoint(RobotMap.lift_tote_2 + addStep);
-				} else if (setpoint.equals(LIFT_3_HEIGHT)) {
+				} else if (setpoint.equals(HEIGHT_3)) {
 					setSetpoint(RobotMap.lift_tote_3 + addStep);
-				} else if (setpoint.equals(LIFT_HIGH_HEIGHT)) {
+				} else if (setpoint.equals(HEIGHT_4)) {
 					setSetpoint(RobotMap.lift_tote_high + addStep);
 				}
 			} else {
-				if (setpoint.equals(LIFT_0_HEIGHT)) {
+				if (setpoint.equals(HEIGHT_0)) {
 					setSetpoint(RobotMap.lift_tote_0 + addStep + 3);
-				} else if (setpoint.equals(LIFT_1_HEIGHT)) {
+				} else if (setpoint.equals(HEIGHT_1)) {
 					setSetpoint(RobotMap.lift_tote_1 + addStep + 3);
-				} else if (setpoint.equals(LIFT_2_HEIGHT)) {
+				} else if (setpoint.equals(HEIGHT_2)) {
 					setSetpoint(RobotMap.lift_tote_2 + addStep + 3);
-				} else if (setpoint.equals(LIFT_3_HEIGHT)) {
+				} else if (setpoint.equals(HEIGHT_3)) {
 					setSetpoint(RobotMap.lift_tote_3 + addStep + 3);
-				} else if (setpoint.equals(LIFT_HIGH_HEIGHT)) {
+				} else if (setpoint.equals(HEIGHT_4)) {
 					setSetpoint(RobotMap.lift_tote_high + addStep + 3);
 				}
 			}
-		} else {
+			/*} else {
 			System.out.println("manual mode");
-			if (setpoint.equals(LIFT_0_HEIGHT)) {
+			if (setpoint.equals(HEIGHT_0)) {
 				manual_down = true;
 				manual_up = false;
-			} else if (setpoint.equals(LIFT_1_HEIGHT)) {
+			} else if (setpoint.equals(HEIGHT_1)) {
 				manual_down = false;
 				manual_up = true;
 			}
-		}
+		}*/
 	}
 
 	public void setMotor(boolean enable) {

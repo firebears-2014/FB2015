@@ -34,15 +34,15 @@ public class DriveCommand extends Command {
 	// Called repeatedly when this Command is scheduled to run
 	protected void execute() {
 		// strafe left/right
-		double x = Robot.oi.getJoystickZero().getRawAxis(0);
+		double x = Robot.oi.getJoystick().getRawAxis(0);
 		// forward / backwards
-		double y = Robot.oi.getJoystickZero().getRawAxis(1);
+		double y = Robot.oi.getJoystick().getRawAxis(1);
 		// rotation
-		double rotation = Robot.oi.getJoystickZero().getRawAxis(2);
+		double rotation = Robot.oi.getJoystick().getRawAxis(2);
 		double rotationMultiplier = 0.4;
 		// SmartDashboard.putNumber("rotationMultiplier", rotationMultiplier);
 
-		boolean slowMode = Robot.oi.slowTriggerButton.get();
+		boolean slowMode = false; // Robot.oi.slowTriggerButton.get();
 		double slowModeMultiplier = slowMode ? 0.3 : 1.0;
 
 		x = Math.signum(x) * x * x * slowModeMultiplier;
